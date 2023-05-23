@@ -1,0 +1,21 @@
+.carousel_body {
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
+.carousel_total{
+    padding: 1rem;
+    background-image: url('/homepage/最受歡迎背景.png');
+    border-radius: 8px;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.carousel_contain {
+    /* border: 1px solid red; */
+    /* width: 400px; */
+    /* height: 270px; */
+    position: relative;
+    overflow: hidden;
+    width: 90%;
+}

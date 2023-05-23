@@ -1,0 +1,126 @@
+
+.GoodsItem{
+    width: 25%;
+    cursor: pointer;
+    /* height: 10%; */
+    position: relative;
+    /* height: 15rem; */
+}
+.goods_img_cover:hover::before{
+  /* width: inherit;
+  height: inherit; */
+  display: block;
+  background-color: rgba(0,0,0,0.3);
+  width: 100%;
+  left: 0;
+  z-index: 1;
+  height: 100%;
+  content: "";
+  position: absolute;
+}
+.goods_img_cover:hover .buy_btn{
+    display: flex;
+}
+.goods_img_cover:hover img{
+   animation: fangda 200ms;
+}
+.buy_btn{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 20%;
+    padding: 0.5rem 2rem;
+    display: none;
+    border:none;
+    z-index: 2;
+    background-color: rgba(0,0,0,0.5);
+    color: white;
+    cursor: pointer;
+}
+@keyframes fangda {
+    from {
+        transform: scale(0);
+    }
+    to{
+        transform: scale(1);
+    }
+}
+
+
+
+/* .GoodsItem:hover::before{
+    display: block;
+    background-color: rgba(0,0,0,0.3);
+    width: 100%;
+    left: 0;
+    z-index: 1;
+    height: 100px;
+    content: "";
+    position: absolute;
+    color: red; */
+/* } */
+/* .goods_img:hover::before{
+    display: flex;
+    background-color: rgba(0,0,0,0.3);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    content: "";
+    width: 100px;
+    height: 100px;
+
+} */
+
+
+.goods_carsouel_price{
+    background-color: black;
+    padding: 2px 1rem;
+    color: white;
+    /* width: 100%; */
+    margin-top:12px;
+    overflow:hidden;
+    text-overflow: ellipsis;
+
+}
+
+.goods_price{
+    text-align: center;
+    color: rgb(170,80,72);
+    margin-top: 10px;
+    width: 100%;
+    overflow:hidden;
+    text-overflow: ellipsis;
+
+}
+
+.goods_title{
+    /* width: 50%; */
+    max-width:100%;
+    overflow:hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin: 0 auto;
+    padding: 0.3rem 0.2rem;
+    font-size: 1rem;
+    text-align: center;
+    border: 1px solid rgb(170,80,72);
+}
+
+.goods_img{
+    position: relative;
+}
+
+
+@media screen and (max-width:1100px){
+    .GoodsItem{
+        width: 33%;
+        /* height: 15rem; */
+    }     
+}
+@media screen and (max-width:670px) {
+    .GoodsItem{
+        width:50%
+    }
+}
