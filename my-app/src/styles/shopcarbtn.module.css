@@ -24,7 +24,11 @@
    position: absolute;
  
 }
-
+.button_icon{
+    border: 1px solid black;
+    padding: 12px 0;
+    border-radius: 12px;
+}
 .close_btn{
     position: fixed;
     padding: 0.5rem 0.7rem;

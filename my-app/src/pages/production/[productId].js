@@ -174,8 +174,8 @@ export default function ProductDetail({ cateList, product }) {
                         <div style={{ marginTop: 24 }}>
                             <button onClick={() => {
                                 if (cardtype) {
-                                    console.log(Cookies.get('token'), flower_id, num, cardtype, cardcontent);
-                                    addToCart.mutate({ cookie: Cookies.get('token'), flower_specs_id: flower_id, num, cardtype, cardcontent: cardcontent.trim() }, {
+                                    console.log(Cookies.get('token'), id, num, cardtype, cardcontent);
+                                    addToCart.mutate({ cookie: Cookies.get('token'), flower_specs_id: id, num, cardtype, cardcontent: cardcontent.trim() }, {
                                         onSuccess: async (res) => {
                                             let isSuccess = await res.json()
                                             console.log(isSuccess);
@@ -185,7 +185,7 @@ export default function ProductDetail({ cateList, product }) {
                                                     alert("登錄失效");
                                                     return;
                                                 }
-                                                if (isSuccess === 1) alert("加入购物车成功");
+                                                if (isSuccess.code === 1) alert("加入购物车成功");
                                             } else {
                                                 alert(isSuccess.msg);
                                             }
