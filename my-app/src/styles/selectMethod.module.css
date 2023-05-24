@@ -1,3 +1,62 @@
 .total_layout{
     padding: 3rem 15%;
 }
+.check{
+    background-color: rgb(213,59,69);
+    position:relative
+}
+.check::after{
+    content: "√";
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    width: 15px;
+    height: 15px;
+    border:1px solid black;
+}
+.uncheck{
+    background-color: black;
+}
+
+.wrong{
+    background-color: red;
+   }
+   .complete{
+    background-color: green;
+   }
+   .processing{
+    background-color: yellow;
+   }
+
+   .addressItem
+   {
+    display: flex;
+    border: 1px solid black;
+    cursor: pointer;
+}
+.addressItemDetail>div{
+    border-bottom: 1px solid black;
+}
+
+@media screen and (min-width:1100px) {
+    .addressItem{
+        width: 30%;
+        margin: 1.5%;
+    }
+}
+@media screen and (max-width:1099px){
+    .addressItem{
+        width: 45%;
+        margin: 2.5%;
+    }
+}
+@media screen and (max-width:675px) {
+    .addressItem{
+        width: 95%;
+        margin:2.5%
+    }
+}

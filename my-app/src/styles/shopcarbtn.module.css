@@ -67,15 +67,7 @@
    background-color: rgba(0,0,0,0.4);
 }
 
-.wrong{
- background-color: red;
-}
-.compile{
- background-color: green;
-}
-.processing{
- background-color: yellow;
-}
+
 .decrease,.increase{
     width: 20px;
     background-color: white;
