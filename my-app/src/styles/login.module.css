@@ -48,7 +48,7 @@
    width: 100%;
    background-color: rgb(228,74,85);
    border:none;
-   padding: 1rem 0;
+   padding: 0.55rem 0;
    border-radius: 8px;
    color: white;
    font-size: 16px;
@@ -83,6 +83,8 @@
     margin-left: auto;
     cursor: pointer;
 }
-@media screen  {
-    
+@media screen and (max-width:670px) {
+    .login_pannel{
+        padding:2% 0;
+    }
 }

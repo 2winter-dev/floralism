@@ -21,20 +21,20 @@ export default function RegisterPannerl(props) {
         mutationKey: ['sendEmailByRegister'],
     })
     const register = useMutation({
-        mutationKey:['register'],
-        mutationFn:(data)=>Api.register(data),
+        mutationKey: ['register'],
+        mutationFn: (data) => Api.register(data),
     })
     const getEmailCode = () => {
-        if(!email.trim()){
+        if (!email.trim()) {
             alert("請填寫郵箱以獲取驗證碼")
-          return ;
+            return;
         }
-        sendEmail.mutate({ email:email.trim(), type: 'register' }, {
-            onSuccess:async (res) =>{
-                let isSuccess=await res.json()
-                if(isSuccess.code){
+        sendEmail.mutate({ email: email.trim(), type: 'register' }, {
+            onSuccess: async (res) => {
+                let isSuccess = await res.json()
+                if (isSuccess.code) {
                     alert("發送驗證碼成功，請到填寫的郵箱内查看驗證碼");
-                }else{
+                } else {
                     alert(isSuccess.msg);
                 }
             },
@@ -44,49 +44,50 @@ export default function RegisterPannerl(props) {
         setFlag(true);
     }
 
-    const _submit=()=>{
-        if(!username.trim()){
+    const _submit = () => {
+        if (!username.trim()) {
             alert("請填寫姓名");
-            return ;
+            return;
         }
-        if(!mobile.trim()){
+        if (!mobile.trim()) {
             alert("請填寫手機號碼");
-            return ;
+            return;
         }
-        if(!password.trim()){
+        if (!password.trim()) {
             alert("請填寫密碼");
-            return ;
+            return;
         }
-        if(password.trim()!==repassword.trim()){
+        if (password.trim() !== repassword.trim()) {
             alert("兩次輸入的密碼不同，請保證一致");
             return;
         }
-        if(!code){
+        if (!code) {
             alert("請填寫收到的驗證碼");
-            return ;
+            return;
         }
 
         register.mutate({
-            email:email.trim(),
-            code:code.trim(),
-            password:password.trim(),
-            mobile:mobile.trim(),
-            username:username.trim(),
-        },{
-            onSuccess:async(res)=>{
-                let isSuccess=await res.json()
+            email: email.trim(),
+            code: code.trim(),
+            password: password.trim(),
+            mobile: mobile.trim(),
+            username: username.trim(),
+        }, {
+            onSuccess: async (res) => {
+                let isSuccess = await res.json()
                 //console.log(res);
-                if(isSuccess.code===1){
+                if (isSuccess.code === 1) {
                     props.close();
-                    Cookies.set('token',isSuccess.data.token);
+                    Cookies.set('token', isSuccess.data.token, { expires: 1 });
+                    Cookies.set('user', JSON.stringify(isSuccess.data.userinfo), { expires: 1 });
                     alert("注冊成功");
-                    
+                    props.hasLogin();
                     // localStorage.setItem("token",res.data.token);
-                }else{
+                } else {
                     alert(isSuccess.msg);
                 }
             },
-            onError:(res)=>{
+            onError: (res) => {
                 //console.log(res);
                 alert("注冊失敗")
             }
@@ -103,7 +104,7 @@ export default function RegisterPannerl(props) {
         open={props.register}
         onClose={props.close}
         className={style.register_layout}
-        width={'70%'}
+        width={'80%'}
     >
         <div className={style.register_total} style={{}}>
             <div className={""} >
@@ -134,7 +135,7 @@ export default function RegisterPannerl(props) {
                         <div style={{ marginTop: '2.5%' }}>
                             {<div style={{ display: 'flex', alignItems: 'center' }}>
                                 <input type='text' placeholder='請輸入驗證碼' value={code} onChange={(e) => setCode(e.target.value)} style={{ flex: 1, marginRight: 24 }} className={style.account_input}></input>
-                                <div className={style.send_btn} style={{width:'25%',textAlign:'center'}}>
+                                <div className={style.send_btn} style={{ width: '25%', textAlign: 'center' }}>
                                     {
 
                                         time ? <div>{time}秒后重新發送</div> : flag ? <div>重新發送</div> : <div onClick={getEmailCode}>獲取驗證碼</div>

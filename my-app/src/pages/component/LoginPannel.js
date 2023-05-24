@@ -4,6 +4,7 @@ import { Modal } from "@nextui-org/react";
 import { useMutation } from '@tanstack/react-query';
 import m_api from '@/m_api';
 import Cookies from 'js-cookie';
+import { useBearStore } from '@/zustand';
 export default function LoginPannel(props) {
     // //console.log(window.innerHeight)
     const [type, setType] = useState(0);//0為密碼登錄，1為驗證碼登錄
@@ -11,6 +12,8 @@ export default function LoginPannel(props) {
     const [email,setEmail]=useState("");
     const [code, setCode] = useState("");//密碼與code
     const [flag,setFlag]=useState(false);
+    // const setUser=useBearStore((state)=>state.setUser);
+    // const setToken=useBearStore((state)=>state.setToken)
     // const [token,setToken]=useState(localStorage.getItem('token'))
     const sendEmail = useMutation({
         mutationFn: (data) => m_api.sendEmail(data),
@@ -58,10 +61,14 @@ export default function LoginPannel(props) {
                     let isSuccess=await res.json()
                     // //console.log(await res.json());
                     if(isSuccess.code){
-                        props.close();
-                        Cookies.set('token',body.data.token);
-                        alert("登陸成功");
+                        console.log("================");
+                        console.log();
+                        Cookies.set('token',isSuccess.data.token,{expires:1});
+                        Cookies.set('user',JSON.stringify(isSuccess.data.userinfo),{expires:1});
+                        alert("登陆成功");
                         
+                        props.close();
+                        props.hasLogin();
                         //token:res.data.token;
                         //userinfo:res.data.userinfo
                     }else{
@@ -81,12 +88,15 @@ export default function LoginPannel(props) {
                     //console.log(body)
                     
                       if(body.code){
-                        Cookies.set('token',body.data.token);
+                        console.log("================");
+                        Cookies.set('token',body.data.token,{expires:1});
+                        Cookies.set('user',JSON.stringify(body.data.userinfo),{expires:1});
                         console.log("========");
                         console.log(Cookies.get('token'));
+                        
                     alert("登陸成功");
                         props.close();
-                      
+                        props.hasLogin();
                         //token:res.data.token;
                         //userinfo:res.data.userinfo
                         // localStorage.setItem("token",body.data.token);
@@ -113,8 +123,8 @@ export default function LoginPannel(props) {
         open={props.login}
         onClose={()=>{props.close();setType(0);}}
         className={style.login_layout}
-        // style={{width:'70%',height:'60%'}}
-        width={'70%'}
+        // style={{width:'70%'}}
+        width={'80%'}
     // style={{width:window.innerWidth*0.7,height:window.innerHeight*0.6}}
 
     >
@@ -168,7 +178,7 @@ export default function LoginPannel(props) {
                                 <div onClick={props.toForget} className={style.forget_password}>忘记密码？</div>
                             </div>
                             <div style={{ marginTop: '2.5%' }}>
-                                <input type='button' onClick={_submit} className={style.submit_button} value="登錄"></input>
+                                <input type='button' onClick={_submit} className={style.submit_button} style={{fontSize:18}} value="登錄"></input>
                             </div>
                             <div style={{ marginTop: '5%', paddingLeft: '3%',display:'flex'}}>
                                 需要一個賬戶？ <a onClick={()=>{props.toRegister();setType(0);}} className={style.to_register}>前往注冊</a><div  onClick={()=>{

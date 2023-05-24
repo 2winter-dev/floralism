@@ -19,10 +19,11 @@ import Cookies from "js-cookie";
 import { useMutation } from "@tanstack/react-query";
 import m_api from "@/m_api";
 import Link from "next/link";
+import DynamicComponent from "../component/Dynamic";
 
 export default function ProductDetail({ cateList, product }) {
 
-    console.log(product);
+    // console.log(product);
     const [login, setLogin] = useState(false);
     const [register, setRegister] = useState(false);
     const [flag, setFlag] = useState(false);
@@ -57,8 +58,9 @@ export default function ProductDetail({ cateList, product }) {
 
 
     useEffect(() => {
-
-    }, [flag])
+        console.log("==-12312-===");
+        console.log(cardtype);
+    }, [cardtype])
     const carousel_slice = () => {
         let res = [];
         for (let i = 0; i < product.flowerList.length / 4; i++) {
@@ -80,11 +82,7 @@ export default function ProductDetail({ cateList, product }) {
             <title>商品詳情---production</title>
 
         </Head>
-        <Header list={cateList} login={() => {
-            if (Cookies.get('token')) {
-                alert("你先退出登陆吗")
-            } else setLogin(true);
-        }} />
+        <DynamicComponent cateList={cateList} setLogin={setLogin}/>
         <main style={{ paddingLeft: '15%', paddingRight: '15%' }}>
             <div>
                 <div style={{ marginTop: 32, display: 'flex' }}>
@@ -138,7 +136,10 @@ export default function ProductDetail({ cateList, product }) {
 
                         <div style={{ display: 'flex', marginTop: 16, width: '100%', justifyContent: 'space-between', textAlign: 'center' }}>
                             <div>默認心意卡</div>
-                            <select onChange={() => setCardType(event.target.value)} style={{ borderRadius: 4 }} >
+                            <select value={cardtype} onChange={(event) =>{
+                                setCardType(event.target.value);
+                                console.log(event.target.value);
+                            }} style={{ borderRadius: 4 }} >
                                 <option value={0}>心意卡内容</option>
                                 <option value={1}>店家代寫心意卡</option>
                                 <option value={2}>留空，自己寫</option>
@@ -150,6 +151,7 @@ export default function ProductDetail({ cateList, product }) {
                             <div style={{ width: '45%', borderWidth: 2, borderColor: 'black', borderRadius: 8 }}>
                                 <img src='/心意卡.png' style={{ width: '100%' }} />
                             </div>
+                            {cardtype==="1"&&<input type={'text'} value={cardcontent} onInput={(e)=>setCardContent(e.target.value)} placeholder="请输入心意卡内容" />}
                         </div>
 
                         <div style={{ marginTop: 32 }}>
@@ -286,7 +288,7 @@ export default function ProductDetail({ cateList, product }) {
             isShow && <ShopCarPage isShow={isShow} setIsShow={setIsShow} />
         }
         {/**public\swiper */}
-        <Script src="/swiper/js/idangerous.swiper.min.js" onReady={() => {
+        <Script defer src="/swiper/js/idangerous.swiper.min.js" onReady={() => {
             MySwiper = new Swiper('.swiper-container', {
                 loop: true,
                 onInit: function (swiper) {

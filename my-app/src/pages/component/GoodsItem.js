@@ -5,7 +5,7 @@ export default function GoodsItem(props) {
     return (<div className={styles.GoodsItem} onClick={() => {
         if (props.type !== "category") {
             location.href = `/production/${props.item.id}`
-        }
+        }else location.href=`/category/${props.item.id}`
     }} style={{ padding: 12, ...props.top_style }}>
         <div className={props.animation?styles.goods_img_cover:""} style={{position:'relative'}}>
             <img src={props.item.photoimage} style={{ width: '100%',...props.imgStyle }} className={styles.goods_img} />

@@ -19,6 +19,11 @@
 .drop_item,.header_center_dropdown{
     /* opacity: 0; */
    width: 100%;
+   
+}
+
+.header_center_dropdown{
+    padding:0.5rem 0;
 }
 
 .header_center {

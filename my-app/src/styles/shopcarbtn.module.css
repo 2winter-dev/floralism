@@ -25,9 +25,10 @@
  
 }
 .button_icon{
-    border: 1px solid black;
+    border: 1px solid rgba(0,0,0,0.1);
     padding: 12px 0;
     border-radius: 12px;
+    cursor: pointer;
 }
 .close_btn{
     position: fixed;
@@ -66,6 +67,15 @@
    background-color: rgba(0,0,0,0.4);
 }
 
+.wrong{
+ background-color: red;
+}
+.compile{
+ background-color: green;
+}
+.processing{
+ background-color: yellow;
+}
 .decrease,.increase{
     width: 20px;
     background-color: white;

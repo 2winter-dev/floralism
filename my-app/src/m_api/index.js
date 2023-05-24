@@ -64,5 +64,28 @@ export default {
                 "Content-Type":"application/json"
             }
         })
-    }
+    },
+    changeShopCarNumber:(data)=>fetch(`${constant.api_url}/api/cart/updateNum`,{
+        body:JSON.stringify({
+            id:data.id,
+            num:data.num,
+        }),
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+            "Authorization": `Bearer ${data.cookie}`,
+            "Content-Type":"application/json"
+        }
+    }),
+    deleteProductionFromShopCar:(data)=>fetch(`${constant.api_url}/api/cart/delete`,{
+        body:JSON.stringify({
+            ids:data.ids,    
+        }),
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+            "Authorization": `Bearer ${data.cookie}`,
+            "Content-Type":"application/json"
+        }
+    }),
 }

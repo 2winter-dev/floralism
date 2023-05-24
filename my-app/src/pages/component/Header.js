@@ -1,4 +1,5 @@
 import header from "@/styles/header.module.css"
+import Cookies from "js-cookie"
 import Link from "next/link"
 
 export default function Header(props) {
@@ -6,7 +7,7 @@ export default function Header(props) {
         <div className={`${header.header_layout}`}>
             <div className={`${header.logo}`}>
                 <Link href={'/'}>
-                <img src="/logo.png" style={{}} className={header.logo_pic} />
+                    <img src="/logo.png" style={{}} className={header.logo_pic} />
                 </Link>
             </div>
             <div className={`${header.header_center}`}>
@@ -38,11 +39,18 @@ export default function Header(props) {
                         </div>)
                     })
                 }
-
+                <div className={`${header.header_center_label}`}>
+                    <Link href={`/ContactPage`} >
+                        <div className={`${header.header_center_parent}`}>聯係我們</div>
+                    </Link>
+                </div>
             </div>
             <div className={`${header.header_right}`}>
-                <div>
-                    <span style={{ cursor: "pointer" }} onClick={props.login} className={`iconfont ${header.mine_icon}`}>&#xe70e;</span>
+                <div  onClick={props.login} style={{display:'flex',alignItems:'center',cursor: "pointer" }}>
+                    <span style={{ }} className={`iconfont ${header.mine_icon}`}>&#xe70e;</span>
+                    {
+                        Cookies.get("token")?"logout":"login"
+                    }
                 </div>
             </div>
         </div>
@@ -73,12 +81,12 @@ export default function Header(props) {
                                     </div>}
                                 </div>
                             </div>
-                       )
+                        )
                     })
                 }
                 <div className={`${header.drop_item}`}>
                     <div className={`${header.drop_label}`}>
-                    <Link href={'/ContactPage'} >聯絡我們</Link>
+                        <Link href={'/ContactPage'} >聯絡我們</Link>
 
                     </div>
                     <div className={`${header.child_list}`}>

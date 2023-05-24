@@ -9,6 +9,7 @@ import GoodsItem from './component/GoodsItem'
 import GoodsScoll from './component/GoodsScroll'
 import Carousel from './component/Carousel'
 import Contactus from './component/Contactus'
+import DynamicComponent from './component/Dynamic';
 import Footer from './component/Footer'
 import useBrowserChange from '@/hooks/useBrowserChange'
 import { useEffect, useState } from 'react'
@@ -22,8 +23,8 @@ import Cookies from 'js-cookie';
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home({ cateList, GoodsPage, carousel }) {
-  console.log("====");
-  console.log(cateList);
+  // console.log("====");
+  // console.log(cateList);
   const [flag, setFlag] = useState(1);
   const [category, setCategory] = useState([]);
   const [categoryPage, setCategoryPage] = useState(1);
@@ -76,11 +77,7 @@ export default function Home({ cateList, GoodsPage, carousel }) {
   return (
     <div style={{ position: 'relative' }}>
 
-      <Header list={cateList} login={() => {
-        if (Cookies.get('token')) {
-          alert("你先退出登陆吗")
-        } else setLogin(true);
-      }} />
+<DynamicComponent cateList={cateList} setLogin={setLogin}/>
       <div style={{ width: '100%', position: 'relative' }} className={styles.banner}>
         {/* <Image priority src="/homepage/top-banner.png" width={1920} height={700} style={{width:'100%'}}/> */}
         <div style={{}} className={styles.top_banner_area}>
@@ -89,7 +86,7 @@ export default function Home({ cateList, GoodsPage, carousel }) {
         </div>
       </div>
       <div>
-        
+
       </div>
       <main className={`${styles.main_body}`}>
         <div className={styles.goods_list}>
@@ -133,15 +130,15 @@ export default function Home({ cateList, GoodsPage, carousel }) {
             <div>
 
               <div style={{ padding: 8 }}>
-                <div className='swiper-container' style={{height:carousel_slice().length>4&&flag<2?620:320}}>
-                  <div className="swiper-wrapper" style={{height:320}}>
+                <div className='swiper-container' style={{ height: carousel_slice().length > 4 && flag < 2 ? 620 : 320 }}>
+                  <div className="swiper-wrapper" style={{ height: 320 }}>
                     {
                       carousel_slice().map((item, index) => {
                         console.log(carousel_slice().length);
-                        return (<div key={item.id + index.toString()} className="swiper-slide" style={{ height:320,width:212,display: 'flex', justifyContent:'space-around',flexWrap: 'wrap' }}>
+                        return (<div key={item.id + index.toString()} className="swiper-slide" style={{ height: 320, width: 212, display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap' }}>
                           {
                             item.map((it, ii) => {
-                              return (<GoodsItem key={item.id + index.toString() + ii.toString()} item={it} type={'carsouel'} top_style={{height:320,width:200}} imgStyle={{height:200,width:200}} />)
+                              return (<GoodsItem key={item.id + index.toString() + ii.toString()} item={it} type={'carsouel'} top_style={{ height: 320, width: 200 }} imgStyle={{ height: 200, width: 200 }} />)
                             })
                           }
                         </div>)
@@ -188,7 +185,7 @@ export default function Home({ cateList, GoodsPage, carousel }) {
           setLogin(true);
         }} />
       }
-      <Script src="/swiper/js/idangerous.swiper.min.js" onReady={() => {
+      <Script defer src="/swiper/js/idangerous.swiper.min.js" onReady={() => {
         MySwiper = new Swiper('.swiper-container', {
           loop: true,
           onInit: function (swiper) {

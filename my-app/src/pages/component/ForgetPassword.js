@@ -30,7 +30,7 @@ export default function ForgetPassword(props) {
             alert("請填寫郵箱以獲取驗證碼")
           return ;
         }
-        sendEmail.mutate({ email:email.trim(), event: 'emaillogin' }, {
+        sendEmail.mutate({ email:email.trim(), event: 'resetpwd' }, {
             onSuccess: () =>{
                 alert("發送驗證碼成功，請到填寫的郵箱内查看驗證碼");
             },
@@ -43,12 +43,8 @@ export default function ForgetPassword(props) {
         setFlag(true);
     }
     
-    const _submit=()=>{
-       type?verfyCode():reset()
-    }
-
     const reset=()=>{
-        resetPassword.mutate({email:email.trim(),password:password.trim(),comfirmPassword:repassword.trim()},{
+        resetPassword.mutate({email:email.trim(),password:password.trim(),confirmPassword:repassword.trim()},{
             onSuccess:async(res)=>{
                 let isSuccess=await res.json()
                 if(isSuccess.code){
@@ -139,7 +135,7 @@ export default function ForgetPassword(props) {
                                 <input type='password' placeholder='确认密碼' value={repassword} onChange={(e) => setRepassword(e.target.value)} className={style.account_input}></input>
                             </div>
                             <div style={{ marginTop: '2.5%' }}>
-                                <input type='button' onClick={_submit} className={style.submit_button} value="提交"></input>
+                                <input type='button' onClick={reset} className={style.submit_button} value="提交"></input>
                             </div>
                         </div>
                     }
