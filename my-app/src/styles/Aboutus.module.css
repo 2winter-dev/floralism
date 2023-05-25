@@ -1,0 +1,17 @@
+.Total_Layout{
+    padding: 40px 40px 104px 40px;
+    display:flex
+}
+
+.left_item{
+    padding:50px 80px 50px 50px;
+}
+.right_item{
+    padding: 64px 64px 64px 64px;
+}
+@media screen and (max-width:1024px){
+    .Total_Layout{
+        padding: 50px 32px 20px 32px;
+        flex-direction: column;
+    }
+}

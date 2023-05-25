@@ -4,7 +4,6 @@ import { Inter } from 'next/font/google'
 import Script from "next/script";
 import styles from '@/styles/Home.module.css'
 import style from '@/styles/product.module.css'
-import Header from './component/Header'
 import GoodsItem from './component/GoodsItem'
 import GoodsScoll from './component/GoodsScroll'
 import Carousel from './component/Carousel'
@@ -20,6 +19,7 @@ import ForgetPassword from "./component/ForgetPassword";
 import BodyBanner from './component/BodyBanner'
 import { constant } from '@/constant/index';
 import Cookies from 'js-cookie';
+import Head from 'next/head';
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home({ cateList, GoodsPage, carousel }) {
@@ -47,7 +47,15 @@ export default function Home({ cateList, GoodsPage, carousel }) {
   }
   useEffect(() => {
     window.addEventListener("resize", resizeUpdate);
-    window.innerWidth < 1100 ? (!flag && setFlag(true)) : (flag && setFlag(false))
+    if (window.innerWidth <= 675) {
+      //console.log("====", e.target.innerWidth);
+      setFlag(0);
+    } else if (window.innerWidth <= 1100) {
+      setFlag(1)
+    } else {
+      //console.log("-----", e.target.innerWidth);
+      setFlag(2);
+    }
     return () => {
       window.removeEventListener("resize", resizeUpdate);
     }
@@ -65,7 +73,7 @@ export default function Home({ cateList, GoodsPage, carousel }) {
 
   let MySwiper;
   useEffect(() => {
-    //console.log("flag改變", flag);
+    console.log("flag改變", flag);
     setCategory(spliceArr(cateList, !flag ? 4 : flag === 1 ? 6 : flag === 2 && 8));
     //console.log(spliceArr(GoodsPage,  !flag ? 4 :flag===1? 6:flag===2&&8))
     setGoodsList(spliceArr(GoodsPage, !flag ? 4 : flag === 1 ? 6 : flag === 2 && 8));
@@ -76,8 +84,15 @@ export default function Home({ cateList, GoodsPage, carousel }) {
   // //console.log(category[categoryPage]);
   return (
     <div style={{ position: 'relative' }}>
+      <Head>
+        <meta charSet='utf-8' />
+        <title>【買花】 | 送花 | 「Floralism」香港花店</title>
+        <meta name='title' content={'【買花】 | 送花 | 「Floralism」香港花店'} />
+        <meta name='description' content={'「Floralism」專業香港花店提供買花及送花服務，如鮮花、盆栽、花籃等，而且還提供網上訂購、送貨上門等一系列買花服務，讓人們能夠方便快捷地為他人表達心意。'} />
+      </Head>
 
-<DynamicComponent cateList={cateList} setLogin={setLogin}/>
+
+      <DynamicComponent cateList={cateList} setLogin={setLogin} />
       <div style={{ width: '100%', position: 'relative' }} className={styles.banner}>
         {/* <Image priority src="/homepage/top-banner.png" width={1920} height={700} style={{width:'100%'}}/> */}
         <div style={{}} className={styles.top_banner_area}>
@@ -226,9 +241,9 @@ export async function getStaticProps({ local }) {
 
   let swiper_data = await swiper_response.text();
   let goods_data = await goods_response.text();
-  // //console.log("====================");
+  // console.log("====================");
   // //console.log(JSON.parse(goods_data));
-  // //console.log(data[1]);
+  // console.log(data);
 
   return {
     props: {

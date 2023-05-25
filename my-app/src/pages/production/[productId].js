@@ -29,9 +29,9 @@ export default function ProductDetail({ cateList, product }) {
     const [flag, setFlag] = useState(false);
     const [visible, setVisible] = useState(false);
     const [isShow, setIsShow] = useState(false);
-    const [Image, setImage] = useState(product.flowerDetail[0].flowerimage);
+    const [Image, setImage] = useState(product?.flowerDetail[0].flowerimage);
     const [num, setNum] = useState(1);
-    const [flower_id, setFlower_id] = useState(product.flowerDetail[0].flower_id)
+    // const [flower_id, setFlower_id] = useState(product?.flowerDetail[0].flower_id)
     const [cardcontent, setCardContent] = useState("");
     const [cardtype, setCardType] = useState(0);
     const addToCart = useMutation({
@@ -76,7 +76,13 @@ export default function ProductDetail({ cateList, product }) {
     let MySwiper;
     // const MySwiper=new Swiper('')
     const [index, setIndex] = useState(0);
-    const [id, setId] = useState(product.flowerDetail[0].id)
+    const [id, setId] = useState(product?.flowerDetail[0].id)
+
+   if(!product){
+     return (<Link style={{width:'100%',justifyContent:'center'}} href="/">商品不存在,請點擊返回</Link>)
+   }
+
+
     return (<div style={{ position: 'relative' }}>
         <Head>
             <title>商品詳情---production</title>
@@ -151,7 +157,7 @@ export default function ProductDetail({ cateList, product }) {
                             <div style={{ width: '45%', borderWidth: 2, borderColor: 'black', borderRadius: 8 }}>
                                 <img src='/心意卡.png' style={{ width: '100%' }} />
                             </div>
-                            {cardtype==="1"&&<input type={'text'} value={cardcontent} onInput={(e)=>setCardContent(e.target.value)} placeholder="请输入心意卡内容" />}
+                            {cardtype==="1"&&<input type={'text'} style={{marginTop:18}} value={cardcontent} onInput={(e)=>setCardContent(e.target.value)} placeholder="请输入心意卡内容" />}
                         </div>
 
                         <div style={{ marginTop: 32 }}>
@@ -347,6 +353,7 @@ export async function getStaticProps(context) {
     //   //console.log("====================");
     //   //console.log(detail.data.product.flowerDetail[0]);
     // //console.log(data[1]);
+    console.log(detail.data);
     return {
         props: {
             cateList: JSON.parse(data).data,

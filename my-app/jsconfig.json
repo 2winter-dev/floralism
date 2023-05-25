@@ -3,5 +3,7 @@
     "paths": {
       "@/*": ["./src/*"]
     }
-  }
+  },
+  "include": ["next-env.d.ts", "environment.d.ts", "**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules"]
 }

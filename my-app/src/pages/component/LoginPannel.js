@@ -68,7 +68,8 @@ export default function LoginPannel(props) {
                         alert("登陆成功");
                         
                         props.close();
-                        props.hasLogin();
+                        // props.hasLogin();
+                        location.reload();
                         //token:res.data.token;
                         //userinfo:res.data.userinfo
                     }else{
@@ -96,7 +97,8 @@ export default function LoginPannel(props) {
                         
                     alert("登陸成功");
                         props.close();
-                        props.hasLogin();
+                        // props.hasLogin();
+                        location.reload();
                         //token:res.data.token;
                         //userinfo:res.data.userinfo
                         // localStorage.setItem("token",body.data.token);

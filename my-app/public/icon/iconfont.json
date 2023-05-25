@@ -6,6 +6,13 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "88079",
+      "name": "rubbish",
+      "font_class": "rubbish",
+      "unicode": "34b2",
+      "unicode_decimal": 13490
+    },
+    {
       "icon_id": "109753",
       "name": "left",
       "font_class": "left",
@@ -25,6 +32,34 @@
       "font_class": "cuowu",
       "unicode": "e641",
       "unicode_decimal": 58945
+    },
+    {
+      "icon_id": "978679",
+      "name": "引号",
+      "font_class": "quotation",
+      "unicode": "e67b",
+      "unicode_decimal": 59003
+    },
+    {
+      "icon_id": "1211116",
+      "name": "write",
+      "font_class": "write",
+      "unicode": "e61e",
+      "unicode_decimal": 58910
+    },
+    {
+      "icon_id": "2513231",
+      "name": "checkbox",
+      "font_class": "checkbox",
+      "unicode": "e798",
+      "unicode_decimal": 59288
+    },
+    {
+      "icon_id": "2513239",
+      "name": "checkbox-o",
+      "font_class": "checkbox-o",
+      "unicode": "e799",
+      "unicode_decimal": 59289
     },
     {
       "icon_id": "5394536",

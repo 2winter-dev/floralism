@@ -131,10 +131,12 @@
     padding: 0;
   }
 
-  .goods_list,.distance_pic,.goods_view,.contactus{
+  .goods_list,.distance_pic,.goods_view{
     padding: 3rem 10% 3rem;
   }
-
+  .contactus{
+    padding: 3rem 15% 3rem;
+  }
   .goods_list{
     /* background-color: red; */
      padding:3rem 20%;

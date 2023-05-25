@@ -26,11 +26,50 @@ export default function ShopCar({ cateList, shopCar }) {
     const [total_num, setTotal_num] = useState(0);
     const [textArea, setTextArea] = useState("");
     const [type, setType] = useState(1);
-    const [flag,setFlag]=useState(false);
-    const [date,setDate]=useState("");
+    const [flag, setFlag] = useState(false);
+    const [date, setDate] = useState("");
 
-    if (shopCar.code === 401) {
-        Cookies.remove('token');
+    // if (shopCar.code === 401) {
+    //    Cookies.remove('token');
+    // }
+    const updateNum = useMutation({
+        mutationFn: (data) => m_api.changeShopCarNumber(data),
+        mutationKey: ['updateNumber'],
+    })
+
+    const ToUpdate = (item, index, type) => {
+        updateNum.mutate({ id:item.id,num:type?item.num+1:item.num-1, cookie: Cookies.get("token") }, {
+            onSuccess: async (res) => {
+                let _res = await res.json();
+                if (_res.code === 401) {
+                    Cookies.remove("token");
+                    location.reload();
+                } else if (_res.code === 1) {
+                    // alert(_res.msg);
+                    // location.reload()
+                    if (type) {
+                        let arr = sc;
+                        arr[index].num += 1;
+                        console.log(arr);
+                        setSc([...arr]);
+                    } else {
+                        if (item.num === 1) {
+                            alert("不能少於1");
+                            return;
+                        }
+                        let arr = sc;
+                        arr[index].num -= 1;
+                        console.log(arr);
+                        setSc([...arr]);
+                    }
+                } else {
+                    alert(_res.msg);
+                }
+            },
+            onError: (res) => {
+                alert("修改失敗");
+            }
+        })
     }
 
     useEffect(() => {
@@ -38,15 +77,15 @@ export default function ShopCar({ cateList, shopCar }) {
             // location.reload();
         }
     }, [login])
-    const hasLogin=()=>{
+    const hasLogin = () => {
         setFlag(true);
     }
 
-    useEffect(()=>{
-        if(flag){
+    useEffect(() => {
+        if (flag) {
             location.reload();
         }
-    },[flag])
+    }, [flag])
     let deleteProductionFromShopCar = useMutation({
         mutationFn: (data) => m_api.deleteProductionFromShopCar(data),
         mutationKey: ['deleteProductionFromShopCar']
@@ -138,32 +177,56 @@ export default function ShopCar({ cateList, shopCar }) {
         //  console.log(money);
     }, [sc, selected])
 
-    const limitTime=()=>{
-        let date=new Date();
-        let year=date.getFullYear();
-        let month=date.getMonth()+1;
-        let day=date.getDate();
-        console.log(year+'-'+(month<10?"0"+month:month)+"-"+day);
-        return year+'-'+(month<10?"0"+month:month)+"-"+day
-       
+    const limitTime = () => {
+        let date = new Date();
+        let year = date.getFullYear();
+        let month = date.getMonth() + 1;
+        let day = date.getDate();
+        console.log(year + '-' + (month < 10 ? "0" + month : month) + "-" + day);
+        return year + '-' + (month < 10 ? "0" + month : month) + "-" + day
+
     }
 
-    const toCreateOrder=()=>{
-         Router.push({
-            pathname:'/selectMethod',
-            query:{
-                cart_ids:selected.join(','),
-                amount:total_money,
-                payment_amount:total_money,
-                deliverydate:date,
-                deliverytype:type,
-                remark:textArea
+    const toCreateOrder = () => {
+        if (selected.length) {
+            if (date !== "") {
+                // Cookies.set("shopCar",);
+               let res=selected.map((item,index)=>{
+                  console.log(item);
+                  return sc.filter((it,index)=>{
+                    console.log(it);
+                     if(it.id===item){
+                        return item;
+                     }
+                  })
+                })
+                // console.log();
+                Cookies.set("shopCar",JSON.stringify(res.flat(1)));
+                Router.push({
+                    pathname: '/selectMethod',
+                    query: {
+                        cart_ids: selected.join(','),
+                        amount: total_money,
+                        payment_amount: total_money,
+                        deliverydate: date,
+                        deliverytype: type,
+                        remark: textArea
+                    }
+                })
+            } else {
+                alert("請選擇時間")
             }
-         })
+
+        } else {
+            alert("請選擇商品");
+        }
+
     }
 
     return <div>
-      <DynamicComponent cateList={cateList} setLogin={setLogin}/>
+        <DynamicComponent cateList={cateList} setLogin={() => {
+            setLogin(true);
+        }} />
         <main style={{ paddingLeft: '10%', paddingRight: '10%' }}>
             <div>
                 <div style={{ marginTop: 32, display: 'flex' }}>
@@ -212,14 +275,8 @@ export default function ShopCar({ cateList, shopCar }) {
                                                         <div style={{ flex: 1 }}>
                                                             <div style={{ display: 'flex', alignItems: 'center', flex: 1 }}>
                                                                 <button onClick={() => {
-                                                                    if (item.num === 1) {
-                                                                        alert("不能少於1");
-                                                                        return;
-                                                                    }
-                                                                    let res = sc;
-                                                                    res[index].num -= 1;
-                                                                    console.log(res);
-                                                                    setSc([...res]);
+                                                                    ToUpdate(item,index, 0);
+
                                                                     // culTotalPrice(res);
                                                                     // setSc([...res, {
                                                                     //     ...item,
@@ -228,10 +285,9 @@ export default function ShopCar({ cateList, shopCar }) {
                                                                 }} className={style.decrease}>-</button>
                                                                 <input type="text" style={{ border: 'none' }} onChange={() => 1} className={style.number} value={item.num} />
                                                                 <button onClick={() => {
-                                                                    let res = sc;
-                                                                    res[index].num += 1;
-                                                                    console.log(res);
-                                                                    setSc([...res]);
+                                                                    console.log(item)
+                                                                    ToUpdate(item,index, 1);
+
                                                                     // culTotalPrice(res);
                                                                     // console.log(r);
                                                                     // console.log(res,sc);
@@ -292,8 +348,8 @@ export default function ShopCar({ cateList, shopCar }) {
                             <input type='date' min={limitTime()} style={{ width: '100%', borderRadius: 6, paddingLeft: 8, paddingRight: 8, paddingTop: 5, paddingBottom: 5 }} onInput={(e) => setDate(e.target.value)} />
                         </div>
                         <div style={{ marginBottom: 24, marginTop: 24, display: 'flex', justifyContent: 'space-around' }}>
-                            <button onClick={toCreateOrder} style={{ width: '30%',textAlign:'center', paddingTop: 12, paddingBottom: 12, backgroundColor: 'red', color: 'white', border: 'none', borderRadius: 8 }}>確認訂單</button>
-                            <Link href="/" style={{ width: '30%',textAlign:'center', paddingTop: 12, paddingBottom: 12, border: 'none', backgroundColor: 'rgb(187,187,187)', color: 'white', borderRadius: 8 }}>繼續選購</Link>
+                            <button onClick={toCreateOrder} style={{ width: '30%', textAlign: 'center', paddingTop: 12, paddingBottom: 12, backgroundColor: 'red', color: 'white', border: 'none', borderRadius: 8 }}>確認訂單</button>
+                            <Link href="/" style={{ width: '30%', textAlign: 'center', paddingTop: 12, paddingBottom: 12, border: 'none', backgroundColor: 'rgb(187,187,187)', color: 'white', borderRadius: 8 }}>繼續選購</Link>
                         </div>
                     </div>
                 </div>
@@ -314,7 +370,7 @@ export default function ShopCar({ cateList, shopCar }) {
             <RegisterPannerl type={false} register={register} close={() => setRegister(false)} toLogin={() => {
                 setLogin(true);
                 setRegister(false)
-            }}  hasLogin={hasLogin}/>
+            }} hasLogin={hasLogin} />
         }
         {
             <ForgetPassword type={0} close={() => setVisible(false)} visible={visible} toLogin={() => {
@@ -333,7 +389,6 @@ export async function getServerSideProps(context) {
         `${constant.api_url}/api/flowercategory/index`
     );
     const data = await response.json()
-    console.log(data);
     let sc;
     let res;
     let i;
@@ -349,8 +404,9 @@ export async function getServerSideProps(context) {
         } else i = null;
         //    console.log(_res[0].trim().split("=")[1]);
     }
-    if(i){
-        console.log("進來了");
+    console.log(i);
+    if (i) {
+        console.log("進來了", i);
         let sc_res = await fetch(
             `${constant.api_url}/api/cart/index`,
             {
@@ -359,26 +415,16 @@ export async function getServerSideProps(context) {
                 }
             }
         )
-        sc=await sc_res.json();
-    }else{
-        sc = { data: [],code:401 };
+        sc = await sc_res.json();
+        if (sc.code === 401) {
+            sc.data = [];
+        }
+        console.log(sc);
+    } else {
+        sc = { data: [], code: 401 };
     }
 
-
-    // if(i===-1){
-
-    // }else{
-        // let sc_res = await fetch(
-        //     `${constant.api_url}/api/cart/index`,
-        //     {
-        //         headers: {
-        //             Authorization: `Bearer ${context.req.headers.cookie.split('=')[i+1]}`
-        //         }
-        //     }
-        // )
-    // }
-    // sc = { data: [] };
-    // console.log(await sc_res.text())
+   
 
     return {
         props: {

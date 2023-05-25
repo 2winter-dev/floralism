@@ -9,7 +9,9 @@
     right: 0;
     bottom: 0; */
 }
+.address_layout{
 
+}
 .address_layout,.login_layout,.register_layout{
     background-image: url("/背景-登錄背景.png");
    

@@ -11,16 +11,6 @@ export default function Header(props) {
                 </Link>
             </div>
             <div className={`${header.header_center}`}>
-                {/* <div className={`${header.header_center_label}`}>
-                    <div className={`${header.header_center_parent}`}>情人節花束 <span className={`iconfont ${header.dropdown_btn}`} style={{ fontSize: 10 }}>&#xe645;</span></div>
-                    <div className={`${header.header_center_dropdown}`}>
-                        <div>情人節花束</div>
-                        <div>情人節禮物</div>
-                    </div>
-                </div>
-                <div className={`${header.header_center_label}`}>
-                    <div className={`${header.header_center_parent}`}>玫瑰熊</div>
-                </div> */}
                 {
                     props.list.length && props.list.map((item, index) => {
                         return (<div key={item.id} className={`${header.header_center_label}`}>

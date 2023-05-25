@@ -7,8 +7,9 @@ import GoodsItem from "../pages/component/GoodsItem";
 import { useEffect,useState } from "react";
 import { spliceArr } from "@/method";
 import GoodsScoll from "../pages/component/GoodsScroll";
+import DynamicComponent from "@/pages/component/Dynamic";
 
-export default function ProductSearch({data}){
+export default function ProductSearch({cateList,data}){
     const [flag,setFlag]=useState(false);
     const [page,setPage]=useState(1);
     const [goodsList,setGoodsList]=useState([]);
@@ -41,7 +42,7 @@ export default function ProductSearch({data}){
       },[goodsList])
 
     return (<div style={{position:'relative'}}>
-        <Header />
+         <DynamicComponent cateList={cateList} setLogin={setLogin} />
         <div style={{width:'100%',position:'relative'}}>
             <img src="/banner-搜索背景.png" style={{width:'100%'}} />
             <div className={style.banner_search} style={{position:'absolute'}}>
@@ -79,7 +80,7 @@ export async function getStaticPaths() {
   const data = await response.json()
   let res = [];
   data.data.map((item, index) => {
-      res.push({ params: { ProductSearchId: item.id.toString() } });
+      res.push({ params: { productId: item.id.toString() } });
     
   })
 
