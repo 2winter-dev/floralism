@@ -168,6 +168,19 @@ export default {
                 "Access-Control-Request-Headers": "Content-Type",
             }
         })
-    }
+    },
+    deleteAddress: (data) => fetch(`${constant.api_url}/api/address/delete`, {
+        body: JSON.stringify({
+            id: data.id,
+        }),
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+            "Authorization": `Bearer ${data.cookie}`,
+            "Content-Type": "application/json",
+            "Access-Control-Request-Method": "POST",
+            "Access-Control-Request-Headers": "Content-Type",
+        }
+    }),
 
 }

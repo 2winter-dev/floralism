@@ -48,7 +48,29 @@ export default function selectMethod(props) {
         mutationKey: ['CreateOrder'],
         mutationFn: (data) => m_api.createOrder(data)
     })
+    const deleteAddress=useMutation({
+        mutationFn:(data)=>m_api.deleteAddress(data),
+        mutationKey:['deleteAddress'],
+    })
 
+    const toDelte=(item)=>{
+        deleteAddress.mutate({id:item.id,cookie:Cookies.get('token')},{
+            onSuccess:async(res)=>{
+                let _res=await res.json();
+                if (_res.code === 401) {
+                    Cookies.remove('token');
+                    location.reload();
+                } else if (_res.code === 1) {
+                    location.reload();
+                } else {
+                    alert(_res.msg);
+                }
+            },
+            onError:(res)=>{
+                alert("删除失败")
+            }
+        })
+    }
     const setPosition = (id) => {
         console.log(id);
         setAdd(id);
@@ -84,7 +106,6 @@ export default function selectMethod(props) {
 
 
     const ToCreateOrder = () => {
-
         if (payment !== "" && add !== "") {
             console.log(deliverytype, deliverydate, cart_ids, remark, amount, payment_amount, add)
             createOrder.mutate({
@@ -100,6 +121,7 @@ export default function selectMethod(props) {
             }, {
                 onSuccess: async (res) => {
                     let _res = await res.json();
+                    // console.log("========================");S
                     console.log(_res.data);
                     if (_res.code === 401) {
                         Cookies.remove("token");
