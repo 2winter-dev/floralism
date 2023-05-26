@@ -13,12 +13,12 @@ export default function AboutUs({ cateList }) {
     const [register, setRegister] = useState(false);
     const [visible, setVisible] = useState(false);
     return (<div>
-        <Head>
+        {/* <Head>
             <meta charSet='utf-8' />
             <title>【訂花】 | 網上訂花 | 「Floralism」網上花店香港</title>
             <meta name='title' content={'【訂花】 | 網上訂花 | 「Floralism」網上花店香港'} />
             <meta name='description' content={'「Floralism」網上花店香港，網上訂花已經是最常見的訂花途徑。「Floralism」提供最方便的花束訂購系統，讓客人輕鬆地訂購花束及為他人送上美麗的花束，同時也帶來了美好的體驗。'} />
-        </Head>
+        </Head> */}
         <DynamicComponent cateList={cateList} setLogin={setLogin} />
         <div className={styles.Total_Layout}>
             <div className={styles.left_item}>
@@ -39,17 +39,20 @@ export default function AboutUs({ cateList }) {
                 <div style={{ paddingTop: 24, paddingBottom: 24 }}>
 
                 </div>
-                <div style={{fontSize:50}}>
-                  <span className="iconfont">&#xe67b;</span>
+                <div style={{ fontSize: 50 }}>
+                    <span className="iconfont">&#xe67b;</span>
                 </div>
-                <div style={{fontSize:20,fontWeight:600,lineHeight:28.8}}>
+                <div style={{ fontSize: 20, fontWeight: 600 }}>
                     創造獨特的花藝，傳遞愛和祝福
                 </div>
-                <div style={{ color: 'rgb(213,59,69)', fontSize: 20, fontWeight: 600, lineHeight: 28.8 }}>
+                <div style={{ color: 'rgb(213,59,69)', fontSize: 20, fontWeight: 600, lineHeight: 1.8 }}>
                     FLORALISM
                 </div>
             </div>
+        </div>
+        <div className={styles.ContactusLayout}>
             <Contactus />
+
         </div>
         <Footer />
         {
@@ -81,7 +84,15 @@ export default function AboutUs({ cateList }) {
 export async function getStaticProps({ local }) {
     //  //console.log(constant.api_url);
     const response = await fetch(
-        `${constant.api_url}/api/flowercategory/index`
+        `${constant.api_url}/api/flowercategory/index`,{
+            mode: 'cors',
+            headers: {
+                // "Authorization": `Bearer ${data.cookie}`,
+                "Content-Type": "application/json",
+                "Access-Control-Request-Method": "POST",
+                "Access-Control-Request-Headers": "Content-Type",
+            }
+        }
     );
     let data = await response.text();
 

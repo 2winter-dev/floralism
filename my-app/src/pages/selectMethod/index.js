@@ -18,8 +18,8 @@ import { Radio } from "@nextui-org/react";
 
 export default function selectMethod(props) {
     const stripe = require('stripe')(props.secretKey);
-    console.log("000000000");
-    console.log(stripe);      
+    // console.log("000000000");
+    // console.log(stripe);      
     const DynamicComponentWithNoSSR = dynamic(
       () => import('./DynamicStripe'),
       { ssr: false }
@@ -318,7 +318,15 @@ export default function selectMethod(props) {
 export async function getServerSideProps(context) {
     console.log(context.query);
     const response = await fetch(
-        `${constant.api_url}/api/flowercategory/index`
+        `${constant.api_url}/api/flowercategory/index`,{
+            mode: 'cors',
+            headers: {
+                // "Authorization": `Bearer ${data.cookie}`,
+                "Content-Type": "application/json",
+                "Access-Control-Request-Method": "POST",
+                "Access-Control-Request-Headers": "Content-Type",
+            }
+        }
     );
     let data = await response.json();
 
@@ -344,16 +352,24 @@ export async function getServerSideProps(context) {
         const add_response = await fetch(
             `${constant.api_url}/api/address/index`, {
             headers: {
-                Authorization: `Bearer ${i}`
-            }
+                Authorization: `Bearer ${i}`,
+                "Content-Type": "application/json",
+                "Access-Control-Request-Method": "POST",
+                "Access-Control-Request-Headers": "Content-Type",
+            },
+            mode: 'cors',
         }
         )
 
         const goods_list_response = await fetch(
             `${constant.api_url}/api/cart/detail?ids=${context.query.cart_ids}`, {
             headers: {
-                Authorization: `Bearer ${i}`
-            }
+                Authorization: `Bearer ${i}`,
+                 "Content-Type": "application/json",
+                "Access-Control-Request-Method": "POST",
+                "Access-Control-Request-Headers": "Content-Type",
+            },
+            mode: 'cors',
         }
         );
         goods_data = await goods_list_response.json();

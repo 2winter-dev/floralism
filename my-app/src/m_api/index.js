@@ -7,7 +7,7 @@ export default {
         headers: {
             "Content-Type": "application/json",
             "Access-Control-Request-Method": "POST",
-        "Access-Control-Request-Headers": "Content-Type",
+            "Access-Control-Request-Headers": "Content-Type",
         },
     }),
     register: (data) => fetch(`${constant.api_url}/api/user/registerByEmail`, {
@@ -17,7 +17,7 @@ export default {
         headers: {
             "Content-Type": "application/json",
             "Access-Control-Request-Method": "POST",
-        "Access-Control-Request-Headers": "Content-Type",
+            "Access-Control-Request-Headers": "Content-Type",
         }
     }),
     loginByCode: (data) => fetch(`${constant.api_url}/api/user/loginByCode`, {
@@ -27,7 +27,7 @@ export default {
         headers: {
             "Content-Type": "application/json",
             "Access-Control-Request-Method": "POST",
-        "Access-Control-Request-Headers": "Content-Type",
+            "Access-Control-Request-Headers": "Content-Type",
         }
     }),
     loginByPassword: (data) => fetch(`${constant.api_url}/api/user/passwordLogin`, {
@@ -37,7 +37,7 @@ export default {
         headers: {
             "Content-Type": "application/json",
             "Access-Control-Request-Method": "POST",
-        "Access-Control-Request-Headers": "Content-Type",
+            "Access-Control-Request-Headers": "Content-Type",
         }
     }),
     verifyCode: (data) => fetch(`${constant.api_url}/api/user/verifyCode`, {
@@ -47,7 +47,7 @@ export default {
         headers: {
             "Content-Type": "application/json",
             "Access-Control-Request-Method": "POST",
-        "Access-Control-Request-Headers": "Content-Type",
+            "Access-Control-Request-Headers": "Content-Type",
         }
     }),
     resetPassword: (data) => fetch(`${constant.api_url}/api/user/resetPassword`, {
@@ -57,7 +57,7 @@ export default {
         headers: {
             "Content-Type": "application/json",
             "Access-Control-Request-Method": "POST",
-        "Access-Control-Request-Headers": "Content-Type",
+            "Access-Control-Request-Headers": "Content-Type",
         }
     }),
     AddToCart: (data) => {
@@ -75,7 +75,7 @@ export default {
                 "Authorization": `Bearer ${data.cookie}`,
                 "Content-Type": "application/json",
                 "Access-Control-Request-Method": "POST",
-        "Access-Control-Request-Headers": "Content-Type",
+                "Access-Control-Request-Headers": "Content-Type",
             }
         })
     },
@@ -92,7 +92,7 @@ export default {
                 "Authorization": `Bearer ${data.cookie}`,
                 "Content-Type": "application/json",
                 "Access-Control-Request-Method": "POST",
-        "Access-Control-Request-Headers": "Content-Type",
+                "Access-Control-Request-Headers": "Content-Type",
             }
         })
     },
@@ -106,7 +106,7 @@ export default {
             "Authorization": `Bearer ${data.cookie}`,
             "Content-Type": "application/json",
             "Access-Control-Request-Method": "POST",
-        "Access-Control-Request-Headers": "Content-Type",
+            "Access-Control-Request-Headers": "Content-Type",
         }
     }),
     addAddress: (data) => fetch(`${constant.api_url}/api/address/create`, {
@@ -121,7 +121,7 @@ export default {
             "Authorization": `Bearer ${data.cookie}`,
             "Content-Type": "application/json",
             "Access-Control-Request-Method": "POST",
-        "Access-Control-Request-Headers": "Content-Type",
+            "Access-Control-Request-Headers": "Content-Type",
         }
     }),
     updateAddress: (data) => fetch(`${constant.api_url}/api/address/update`, {
@@ -137,7 +137,7 @@ export default {
             "Authorization": `Bearer ${data.cookie}`,
             "Content-Type": "application/json",
             "Access-Control-Request-Method": "POST",
-        "Access-Control-Request-Headers": "Content-Type",
+            "Access-Control-Request-Headers": "Content-Type",
         }
     }),
     setDefaultAddress: (data) => fetch(`${constant.api_url}/api/address/setDefault`, {
@@ -155,7 +155,7 @@ export default {
     }),
     createOrder: (data) => {
         console.log(data);
-       return fetch(`${constant.api_url}/api/order/create`, {
+        return fetch(`${constant.api_url}/api/order/create`, {
             body: JSON.stringify(
                 data
             ),
@@ -182,5 +182,19 @@ export default {
             "Access-Control-Request-Headers": "Content-Type",
         }
     }),
-
+    fetchGoods: (data) => {
+        console.log("123");
+        return fetch(`${constant.api_url}/api/flowers/index?keyword=${data.keyword}&flower_category_id=${data.flower_category_id}&listRows=${data.listRows}&page=${data.page}`, {
+            // body:JSON.stringify(data),
+            method: 'GET',
+            // mode: 'cors',
+            headers: {
+                "Authorization": `Bearer ${data.cookie}`,
+                "Content-Type": "application/json",
+                "Access-Control-Request-Method": "GET,POST",
+                "Access-Control-Request-Headers": "Content-Type",
+                "Access-Control-Request-Credentials":"true",
+            }
+        })
+    }
 }

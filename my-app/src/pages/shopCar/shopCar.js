@@ -202,7 +202,7 @@ export default function ShopCar({ cateList, shopCar }) {
                 })
                 // console.log();
                 Cookies.set("shopCar",JSON.stringify(res.flat(1)));
-                Router.push({
+                Router.replace({
                     pathname: '/selectMethod',
                     query: {
                         cart_ids: selected.join(','),
@@ -386,7 +386,15 @@ export async function getServerSideProps(context) {
     // console.log(context.req.headers.cookie.split('=')[1]);
 
     const response = await fetch(
-        `${constant.api_url}/api/flowercategory/index`
+        `${constant.api_url}/api/flowercategory/index`,{
+            mode: 'cors',
+            headers: {
+                // "Authorization": `Bearer ${data.cookie}`,
+                "Content-Type": "application/json",
+                "Access-Control-Request-Method": "POST",
+                "Access-Control-Request-Headers": "Content-Type",
+            }
+        }
     );
     const data = await response.json()
     let sc;
@@ -411,8 +419,12 @@ export async function getServerSideProps(context) {
             `${constant.api_url}/api/cart/index`,
             {
                 headers: {
-                    Authorization: `Bearer ${i}`
-                }
+                    Authorization: `Bearer ${i}`,
+                    "Content-Type": "application/json",
+                    "Access-Control-Request-Method": "POST",
+                    "Access-Control-Request-Headers": "Content-Type",
+                },
+                mode: 'cors',
             }
         )
         sc = await sc_res.json();

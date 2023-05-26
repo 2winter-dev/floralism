@@ -11,8 +11,13 @@ import { useState, useEffect } from "react";
 import { spliceArr } from "@/method";
 import GoodsScoll from "../component/GoodsScroll";
 import DynamicComponent from "../component/Dynamic";
-export default function Category({ cateList, data }) {
+import Head from "next/head";
+import CateScroll from "../component/cateScroll";
+import { useRouter } from "next/router";
+export default function Category({ allcate, cateList, data }) {
+    console.log("----");
     console.log(data);
+    const router=useRouter();
     const [login, setLogin] = useState(false);
     const [register, setRegister] = useState(false);
     const [visible, setVisible] = useState(false);
@@ -21,7 +26,6 @@ export default function Category({ cateList, data }) {
     const [categoryPage, setCategoryPage] = useState(1);
     const [goodsList, setGoodsList] = useState([]);
     const [goodsPage, setGoodsPage] = useState(1);
-    console.log(data);
     const resizeUpdate = (e) => {
         if (e.target.innerWidth <= 675) {
             //console.log("====", e.target.innerWidth);
@@ -29,62 +33,91 @@ export default function Category({ cateList, data }) {
         } else if (e.target.innerWidth <= 1100) {
             setFlag(1)
         } else {
-            //console.log("-----", e.target.innerWidth);
             setFlag(2);
         }
     }
     useEffect(() => {
         window.addEventListener("resize", resizeUpdate);
-        window.innerWidth < 1100 ? (!flag && setFlag(true)) : (flag && setFlag(false))
+        if (window.innerWidth <= 675) {
+            //console.log("====", e.target.innerWidth);
+            setFlag(0);
+        } else if (window.innerWidth <= 1100) {
+            setFlag(1)
+        } else {
+            //console.log("-----", e.target.innerWidth);
+            setFlag(2);
+        }
         return () => {
             window.removeEventListener("resize", resizeUpdate);
         }
     }, [])
     useEffect(() => {
         //console.log("flag改變", flag);
-        setCategory(spliceArr(cateList, !flag ? 4 : flag === 1 ? 6 : flag === 2 && 8));
+        setCategory(spliceArr(allcate, !flag ? 4 : flag === 1 ? 6 : flag === 2 && 8, 1));
         //console.log(spliceArr(GoodsPage,  !flag ? 4 :flag===1? 6:flag===2&&8))
         setGoodsList(spliceArr(data.data, !flag ? 4 : flag === 1 ? 6 : flag === 2 && 8));
         setGoodsPage(1);
         setCategoryPage(1);
     }, [flag])
+
+    const checkname = () => {
+        //    console.log(goodsList);
+        let res = allcate.filter((item) => {
+            if (item.id === data.data[0].flower_category_id) {
+                return item;
+            }
+        })
+
+        return res[0].categoryname;
+    }
+
+    useEffect(() => {
+        console.log(goodsList);
+    }, [goodsList])
     return (<div>
-          <DynamicComponent cateList={cateList} setLogin={setLogin}/>
-        <div style={{ width: '100%', position: 'relative',backgroundImage:`url(http://192.168.1.24:6353/uploads/20230523/637cfca2255479e7b2fb99f6364b11b4.png)` }} className={styles.banner} >
+        <Head>
+            {/* <meta title={}  /> */}
+        </Head>
+        <DynamicComponent cateList={cateList} setLogin={setLogin} />
+        <div style={{ width: '100%', position: 'relative', backgroundImage: `url(${constant.api_url}/uploads/20230523/637cfca2255479e7b2fb99f6364b11b4.png)` }} className={styles.banner} >
             {/* <Image priority src="/homepage/top-banner.png" width={1920} height={700} style={{width:'100%'}}/> */}
             <div style={{}} className={styles.top_banner_area}>
-                <img src="http://192.168.1.24:6353/uploads/20230523/0c024bf065eaa139d865a7a6af18f7dc.png" width={'100%'} />
-                <button style={{ border: 'none', display: 'block' }} className={styles.banner_buttom} >點擊選購</button>
+                <img src={`${constant.api_url}/uploads/20230523/0c024bf065eaa139d865a7a6af18f7dc.png`} width={'100%'} />
+                <button onClick={() => router.push(`/productSearch/${data.data[0].flower_category_id}`)} style={{ border: 'none', display: 'block',cursor:'pointer' }} className={styles.banner_buttom} >點擊選購</button>
             </div>
         </div>
         <div className={styles.goods_view}>
-          <GoodsScoll
-            title={cateList[0].categoryname}
-            list={goodsList}
-            page={goodsPage}
-            setPage={setGoodsPage}
-            type={''}
-             
+            <GoodsScoll
+                title={checkname()}
+                list={goodsList}
+                page={goodsPage}
+                id={data.data[0].flower_category_id}
+                setPage={setGoodsPage}
+                perPage={!flag ? 4 : flag === 1 ? 6 : flag === 2 && 8}
+                maxPage={data.last_page}
+                setList={setGoodsList}
+                type={''}
             />
         </div>
         <div style={{ width: '100%', position: 'relative' }}>
-        {
-            <img src={flag ? "http://192.168.1.24:6353/uploads/20230523/94430a50cbdf2a5a5a2d10a2af501ec3.png" : "http://192.168.1.24:6353/uploads/20230523/94430a50cbdf2a5a5a2d10a2af501ec3.png"} style={{ width: '100%', height: '100%', display: 'block' }}></img>
-        }
-        <div className={style.banner_desc} style={{}}>
-            <div style={{ maxHeight: 200, overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <img src="/小短文-訂製花束.png" style={{width:'100%'}} />
+            {
+                <img src={flag ? `${constant.api_url}/uploads/20230523/94430a50cbdf2a5a5a2d10a2af501ec3.png` : `${constant.api_url}/uploads/20230523/94430a50cbdf2a5a5a2d10a2af501ec3.png`} style={{ width: '100%', height: '100%', display: 'block' }}></img>
+            }
+            <div className={style.banner_desc} style={{}}>
+                <div style={{ maxHeight: 200, overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                        <img src="/小短文-訂製花束.png" style={{ width: '100%' }} />
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
         <div className={styles.goods_list}>
-            <GoodsScoll
+            <CateScroll
                 title={'【FLORALISM】 全部分类'}
                 list={category}
                 page={categoryPage}
                 type={'category'}
+                perPage={!flag ? 4 : flag === 1 ? 6 : flag === 2 && 8}
                 setPage={setCategoryPage}
             // click={() => //console.log("1")}
             />
@@ -121,13 +154,21 @@ export default function Category({ cateList, data }) {
 
 export async function getStaticPaths() {
     const response = await fetch(
-        `${constant.api_url}/api/Flowercategory/allIndex`
+        `${constant.api_url}/api/Flowercategory/allIndex`,{
+            mode: 'cors',
+            headers: {
+                // "Authorization": `Bearer ${data.cookie}`,
+                "Content-Type": "application/json",
+                "Access-Control-Request-Method": "POST",
+                "Access-Control-Request-Headers": "Content-Type",
+            }
+        }
     );
     const data = await response.json()
     let res = [];
     data.data.map((item, index) => {
         res.push({ params: { categoryId: item.id.toString() } });
-      
+
     })
     console.log(res);
     // const data=await response.json()
@@ -142,16 +183,46 @@ export async function getStaticProps(context) {
     const { params } = context;
     console.log(params);
     const response = await fetch(
-        `${constant.api_url}/api/flowers/index?keyword=&flower_category_id=${params.categoryId}`
+        `${constant.api_url}/api/flowers/index?keyword=&flower_category_id=${params.categoryId}`,{
+            mode: 'cors',
+            headers: {
+                // "Authorization": `Bearer ${data.cookie}`,
+                "Content-Type": "application/json",
+                "Access-Control-Request-Method": "POST",
+                "Access-Control-Request-Headers": "Content-Type",
+            }
+        }
     );
     const tt_response = await fetch(
-        `${constant.api_url}/api/flowercategory/index`
+        `${constant.api_url}/api/flowercategory/index`,{
+            mode: 'cors',
+            headers: {
+                // "Authorization": `Bearer ${data.cookie}`,
+                "Content-Type": "application/json",
+                "Access-Control-Request-Method": "POST",
+                "Access-Control-Request-Headers": "Content-Type",
+            }
+        }
     );
+    const allcate_response = await fetch(
+        `${constant.api_url}/api/Flowercategory/allIndex`,{
+            mode: 'cors',
+            headers: {
+                // "Authorization": `Bearer ${data.cookie}`,
+                "Content-Type": "application/json",
+                "Access-Control-Request-Method": "POST",
+                "Access-Control-Request-Headers": "Content-Type",
+            }
+        }
+    )
+    let allcate = await allcate_response.json();
     const tt_data = await tt_response.text()
     const data = await response.text()
 
+
     return {
         props: {
+            allcate: allcate.data,
             cateList: JSON.parse(tt_data).data,
             data: JSON.parse(data).data,
         },

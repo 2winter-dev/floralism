@@ -19,26 +19,30 @@ import Cookies from "js-cookie";
 import { useMutation } from "@tanstack/react-query";
 import m_api from "@/m_api";
 import Link from "next/link";
+import { useRef } from "react";
 import DynamicComponent from "../component/Dynamic";
 
 export default function ProductDetail({ cateList, product }) {
 
     // console.log(product);
+    const [index, setIndex] = useState(0);
     const [login, setLogin] = useState(false);
     const [register, setRegister] = useState(false);
     const [flag, setFlag] = useState(false);
     const [visible, setVisible] = useState(false);
     const [isShow, setIsShow] = useState(false);
-    const [Image, setImage] = useState(product?.flowerDetail[0].flowerimage);
+    const [Image, setImage] = useState(product?.flowerDetail[index].flowerimage);
     const [num, setNum] = useState(1);
-    // const [flower_id, setFlower_id] = useState(product?.flowerDetail[0].flower_id)
+    const contain = useRef();
+    const [id, setId] = useState(product?.flowerDetail[index].id)
     const [cardcontent, setCardContent] = useState("");
     const [cardtype, setCardType] = useState(0);
+    const [btnLength, setBtnLength] = useState(0);
     const addToCart = useMutation({
         mutationKey: ['addToCart'],
         mutationFn: (data) => m_api.AddToCart(data)
     })
-
+    console.log(product);
     const resizeUpdate = (e) => {
         if (e.target.innerWidth <= 1100) {
             //console.log("====", e.target.innerWidth);
@@ -61,12 +65,21 @@ export default function ProductDetail({ cateList, product }) {
         console.log("==-12312-===");
         console.log(cardtype);
     }, [cardtype])
-    const carousel_slice = () => {
+    const carousel_slice = (n) => {
         let res = [];
-        for (let i = 0; i < product.flowerList.length / 4; i++) {
-            let sli = product.flowerList.slice(4 * i, 4 * (i + 1));
-            res.push(sli);
+        if (n === 4) {
+            for (let i = 0; i < product.flowerList.length / n; i++) {
+                let sli = product.flowerList.slice(n * i, n * (i + 1));
+                res.push(sli);
+            }
+        } else {
+            for (let i = 0; i < product.flowerDetail[index].flowerimages.length / n; i++) {
+                let sli = product.flowerDetail[index].flowerimages.slice(n * i, n * (i + 1));
+                res.push(sli);
+            }
+
         }
+
         return res;
     }
 
@@ -75,12 +88,10 @@ export default function ProductDetail({ cateList, product }) {
     }
     let MySwiper;
     // const MySwiper=new Swiper('')
-    const [index, setIndex] = useState(0);
-    const [id, setId] = useState(product?.flowerDetail[0].id)
 
-   if(!product){
-     return (<Link style={{width:'100%',justifyContent:'center'}} href="/">商品不存在,請點擊返回</Link>)
-   }
+    if (!product) {
+        return (<Link style={{ width: '100%', justifyContent: 'center' }} href="/">商品不存在,請點擊返回</Link>)
+    }
 
 
     return (<div style={{ position: 'relative' }}>
@@ -88,25 +99,52 @@ export default function ProductDetail({ cateList, product }) {
             <title>商品詳情---production</title>
 
         </Head>
-        <DynamicComponent cateList={cateList} setLogin={setLogin}/>
+        <DynamicComponent cateList={cateList} setLogin={setLogin} />
         <main style={{ paddingLeft: '15%', paddingRight: '15%' }}>
             <div>
                 <div style={{ marginTop: 32, display: 'flex' }}>
-                    <Link href={'/'} style={{ cursor: 'pointer' }}>首頁</Link><span className={style.separator} style={{ cursor: 'pointer' }}>/</span><Link href={`/category/${product.flowerCategory.id}`}>{product.flowerCategory.categoryname}</Link><span className={style.separator}>/</span><div style={{ overflow: 'hidden', textOverflow: 'ellipsis', display: 'flex', flexWrap: 'nowrap' }}>{product.flowerDetail[index].specs_name}</div>
+                    <Link href={'/'} style={{ cursor: 'pointer' }}>首頁</Link><span className={style.separator} style={{ cursor: 'pointer' }}>/</span><Link href={`/category/${product.flowerCategory.id}`}>{product.flowerCategory.categoryname}</Link><span className={style.separator}>/</span><div style={{ overflow: 'hidden', textOverflow: 'ellipsis', display: 'flex', flexWrap: 'nowrap' }}>{product.flowerDetail[index].flowername}</div>
                 </div>
                 <div className={style.main_detail} style={{ width: '100%', display: "flex", marginTop: 24, marginBottom: 24 }}>
                     <div className={style.detail_left} style={{}}>
                         <img className={style.img_show} src={Image} style={{ width: '100%' }} />
                         <div style={{ marginTop: 16 }}>
-                            <div className={style.img_picker_contain} style={{ width: '100%', position: 'relative' }}>
-                                <div className={style.left_button}><span className="iconfont" style={{ fontSize: 24 }}>&#xe628;</span></div>
-                                <div className={style.right_button}><span className="iconfont" style={{ fontSize: 24 }}>&#xe642;</span></div>
+                            <div className={style.img_picker_contain} style={{ width: '100%', position: 'relative', overflow: 'hidden' }}>
+                                <div className={style.left_button}><span className="iconfont" onClick={() => {
+                                    console.log(btnLength);
+                                    if (btnLength) {
+                                        if (product.flowerDetail[index].flowerimages.length < 5) return;
+                                        if (contain.current.style.left) {
+                                            console.log(contain.current.style.left)
+                                            contain.current.style.left = parseInt(contain.current.style.left) - 17 + "%";
+                                        } else {
+                                            contain.current.style.left = -17 + '%';
+                                        }
+                                    }
+                                    console.log("------------------");
+
+                                }} style={{ fontSize: 24 }}>&#xe628;</span></div>
+                                <div className={style.right_button}><span className="iconfont" onClick={() => {
+                                    console.log(btnLength);
+                                   
+                                    if (product.flowerDetail[index].flowerimages.length > 5) {
+                                        let l = btnLength;
+                                        if (l + 1 > product.flowerDetail[index].flowerimage.length) return;
+                                        setBtnLength(btnLength + 1);
+                                        if (contain.current.style.left) {
+                                            console.log(contain.current.style.left)
+                                            contain.current.style.left = parseInt(contain.current.style.left) + 17 + "%";
+                                        } else {
+                                            contain.current.style.left = 17 + '%';
+                                        }
+                                    }
+
+                                }} style={{ fontSize: 24 }}>&#xe642;</span></div>
                                 <div className={style.img_picker}>
-                                    <div style={{ width: '100%' }}>
+                                    <div ref={contain} style={{ width: '100%', position: 'relative' }}>
                                         <div style={{ width: '100%', display: 'flex', alignItems: 'center' }}>
                                             {
                                                 product.flowerDetail[index].flowerimages.map((item, index) => {
-
                                                     return <img onClick={() => setImage(item)} key={index.toString()} src={item} style={{ width: '17%', marginRight: '3%' }}></img>
                                                 })
                                             }
@@ -119,11 +157,11 @@ export default function ProductDetail({ cateList, product }) {
                     </div>
                     <div className={style.detail_right} style={{}}>
                         <div style={{ width: '100%', fontSize: 18 }} className={style.product_title}>
-                            {product.flowerDetail[0].specs_name}
+                            {product.flowerDetail[index].flowername}
                         </div>
 
                         <div className={style.price} style={{ color: 'rgb(206,57,75)' }}>
-                            HK$ {(parseFloat(product.flowerDetail[0].price).toFixed(2) * num).toFixed(2)}
+                            HK$ {(parseFloat(product.flowerDetail[index].price).toFixed(2) * num).toFixed(2)}
                         </div>
 
                         <div>規格</div>
@@ -135,14 +173,17 @@ export default function ProductDetail({ cateList, product }) {
                                 product.flowerDetail.map((item, index) => {
                                     if (item.id === id) {
                                         return (<div key={item.toString() + index.toString()} className={style.choosen}>{item.specs_attr}</div>)
-                                    } else return <div key={item.toString() + index.toString()}>{item.specs_attr}</div>
+                                    } else return <div onClick={() => {
+                                        setIndex(index);
+                                        setId(item.id);
+                                    }} key={item.toString() + index.toString()}>{item.specs_attr}</div>
                                 })
                             }
                         </div>
 
                         <div style={{ display: 'flex', marginTop: 16, width: '100%', justifyContent: 'space-between', textAlign: 'center' }}>
                             <div>默認心意卡</div>
-                            <select value={cardtype} onChange={(event) =>{
+                            <select value={cardtype} onChange={(event) => {
                                 setCardType(event.target.value);
                                 console.log(event.target.value);
                             }} style={{ borderRadius: 4 }} >
@@ -157,7 +198,7 @@ export default function ProductDetail({ cateList, product }) {
                             <div style={{ width: '45%', borderWidth: 2, borderColor: 'black', borderRadius: 8 }}>
                                 <img src='/心意卡.png' style={{ width: '100%' }} />
                             </div>
-                            {cardtype==="1"&&<input type={'text'} style={{marginTop:18}} value={cardcontent} onInput={(e)=>setCardContent(e.target.value)} placeholder="请输入心意卡内容" />}
+                            {cardtype === "1" && <input type={'text'} style={{ marginTop: 18 }} value={cardcontent} onInput={(e) => setCardContent(e.target.value)} placeholder="请输入心意卡内容" />}
                         </div>
 
                         <div style={{ marginTop: 32 }}>
@@ -229,11 +270,10 @@ export default function ProductDetail({ cateList, product }) {
                         <div style={{ position: "relative" }}>
 
                             <div style={{ padding: 8 }}>
-                                <div className='swiper-container' style={{ height:  carousel_slice().length>4&&flag < 2 ? 620 : 320 }}>
+                                <div className='swiper-container' style={{ height: carousel_slice().length > 4 && flag < 2 ? 620 : 320 }}>
                                     <div className="swiper-wrapper" style={{ height: 320 }}>
                                         {
-                                            carousel_slice().map((item, index) => {
-                                                console.log(carousel_slice().length);
+                                            carousel_slice(4).map((item, index) => {
                                                 return (<div key={item.id + index.toString()} className="swiper-slide" style={{ height: 320, width: 212, display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap' }}>
                                                     {
                                                         item.map((it, ii) => {
@@ -307,7 +347,15 @@ export default function ProductDetail({ cateList, product }) {
 
 export async function getStaticPaths() {
     const response = await fetch(
-        `${constant.api_url}/api/flowers/allList`
+        `${constant.api_url}/api/flowers/allList`,{
+            mode: 'cors',
+            headers: {
+                // "Authorization": `Bearer ${data.cookie}`,
+                "Content-Type": "application/json",
+                "Access-Control-Request-Method": "POST",
+                "Access-Control-Request-Headers": "Content-Type",
+            }
+        }
     );
     const data = await response.json();
     let res = [];
@@ -328,21 +376,36 @@ export async function getStaticProps(context) {
 
     //  //console.log(constant.api_url);
     const response = await fetch(
-        `${constant.api_url}/api/flowercategory/index`
+        `${constant.api_url}/api/flowercategory/index`,{
+            mode: 'cors',
+            headers: {
+                // "Authorization": `Bearer ${data.cookie}`,
+                "Content-Type": "application/json",
+                "Access-Control-Request-Method": "POST",
+                "Access-Control-Request-Headers": "Content-Type",
+            }
+        }
     );
     const data = await response.text()
     //   //console.log(Cookies.get('token'));
 
     const detail_response = await fetch(
         `${constant.api_url}/api/flowers/flowerDetail?id=${params.productId}`, {
-        Authorization: `Bearer ${Cookies.get('token')}`
+        Authorization: `Bearer ${Cookies.get('token')}`,
+        mode: 'cors',
+            headers: {
+                // "Authorization": `Bearer ${data.cookie}`,
+                "Content-Type": "application/json",
+                "Access-Control-Request-Method": "POST",
+                "Access-Control-Request-Headers": "Content-Type",
+            }
     }
     );
     //console.log(Cookies.get("token"));
     const detail = await detail_response.json();
     //   let data=await response.text();
     //   const swiper_response=await fetch(
-    //     `${constant.api_url}/api/flowers/getTopicFlower?flower_category_id=${JSON.parse(data).data[0].id}`
+    //     `${constant.api_url}/api/flowers/getTopicFlower?flower_category_id=${JSON.parse(data).data[index].id}`
     //   )
     //   const goods_response=await fetch(
     //     `${constant.api_url}/api/flowers/index`
@@ -351,7 +414,7 @@ export async function getStaticProps(context) {
     //   //console.log(detail);
 
     //   //console.log("====================");
-    //   //console.log(detail.data.product.flowerDetail[0]);
+    //   //console.log(detail.data.product.flowerDetail[index]);
     // //console.log(data[1]);
     console.log(detail.data);
     return {

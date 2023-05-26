@@ -1,18 +1,18 @@
-import Header from "./component/Header";
-import Footer from "./component/Footer";
+import Header from "../component/Header";
+import Footer from "../component/Footer";
 import styles from '@/styles/Home.module.css'
 import style from '@/styles/productSearch.module.css'
-import SearchInput from "./component/SearchInput";
-import GoodsItem from "./component/GoodsItem";
+import SearchInput from "../component/SearchInput";
+import GoodsItem from "../component/GoodsItem";
 import { useEffect, useState } from "react";
 import { spliceArr } from "@/method";
-import GoodsScoll from "./component/GoodsScroll";
+import GoodsScoll from "../component/GoodsScroll";
 import DynamicComponent from "@/pages/component/Dynamic";
 import { constant } from "@/constant";
-import LoginPannel from "./component/LoginPannel";
-import RegisterPannerl from "./component/ResgisterPannel";
-import ForgetPassword from "./component/ForgetPassword";
-import SearchPageGoodsScoll from "./component/SearchPageScroll";
+import LoginPannel from "../component/LoginPannel";
+import RegisterPannerl from "../component/ResgisterPannel";
+import ForgetPassword from "../component/ForgetPassword";
+import SearchPageGoodsScoll from "../component/SearchPageScroll";
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 export default function ProductSearch1({ cateList, data }) {
@@ -114,7 +114,15 @@ export async function getStaticProps(context) {
 
 
   const _response = await fetch(
-    `${constant.api_url}/api/Flowercategory/allIndex`
+    `${constant.api_url}/api/Flowercategory/allIndex`,{
+      mode: 'cors',
+      headers: {
+          // "Authorization": `Bearer ${data.cookie}`,
+          "Content-Type": "application/json",
+          "Access-Control-Request-Method": "POST",
+          "Access-Control-Request-Headers": "Content-Type",
+      }
+    }
 );
 const _data = await _response.json()
 let res = [];
@@ -122,14 +130,29 @@ _data.data.map((item, index) => {
     res.push({ params: { productSearchId: item.id.toString() } });
   
 })
+console.log("-----");
 console.log(res);
-  //   const { params } = context;
-  //   console.log(params);
   const response = await fetch(
-    `${constant.api_url}/api/flowers/index?keyword=&flower_category_id=${1}`
+    `${constant.api_url}/api/flowers/index?keyword=&flower_category_id=${1}`,{
+      mode: 'cors',
+      headers: {
+          // "Authorization": `Bearer ${data.cookie}`,
+          "Content-Type": "application/json",
+          "Access-Control-Request-Method": "POST",
+          "Access-Control-Request-Headers": "Content-Type",
+      }
+    }
   );
   const tt_response = await fetch(
-    `${constant.api_url}/api/flowercategory/index`
+    `${constant.api_url}/api/flowercategory/index`,{
+      mode: 'cors',
+      headers: {
+          // "Authorization": `Bearer ${data.cookie}`,
+          "Content-Type": "application/json",
+          "Access-Control-Request-Method": "POST",
+          "Access-Control-Request-Headers": "Content-Type",
+      }
+    }
   );
   const tt_data = await tt_response.json()
   const data = await response.text()

@@ -1,13 +1,15 @@
-.Total_Layout{
+.ContactusLayout,.Total_Layout{
     padding: 40px 40px 104px 40px;
     display:flex
 }
 
 .left_item{
     padding:50px 80px 50px 50px;
+    flex:1
 }
 .right_item{
     padding: 64px 64px 64px 64px;
+    flex:1
 }
 @media screen and (max-width:1024px){
     .Total_Layout{

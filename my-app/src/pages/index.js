@@ -19,10 +19,11 @@ import ForgetPassword from "./component/ForgetPassword";
 import BodyBanner from './component/BodyBanner'
 import { constant } from '@/constant/index';
 import Cookies from 'js-cookie';
+import CateScroll from './component/cateScroll';
 import Head from 'next/head';
 const inter = Inter({ subsets: ['latin'] })
 
-export default function Home({ cateList, GoodsPage, carousel }) {
+export default function Home({ allcate, cateList, GoodsPage, carousel }) {
   // console.log("====");
   // console.log(cateList);
   const [flag, setFlag] = useState(1);
@@ -74,9 +75,9 @@ export default function Home({ cateList, GoodsPage, carousel }) {
   let MySwiper;
   useEffect(() => {
     console.log("flag改變", flag);
-    setCategory(spliceArr(cateList, !flag ? 4 : flag === 1 ? 6 : flag === 2 && 8));
+    setCategory(spliceArr(allcate, !flag ? 4 : flag === 1 ? 6 : flag === 2 && 8, 'cat'));
     //console.log(spliceArr(GoodsPage,  !flag ? 4 :flag===1? 6:flag===2&&8))
-    setGoodsList(spliceArr(GoodsPage, !flag ? 4 : flag === 1 ? 6 : flag === 2 && 8));
+    setGoodsList(spliceArr(GoodsPage.data, !flag ? 4 : flag === 1 ? 6 : flag === 2 && 8));
     setGoodsPage(1);
     setCategoryPage(1);
   }, [flag])
@@ -105,11 +106,12 @@ export default function Home({ cateList, GoodsPage, carousel }) {
       </div>
       <main className={`${styles.main_body}`}>
         <div className={styles.goods_list}>
-          <GoodsScoll
+          <CateScroll
             title={'【FLORALISM】 全部分类'}
             list={category}
             page={categoryPage}
             type={'category'}
+            perPage={!flag ? 4 : flag === 1 ? 6 : flag === 2 && 8}
             setPage={setCategoryPage}
           // click={() => //console.log("1")}
           />
@@ -125,15 +127,16 @@ export default function Home({ cateList, GoodsPage, carousel }) {
         <div className={styles.goods_view}>
           {/* <GoodsScoll /> */}
           <GoodsScoll
-            title={cateList[0].categoryname}
+            title={allcate[1].categoryname}
             list={goodsList}
             page={goodsPage}
+            id={allcate[1].id}
             setPage={setGoodsPage}
+            perPage={!flag ? 4 : flag === 1 ? 6 : flag === 2 && 8}
+            maxPage={GoodsPage.last_page}
+            setList={setGoodsList}
             type={''}
-            click={(data) => {
-              // //console.log(data);
-              location.href = "/ProductDetail"
-            }} />
+          />
         </div>
         <div className={styles.goods_scroll}>
           <div className={style.youMaybeLike} style={{ padding: 5, position: 'relative' }}>
@@ -213,42 +216,72 @@ export default function Home({ cateList, GoodsPage, carousel }) {
   )
 }
 
-// export async function getServerSideProps(){
-//   const response = await fetch(
-//     "http://192.168.1.41:6352/api/flowercategory/index"
-//   );
-
-//   const data = await response.json();
-//   //console.log(data);
-
-//   return { props: { repo } };
-// }
 
 export async function getStaticProps({ local }) {
   //  //console.log(constant.api_url);
   const response = await fetch(
-    `${constant.api_url}/api/flowercategory/index`
+    `${constant.api_url}/api/flowercategory/index`, {
+    mode: 'cors',
+    headers: {
+      // "Authorization": `Bearer ${data.cookie}`,
+      "Content-Type": "application/json",
+      "Access-Control-Request-Method": "POST",
+      "Access-Control-Request-Headers": "Content-Type",
+    }
+  }
   );
+  const allcate_response = await fetch(
+    `${constant.api_url}/api/Flowercategory/allIndex`, {
+    mode: 'cors',
+    headers: {
+      // "Authorization": `Bearer ${data.cookie}`,
+      "Content-Type": "application/json",
+      "Access-Control-Request-Method": "POST",
+      "Access-Control-Request-Headers": "Content-Type",
+    }
+  }
+  )
+  let allcate = await allcate_response.json();
   let data = await response.text();
+  // console.log("====================");
+  // console.log(allcate);
   const swiper_response = await fetch(
-    `${constant.api_url}/api/flowers/getTopicFlower?flower_category_id=${JSON.parse(data).data[0].id}`
+    `${constant.api_url}/api/flowers/getTopicFlower?flower_category_id=${JSON.parse(data).data[0].id}`,{
+      mode: 'cors',
+            headers: {
+                // "Authorization": `Bearer ${data.cookie}`,
+                "Content-Type": "application/json",
+                "Access-Control-Request-Method": "POST",
+                "Access-Control-Request-Headers": "Content-Type",
+            }
+    }
   )
   const goods_response = await fetch(
-    `${constant.api_url}/api/flowers/index`
+    `${constant.api_url}/api/flowers/index`,{
+      mode: 'cors',
+            headers: {
+                // "Authorization": `Bearer ${data.cookie}`,
+                "Content-Type": "application/json",
+                "Access-Control-Request-Method": "POST",
+                "Access-Control-Request-Headers": "Content-Type",
+            }
+    }
   )
 
   //console.log(response);
 
   let swiper_data = await swiper_response.text();
   let goods_data = await goods_response.text();
-  // console.log("====================");
-  // //console.log(JSON.parse(goods_data));
+  console.log("====================");
+
+  console.log(JSON.parse(goods_data).data);
   // console.log(data);
 
   return {
     props: {
+      allcate: allcate.data,
       cateList: JSON.parse(data).data,
-      GoodsPage: JSON.parse(goods_data).data.data,
+      GoodsPage: JSON.parse(goods_data).data,
       carousel: JSON.parse(swiper_data).data.data,
     },
   };

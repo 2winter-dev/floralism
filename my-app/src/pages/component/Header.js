@@ -22,7 +22,7 @@ export default function Header(props) {
                             {item.get_child && <div className={`${header.header_center_dropdown}`}>
                                 {
                                     item.get_child.map((it, ii) => {
-                                        return (<Link href={`/category/${it.id}`} key={index.toString() + ii.toString()}>{it.categoryname}</Link>)
+                                        return (<a href={`/category/${it.id}`} key={index.toString() + ii.toString()}>{it.categoryname}</a>)
                                     })
                                 }
                             </div>}
@@ -32,6 +32,11 @@ export default function Header(props) {
                 <div className={`${header.header_center_label}`}>
                     <Link href={`/ContactPage`} >
                         <div className={`${header.header_center_parent}`}>聯係我們</div>
+                    </Link>
+                </div>
+                <div className={`${header.header_center_label}`}>
+                    <Link href={`/Aboutus`} >
+                        <div className={`${header.header_center_parent}`}>關於我們</div>
                     </Link>
                 </div>
             </div>
