@@ -23,11 +23,13 @@ import { constant } from '@/constant/index';
 import Cookies from 'js-cookie';
 import CateScroll from './component/cateScroll';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home({ allcate, cateList, GoodsPage, carousel }) {
-  // console.log("====");
-  // console.log(cateList);
+  // ////console.log("====");
+  const router=useRouter();
+  // ////console.log(cateList);
   const [flag, setFlag] = useState(1);
   const [category, setCategory] = useState([]);
   const [categoryPage, setCategoryPage] = useState(1);
@@ -39,24 +41,24 @@ export default function Home({ allcate, cateList, GoodsPage, carousel }) {
   const [isShow, setIsShow] = useState(false);
   const resizeUpdate = (e) => {
     if (e.target.innerWidth <= 675) {
-      //console.log("====", e.target.innerWidth);
+      //////console.log("====", e.target.innerWidth);
       setFlag(0);
     } else if (e.target.innerWidth <= 1100) {
       setFlag(1)
     } else {
-      //console.log("-----", e.target.innerWidth);
+      //////console.log("-----", e.target.innerWidth);
       setFlag(2);
     }
   }
   useEffect(() => {
     window.addEventListener("resize", resizeUpdate);
     if (window.innerWidth <= 675) {
-      //console.log("====", e.target.innerWidth);
+      //////console.log("====", e.target.innerWidth);
       setFlag(0);
     } else if (window.innerWidth <= 1100) {
       setFlag(1)
     } else {
-      //console.log("-----", e.target.innerWidth);
+      //////console.log("-----", e.target.innerWidth);
       setFlag(2);
     }
     return () => {
@@ -76,15 +78,15 @@ export default function Home({ allcate, cateList, GoodsPage, carousel }) {
 
   let MySwiper;
   useEffect(() => {
-    console.log("flag改變", flag);
+    ////console.log("flag改變", flag);
     setCategory(spliceArr(allcate, !flag ? 4 : flag === 1 ? 6 : flag === 2 && 8, 'cat'));
-    //console.log(spliceArr(GoodsPage,  !flag ? 4 :flag===1? 6:flag===2&&8))
+    //////console.log(spliceArr(GoodsPage,  !flag ? 4 :flag===1? 6:flag===2&&8))
     setGoodsList(spliceArr(GoodsPage.data, !flag ? 4 : flag === 1 ? 6 : flag === 2 && 8));
     setGoodsPage(1);
     setCategoryPage(1);
   }, [flag])
-  // //console.log("=======");
-  // //console.log(category[categoryPage]);
+  // //////console.log("=======");
+  // //////console.log(category[categoryPage]);
   return (
     <div style={{ position: 'relative' }}>
       <Head>
@@ -100,7 +102,7 @@ export default function Home({ allcate, cateList, GoodsPage, carousel }) {
         {/* <Image priority src="/homepage/top-banner.png" width={1920} height={700} style={{width:'100%'}}/> */}
         <div style={{}} className={styles.top_banner_area}>
           <img src="/homepage/banner-desc.png" width={'100%'} />
-          <button style={{ border: 'none', display: 'block' }} className={styles.banner_buttom} >點擊選購</button>
+          <button onClick={()=>router.push('/productSearch/3')} style={{ border: 'none', display: 'block' }} className={styles.banner_buttom} >點擊選購</button>
         </div>
       </div>
       <div>
@@ -115,7 +117,7 @@ export default function Home({ allcate, cateList, GoodsPage, carousel }) {
             type={'category'}
             perPage={!flag ? 4 : flag === 1 ? 6 : flag === 2 && 8}
             setPage={setCategoryPage}
-          // click={() => //console.log("1")}
+          // click={() => //////console.log("1")}
           />
         </div>
         <BodyBanner
@@ -154,7 +156,7 @@ export default function Home({ allcate, cateList, GoodsPage, carousel }) {
                   <div className="swiper-wrapper" style={{ height: 320 }}>
                     {
                       carousel_slice().map((item, index) => {
-                        console.log(carousel_slice().length);
+                        ////console.log(carousel_slice().length);
                         return (<div key={item.id + index.toString()} className="swiper-slide" style={{ height: 320, width: 212, display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap' }}>
                           {
                             item.map((it, ii) => {
@@ -180,7 +182,7 @@ export default function Home({ allcate, cateList, GoodsPage, carousel }) {
                   <Carousel loop>
                   {
                       carousel_slice().map((item, index) => {
-                        console.log(carousel_slice().length);
+                        ////console.log(carousel_slice().length);
                         return (<div key={item.id + index.toString()} style={{  display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap' }}>
                           {
                             item.map((it, ii) => {
@@ -239,7 +241,7 @@ export default function Home({ allcate, cateList, GoodsPage, carousel }) {
 
 
 export async function getStaticProps({ local }) {
-  //  //console.log(constant.api_url);
+  //  //////console.log(constant.api_url);
   const response = await fetch(
     `${constant.api_url}/api/flowercategory/index`, {
     mode: 'cors',
@@ -264,8 +266,8 @@ export async function getStaticProps({ local }) {
   )
   let allcate = await allcate_response.json();
   let data = await response.text();
-  // console.log("====================");
-  // console.log(allcate);
+  // ////console.log("====================");
+  // ////console.log(allcate);
   const swiper_response = await fetch(
     `${constant.api_url}/api/flowers/getTopicFlower?flower_category_id=${JSON.parse(data).data[0].id}`, {
     mode: 'cors',
@@ -289,14 +291,14 @@ export async function getStaticProps({ local }) {
   }
   )
 
-  //console.log(response);
+  //////console.log(response);
 
   let swiper_data = await swiper_response.text();
   let goods_data = await goods_response.text();
-  console.log("====================");
+  ////console.log("====================");
 
-  console.log(JSON.parse(goods_data).data);
-  // console.log(data);
+  ////console.log(JSON.parse(goods_data).data);
+  // ////console.log(data);
 
   return {
     props: {

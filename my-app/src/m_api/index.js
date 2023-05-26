@@ -61,7 +61,7 @@ export default {
         }
     }),
     AddToCart: (data) => {
-        console.log(data);
+        ////console.log(data);
         return fetch(`${constant.api_url}/api/cart/create`, {
             body: JSON.stringify({
                 flower_specs_id: data.flower_specs_id,
@@ -80,7 +80,7 @@ export default {
         })
     },
     changeShopCarNumber: (data) => {
-        console.log(data);
+        ////console.log(data);
         return fetch(`${constant.api_url}/api/cart/updateNum`, {
             body: JSON.stringify({
                 id: data.id,
@@ -154,7 +154,7 @@ export default {
         }
     }),
     createOrder: (data) => {
-        console.log(data);
+        ////console.log(data);
         return fetch(`${constant.api_url}/api/order/create`, {
             body: JSON.stringify(
                 data
@@ -183,11 +183,9 @@ export default {
         }
     }),
     fetchGoods: (data) => {
-        console.log("123");
-        return fetch(`${constant.api_url}/api/flowers/index?keyword=${data.keyword}&flower_category_id=${data.flower_category_id}&listRows=${data.listRows}&page=${data.page}`, {
-            // body:JSON.stringify(data),
+        //console.log("123");
+        return fetch(`${constant.api_url}/api/flowers/index?keyword=${data.keyword}&flower_category_id=${data.flower_category_id}&listRows=${data.listRows}&page=${data.page}`, {    
             method: 'GET',
-            // mode: 'cors',
             headers: {
                 "Authorization": `Bearer ${data.cookie}`,
                 "Content-Type": "application/json",

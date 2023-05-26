@@ -12,7 +12,7 @@ export default function Header(props) {
             </div>
             <div className={`${header.header_center}`}>
                 {
-                    props.list.length && props.list.map((item, index) => {
+                    props?.list?.length && props.list.map((item, index) => {
                         return (<div key={item.id} className={`${header.header_center_label}`}>
                             <div className={`${header.header_center_parent}`}>{item.categoryname}
                                 {
@@ -22,7 +22,7 @@ export default function Header(props) {
                             {item.get_child && <div className={`${header.header_center_dropdown}`}>
                                 {
                                     item.get_child.map((it, ii) => {
-                                        return (<a href={`/category/${it.id}`} key={index.toString() + ii.toString()}>{it.categoryname}</a>)
+                                        return (<div key={index.toString() + ii.toString()}><a href={`/category/${it.id}`} >{it.categoryname}</a></div>)
                                     })
                                 }
                             </div>}
@@ -62,7 +62,7 @@ export default function Header(props) {
                     </div>
                 </div> */}
                 {
-                    props.list.map((item, index) => {
+                   props?.list?.length && props.list.map((item, index) => {
                         return (
                             <div key={index} className={`${header.drop_item}`}>
                                 <div className={`${header.drop_label}`}>{item.categoryname}</div>

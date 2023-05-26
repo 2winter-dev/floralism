@@ -13,9 +13,9 @@ import m_api from '@/m_api';
 import DynamicComponent from '../component/Dynamic';
 import Router from 'next/router';
 export default function ShopCar({ cateList, shopCar }) {
-    // console.log(Cookies.get('token'));
-    // console.log("============");
-    // console.log(shopCar.data);
+    // ////console.log(Cookies.get('token'));
+    // ////console.log("============");
+    // ////console.log(shopCar.data);
     const [selected, setSelected] = useState([]);
     const [selAll, setSelAll] = useState(false);
     const [sc, setSc] = useState(shopCar.data);
@@ -50,7 +50,7 @@ export default function ShopCar({ cateList, shopCar }) {
                     if (type) {
                         let arr = sc;
                         arr[index].num += 1;
-                        console.log(arr);
+                        ////console.log(arr);
                         setSc([...arr]);
                     } else {
                         if (item.num === 1) {
@@ -59,7 +59,7 @@ export default function ShopCar({ cateList, shopCar }) {
                         }
                         let arr = sc;
                         arr[index].num -= 1;
-                        console.log(arr);
+                        ////console.log(arr);
                         setSc([...arr]);
                     }
                 } else {
@@ -96,30 +96,30 @@ export default function ShopCar({ cateList, shopCar }) {
         let money = total_money;
         let res = selected.findIndex((item, index) => item === data.id);
         if (res === -1) {
-            console.log("未被选中，选中");
+            ////console.log("未被选中，选中");
             setSelected([...arr, data.id]);
             money += data.num * data.price;
             if (arr.length + 1 === sc.length) {
                 setSelAll(true);
             }
         } else {
-            console.log("已被选中，取消,位置:" + res);
+            ////console.log("已被选中，取消,位置:" + res);
             let _res = arr.splice(res, 1)
-            console.log(_res, arr);
+            ////console.log(_res, arr);
             money -= data.num * data.price;
             setSelected([...arr]);
             setSelAll(false);
         }
-        console.log(arr.length, sc.length);
+        ////console.log(arr.length, sc.length);
         // culTotalPrice();
     }
     const deleteProduct = () => {
-        console.log(selected);
+        ////console.log(selected);
         deleteProductionFromShopCar.mutate({ ids: selected.join(","), cookie: Cookies.get('token') }, {
             onSuccess: async (res) => {
-                // console.log(await res.text())
+                // ////console.log(await res.text())
                 let _res = await res.json();
-                console.log(_res);
+                ////console.log(_res);
                 if (_res.code === 1) {
                     let arr = sc;
                     selected.map((item) => {
@@ -136,7 +136,7 @@ export default function ShopCar({ cateList, shopCar }) {
                     alert(_res.msg);
                 }
                 // let _res=JSON.parse(res)
-                // console.log(_res);
+                // ////console.log(_res);
 
                 // culTotalPrice();
             },
@@ -174,7 +174,7 @@ export default function ShopCar({ cateList, shopCar }) {
         !sc.length && setSelAll(false);
         setTotal_money(money);
         setTotal_num(num);
-        //  console.log(money);
+        //  ////console.log(money);
     }, [sc, selected])
 
     const limitTime = () => {
@@ -182,7 +182,7 @@ export default function ShopCar({ cateList, shopCar }) {
         let year = date.getFullYear();
         let month = date.getMonth() + 1;
         let day = date.getDate();
-        console.log(year + '-' + (month < 10 ? "0" + month : month) + "-" + day);
+        ////console.log(year + '-' + (month < 10 ? "0" + month : month) + "-" + day);
         return year + '-' + (month < 10 ? "0" + month : month) + "-" + day
 
     }
@@ -192,15 +192,15 @@ export default function ShopCar({ cateList, shopCar }) {
             if (date !== "") {
                 // Cookies.set("shopCar",);
                let res=selected.map((item,index)=>{
-                  console.log(item);
+                  ////console.log(item);
                   return sc.filter((it,index)=>{
-                    console.log(it);
+                    ////console.log(it);
                      if(it.id===item){
                         return item;
                      }
                   })
                 })
-                // console.log();
+                // ////console.log();
                 Cookies.set("shopCar",JSON.stringify(res.flat(1)));
                 Router.replace({
                     pathname: '/selectMethod',
@@ -237,7 +237,7 @@ export default function ShopCar({ cateList, shopCar }) {
                     <div style={{}}>
                         <div style={{ display: 'flex', paddingLeft: 10, paddingRight: 10 }}>
                             <div style={{ width: '15%' }}>
-                                <input type='checkbox' checked={selAll} onChange={(e) => console.log(e.currentTarget.value)} onClick={selectedAll} style={{ width: 15, height: 15 }} />
+                                <input type='checkbox' checked={selAll} onClick={selectedAll} style={{ width: 15, height: 15 }} />
                                 <span>全選</span>
                                 <span onClick={deleteProduct} style={{ marginLeft: 8, cursor: 'pointer' }}>删除</span>
                             </div>
@@ -264,7 +264,7 @@ export default function ShopCar({ cateList, shopCar }) {
                                                     <div style={{ width: '100%', marginTop: 24, display: 'flex', alignItems: 'center', textAlign: 'center' }}>
                                                         <div style={{ width: '52%' }}>
                                                             <div style={{ width: '97%', display: 'flex', alignItems: 'flex-start' }}>
-                                                                <input type='checkbox' onChange={(e) => console.log(e.currentTarget.value)} onClick={() => changeStatus(item)} checked={selected.some((it, ii) => it === item.id)} style={{ width: 15, height: 15, marginRight: 12 }} />
+                                                                <input type='checkbox' onClick={() => changeStatus(item)} checked={selected.some((it, ii) => it === item.id)} style={{ width: 15, height: 15, marginRight: 12 }} />
                                                                 <img src='/心意卡.png' style={{ width: '20%', marginRight: 12 }} />
                                                                 <div style={{ fontSize: 12, flex: 1, textAlign: 'left', paddingLeft: 16, paddingTop: 4, paddingBottom: 4, backgroundColor: 'rgb(224,224,224)' }}>
                                                                     {item.flower_specs_name}
@@ -285,12 +285,12 @@ export default function ShopCar({ cateList, shopCar }) {
                                                                 }} className={style.decrease}>-</button>
                                                                 <input type="text" style={{ border: 'none' }} onChange={() => 1} className={style.number} value={item.num} />
                                                                 <button onClick={() => {
-                                                                    console.log(item)
+                                                                    ////console.log(item)
                                                                     ToUpdate(item,index, 1);
 
                                                                     // culTotalPrice(res);
-                                                                    // console.log(r);
-                                                                    // console.log(res,sc);
+                                                                    // ////console.log(r);
+                                                                    // ////console.log(res,sc);
                                                                     // setSc([...sc, {
                                                                     //     ...item,
                                                                     //     num: item.num+1,
@@ -382,8 +382,8 @@ export default function ShopCar({ cateList, shopCar }) {
 }
 export async function getServerSideProps(context) {
     const cookies = context.req.headers.cookie;
-    console.log("-----------");
-    // console.log(context.req.headers.cookie.split('=')[1]);
+    ////console.log("-----------");
+    // ////console.log(context.req.headers.cookie.split('=')[1]);
 
     const response = await fetch(
         `${constant.api_url}/api/flowercategory/index`,{
@@ -403,18 +403,18 @@ export async function getServerSideProps(context) {
     if (context.req.headers.cookie) {
         res = context.req.headers.cookie.split(';');
         let _res = res.filter(item => {
-            console.log(item.trim().split("=")[0]);
+            ////console.log(item.trim().split("=")[0]);
             if (item.trim().split("=")[0] === "token")
                 return item;
         })
         if (_res.length) {
             i = _res[0].trim().split("=")[1];
         } else i = null;
-        //    console.log(_res[0].trim().split("=")[1]);
+        //    ////console.log(_res[0].trim().split("=")[1]);
     }
-    console.log(i);
+    ////console.log(i);
     if (i) {
-        console.log("進來了", i);
+        ////console.log("進來了", i);
         let sc_res = await fetch(
             `${constant.api_url}/api/cart/index`,
             {
@@ -431,7 +431,7 @@ export async function getServerSideProps(context) {
         if (sc.code === 401) {
             sc.data = [];
         }
-        console.log(sc);
+        ////console.log(sc);
     } else {
         sc = { data: [], code: 401 };
     }

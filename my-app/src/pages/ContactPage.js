@@ -11,16 +11,16 @@ import { constant } from "@/constant/index";
 
 
 export default function ContactPage({ cateList }) {
-    //console.log(cateList)
+    //////console.log(cateList)
     const [flag, setFlag] = useState(false);
     const [category, setCategory] = useState([]);
     const [categoryPage, setCategoryPage] = useState(1);
     const resizeUpdate = (e) => {
         if (e.target.innerWidth <= 1100) {
-            //console.log("====", e.target.innerWidth);
+            //////console.log("====", e.target.innerWidth);
             setFlag(true);
         } else {
-            //console.log("-----", e.target.innerWidth);
+            //////console.log("-----", e.target.innerWidth);
             setFlag(false);
         }
     }
@@ -33,7 +33,7 @@ export default function ContactPage({ cateList }) {
     }, [])
 
     useEffect(() => {
-        //console.log("flag改變", flag);
+        //////console.log("flag改變", flag);
         setCategory(spliceArr(cateList, flag ? 4 : 8));
         setCategoryPage(1);
     }, [flag])
@@ -99,7 +99,7 @@ export default function ContactPage({ cateList }) {
                 page={categoryPage}
                 type={'category'}
                 setPage={setCategoryPage}
-                click={() =>console.log("1")}
+                // click={() =>////console.log("1")}
             />
         </div>
         <Footer />

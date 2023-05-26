@@ -8,7 +8,7 @@ import { useState } from 'react';
 export default function Carousel(props) {
     let [height, width] = useBrowserChange();
     const [goodsList, setGoodsList] = useState([]);
-    //console.log(props);
+    //////console.log(props);
 
     return (
     <div style={{ width: '100%',...props.top_div_style }} className={style.carousel_total}>

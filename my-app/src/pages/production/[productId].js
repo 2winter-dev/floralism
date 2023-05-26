@@ -25,7 +25,7 @@ import { Carousel } from "react-responsive-carousel";
 
 export default function ProductDetail({ cateList, product }) {
 
-    // console.log(product);
+    // ////console.log(product);
     const [index, setIndex] = useState(0);
     const [login, setLogin] = useState(false);
     const [register, setRegister] = useState(false);
@@ -43,13 +43,13 @@ export default function ProductDetail({ cateList, product }) {
         mutationKey: ['addToCart'],
         mutationFn: (data) => m_api.AddToCart(data)
     })
-    // console.log(product);
+    // ////console.log(product);
     const resizeUpdate = (e) => {
         if (e.target.innerWidth <= 1100) {
-            //console.log("====", e.target.innerWidth);
+            //////console.log("====", e.target.innerWidth);
             setFlag(true);
         } else {
-            //console.log("-----", e.target.innerWidth);
+            //////console.log("-----", e.target.innerWidth);
             setFlag(false);
         }
     }
@@ -63,8 +63,8 @@ export default function ProductDetail({ cateList, product }) {
 
 
     useEffect(() => {
-        // console.log("==-12312-===");
-        // console.log(cardtype);
+        // ////console.log("==-12312-===");
+        // ////console.log(cardtype);
     }, [cardtype])
     const carousel_slice = (n) => {
         let res = [];
@@ -113,28 +113,28 @@ export default function ProductDetail({ cateList, product }) {
                         <div style={{ marginTop: 16 }}>
                             <div className={style.img_picker_contain} style={{ width: '100%', position: 'relative', overflow: 'hidden' }}>
                                 <div className={style.left_button}><span className="iconfont" onClick={() => {
-                                    // console.log(btnLength);
+                                    // ////console.log(btnLength);
                                     if (btnLength) {
                                         if (product.flowerDetail[index].flowerimages.length < 5) return;
                                         if (contain.current.style.left) {
-                                            // console.log(contain.current.style.left)
+                                            // ////console.log(contain.current.style.left)
                                             contain.current.style.left = parseInt(contain.current.style.left) - 17 + "%";
                                         } else {
                                             contain.current.style.left = -17 + '%';
                                         }
                                     }
-                                    // console.log("------------------");
+                                    // ////console.log("------------------");
 
                                 }} style={{ fontSize: 24 }}>&#xe628;</span></div>
                                 <div className={style.right_button}><span className="iconfont" onClick={() => {
-                                    // console.log(btnLength);
+                                    // ////console.log(btnLength);
 
                                     if (product.flowerDetail[index].flowerimages.length > 5) {
                                         let l = btnLength;
                                         if (l + 1 > product.flowerDetail[index].flowerimage.length) return;
                                         setBtnLength(btnLength + 1);
                                         if (contain.current.style.left) {
-                                            // console.log(contain.current.style.left)
+                                            // ////console.log(contain.current.style.left)
                                             contain.current.style.left = parseInt(contain.current.style.left) + 17 + "%";
                                         } else {
                                             contain.current.style.left = 17 + '%';
@@ -187,7 +187,7 @@ export default function ProductDetail({ cateList, product }) {
                             <div>默認心意卡</div>
                             <select value={cardtype} onChange={(event) => {
                                 setCardType(event.target.value);
-                                // console.log(event.target.value);
+                                // ////console.log(event.target.value);
                             }} style={{ borderRadius: 4 }} >
                                 <option value={0}>心意卡内容</option>
                                 <option value={1}>店家代寫心意卡</option>
@@ -214,7 +214,7 @@ export default function ProductDetail({ cateList, product }) {
                                     }
                                 }} className={style.decrease}>-</button>
                                 <input type="text" className={style.product_number} contentEditable={false} value={num} onChange={() => {
-                                    //console.log(value)
+                                    //////console.log(value)
                                 }} />
                                 <button onClick={() => {
                                     setNum(num + 1);
@@ -225,11 +225,11 @@ export default function ProductDetail({ cateList, product }) {
                         <div style={{ marginTop: 24 }}>
                             <button onClick={() => {
                                 if (cardtype) {
-                                    // console.log(Cookies.get('token'), id, num, cardtype, cardcontent);
+                                    // ////console.log(Cookies.get('token'), id, num, cardtype, cardcontent);
                                     addToCart.mutate({ cookie: Cookies.get('token'), flower_specs_id: id, num, cardtype, cardcontent: cardcontent.trim() }, {
                                         onSuccess: async (res) => {
                                             let isSuccess = await res.json()
-                                            // console.log(isSuccess);
+                                            // ////console.log(isSuccess);
                                             if (isSuccess.code) {
                                                 if (isSuccess.code.toString() === '401') {
                                                     Cookies.remove('token');
@@ -290,7 +290,7 @@ export default function ProductDetail({ cateList, product }) {
                                 <Carousel loop>
                                     {
                                         carousel_slice(4).map((item, index) => {
-                                            // console.log(item);
+                                            // ////console.log(item);
                                             return (<div key={item.id + index.toString()} style={{display: 'flex', flexWrap: 'wrap' }}>
                                                 {
                                                     item.map((it, ii) => {
@@ -391,7 +391,7 @@ export async function getStaticPaths() {
 export async function getStaticProps(context) {
     const { params } = context;
 
-    //  //console.log(constant.api_url);
+    //  //////console.log(constant.api_url);
     const response = await fetch(
         `${constant.api_url}/api/flowercategory/index`, {
         mode: 'cors',
@@ -404,7 +404,7 @@ export async function getStaticProps(context) {
     }
     );
     const data = await response.text()
-    //   //console.log(Cookies.get('token'));
+    //   //////console.log(Cookies.get('token'));
 
     const detail_response = await fetch(
         `${constant.api_url}/api/flowers/flowerDetail?id=${params.productId}`, {
@@ -418,7 +418,7 @@ export async function getStaticProps(context) {
         }
     }
     );
-    //console.log(Cookies.get("token"));
+    //////console.log(Cookies.get("token"));
     const detail = await detail_response.json();
     //   let data=await response.text();
     //   const swiper_response=await fetch(
@@ -427,13 +427,13 @@ export async function getStaticProps(context) {
     //   const goods_response=await fetch(
     //     `${constant.api_url}/api/flowers/index`
     //   )
-    //    //console.log(data);
-    //   //console.log(detail);
+    //    //////console.log(data);
+    //   //////console.log(detail);
 
-    //   //console.log("====================");
-    //   //console.log(detail.data.product.flowerDetail[index]);
-    // //console.log(data[1]);
-    // console.log(detail.data);
+    //   //////console.log("====================");
+    //   //////console.log(detail.data.product.flowerDetail[index]);
+    // //////console.log(data[1]);
+    // ////console.log(detail.data);
     return {
         props: {
             cateList: JSON.parse(data).data,

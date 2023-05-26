@@ -7,46 +7,46 @@ export default function CateScroll(props) {
   const [goodsList, setGoodsList] = useState(
     props.list
   );
-  //console.log("0000");
-  //console.log(props.list);
-  // //console.log(props);
+  //////console.log("0000");
+  //////console.log(props.list);
+  // //////console.log(props);
   // const [btnList, setBtnList] = useState(props.list.length);
   // const [props.page, setprops.page] = useState(props.page);
   // const [props.list.length, setprops.list.length] = useState(props.list.length);
-  //console.log(props.list.length)
+  //////console.log(props.list.length)
   const setBtn = () => {
     switch (props.page) {
       case 1: {
-        if(props.list.length===3){
+        if(props?.list?.length===3){
           return [1,2,3];
         }
-        if(props.list.length===2){
+        if(props?.list?.length===2){
           return [1,2];
         }
-        if(props.list.length===1){
+        if(props?.list?.length===1){
           return [];
         }
       }
       case 2: {
-        if (props.list.length === 3) {
-          //console.log("是3");
+        if (props?.list?.length === 3) {
+          //////console.log("是3");
           return ([1, 2, 3]);
-        } else if(props.list.length===2){
-          //console.log("是2");
+        } else if(props?.list?.length===2){
+          //////console.log("是2");
           return ([1, 2])
         }else{
           return ([1,2,3,4]);
         }
       }
       // case props.list.length-props.page=2:([props.list.length]];
-      case props.list.length - 1: return ([props.page - 2, props.page - 1, props.page, props.list.length])
-      case props.list.length: return ([props.page - 2, props.page - 1, props.page])
+      case props?.list?.length - 1: return ([props.page - 2, props.page - 1, props.page, props?.list?.length])
+      case props?.list?.length: return ([props.page - 2, props.page - 1, props.page])
       default: return ([props.page - 2, props.page - 1, props.page, props.page + 1, props.page + 2]);
     }
   }
-  //console.log("最大页面发生变化")
-  //console.log("当前页面发生变化")
-  // //console.log(props.page,props.page)
+  //////console.log("最大页面发生变化")
+  //////console.log("当前页面发生变化")
+  // //////console.log(props.page,props.page)
   // useEffect(()=>{
 
   // },[])
@@ -61,7 +61,7 @@ export default function CateScroll(props) {
     <section>
         <div style={{ display: 'flex', flexWrap: 'wrap',  marginTop: 12 }}>
           {
-            props.list.length && props.list[props.page - 1].map((item, index) => {
+            props?.list?.length && props.list[props.page - 1].map((item, index) => {
               return <GoodsItem key={index} src={item.src} item={item} title={item.categoryname} price={item.price} type={props.type} animation={props.animation} />
             })
           }
@@ -77,14 +77,14 @@ export default function CateScroll(props) {
           setBtn().map((item, index) => {
             return <div key={index} onClick={() => {
               props.setPage(item);
-              //console.log("Page change");
+              //////console.log("Page change");
             }}
               className={item === props.page ? G_styles.select : "common"}
               style={{ marginLeft: 8, cursor: 'pointer', marginRight: 4, paddingLeft: props.page >= 10 ? 5 : 10, paddingRight: props.page >= 10 ? 5 : 10, paddingTop: 4, paddingBottom: 4, borderRadius: 50 }}>{item}</div>
           })
         }
         {
-          props.list.length - props.page > 2 && <div>....</div>
+          props?.list?.length - props.page > 2 && <div>....</div>
         }
       </div>
     </div>

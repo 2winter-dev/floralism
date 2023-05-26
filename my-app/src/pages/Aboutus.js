@@ -82,7 +82,7 @@ export default function AboutUs({ cateList }) {
 
 
 export async function getStaticProps({ local }) {
-    //  //console.log(constant.api_url);
+    //  //////console.log(constant.api_url);
     const response = await fetch(
         `${constant.api_url}/api/flowercategory/index`,{
             mode: 'cors',

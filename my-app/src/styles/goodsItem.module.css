@@ -97,10 +97,11 @@
 
 .goods_title{
     /* width: 50%; */
-    max-width:100%;
+    width: 70%;
     overflow:hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+
     margin: 0 auto;
     padding: 0.3rem 0.2rem;
     font-size: 1rem;

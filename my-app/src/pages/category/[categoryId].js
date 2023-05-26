@@ -15,8 +15,8 @@ import Head from "next/head";
 import CateScroll from "../component/cateScroll";
 import { useRouter } from "next/router";
 export default function Category({ allcate, cateList, data }) {
-    // console.log("----");
-    // console.log(data);
+    // ////console.log("----");
+    //console.log(data);
     const router=useRouter();
     const [login, setLogin] = useState(false);
     const [register, setRegister] = useState(false);
@@ -28,7 +28,7 @@ export default function Category({ allcate, cateList, data }) {
     const [goodsPage, setGoodsPage] = useState(1);
     const resizeUpdate = (e) => {
         if (e.target.innerWidth <= 675) {
-            //console.log("====", e.target.innerWidth);
+            //////console.log("====", e.target.innerWidth);
             setFlag(0);
         } else if (e.target.innerWidth <= 1100) {
             setFlag(1)
@@ -39,12 +39,12 @@ export default function Category({ allcate, cateList, data }) {
     useEffect(() => {
         window.addEventListener("resize", resizeUpdate);
         if (window.innerWidth <= 675) {
-            //console.log("====", e.target.innerWidth);
+            //////console.log("====", e.target.innerWidth);
             setFlag(0);
         } else if (window.innerWidth <= 1100) {
             setFlag(1)
         } else {
-            //console.log("-----", e.target.innerWidth);
+            //////console.log("-----", e.target.innerWidth);
             setFlag(2);
         }
         return () => {
@@ -52,27 +52,27 @@ export default function Category({ allcate, cateList, data }) {
         }
     }, [])
     useEffect(() => {
-        //console.log("flag改變", flag);
+        //////console.log("flag改變", flag);
         setCategory(spliceArr(allcate, !flag ? 4 : flag === 1 ? 6 : flag === 2 && 8, 1));
-        //console.log(spliceArr(GoodsPage,  !flag ? 4 :flag===1? 6:flag===2&&8))
+        //////console.log(spliceArr(GoodsPage,  !flag ? 4 :flag===1? 6:flag===2&&8))
         setGoodsList(spliceArr(data.data, !flag ? 4 : flag === 1 ? 6 : flag === 2 && 8));
         setGoodsPage(1);
         setCategoryPage(1);
     }, [flag])
 
-    const checkname = () => {
-        //    console.log(goodsList);
-        let res = allcate.filter((item) => {
-            if (item.id === data.data[0].flower_category_id) {
-                return item;
-            }
-        })
+    // const checkname = () => {
+    //     //    ////console.log(goodsList);
+    //     let res = allcate.filter((item) => {
+    //         if (item.id === data.data[0].flower_category_id) {
+    //             return item;
+    //         }
+    //     })
 
-        return res[0].categoryname;
-    }
+    //     return res[0].categoryname;
+    // }
 
     useEffect(() => {
-        // console.log(goodsList);
+        // ////console.log(goodsList);
     }, [goodsList])
     return (<div>
         <Head>
@@ -88,10 +88,10 @@ export default function Category({ allcate, cateList, data }) {
         </div>
         <div className={styles.goods_view} style={{marginBottom:32}}>
             <GoodsScoll
-                title={checkname()}
+                title={data.category_name}
                 list={goodsList}
                 page={goodsPage}
-                id={data.data[0].flower_category_id}
+                id={data?.data[0]?.flower_category_id??0}
                 setPage={setGoodsPage}
                 perPage={!flag ? 4 : flag === 1 ? 6 : flag === 2 && 8}
                 maxPage={data.last_page}
@@ -120,7 +120,7 @@ export default function Category({ allcate, cateList, data }) {
                 type={'category'}
                 perPage={!flag ? 4 : flag === 1 ? 6 : flag === 2 && 8}
                 setPage={setCategoryPage}
-            // click={() => //console.log("1")}
+            // click={() => //////console.log("1")}
             />
         </div>
         <div className={styles.contactus}>
@@ -171,7 +171,7 @@ export async function getStaticPaths() {
         res.push({ params: { categoryId: item.id.toString() } });
 
     })
-    // console.log(res);
+    // ////console.log(res);
     // const data=await response.json()
     // TODO get product id to be array
     return {
@@ -182,7 +182,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps(context) {
     const { params } = context;
-    // console.log(params);
+    // ////console.log(params);
     const response = await fetch(
         `${constant.api_url}/api/flowers/index?keyword=&flower_category_id=${params.categoryId}`,{
             mode: 'cors',

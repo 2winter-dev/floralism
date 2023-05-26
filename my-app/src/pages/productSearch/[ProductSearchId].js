@@ -12,9 +12,11 @@ import DynamicComponent from "@/pages/component/Dynamic";
 import { useMutation } from "@tanstack/react-query";
 import m_api from "../../m_api";
 import { useRouter } from "next/router";
+import useDebounce from '@/hooks/useDebounce'
+import useThrottle from "../../hooks/useThrottle";
 
 export default function ProductSearch({ cateList, data }) {
-  // console.log(data);
+  // ////console.log(data);
   const router = useRouter();
   const [flag, setFlag] = useState(false);
   const [page, setPage] = useState(1);
@@ -22,6 +24,7 @@ export default function ProductSearch({ cateList, data }) {
   const [register, setRegister] = useState(false);
   const [visible, setVisible] = useState(false);
   const [goodsList, setGoodsList] = useState([]);
+  const [searchResult, setSearchResult] = useState([]);
   const input = useRef();
   const [keyword, setKeyWord] = useState("")
   const fetchGoods = useMutation({
@@ -30,50 +33,60 @@ export default function ProductSearch({ cateList, data }) {
   })
 
   const ToSearch = () => {
-    // console.log(1);
+    //console.log("點擊了");
     fetchGoods.mutate({ keyword, flower_category_id: "", listRows: 16, page: page }, {
-      onSuccess: (res) => {
-        console.log(res);
+      onSuccess: async (res) => {
+        let _res = await res.json();
+        if (_res.code === 1) {
+          setSearchResult(_res.data.data);
+          //console.log(_res);
+          setPage(1);
+        } else {
+          alert(_res.msg);
+        }
       },
       onError: (res) => {
-        console.log(res);
+        ////console.log(res);
 
       }
     })
   }
   const resizeUpdate = (e) => {
     if (e.target.innerWidth <= 1100) {
-      //console.log("====", e.target.innerWidth);
+      //////console.log("====", e.target.innerWidth);
       setFlag(true);
     } else {
-      //console.log("-----", e.target.innerWidth);
+      //////console.log("-----", e.target.innerWidth);
       setFlag(false);
     }
   }
   useEffect(() => {
     window.addEventListener("resize", resizeUpdate);
     window.innerWidth < 1100 ? (!flag && setFlag(true)) : (flag && setFlag(false))
-    window.addEventListener("keypress",(e)=>{
-      console.log("點擊了");
-      if(e.key==="Enter"&&keyword!==""){
+    window.addEventListener("keypress", (e) => {
+      
+      if (e.key === "Enter") {
         ToSearch();
+        if(keyword===""){
+          setSearchResult([]);
+        }
       }
     })
     return () => {
       window.removeEventListener("resize", resizeUpdate);
     }
-  
+
   }, [])
 
   useEffect(() => {
-    //console.log("flag改變", flag);
+    //////console.log("flag改變", flag);
     setPage(1);
     setGoodsList(spliceArr(data.data, 16))
     // setCategoryPage(1);
   }, [flag])
 
   useEffect(() => {
-    //console.log(goodsList)
+    //////console.log(goodsList)
   }, [goodsList])
 
   return (<div style={{ position: 'relative' }}>
@@ -97,7 +110,7 @@ export default function ProductSearch({ cateList, data }) {
         </div>
       </div>
     </div>
-    <div className={`${style.search_main_body}`} style={{marginBottom:32}}>
+    <div className={`${style.search_main_body}`} style={{ marginBottom: 32 }}>
       {/* <GoodsItem /> */}
       {/* <GoodsScoll
                  list={goodsList}
@@ -109,22 +122,35 @@ export default function ProductSearch({ cateList, data }) {
                  ButtonGroupStyle={{marginTop:6}}
                  animation
                  click={(data) => {
-                    //console.log(data);
+                    //////console.log(data);
                     
                   }}
                  /> */}
-      <GoodsScoll
-        title={data.category_name}
-        list={goodsList}
-        page={page}
-        id={data.data[0].flower_category_id}
-        setPage={setPage}
-        perPage={8}
-        maxPage={data.last_page}
-        setList={setGoodsList}
-        animation
-        type={''}
-      />
+      {searchResult?.length ?
+        <GoodsScoll
+          title={data.category_name}
+          list={searchResult}
+          page={page}
+          id={data?.data[0]?.flower_category_id ?? 0}
+          setPage={setPage}
+          perPage={8}
+          maxPage={data.last_page}
+          setList={setGoodsList}
+          animation
+          type={''}
+        /> :
+        <GoodsScoll
+          title={data.category_name}
+          list={goodsList}
+          page={page}
+          id={data?.data[0]?.flower_category_id ?? 0}
+          setPage={setPage}
+          perPage={8}
+          maxPage={data.last_page}
+          setList={setGoodsList}
+          animation
+          type={''}
+        />}
     </div>
     <Footer />
   </div>)
@@ -160,7 +186,7 @@ export async function getStaticPaths() {
 export async function getStaticProps(context) {
 
   const { params } = context;
-  // console.log(params);
+  // ////console.log(params);
   const response = await fetch(
     `${constant.api_url}/api/flowers/index?keyword=&flower_category_id=${params.ProductSearchId}&listRows=8`, {
     headers: {
@@ -183,8 +209,8 @@ export async function getStaticProps(context) {
   );
   const tt_data = await tt_response.text()
   const data = await response.text()
-  // console.log("------======-----")
-  // console.log(data);
+  // ////console.log("------======-----")
+  // ////console.log(data);
   return {
     props: {
       cateList: JSON.parse(tt_data).data,

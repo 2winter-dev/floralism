@@ -5,7 +5,7 @@ export default function ShopcarBottom(props) {
 
 
     const toAddAnimation = () => {
-        //console.log("點擊了");
+        //////console.log("點擊了");
         location.href='/shopCar/shopCar'
     }
 
