@@ -8,7 +8,11 @@ const DynamicLazyComponent = dynamic(
 export default function DynamicComponent(props) {
     return (<DynamicLazyComponent list={props.cateList} login={() => {
         if (Cookies.get('token')) {
-            alert("你先退出登陆吗")
+            if(confirm("你先退出登陆吗")){
+                Cookies.remove('token');
+                Cookies.remove('user');
+                location.reload();
+            }
         } else props.setLogin(true);
     }} />)
 }

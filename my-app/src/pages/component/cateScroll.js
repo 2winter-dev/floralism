@@ -77,7 +77,6 @@ export default function CateScroll(props) {
           setBtn().map((item, index) => {
             return <div key={index} onClick={() => {
               props.setPage(item);
-              //////console.log("Page change");
             }}
               className={item === props.page ? G_styles.select : "common"}
               style={{ marginLeft: 8, cursor: 'pointer', marginRight: 4, paddingLeft: props.page >= 10 ? 5 : 10, paddingRight: props.page >= 10 ? 5 : 10, paddingTop: 4, paddingBottom: 4, borderRadius: 50 }}>{item}</div>
