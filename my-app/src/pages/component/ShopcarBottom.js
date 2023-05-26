@@ -12,7 +12,7 @@ export default function ShopcarBottom(props) {
     return (
 
         <div style={{ position: "fixed", right: '5%', bottom: 150,cursor:'pointer' }}>
-            <button onClick={toAddAnimation} className={props.isShow ? `${style.button} ${style.button_hid}` : style.button}>
+            <button onClick={toAddAnimation} style={{cursor:'pointer'}} className={props.isShow ? `${style.button} ${style.button_hid}` : style.button}>
                 {/* <div></div> */}
                 <span className='iconfont'>&#xe64d;</span>
             </button>

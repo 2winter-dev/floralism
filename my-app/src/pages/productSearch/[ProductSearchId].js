@@ -14,7 +14,7 @@ import m_api from "../../m_api";
 import { useRouter } from "next/router";
 
 export default function ProductSearch({ cateList, data }) {
-  console.log(data);
+  // console.log(data);
   const router = useRouter();
   const [flag, setFlag] = useState(false);
   const [page, setPage] = useState(1);
@@ -30,12 +30,14 @@ export default function ProductSearch({ cateList, data }) {
   })
 
   const ToSearch = () => {
+    // console.log(1);
     fetchGoods.mutate({ keyword, flower_category_id: "", listRows: 16, page: page }, {
       onSuccess: (res) => {
         console.log(res);
       },
       onError: (res) => {
         console.log(res);
+
       }
     })
   }
@@ -51,9 +53,16 @@ export default function ProductSearch({ cateList, data }) {
   useEffect(() => {
     window.addEventListener("resize", resizeUpdate);
     window.innerWidth < 1100 ? (!flag && setFlag(true)) : (flag && setFlag(false))
+    window.addEventListener("keypress",(e)=>{
+      console.log("點擊了");
+      if(e.key==="Enter"&&keyword!==""){
+        ToSearch();
+      }
+    })
     return () => {
       window.removeEventListener("resize", resizeUpdate);
     }
+  
   }, [])
 
   useEffect(() => {
@@ -88,7 +97,7 @@ export default function ProductSearch({ cateList, data }) {
         </div>
       </div>
     </div>
-    <div className={`${style.search_main_body}`} style={{}}>
+    <div className={`${style.search_main_body}`} style={{marginBottom:32}}>
       {/* <GoodsItem /> */}
       {/* <GoodsScoll
                  list={goodsList}
@@ -110,7 +119,7 @@ export default function ProductSearch({ cateList, data }) {
         page={page}
         id={data.data[0].flower_category_id}
         setPage={setPage}
-        perPage={16}
+        perPage={8}
         maxPage={data.last_page}
         setList={setGoodsList}
         animation
@@ -151,9 +160,9 @@ export async function getStaticPaths() {
 export async function getStaticProps(context) {
 
   const { params } = context;
-  console.log(params);
+  // console.log(params);
   const response = await fetch(
-    `${constant.api_url}/api/flowers/index?keyword=&flower_category_id=${params.ProductSearchId}&listRows=16`, {
+    `${constant.api_url}/api/flowers/index?keyword=&flower_category_id=${params.ProductSearchId}&listRows=8`, {
     headers: {
       // "Authorization": `Bearer ${data.cookie}`,
       "Content-Type": "application/json",
@@ -174,8 +183,8 @@ export async function getStaticProps(context) {
   );
   const tt_data = await tt_response.text()
   const data = await response.text()
-  console.log("------======-----")
-  console.log(data);
+  // console.log("------======-----")
+  // console.log(data);
   return {
     props: {
       cateList: JSON.parse(tt_data).data,

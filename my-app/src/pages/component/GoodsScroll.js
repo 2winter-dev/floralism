@@ -9,7 +9,7 @@ export default function GoodsScoll(props) {
   const [goodsList, setGoodsList] = useState(
     props.list
   );
-  console.log(props.list);
+  // console.log(props.list);
   //console.log(props);
   //console.log("0000");
   // console.log(props.list);
@@ -65,11 +65,12 @@ export default function GoodsScoll(props) {
     fetchGoods.mutate({keyword:"",flower_category_id:props.id,listRows:props.perPage,page:page},{
       onSuccess:async(res)=>{
         let _res=await res.json();
-        console.log(_res);
+        // console.log(_res);
         props.setList(_res.data.data);
       },
       onError:(res)=>{
-        console.log(res);
+        // console.log(res);
+        Toast.show("獲取失敗");
       }
     })
 

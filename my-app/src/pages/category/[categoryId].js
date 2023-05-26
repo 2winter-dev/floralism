@@ -15,8 +15,8 @@ import Head from "next/head";
 import CateScroll from "../component/cateScroll";
 import { useRouter } from "next/router";
 export default function Category({ allcate, cateList, data }) {
-    console.log("----");
-    console.log(data);
+    // console.log("----");
+    // console.log(data);
     const router=useRouter();
     const [login, setLogin] = useState(false);
     const [register, setRegister] = useState(false);
@@ -72,7 +72,7 @@ export default function Category({ allcate, cateList, data }) {
     }
 
     useEffect(() => {
-        console.log(goodsList);
+        // console.log(goodsList);
     }, [goodsList])
     return (<div>
         <Head>
@@ -86,7 +86,7 @@ export default function Category({ allcate, cateList, data }) {
                 <button onClick={() => router.push(`/productSearch/${data.data[0].flower_category_id}`)} style={{ border: 'none', display: 'block',cursor:'pointer' }} className={styles.banner_buttom} >點擊選購</button>
             </div>
         </div>
-        <div className={styles.goods_view}>
+        <div className={styles.goods_view} style={{marginBottom:32}}>
             <GoodsScoll
                 title={checkname()}
                 list={goodsList}
@@ -96,6 +96,7 @@ export default function Category({ allcate, cateList, data }) {
                 perPage={!flag ? 4 : flag === 1 ? 6 : flag === 2 && 8}
                 maxPage={data.last_page}
                 setList={setGoodsList}
+                animation
                 type={''}
             />
         </div>
@@ -170,7 +171,7 @@ export async function getStaticPaths() {
         res.push({ params: { categoryId: item.id.toString() } });
 
     })
-    console.log(res);
+    // console.log(res);
     // const data=await response.json()
     // TODO get product id to be array
     return {
@@ -181,7 +182,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps(context) {
     const { params } = context;
-    console.log(params);
+    // console.log(params);
     const response = await fetch(
         `${constant.api_url}/api/flowers/index?keyword=&flower_category_id=${params.categoryId}`,{
             mode: 'cors',

@@ -90,11 +90,25 @@
       "unicode_decimal": 58949
     },
     {
+      "icon_id": "11544971",
+      "name": "successful",
+      "font_class": "successful",
+      "unicode": "e633",
+      "unicode_decimal": 58931
+    },
+    {
       "icon_id": "15838564",
       "name": "arrow-down-bold",
       "font_class": "arrow-down-bold",
       "unicode": "e686",
       "unicode_decimal": 59014
+    },
+    {
+      "icon_id": "16654589",
+      "name": "icon_richeng_btn_cancel",
+      "font_class": "icon_richeng_btn_cancel",
+      "unicode": "e618",
+      "unicode_decimal": 58904
     }
   ]
 }

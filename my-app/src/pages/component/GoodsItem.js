@@ -4,8 +4,9 @@ export default function GoodsItem(props) {
     // //console.log(props)
     // console.log(props.item);
     return (<div className={styles.GoodsItem} onClick={() => {
-        
+        console.log("123");
         if (props.type !== "category") {
+            console.log("不是分類");
             location.href = `/production/${props.item.id}`
         } else {
             location.href = `/category/${props.item.id}`

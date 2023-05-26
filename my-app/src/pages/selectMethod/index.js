@@ -18,6 +18,7 @@ import { Radio } from "@nextui-org/react";
 
 export default function selectMethod(props) {
     const stripe = require('stripe')(props.secretKey);
+    const router=useRouter();
     // console.log("000000000");
     // console.log(stripe);      
     const DynamicComponentWithNoSSR = dynamic(
@@ -26,6 +27,8 @@ export default function selectMethod(props) {
     )
 
     const { deliverytype, deliverydate, cart_ids, remark, amount, payment_amount } = useRouter().query
+
+    // console.log(useRouter());
     const [login, setLogin] = useState(false);
     const [register, setRegister] = useState(false);
     const [visible, setVisible] = useState(false);
@@ -54,7 +57,7 @@ export default function selectMethod(props) {
     })
 
     const toDelte=(item)=>{
-        deleteAddress.mutate({id:item.id,cookie:Cookies.get('token')},{
+        deleteAddress.mutate({id:item,cookie:Cookies.get('token')},{
             onSuccess:async(res)=>{
                 let _res=await res.json();
                 if (_res.code === 401) {
@@ -72,7 +75,7 @@ export default function selectMethod(props) {
         })
     }
     const setPosition = (id) => {
-        console.log(id);
+        // console.log(id);
         setAdd(id);
         setDefault.mutate({ id, cookie: Cookies.get('token') }, {
             onSuccess: async (res) => {
@@ -92,14 +95,15 @@ export default function selectMethod(props) {
     useEffect(() => {
         if (props.addList && Cookies.get("token")) {
             let res = props.addList.data.filter((item) => {
-                console.log(item);
+                // console.log(item);
                 if (item.is_default) {
                     return item;
                 }
             })
             setAdd(res[0].id);
         }else{
-            alert("addList有问题")
+            alert("登陸失效");
+            router.replace('/');
         }
     }, [])
 
@@ -107,7 +111,7 @@ export default function selectMethod(props) {
 
     const ToCreateOrder = () => {
         if (payment !== "" && add !== "") {
-            console.log(deliverytype, deliverydate, cart_ids, remark, amount, payment_amount, add)
+            // console.log(deliverytype, deliverydate, cart_ids, remark, amount, payment_amount, add)
             createOrder.mutate({
                 deliverytype,
                 deliverydate,
@@ -122,12 +126,12 @@ export default function selectMethod(props) {
                 onSuccess: async (res) => {
                     let _res = await res.json();
                     // console.log("========================");S
-                    console.log(_res.data);
+                    // console.log(_res.data);
                     if (_res.code === 401) {
                         Cookies.remove("token");
                         location.reload();
                     } else if (_res.code === 1) {
-                        console.log(_res);
+                        // console.log(_res);
                         if(payment==="paypal"){
                             setUrl(_res.data.payment_info.approval_url)
                         }
@@ -143,8 +147,8 @@ export default function selectMethod(props) {
         }
     }
    useEffect(()=>{
-    console.log("==============");
-     console.log(createOrder.data);
+    // console.log("==============");
+    //  console.log(createOrder.data);
    },[createOrder])
 
     return (<div>
@@ -217,8 +221,8 @@ export default function selectMethod(props) {
                                                                 <span onClick={() => setPosition(item.id)} style={{ marginRight: 12 }} className={`iconfont`}>&#xe799;</span>
                                                         }
                                                         <span onClick={(e) => {
-                                                            console.log("刪除");
-
+                                                            // console.log("刪除");
+                                                            toDelte(item.id);
                                                             e.stopPropagation();
                                                         }} style={{ marginRight: 12, fontSize: 14 }} className={`iconfont`} >&#x34b2;</span>
                                                         <span onClick={(e) => {
@@ -277,7 +281,9 @@ export default function selectMethod(props) {
                         </div>
                         :
                         page === 2 && (payment==="stripe" ?<DynamicComponentWithNoSSR />:
-                        <a href={`${url}`} >checkout</a>)
+                        <div style={{display:"flex",alignItems:'center',justifyContent:'center',textAlign:'center'}}>
+                            <div style={{paddingLeft:24,paddingRight:24,paddingTop:4,paddingBottom:4,cursor:'pointer'}} onClick={()=>router.replace(`${url}`)} >checkout</div>
+                        </div>)
                       
                 }
 

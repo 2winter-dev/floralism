@@ -16,8 +16,8 @@ import SearchPageGoodsScoll from "../component/SearchPageScroll";
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 export default function ProductSearch1({ cateList, data }) {
-  console.log("================");
-  console.log(stripe);
+  // console.log("================");
+  // console.log(stripe);
   const [flag, setFlag] = useState(false);
   const [page, setPage] = useState(1);
   const [goodsList, setGoodsList] = useState(data.data);
@@ -130,8 +130,8 @@ _data.data.map((item, index) => {
     res.push({ params: { productSearchId: item.id.toString() } });
   
 })
-console.log("-----");
-console.log(res);
+// console.log("-----");
+// console.log(res);
   const response = await fetch(
     `${constant.api_url}/api/flowers/index?keyword=&flower_category_id=${1}`,{
       mode: 'cors',
@@ -156,8 +156,8 @@ console.log(res);
   );
   const tt_data = await tt_response.json()
   const data = await response.text()
-  console.log("---");
-  console.log(tt_data);
+  // console.log("---");
+  // console.log(tt_data);
 
   return {
     props: {

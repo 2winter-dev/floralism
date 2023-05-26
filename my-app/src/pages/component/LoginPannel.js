@@ -61,8 +61,8 @@ export default function LoginPannel(props) {
                     let isSuccess=await res.json()
                     // //console.log(await res.json());
                     if(isSuccess.code){
-                        console.log("================");
-                        console.log();
+                        // console.log("================");
+                        // console.log();
                         Cookies.set('token',isSuccess.data.token,{expires:1});
                         Cookies.set('user',JSON.stringify(isSuccess.data.userinfo),{expires:1});
                         alert("登陆成功");
@@ -89,11 +89,11 @@ export default function LoginPannel(props) {
                     //console.log(body)
                     
                       if(body.code){
-                        console.log("================");
+                        // console.log("================");
                         Cookies.set('token',body.data.token,{expires:1});
                         Cookies.set('user',JSON.stringify(body.data.userinfo),{expires:1});
-                        console.log("========");
-                        console.log(Cookies.get('token'));
+                        // console.log("========");
+                        // console.log(Cookies.get('token'));
                         
                     alert("登陸成功");
                         props.close();

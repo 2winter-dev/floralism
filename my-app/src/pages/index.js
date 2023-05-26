@@ -5,8 +5,10 @@ import Script from "next/script";
 import styles from '@/styles/Home.module.css'
 import style from '@/styles/product.module.css'
 import GoodsItem from './component/GoodsItem'
+import "react-responsive-carousel/lib/styles/carousel.min.css"
 import GoodsScoll from './component/GoodsScroll'
-import Carousel from './component/Carousel'
+// import Carousel from './component/Carousel'
+import { Carousel } from 'react-responsive-carousel';
 import Contactus from './component/Contactus'
 import DynamicComponent from './component/Dynamic';
 import Footer from './component/Footer'
@@ -145,9 +147,9 @@ export default function Home({ allcate, cateList, GoodsPage, carousel }) {
               <div className={styles.title} style={{ color: "white", marginRight: 16, marginLeft: 16 }}>情人節禮物 | 最受歡迎的</div>
               <div className={styles.distance} style={{ borderBottomWidth: 1, borderBottomColor: 'white' }}></div>
             </div>
-            <div>
+           
 
-              <div style={{ padding: 8 }}>
+              {/* <div style={{ padding: 8 }}>
                 <div className='swiper-container' style={{ height: carousel_slice().length > 4 && flag < 2 ? 620 : 320 }}>
                   <div className="swiper-wrapper" style={{ height: 320 }}>
                     {
@@ -170,15 +172,34 @@ export default function Home({ allcate, cateList, GoodsPage, carousel }) {
               </div>
               <div className={styles.scroll_right} onClick={() => MySwiper.swipeNext()} style={{}}>
                 &gt;
+              </div> */}
+              <div style={{ position: "relative" }}>
+
+                <div style={{ padding: 8 }}>
+
+                  <Carousel loop>
+                  {
+                      carousel_slice().map((item, index) => {
+                        console.log(carousel_slice().length);
+                        return (<div key={item.id + index.toString()} style={{  display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap' }}>
+                          {
+                            item.map((it, ii) => {
+                              return (<GoodsItem key={item.id + index.toString() + ii.toString()} item={it} type={'carsouel'} top_style={{  }} imgStyle={{  }} />)
+                            })
+                          }
+                        </div>)
+                      })
+                    }
+                  </Carousel>
+                </div>
               </div>
+
             </div>
 
           </div>
-
-        </div>
-        <div className={styles.contactus}>
-          <Contactus />
-        </div>
+          <div className={styles.contactus}>
+            <Contactus />
+          </div>
       </main>
       <Footer />
       {
@@ -246,26 +267,26 @@ export async function getStaticProps({ local }) {
   // console.log("====================");
   // console.log(allcate);
   const swiper_response = await fetch(
-    `${constant.api_url}/api/flowers/getTopicFlower?flower_category_id=${JSON.parse(data).data[0].id}`,{
-      mode: 'cors',
-            headers: {
-                // "Authorization": `Bearer ${data.cookie}`,
-                "Content-Type": "application/json",
-                "Access-Control-Request-Method": "POST",
-                "Access-Control-Request-Headers": "Content-Type",
-            }
+    `${constant.api_url}/api/flowers/getTopicFlower?flower_category_id=${JSON.parse(data).data[0].id}`, {
+    mode: 'cors',
+    headers: {
+      // "Authorization": `Bearer ${data.cookie}`,
+      "Content-Type": "application/json",
+      "Access-Control-Request-Method": "POST",
+      "Access-Control-Request-Headers": "Content-Type",
     }
+  }
   )
   const goods_response = await fetch(
-    `${constant.api_url}/api/flowers/index`,{
-      mode: 'cors',
-            headers: {
-                // "Authorization": `Bearer ${data.cookie}`,
-                "Content-Type": "application/json",
-                "Access-Control-Request-Method": "POST",
-                "Access-Control-Request-Headers": "Content-Type",
-            }
+    `${constant.api_url}/api/flowers/index`, {
+    mode: 'cors',
+    headers: {
+      // "Authorization": `Bearer ${data.cookie}`,
+      "Content-Type": "application/json",
+      "Access-Control-Request-Method": "POST",
+      "Access-Control-Request-Headers": "Content-Type",
     }
+  }
   )
 
   //console.log(response);

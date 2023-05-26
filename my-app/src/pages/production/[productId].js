@@ -4,7 +4,7 @@ import style from '@/styles/product.module.css'
 import styles from '@/styles/Home.module.css'
 import Header from "../component/Header";
 import Footer from "../component/Footer";
-import Carousel from "../component/Carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css"
 import GoodsItem from "../component/GoodsItem";
 // import GoodsScoll from "./component/GoodsScroll";
 import LoginPannel from '../component/LoginPannel'
@@ -21,6 +21,7 @@ import m_api from "@/m_api";
 import Link from "next/link";
 import { useRef } from "react";
 import DynamicComponent from "../component/Dynamic";
+import { Carousel } from "react-responsive-carousel";
 
 export default function ProductDetail({ cateList, product }) {
 
@@ -42,7 +43,7 @@ export default function ProductDetail({ cateList, product }) {
         mutationKey: ['addToCart'],
         mutationFn: (data) => m_api.AddToCart(data)
     })
-    console.log(product);
+    // console.log(product);
     const resizeUpdate = (e) => {
         if (e.target.innerWidth <= 1100) {
             //console.log("====", e.target.innerWidth);
@@ -62,8 +63,8 @@ export default function ProductDetail({ cateList, product }) {
 
 
     useEffect(() => {
-        console.log("==-12312-===");
-        console.log(cardtype);
+        // console.log("==-12312-===");
+        // console.log(cardtype);
     }, [cardtype])
     const carousel_slice = (n) => {
         let res = [];
@@ -97,7 +98,8 @@ export default function ProductDetail({ cateList, product }) {
     return (<div style={{ position: 'relative' }}>
         <Head>
             <title>商品詳情---production</title>
-
+            <meta title={'title'} content={`${product.flowerList[index].metatitle}`} />
+            <meta title={'descirption'} content={`${product.flowerList[index].metadescription}`} />
         </Head>
         <DynamicComponent cateList={cateList} setLogin={setLogin} />
         <main style={{ paddingLeft: '15%', paddingRight: '15%' }}>
@@ -111,28 +113,28 @@ export default function ProductDetail({ cateList, product }) {
                         <div style={{ marginTop: 16 }}>
                             <div className={style.img_picker_contain} style={{ width: '100%', position: 'relative', overflow: 'hidden' }}>
                                 <div className={style.left_button}><span className="iconfont" onClick={() => {
-                                    console.log(btnLength);
+                                    // console.log(btnLength);
                                     if (btnLength) {
                                         if (product.flowerDetail[index].flowerimages.length < 5) return;
                                         if (contain.current.style.left) {
-                                            console.log(contain.current.style.left)
+                                            // console.log(contain.current.style.left)
                                             contain.current.style.left = parseInt(contain.current.style.left) - 17 + "%";
                                         } else {
                                             contain.current.style.left = -17 + '%';
                                         }
                                     }
-                                    console.log("------------------");
+                                    // console.log("------------------");
 
                                 }} style={{ fontSize: 24 }}>&#xe628;</span></div>
                                 <div className={style.right_button}><span className="iconfont" onClick={() => {
-                                    console.log(btnLength);
-                                   
+                                    // console.log(btnLength);
+
                                     if (product.flowerDetail[index].flowerimages.length > 5) {
                                         let l = btnLength;
                                         if (l + 1 > product.flowerDetail[index].flowerimage.length) return;
                                         setBtnLength(btnLength + 1);
                                         if (contain.current.style.left) {
-                                            console.log(contain.current.style.left)
+                                            // console.log(contain.current.style.left)
                                             contain.current.style.left = parseInt(contain.current.style.left) + 17 + "%";
                                         } else {
                                             contain.current.style.left = 17 + '%';
@@ -185,7 +187,7 @@ export default function ProductDetail({ cateList, product }) {
                             <div>默認心意卡</div>
                             <select value={cardtype} onChange={(event) => {
                                 setCardType(event.target.value);
-                                console.log(event.target.value);
+                                // console.log(event.target.value);
                             }} style={{ borderRadius: 4 }} >
                                 <option value={0}>心意卡内容</option>
                                 <option value={1}>店家代寫心意卡</option>
@@ -223,11 +225,11 @@ export default function ProductDetail({ cateList, product }) {
                         <div style={{ marginTop: 24 }}>
                             <button onClick={() => {
                                 if (cardtype) {
-                                    console.log(Cookies.get('token'), id, num, cardtype, cardcontent);
+                                    // console.log(Cookies.get('token'), id, num, cardtype, cardcontent);
                                     addToCart.mutate({ cookie: Cookies.get('token'), flower_specs_id: id, num, cardtype, cardcontent: cardcontent.trim() }, {
                                         onSuccess: async (res) => {
                                             let isSuccess = await res.json()
-                                            console.log(isSuccess);
+                                            // console.log(isSuccess);
                                             if (isSuccess.code) {
                                                 if (isSuccess.code.toString() === '401') {
                                                     Cookies.remove('token');
@@ -270,7 +272,7 @@ export default function ProductDetail({ cateList, product }) {
                         <div style={{ position: "relative" }}>
 
                             <div style={{ padding: 8 }}>
-                                <div className='swiper-container' style={{ height: carousel_slice().length > 4 && flag < 2 ? 620 : 320 }}>
+                                {/* <div className='swiper-container' style={{ height: carousel_slice().length > 4 && flag < 2 ? 620 : 320 }}>
                                     <div className="swiper-wrapper" style={{ height: 320 }}>
                                         {
                                             carousel_slice(4).map((item, index) => {
@@ -284,14 +286,28 @@ export default function ProductDetail({ cateList, product }) {
                                             })
                                         }
                                     </div>
-                                </div>
+                                </div> */}
+                                <Carousel loop>
+                                    {
+                                        carousel_slice(4).map((item, index) => {
+                                            // console.log(item);
+                                            return (<div key={item.id + index.toString()} style={{display: 'flex', flexWrap: 'wrap' }}>
+                                                {
+                                                    item.map((it, ii) => {
+                                                        return (<GoodsItem key={item.id + index.toString() + ii.toString()} item={it} type={'carsouel'} top_style={{  }} imgStyle={{ }} />)
+                                                    })
+                                                }
+                                            </div>)
+                                        })
+                                    }
+                                </Carousel>
                             </div>
-                            <div className={styles.scroll_left} style={{ zIndex: 10 }} onClick={() => MySwiper.swipePrev()} >
+                            {/* <div className={styles.scroll_left} style={{ zIndex: 10, cursor: 'pointer' }} onClick={() => MySwiper.swipePrev()} >
                                 <span className="iconfont" style={{ fontSize: 24 }}>&#xe628;</span>
                             </div>
-                            <div className={styles.scroll_right} style={{ zIndex: 10 }} onClick={() => MySwiper.swipeNext()}>
+                            <div className={styles.scroll_right} style={{ zIndex: 10, cursor: 'pointer' }} onClick={() => MySwiper.swipeNext()}>
                                 <span className="iconfont" style={{ fontSize: 24 }}>&#xe642;</span>
-                            </div>
+                            </div> */}
                         </div>
 
                     </div>
@@ -339,7 +355,8 @@ export default function ProductDetail({ cateList, product }) {
                 loop: true,
                 onInit: function (swiper) {
                     swiper.swipeNext()
-                }
+                },
+                preventClicksPropagation: false,
             })
         }}></Script>
     </div >)
@@ -347,15 +364,15 @@ export default function ProductDetail({ cateList, product }) {
 
 export async function getStaticPaths() {
     const response = await fetch(
-        `${constant.api_url}/api/flowers/allList`,{
-            mode: 'cors',
-            headers: {
-                // "Authorization": `Bearer ${data.cookie}`,
-                "Content-Type": "application/json",
-                "Access-Control-Request-Method": "POST",
-                "Access-Control-Request-Headers": "Content-Type",
-            }
+        `${constant.api_url}/api/flowers/allList`, {
+        mode: 'cors',
+        headers: {
+            // "Authorization": `Bearer ${data.cookie}`,
+            "Content-Type": "application/json",
+            "Access-Control-Request-Method": "POST",
+            "Access-Control-Request-Headers": "Content-Type",
         }
+    }
     );
     const data = await response.json();
     let res = [];
@@ -376,15 +393,15 @@ export async function getStaticProps(context) {
 
     //  //console.log(constant.api_url);
     const response = await fetch(
-        `${constant.api_url}/api/flowercategory/index`,{
-            mode: 'cors',
-            headers: {
-                // "Authorization": `Bearer ${data.cookie}`,
-                "Content-Type": "application/json",
-                "Access-Control-Request-Method": "POST",
-                "Access-Control-Request-Headers": "Content-Type",
-            }
+        `${constant.api_url}/api/flowercategory/index`, {
+        mode: 'cors',
+        headers: {
+            // "Authorization": `Bearer ${data.cookie}`,
+            "Content-Type": "application/json",
+            "Access-Control-Request-Method": "POST",
+            "Access-Control-Request-Headers": "Content-Type",
         }
+    }
     );
     const data = await response.text()
     //   //console.log(Cookies.get('token'));
@@ -393,12 +410,12 @@ export async function getStaticProps(context) {
         `${constant.api_url}/api/flowers/flowerDetail?id=${params.productId}`, {
         Authorization: `Bearer ${Cookies.get('token')}`,
         mode: 'cors',
-            headers: {
-                // "Authorization": `Bearer ${data.cookie}`,
-                "Content-Type": "application/json",
-                "Access-Control-Request-Method": "POST",
-                "Access-Control-Request-Headers": "Content-Type",
-            }
+        headers: {
+            // "Authorization": `Bearer ${data.cookie}`,
+            "Content-Type": "application/json",
+            "Access-Control-Request-Method": "POST",
+            "Access-Control-Request-Headers": "Content-Type",
+        }
     }
     );
     //console.log(Cookies.get("token"));
@@ -416,7 +433,7 @@ export async function getStaticProps(context) {
     //   //console.log("====================");
     //   //console.log(detail.data.product.flowerDetail[index]);
     // //console.log(data[1]);
-    console.log(detail.data);
+    // console.log(detail.data);
     return {
         props: {
             cateList: JSON.parse(data).data,

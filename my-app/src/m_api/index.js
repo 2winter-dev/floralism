@@ -193,7 +193,7 @@ export default {
                 "Content-Type": "application/json",
                 "Access-Control-Request-Method": "GET,POST",
                 "Access-Control-Request-Headers": "Content-Type",
-                "Access-Control-Request-Credentials":"true",
+                // "Access-Control-Request-Credentials":"true",
             }
         })
     }
