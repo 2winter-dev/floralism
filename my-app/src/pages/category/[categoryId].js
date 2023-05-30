@@ -14,10 +14,10 @@ import DynamicComponent from "../component/Dynamic";
 import Head from "next/head";
 import CateScroll from "../component/cateScroll";
 import { useRouter } from "next/router";
-export default function Category({ allcate, cateList, data }) {
+export default function Category({ allcate, cateList, data,top_banner,middle_banner }) {
     // ////console.log("----");
     //console.log(data);
-    const router=useRouter();
+    const router = useRouter();
     const [login, setLogin] = useState(false);
     const [register, setRegister] = useState(false);
     const [visible, setVisible] = useState(false);
@@ -28,7 +28,6 @@ export default function Category({ allcate, cateList, data }) {
     const [goodsPage, setGoodsPage] = useState(1);
     const resizeUpdate = (e) => {
         if (e.target.innerWidth <= 675) {
-            //////console.log("====", e.target.innerWidth);
             setFlag(0);
         } else if (e.target.innerWidth <= 1100) {
             setFlag(1)
@@ -74,24 +73,26 @@ export default function Category({ allcate, cateList, data }) {
     useEffect(() => {
         // ////console.log(goodsList);
     }, [goodsList])
+    console.log("======");
+    console.log(data);
     return (<div>
         <Head>
             {/* <meta title={}  /> */}
         </Head>
         <DynamicComponent cateList={cateList} setLogin={setLogin} />
-        <div style={{ width: '100%', position: 'relative', backgroundImage: `url(${constant.api_url}/uploads/20230523/637cfca2255479e7b2fb99f6364b11b4.png)` }} className={styles.banner} >
+        <div style={{ width: '100%', position: 'relative', backgroundImage:`url(${top_banner.coverimage})`,marginBottom:0 }} className={styles.banner} >
             {/* <Image priority src="/homepage/top-banner.png" width={1920} height={700} style={{width:'100%'}}/> */}
-            <div style={{}} className={styles.top_banner_area}>
+            <div className={styles.top_banner_area} style={{}}>
                 <img src={`${constant.api_url}/uploads/20230523/0c024bf065eaa139d865a7a6af18f7dc.png`} width={'100%'} />
-                <button onClick={() => router.push(`/productSearch/${data.data[0].flower_category_id}`)} style={{ border: 'none', display: 'block',cursor:'pointer' }} className={styles.banner_buttom} >點擊選購</button>
+                <button onClick={() => data.data.length?router.push(`/productSearch/${data.data[0].flower_category_id}`):router.push('/')} style={{ border: 'none', display: 'block', cursor: 'pointer' }} className={styles.banner_buttom} >點擊選購</button>
             </div>
         </div>
-        <div className={styles.goods_view} style={{marginBottom:32}}>
+        <div className={styles.goods_view} style={{ marginBottom: 32 }}>
             <GoodsScoll
                 title={data.category_name}
                 list={goodsList}
                 page={goodsPage}
-                id={data?.data[0]?.flower_category_id??0}
+                id={data?.data[0]?.flower_category_id ?? 0}
                 setPage={setGoodsPage}
                 perPage={!flag ? 4 : flag === 1 ? 6 : flag === 2 && 8}
                 maxPage={data.last_page}
@@ -155,15 +156,15 @@ export default function Category({ allcate, cateList, data }) {
 
 export async function getStaticPaths() {
     const response = await fetch(
-        `${constant.api_url}/api/Flowercategory/allIndex`,{
-            mode: 'cors',
-            headers: {
-                // "Authorization": `Bearer ${data.cookie}`,
-                "Content-Type": "application/json",
-                "Access-Control-Request-Method": "POST",
-                "Access-Control-Request-Headers": "Content-Type",
-            }
+        `${constant.api_url}/api/Flowercategory/allIndex`, {
+        mode: 'cors',
+        headers: {
+            // "Authorization": `Bearer ${data.cookie}`,
+            "Content-Type": "application/json",
+            "Access-Control-Request-Method": "POST",
+            "Access-Control-Request-Headers": "Content-Type",
         }
+    }
     );
     const data = await response.json()
     let res = [];
@@ -184,48 +185,78 @@ export async function getStaticProps(context) {
     const { params } = context;
     // ////console.log(params);
     const response = await fetch(
-        `${constant.api_url}/api/flowers/index?keyword=&flower_category_id=${params.categoryId}`,{
-            mode: 'cors',
-            headers: {
-                // "Authorization": `Bearer ${data.cookie}`,
-                "Content-Type": "application/json",
-                "Access-Control-Request-Method": "POST",
-                "Access-Control-Request-Headers": "Content-Type",
-            }
+        `${constant.api_url}/api/flowers/index?keyword=&flower_category_id=${params.categoryId}`, {
+        mode: 'cors',
+        headers: {
+            // "Authorization": `Bearer ${data.cookie}`,
+            "Content-Type": "application/json",
+            "Access-Control-Request-Method": "POST",
+            "Access-Control-Request-Headers": "Content-Type",
         }
+    }
     );
-    const tt_response = await fetch(
-        `${constant.api_url}/api/flowercategory/index`,{
-            mode: 'cors',
-            headers: {
-                // "Authorization": `Bearer ${data.cookie}`,
-                "Content-Type": "application/json",
-                "Access-Control-Request-Method": "POST",
-                "Access-Control-Request-Headers": "Content-Type",
-            }
+
+    const banner = await fetch(`${constant.api_url}/api/banner/index`, {
+        mode: 'cors',
+        headers: {
+            // "Authorization": `Bearer ${data.cookie}`,
+            "Content-Type": "application/json",
+            "Access-Control-Request-Method": "POST",
+            "Access-Control-Request-Headers": "Content-Type",
         }
+    })
+
+    const tt_response = await fetch(
+        `${constant.api_url}/api/flowercategory/index`, {
+        mode: 'cors',
+        headers: {
+            // "Authorization": `Bearer ${data.cookie}`,
+            "Content-Type": "application/json",
+            "Access-Control-Request-Method": "POST",
+            "Access-Control-Request-Headers": "Content-Type",
+        }
+    }
     );
     const allcate_response = await fetch(
-        `${constant.api_url}/api/Flowercategory/allIndex`,{
-            mode: 'cors',
-            headers: {
-                // "Authorization": `Bearer ${data.cookie}`,
-                "Content-Type": "application/json",
-                "Access-Control-Request-Method": "POST",
-                "Access-Control-Request-Headers": "Content-Type",
-            }
+        `${constant.api_url}/api/Flowercategory/allIndex`, {
+        mode: 'cors',
+        headers: {
+            // "Authorization": `Bearer ${data.cookie}`,
+            "Content-Type": "application/json",
+            "Access-Control-Request-Method": "POST",
+            "Access-Control-Request-Headers": "Content-Type",
         }
+    }
     )
     let allcate = await allcate_response.json();
     const tt_data = await tt_response.text()
-    const data = await response.text()
-
-
+    const data = await response.text();
+    const banner_list=await banner.json();
+    console.log("--------");
+    console.log(banner_list.data);
+    console.log(banner_list.data.top_banner.web);
+    console.log(banner_list.data.middle_banner.web);
+    console.log(params.categoryId)
+    let top_banner=banner_list.data.top_banner.web.filter((item)=>{
+        if(item.flower_category_ids.includes(parseInt(params.categoryId))){
+            console.log("找到了");
+            return item;
+        }
+    })
+    let middle_banner=banner_list.data.middle_banner.web.filter((item)=>{
+        if(item.flower_category_ids.includes(parseInt(params.categoryId))){
+            return item;
+        }
+        // console.log(item.flower_category_ids.includes(params.categoryId))
+    })
+    console.log(top_banner,middle_banner);
     return {
         props: {
             allcate: allcate.data,
             cateList: JSON.parse(tt_data).data,
             data: JSON.parse(data).data,
+            top_banner:middle_banner.length?top_banner[0]:{coverimage:`${constant.api_url}/uploads/20230523/637cfca2255479e7b2fb99f6364b11b4.png)`},
+            middle_banner:middle_banner.length?middle_banner[0]:{coverimage:`${constant.api_url}/uploads/20230523/94430a50cbdf2a5a5a2d10a2af501ec3.png`},
         },
     };
 }

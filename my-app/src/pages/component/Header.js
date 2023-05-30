@@ -44,7 +44,7 @@ export default function Header(props) {
                 <div onClick={props.login} style={{ display: 'flex', alignItems: 'center', cursor: "pointer" }}>
                     <span style={{}} className={`iconfont ${header.mine_icon}`}>&#xe70e;</span>
                     {
-                        Cookies.get("token") ? "logout" : "login"
+                        Cookies.get("token") ? "歡迎" : "登入"
                     }
                 </div>
             </div>

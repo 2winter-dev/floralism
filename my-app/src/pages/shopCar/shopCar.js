@@ -276,7 +276,8 @@ export default function ShopCar({ cateList, shopCar }) {
                                                             <div className={styles.product_title} style={{ fontSize: 14, width: '100%', overflow: 'hidden', textOverflow: 'ellipsis', wordWrap: 'break-word' }}>
                                                                 {item.productname}
                                                             </div>
-                                                            ✖<input type={'number'} style={{ width: 40, marginLeft: 12, textAlign: 'center' }} onChange={(e) => ToUpdate(item, index, e.target.value)} value={item.num} />
+                                                            {/* <div>×</div> */}
+                                                            <input type={'number'} style={{ width: 40,  textAlign: 'center' }} onChange={(e) => ToUpdate(item, index, e.target.value)} value={item.num} />
                                                         </div>
                                                     </div>
                                                 </td>
@@ -325,8 +326,8 @@ export default function ShopCar({ cateList, shopCar }) {
                                 <input type='date' min={limitTime()} style={{ width: '100%', marginTop: 12, borderRadius: 6, paddingLeft: 8, paddingRight: 8, paddingTop: 5, paddingBottom: 5 }} onInput={(e) => setDate(e.target.value)} />
                             </div>
                             <div className={style.mediaArea_btnGroup} style={{ marginBottom: 24, marginTop: 24, display: 'flex', justifyContent: 'space-between' }}>
-                                <button className={style.check_order} onClick={toCreateOrder} style={{ textAlign: 'center', paddingTop: 12, paddingBottom: 12, backgroundColor: 'red', color: 'white', border: 'none', borderRadius: 8 }}>確認訂單</button>
-                                <Link className={style.btn_To_index} href="/" style={{ textAlign: 'center', paddingTop: 12, paddingBottom: 12, border: 'none', backgroundColor: 'rgb(187,187,187)', color: 'white', borderRadius: 8 }}>繼續選購</Link>
+                                <button className={style.check_order} onClick={toCreateOrder} style={{ textAlign: 'center', paddingTop: 12, paddingBottom: 12, backgroundColor: '#d43a43', color: 'white', border: 'none', borderRadius: 8 }}>確認訂單</button>
+                                <Link className={style.btn_To_index} href="/" style={{ textAlign: 'center', paddingTop: 12, paddingBottom: 12, border: 'none', backgroundColor: 'black', color: 'white', borderRadius: 8 }}>繼續選購</Link>
                             </div>
                         </div>
                     </div>

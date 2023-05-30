@@ -30,11 +30,17 @@ export default function selectMethod(props) {
 
     const { deliverytype, deliverydate, cart_ids, remark, amount, payment_amount } = useRouter().query
 
+    if (useRouter().query.page) {
+        setPage(useRouter().query.page);
+    }
+    console.log("----------");
+    console.log(deliverytype);
     // ////console.log(useRouter());
     const [login, setLogin] = useState(false);
     const [register, setRegister] = useState(false);
     const [visible, setVisible] = useState(false);
-    const [shopMess,setShopMess]=useState(props.shopList[0])
+    const [shopMess, setShopMess] = useState(props.shopList[0])
+    const [addList, setAddList] = useState(props.addList.data)
 
     const [flag, setFlag] = useState(false);
     const [page, setPage] = useState(1);//第一頁:選擇地址，第二頁選擇支付方式，第三頁結果。
@@ -208,71 +214,77 @@ export default function selectMethod(props) {
             <div style={{ marginTop: 24 }}>
                 {
                     page === 1 &&
-                    <div className={styles.column_control} style={{ display: 'flex' }}>
+                    <div className={styles.column_control} style={{ display: 'flex', alignItems: 'flex-start' }}>
                         <div style={{ flex: 1, marginRight: 12, backgroundColor: 'white', padding: '3%', borderRadius: 8, marginRight: 12 }}>
-                            {deliverytype === 1 ? <div>
-                                <div className={styles.title_area} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
-                                    <div className={styles.title} >選擇地址</div>
-                                    {/* <div onClick={() => {
+                            {
+                                deliverytype.toString() === "1" ? <div>
+                                    <div className={styles.title_area} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
+                                        <div className={styles.title} >選擇地址</div>
+                                        {/* <div onClick={() => {
                                         setAdd_vis(true);
                                         setType(0);
                                     }} style={{ cursor: 'pointer' }}>新增地址&gt;&gt;</div> */}
-                                    <div onClick={() => {
-                                        setAdd_vis(true);
-                                        setType(0);
-                                    }} className={style.addAddress_btn} style={{}}>+ 添加地址</div>
-                                </div>
-                                <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', marginTop: 24 }}>
-                                    {
-                                        props.addList.data.length ? props.addList.data.map((item, index) => {
-                                            return <div key={item.id} className={styles.addressItem} style={{ padding: 14 }}>
-                                                <div onClick={() => setPosition(item.id)} className={styles.addressItemDetail} style={{ paddingLeft: 4, flex: 1 }}>
-                                                    <div style={{ display: 'flex', alignItems: 'baseline' }}>
-                                                        <div style={{ fontSize: 18, fontWeight: 'bold' }}>{item?.name}</div>
-                                                        <div style={{ marginLeft: 10 }}>收</div>
-                                                    </div>
-                                                    <div style={{ marginTop: 8 }}>{item?.mobile}</div>
-                                                    <div style={{ marginTop: 4 }}>{item?.location}</div>
+                                        <div onClick={() => {
+                                            setAdd_vis(true);
+                                            setType(0);
+                                        }} className={style.addAddress_btn} style={{}}>+ 添加地址</div>
+                                    </div>
+                                    <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', marginTop: 24, maxHeight: 400, overflow: 'auto' }}>
+                                        {
+                                            addList.length ? addList.map((item, index) => {
+                                                return <div key={item.id} className={styles.addressItem} style={{ padding: 14, marginBottom: 12 }}>
+                                                    <div onClick={() => setPosition(item.id)} className={styles.addressItemDetail} style={{ paddingLeft: 4, flex: 1 }}>
+                                                        <div style={{ display: 'flex', alignItems: 'baseline' }}>
+                                                            <div style={{ fontSize: 18, fontWeight: 'bold' }}>{item?.name}</div>
+                                                            <div style={{ marginLeft: 10 }}>收</div>
+                                                        </div>
+                                                        <div style={{ marginTop: 8 }}>{item?.mobile}</div>
+                                                        <div style={{ marginTop: 4 }}>{item?.location}</div>
 
-                                                    <div onClick={(e) => e.stopPropagation()} style={{ display: 'flex', alignItems: 'flex-start', marginTop: 12, justifyContent: 'flex-end' }}>
-                                                        {
-                                                            item.is_default ?
-                                                                <span style={{ marginRight: 12 }} className={`iconfont`}>&#xe798;</span> :
-                                                                <span onClick={() => setPosition(item.id)} style={{ marginRight: 12 }} className={`iconfont`}>&#xe799;</span>
-                                                        }
-                                                        <span onClick={(e) => {
-                                                            // ////console.log("刪除");
-                                                            toDelte(item.id);
-                                                            e.stopPropagation();
-                                                        }} style={{ marginRight: 12, fontSize: 14 }} className={`iconfont`} >&#x34b2;</span>
-                                                        <span onClick={(e) => {
-                                                            setAdd_vis(true);
-                                                            setAdd_type(1);
-                                                            setItem(item);
-                                                            e.stopPropagation();
-                                                        }} style={{ fontSize: 15 }} className={`iconfont`} >&#xe61e;</span>
-                                                    </div>
+                                                        <div onClick={(e) => e.stopPropagation()} style={{ display: 'flex', alignItems: 'flex-start', marginTop: 12, justifyContent: 'flex-end' }}>
+                                                            {
+                                                                item.is_default ?
+                                                                    <span style={{ marginRight: 12 }} className={`iconfont`}>&#xe798;</span> :
+                                                                    <span onClick={() => setPosition(item.id)} style={{ marginRight: 12 }} className={`iconfont`}>&#xe799;</span>
+                                                            }
+                                                            <span onClick={(e) => {
+                                                                // ////console.log("刪除");
+                                                                toDelte(item.id);
+                                                                e.stopPropagation();
+                                                            }} style={{ marginRight: 12, fontSize: 14 }} className={`iconfont`} >&#x34b2;</span>
+                                                            <span onClick={(e) => {
+                                                                setAdd_vis(true);
+                                                                setAdd_type(1);
+                                                                setItem(item);
+                                                                e.stopPropagation();
+                                                            }} style={{ fontSize: 15 }} className={`iconfont`} >&#xe61e;</span>
+                                                        </div>
 
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        }) : props.addList.code === 401 ? <div style={{ marginTop: 24, width: '100%', textAlign: 'center' }}>登錄失效，請重新登錄</div> : <div style={{ marginTop: 24, width: '100%', textAlign: 'center' }}>暫無數據，請先添加</div>
-                                    }
-                                </div>
-                            </div> : <div>
-                                <div className={styles.title_area} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
-                                    <div className={styles.title} >選擇門店地址</div>
-                                </div>
-                                {/* <select onChange={(event) => {
-                                    setCardType(event.target.value);
-                                    console.log(event.target.value);
-                                }} Value={'請選擇地址'} >
-                                    {
-                                        props.shopList.map((item) => {
-                                            return (<option value={item.id}>{item.storename}</option>)
-                                        })
-                                    }
-                                </select> */}
-                            </div>}
+                                            }) : props.addList.code === 401 ? <div style={{ marginTop: 24, width: '100%', textAlign: 'center' }}>登錄失效，請重新登錄</div> : <div style={{ marginTop: 24, width: '100%', textAlign: 'center' }}>暫無數據，請先添加</div>
+                                        }
+                                    </div>
+                                </div> : <div>
+                                    <div className={styles.title_area} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
+                                        <div className={styles.title} >選擇門店地址</div>
+                                    </div>
+                                    <Radio.Group>
+                                        <div style={{ marginTop: 12, height: 200, overflow: 'auto' }}>
+                                            {
+                                                props.shopList.map(item => {
+                                                    return (<Radio className={styles.shopItem} value={`${item.id}`} key={item.id}>
+                                                        <div style={{ display: 'flex', flexDirection: 'column', marginLeft: 12, fontSize: 12 }}>
+                                                            <div style={{ fontSize: 14, fontWeight: 700 }}>{item.storename}</div>
+                                                            <div>地址:{item.address}</div>
+                                                            <div>聯係人:{item.name} {"電話:" + item.mobile}</div>
+                                                        </div>
+                                                    </Radio>)
+                                                })
+                                            }
+                                        </div>
+                                    </Radio.Group>
+                                </div>}
                             <div className={styles.title_area} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginTop: 24 }}>
                                 <div className={styles.title} >支付方式</div>
                             </div>
@@ -500,8 +512,6 @@ export async function getServerSideProps(context) {
             }
         }
     }
-
-
 
 
     ////console.log(add_data);

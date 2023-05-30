@@ -1,14 +1,16 @@
 
 import style from '@/styles/shopcarbtn.module.css'
 import Cookies from 'js-cookie'
+import { useRouter } from 'next/router'
 import { useState } from 'react'
 export default function ShopcarBottom(props) {
-
+    const router=useRouter();
 
     const toAddAnimation = (props) => {
         //////console.log("點擊了");
         Cookies.remove("isAdd");
-        location.href='/shopCar/shopCar'
+        router.push('/shopCar/shopCar')
+        // location.href='/shopCar/shopCar'
     }
 
     return (

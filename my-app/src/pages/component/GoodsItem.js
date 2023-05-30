@@ -9,7 +9,7 @@ export default function GoodsItem(props) {
         } else {
             location.href = `/category/${props.item.id}`
         }
-    }} style={{ padding: '1%', ...props.top_style }}>
+    }} style={{ padding: '2%', ...props.top_style }}>
         <div className={props.animation ? styles.goods_img_cover : ""} style={{ position: 'relative',...props.imgTopStyle }}>
             <img src={props?.item?.photoimage} style={{ width: '100%',display:'block', ...props.imgStyle }} className={props.animation==="toLarge"?`${styles.goods_img} ${styles.an_fangda}`:`${styles.goods_img}`} />
             {

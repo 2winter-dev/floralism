@@ -28,7 +28,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 export default function Home({ allcate, cateList, GoodsPage, carousel }) {
   // ////console.log("====");
-  const router=useRouter();
+  const router = useRouter();
   // console.log(GoodsPage);
   const [flag, setFlag] = useState(1);
   const [category, setCategory] = useState([]);
@@ -90,7 +90,7 @@ export default function Home({ allcate, cateList, GoodsPage, carousel }) {
   return (
     <div style={{ position: 'relative' }}>
       <Head>
-        <meta charSet='utf-8' />
+        {/* <meta charSet='utf-8' /> */}
         <title>【買花】 | 送花 | 「Floralism」香港花店</title>
         <meta name='title' content={'【買花】 | 送花 | 「Floralism」香港花店'} />
         <meta name='description' content={'「Floralism」專業香港花店提供買花及送花服務，如鮮花、盆栽、花籃等，而且還提供網上訂購、送貨上門等一系列買花服務，讓人們能夠方便快捷地為他人表達心意。'} />
@@ -102,7 +102,7 @@ export default function Home({ allcate, cateList, GoodsPage, carousel }) {
         {/* <Image priority src="/homepage/top-banner.png" width={1920} height={700} style={{width:'100%'}}/> */}
         <div style={{}} className={styles.top_banner_area}>
           <img src="/homepage/banner-desc.png" width={'100%'} />
-          <button onClick={()=>router.push('/productSearch/3')} style={{ border: 'none', display: 'block',cursor:'pointer' }} className={styles.banner_buttom} >點擊選購</button>
+          <button onClick={() => router.push('/productSearch/3')} style={{ border: 'none', display: 'block', cursor: 'pointer' }} className={styles.banner_buttom} >點擊選購</button>
         </div>
       </div>
       <div>
@@ -151,33 +151,33 @@ export default function Home({ allcate, cateList, GoodsPage, carousel }) {
               <div className={styles.title} style={{ color: "white", marginRight: 16, marginLeft: 16 }}>情人節禮物 | 最受歡迎的</div>
               <div className={styles.distance} style={{ borderBottomWidth: 1, borderBottomColor: 'white' }}></div>
             </div>
-              <div style={{ position: "relative" }}>
+            <div style={{ position: "relative" }}>
 
-                <div style={{ padding: 8,marginTop:24}}>
+              <div style={{ padding: 8, marginTop: 24 }}>
 
-                  <Carousel infiniteLoop showIndicators={false} preventMovementUntilSwipeScrollTolerance={true} swipeScrollTolerance={50} showStatus={false}>
+                <Carousel infiniteLoop showIndicators={false} preventMovementUntilSwipeScrollTolerance={true} swipeScrollTolerance={50} showStatus={false}>
                   {
-                      carousel_slice().map((item, index) => {
-                        ////console.log(carousel_slice().length);
-                        return (<div key={item.id + index.toString()} style={{  display: 'flex', flexWrap: 'wrap' }}>
-                          {
-                            item.map((it, ii) => {
-                              return (<GoodsItem imgTopStyle={{}} key={item.id + index.toString() + ii.toString()} item={it} type={'carsouel'} top_style={{  }} imgStyle={{  }} animation />)
-                            })
-                          }
-                        </div>)
-                      })
-                    }
-                  </Carousel>
-                </div>
+                    carousel_slice().map((item, index) => {
+                      ////console.log(carousel_slice().length);
+                      return (<div key={item.id + index.toString()} style={{ display: 'flex', flexWrap: 'wrap' }}>
+                        {
+                          item.map((it, ii) => {
+                            return (<GoodsItem imgTopStyle={{}} key={item.id + index.toString() + ii.toString()} item={it} type={'carsouel'} top_style={{}} imgStyle={{}} animation />)
+                          })
+                        }
+                      </div>)
+                    })
+                  }
+                </Carousel>
               </div>
-
             </div>
 
           </div>
-          <div className={styles.contactus}>
-            <Contactus />
-          </div>
+
+        </div>
+        <div className={styles.contactus}>
+          <Contactus />
+        </div>
       </main>
       <Footer />
       {
@@ -276,6 +276,7 @@ export async function getStaticProps({ local }) {
 
   ////console.log(JSON.parse(goods_data).data);
   // ////console.log(data);
+
 
   return {
     props: {

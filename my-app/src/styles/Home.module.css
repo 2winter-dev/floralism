@@ -4,7 +4,7 @@
   /* background-color:aquamarine; */
   overflow: hidden;
   background-image: url("/homepage/top-banner.png");
-  background-size: 100% 100%;
+  background-size: 100% ;
   background-repeat: no-repeat;
 }
 
@@ -70,6 +70,7 @@
   /* background-color: red; */
    padding:3rem 20%;
   /* background-image: url("/homepage/分類背景.png"); */
+  /* background-color: #f1f1f1; */
   background-size: 100% 100%;
 }
 .contactus,.goods_scroll,.goods_view{
@@ -135,21 +136,35 @@
     padding: 3rem 10% 3rem;
   }
   .contactus{
-    padding: 3rem 15% 3rem;
+    padding: 3rem 0 3rem;
   }
   .goods_list{
     /* background-color: red; */
      padding:3rem 10%;
-    background-image: url("/homepage/分類-背景.png");
+    /* background-image: url("/homepage/分類-背景.png"); */
     background-size: 100% 100%;
+  }
+  .top_banner_area{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 24px 0;
+  }
+  .top_banner_area>img{
+    width:50%
   }
 }
 @media screen and (max-width:675px) {
   .goods_list{
     /* background-color: red; */
      padding:3rem 0;
-    background-image: url("/homepage/分類背景.png");
+    /* background-image: url("/homepage/分類背景.png"); */
     background-size: 100% 100%;
+  }
+  .banner_buttom{
+    margin: 8px;
+    font-size: 14px;
   }
 }
 /* @media screen and (max-width:1099px) {

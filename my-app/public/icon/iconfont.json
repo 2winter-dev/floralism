@@ -97,6 +97,13 @@
       "unicode_decimal": 58949
     },
     {
+      "icon_id": "10166321",
+      "name": "404",
+      "font_class": "icon-test",
+      "unicode": "e62a",
+      "unicode_decimal": 58922
+    },
+    {
       "icon_id": "11544971",
       "name": "successful",
       "font_class": "successful",

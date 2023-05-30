@@ -8,7 +8,7 @@
     padding: 5px;
 }
 .logo{
-    margin-right:5rem;
+    /* margin-right:; */
 
 }
 .header_layout {
@@ -33,7 +33,8 @@
 .header_center {
     flex: 1;
     display: flex;
-    justify-content: space-around;
+    /* justify-content: space-around; */
+    justify-content: flex-end;
 }
 .header_center_label{
     /* width: 7rem; */

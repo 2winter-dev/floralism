@@ -8,7 +8,8 @@ export default function CateScroll(props) {
     props.list
   );
   //////console.log("0000");
-  //////console.log(props.list);
+  console.log("=====");
+  console.log(props.list);
   // //////console.log(props);
   // const [btnList, setBtnList] = useState(props.list.length);
   // const [props.page, setprops.page] = useState(props.page);
@@ -54,9 +55,9 @@ export default function CateScroll(props) {
   return (<div style={{...props.top_style}}>
     {/* 標題 */}
     <div style={{ display: 'flex', alignItems: 'center' }}>
-      <div className={styles.distance}></div>
-      <div className={styles.title}>{props.title}</div>
-      <div className={styles.distance}></div>
+      {props.flag!==0&&<div className={styles.distance}></div>}
+      <div className={styles.title} style={{whiteSpace: 'nowrap'}}>{props.title}</div>
+      {props.flag!==0&&<div className={styles.distance}></div>}
     </div>
     <section>
         <div style={{ display: 'flex', flexWrap: 'wrap',  marginTop: 12 }}>
@@ -65,7 +66,6 @@ export default function CateScroll(props) {
                return <GoodsItem key={index} src={item.src} item={item} title={item.categoryname} price={item.price} type={props.type} animation={props.animation} />
             })
           }
-          {/* <GoodsItem src="/homepage/圖1.png" title={'綠色'} type={'category'} /> */}
         </div>
     </section>
     <div className={G_styles.btn_list}>

@@ -89,7 +89,7 @@ export default function GoodsScoll(props) {
         <div style={{ display: 'flex', flexWrap: 'wrap',  marginTop: 32 }}>
           {
             !!props?.list?.length ? props.list.map((item, index) => {
-              return <GoodsItem key={index} src={item.src} item={item} title={item.categoryname} price={item.price} type={props.type} animation={props.animation} />
+              return <GoodsItem top_style={{marginTop:12}} key={index} src={item.src} item={item} title={item.categoryname} price={item.price} type={props.type} animation={props.animation} />
             }):<div style={{width:'100%',textAlign:'center'}}>商品列表为空</div>
           }
           {/* <GoodsItem src="/homepage/圖1.png" title={'綠色'} type={'category'} /> */}

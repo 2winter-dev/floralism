@@ -100,6 +100,7 @@ export default function ProductDetail({ cateList, product }) {
             <title>商品詳情</title>
             <meta title={'title'} content={`${product.flowerList[index].metatitle}`} />
             <meta title={'descirption'} content={`${product.flowerList[index].metadescription}`} />
+            <meta title={'keywords'} content={`${product.flowerList[index].meta}`} />
         </Head>
         <DynamicComponent cateList={cateList} setLogin={setLogin} />
         <main style={{ paddingLeft: '21%', paddingRight: '21%' }}>
@@ -174,11 +175,11 @@ export default function ProductDetail({ cateList, product }) {
                             {
                                 product.flowerDetail.map((item, index) => {
                                     if (item.id === id) {
-                                        return (<div key={item.toString() + index.toString()} className={style.choosen}>{item.specs_attr}</div>)
+                                        return (<div key={item.toString() + index.toString()} className={style.choosen}>{item.specs_name}</div>)
                                     } else return <div onClick={() => {
                                         setIndex(index);
                                         setId(item.id);
-                                    }} key={item.toString() + index.toString()}>{item.specs_attr}</div>
+                                    }} key={item.toString() + index.toString()}>{item.specs_name}</div>
                                 })
                             }
                         </div>

@@ -126,12 +126,13 @@ export default function LoginPannel(props) {
         onClose={()=>{props.close();setType(0);}}
         className={style.login_layout}
         // style={{width:'70%'}}
-        width={'80%'}
+        width={'70%'}
     // style={{width:window.innerWidth*0.7,height:window.innerHeight*0.6}}
-
+        blur
+        // css={{width:}}
     >
         <Modal.Body>
-            <div className={style.login_total} style={{}}>
+            <div className={style.login_total} style={{fontSize:'0.9rem'}}>
                 <div className={""}>
                     <div style={{ width: "100%", cursor: 'pointer', alignItems: 'flex-end', display: 'flex', justifyContent: 'flex-end' }}>
                         <span onClick={()=>{props.close();setType(0)}} style={{ color: 'white' }} className="iconfont" >&#xe641;</span>
@@ -153,7 +154,7 @@ export default function LoginPannel(props) {
                                 <input type='button' onClick={_submit} className={style.submit_button} value="登錄"></input>
                             </div>
                             <div style={{ marginTop: '5%', paddingLeft: '3%',display:'flex' }}>
-                                需要一個賬戶？ <a onClick={()=>{props.toRegister();setType(0);}} className={style.to_register}>前往注冊</a><div onClick={()=>{
+                               <a onClick={()=>{props.toRegister();setType(0);}} className={style.to_register}>前往注冊</a><div onClick={()=>{
                                     setType(1);
                                     setCode("");
                                     setEmail("");
@@ -183,7 +184,7 @@ export default function LoginPannel(props) {
                                 <input type='button' onClick={_submit} className={style.submit_button} style={{fontSize:18}} value="登錄"></input>
                             </div>
                             <div style={{ marginTop: '5%', paddingLeft: '3%',display:'flex'}}>
-                                需要一個賬戶？ <a onClick={()=>{props.toRegister();setType(0);}} className={style.to_register}>前往注冊</a><div  onClick={()=>{
+                                 <a onClick={()=>{props.toRegister();setType(0);}} className={style.to_register}>前往注冊</a><div  onClick={()=>{
                                     setType(0);
                                     setCode("");
                                     setEmail("");

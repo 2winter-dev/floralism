@@ -133,7 +133,7 @@ export default function ProductSearch({ cateList, data }) {
           page={page}
           id={data?.data[0]?.flower_category_id ?? 0}
           setPage={setPage}
-          perPage={8}
+          perPage={16}
           maxPage={data.last_page}
           setList={setGoodsList}
           animation
@@ -145,7 +145,7 @@ export default function ProductSearch({ cateList, data }) {
           page={page}
           id={data?.data[0]?.flower_category_id ?? 0}
           setPage={setPage}
-          perPage={8}
+          perPage={16}
           maxPage={data.last_page}
           setList={setGoodsList}
           animation
@@ -188,7 +188,7 @@ export async function getStaticProps(context) {
   const { params } = context;
   // ////console.log(params);
   const response = await fetch(
-    `${constant.api_url}/api/flowers/index?keyword=&flower_category_id=${params.ProductSearchId}&listRows=8`, {
+    `${constant.api_url}/api/flowers/index?keyword=&flower_category_id=${params.ProductSearchId}&listRows=16`, {
     headers: {
       // "Authorization": `Bearer ${data.cookie}`,
       "Content-Type": "application/json",

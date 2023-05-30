@@ -105,7 +105,8 @@ export default function RegisterPannerl(props) {
         open={props.register}
         onClose={props.close}
         className={style.register_layout}
-        width={'80%'}
+        width={'70%'}
+        blur
     >
         <div className={style.register_total} style={{}}>
             <div className={""} >

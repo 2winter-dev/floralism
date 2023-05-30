@@ -8,22 +8,55 @@ import { useEffect, useState } from "react";
 import { spliceArr } from "@/method";
 import BodyBanner from "./component/BodyBanner";
 import { constant } from "@/constant/index";
-
-
-export default function ContactPage({ cateList }) {
+import CateScroll from './component/cateScroll';
+import LoginPannel from "./component/LoginPannel";
+import RegisterPannerl from "./component/ResgisterPannel";
+import ForgetPassword from "./component/ForgetPassword";
+import DynamicComponent from './component/Dynamic';
+export default function ContactPage({ cateList, allcate }) {
     //////console.log(cateList)
-    const [flag, setFlag] = useState(false);
+    // const [flag, setFlag] = useState(1);
+    const [login, setLogin] = useState(false);
+    const [register, setRegister] = useState(false);
+    const [visible, setVisible] = useState(false);
+
+    const [flag, setFlag] = useState(1);
     const [category, setCategory] = useState([]);
+    // console.log(allcate);
     const [categoryPage, setCategoryPage] = useState(1);
+
     const resizeUpdate = (e) => {
-        if (e.target.innerWidth <= 1100) {
+        if (e.target.innerWidth <= 675) {
             //////console.log("====", e.target.innerWidth);
-            setFlag(true);
+            setFlag(0);
+        } else if (e.target.innerWidth <= 1100) {
+            setFlag(1)
         } else {
             //////console.log("-----", e.target.innerWidth);
-            setFlag(false);
+            setFlag(2);
         }
     }
+    useEffect(() => {
+        window.addEventListener("resize", resizeUpdate);
+        if (window.innerWidth <= 675) {
+            //////console.log("====", e.target.innerWidth);
+            setFlag(0);
+        } else if (window.innerWidth <= 1100) {
+            setFlag(1)
+        } else {
+            //////console.log("-----", e.target.innerWidth);
+            setFlag(2);
+        }
+        return () => {
+            window.removeEventListener("resize", resizeUpdate);
+        }
+    }, [])
+    useEffect(() => {
+        console.log("flag改變", flag);
+        setCategory(spliceArr(allcate, !flag ? 4 : flag === 1 ? 6 : flag === 2 && 8, 'cat'));
+        console.log(spliceArr(allcate, !flag ? 4 : flag === 1 ? 6 : flag === 2 && 8, 'cat'))
+        setCategoryPage(1);
+    }, [flag])
     useEffect(() => {
         window.addEventListener("resize", resizeUpdate);
         window.innerWidth < 1100 ? (!flag && setFlag(true)) : (flag && setFlag(false))
@@ -32,35 +65,8 @@ export default function ContactPage({ cateList }) {
         }
     }, [])
 
-    useEffect(() => {
-        //////console.log("flag改變", flag);
-        setCategory(spliceArr(cateList, flag ? 4 : 8));
-        setCategoryPage(1);
-    }, [flag])
     return (<div style={{ position: 'relative' }}>
-        <Header list={cateList} />
-        {/* <div style={{ width: '100%', position: 'relative' }}>
-            {
-              <img src={flag?"/contact-banner-m.png":"/contactus-banner.png"} style={{ width: '100%', height: '100%', display: 'block' }}></img>
-            }
-            <div className={style.banner_desc} style={{}}>
-                <div style={{maxHeight:200,overflow:'hidden',textOverflow:'ellipsis'}}>
-                    <div style={{ display: 'flex', alignItems: 'center',justifyContent:'center' }}>
-                        {
-                           <div className={styles.distance} style={{ borderBottomWidth: 1, borderBottomColor: 'white' }}></div>
-                        }
-                        <div className={styles.title} style={{ color: "white", marginRight: 16, marginLeft: 16 }}>FLORALISM | 關於我們</div>
-                        {
-                            <div className={styles.distance} style={{ borderBottomWidth: 1, borderBottomColor: 'white' }}></div>
-                        }
-                    </div>
-                    <div style={{}} className={style.desc_layout}>
-                        <div>在FLORALISM，我們重視花材的品質和選擇，堅持采用最新鮮，最優質的花材，注重花束的藝術性和創意性</div>
-                        <div style={{ marginTop: 12 }}>運用不同的創意和技巧，讓花材的形狀和質地在空間中產生獨特的視覺效果，讓每一朵花都散發出自己獨有的魅力</div>
-                    </div>
-                </div>
-            </div>
-        </div> */}
+        <DynamicComponent cateList={cateList} setLogin={setLogin} />
         <BodyBanner
             flag={flag}
             imgTiny={"/contact-banner-m.png"}
@@ -93,16 +99,39 @@ export default function ContactPage({ cateList }) {
 
         </div>
         <div className={styles.goods_list} style={{ paddingLeft: '15%', paddingRight: '15%' }}>
-            <GoodsScoll
+            <CateScroll
                 title={'【FLORALISM】 全部分类'}
                 list={category}
                 page={categoryPage}
                 type={'category'}
+                perPage={!flag ? 4 : flag === 1 ? 6 : flag === 2 && 8}
                 setPage={setCategoryPage}
-                // click={() =>////console.log("1")}
+                animation
             />
         </div>
         <Footer />
+        {
+            <LoginPannel login={login} close={() => setLogin(false)} toRegister={() => {
+                setLogin(false);
+                setRegister(true);
+            }} toForget={() => {
+                setLogin(false);
+                setVisible(true);
+            }
+            } />
+        }
+        {
+            <RegisterPannerl type={false} register={register} close={() => setRegister(false)} toLogin={() => {
+                setLogin(true);
+                setRegister(false)
+            }} />
+        }
+        {
+            <ForgetPassword type={0} close={() => setVisible(false)} visible={visible} toLogin={() => {
+                setVisible(false);
+                setLogin(true);
+            }} />
+        }
     </div>)
 }
 
@@ -111,21 +140,34 @@ export async function getStaticProps(context) {
     const { params } = context;
 
     const response = await fetch(
-        `${constant.api_url}/api/flowercategory/index`,{
-            mode: 'cors',
-            headers: {
-                // "Authorization": `Bearer ${data.cookie}`,
-                "Content-Type": "application/json",
-                "Access-Control-Request-Method": "POST",
-                "Access-Control-Request-Headers": "Content-Type",
-            }
+        `${constant.api_url}/api/flowercategory/index`, {
+        mode: 'cors',
+        headers: {
+            // "Authorization": `Bearer ${data.cookie}`,
+            "Content-Type": "application/json",
+            "Access-Control-Request-Method": "POST",
+            "Access-Control-Request-Headers": "Content-Type",
         }
+    }
     );
     const data = await response.text()
-
+    const allcate_response = await fetch(
+        `${constant.api_url}/api/Flowercategory/allIndex`, {
+        mode: 'cors',
+        headers: {
+            // "Authorization": `Bearer ${data.cookie}`,
+            "Content-Type": "application/json",
+            "Access-Control-Request-Method": "POST",
+            "Access-Control-Request-Headers": "Content-Type",
+        }
+    }
+    )
+    let allcate = await allcate_response.json();
+    console.log(allcate);
     return {
         props: {
             cateList: JSON.parse(data).data,
+            allcate: allcate.data,
         },
     };
 }

@@ -1,6 +1,8 @@
 import style from '@/styles/contactComponent.module.css'
+import { useState } from 'react';
 export default function Contactus(props) {
-    return (<div className={style.contact_total} style={{ display: "flex", flex: 1, backgroundColor: 'black', borderRadius: 12, alignItems: 'center',...props.topStyle }}>
+    const [input,setInput] =useState("");
+    return (<div className={style.contact_total} style={{ display: "flex", flex: 1, backgroundColor: 'black', alignItems: 'center',...props.topStyle }}>
         <div style={{ flex: 1, padding: '5%', alignItems: 'center' }} className={style.contactus_border}>
             <div className={style.contact_img} style={{}}>
                 <img src="/訂製服務.png" width={'100%'} />
@@ -10,6 +12,7 @@ export default function Contactus(props) {
                 <input style={{
                     marginTop: 24,
                     outline: 'none',
+                    border:'none',
                     width: '100%',
                     paddingTop: 16,
                     paddingBottom: 16,
@@ -18,10 +21,16 @@ export default function Contactus(props) {
                     paddingLeft: 8
                 }}
                     placeholder="請輸入您的電郵地址"
+                    onInput={(e)=>setInput(e.target.value)}
                 />
-                <div style={{ width: '100%' }}>
-                    <input type={'button'} value={'發送'}
-                        style={{ paddingLeft: 24, paddingRight: 24, letterSpacing: 2, paddingTop: 8, paddingBottom: 8, borderRadius: 8, marginTop: 24, fontSize: 16 }}
+                <div style={{ width: '100%',cursor:'pointer' }}>
+                    <input type={'button'} value={'發送'} onClick={()=>{
+                       if(input){
+                        alert("發送成功");
+                       }else alert("請填寫郵箱")
+                    }}
+                       className={style.submit_btn} 
+                    //    style={{ paddingLeft: 24, paddingRight: 24, letterSpacing: 2, paddingTop: 8, paddingBottom: 8, borderRadius: 8, marginTop: 24, fontSize: 16 }}
                     ></input>
                 </div>
 
