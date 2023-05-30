@@ -19,7 +19,7 @@
   margin: 4rem auto 0;
   padding: 0.5rem 2.5rem;
   font-size: 2rem;
-  background-color: rgb(170,80,72);
+  background-color: #d43a43;
   color: white;
   letter-spacing: 0.2rem;
 }
@@ -69,12 +69,12 @@
 .goods_list{
   /* background-color: red; */
    padding:3rem 20%;
-  background-image: url("/homepage/分類背景.png");
+  /* background-image: url("/homepage/分類背景.png"); */
   background-size: 100% 100%;
 }
 .contactus,.goods_scroll,.goods_view{
   /* background-color: red; */
-   padding:3rem 20% 0;
+   padding:3rem 21% 0;
 
 
 }
@@ -85,7 +85,7 @@
   flex:1;
   height: 1px;
   margin: 0 5%;
-  border-bottom: 1px dashed rgb(170,80,72);
+  border-bottom: 1px dashed #d43a43;
 }
 
 .goods_scroll{
@@ -94,7 +94,7 @@
 
 .title{
   width: 20rem;
-  color: rgb(170,80,72);
+  color: #d43a43;
   font-size: 1.5rem;
   /* margin: 0 2rem; */
   text-align: center;
@@ -139,15 +139,15 @@
   }
   .goods_list{
     /* background-color: red; */
-     padding:3rem 20%;
+     padding:3rem 10%;
     background-image: url("/homepage/分類-背景.png");
     background-size: 100% 100%;
   }
 }
 @media screen and (max-width:675px) {
   .goods_list{
-    background-color: red;
-     padding:3rem 20%;
+    /* background-color: red; */
+     padding:3rem 0;
     background-image: url("/homepage/分類背景.png");
     background-size: 100% 100%;
   }

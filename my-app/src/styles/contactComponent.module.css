@@ -1,5 +1,5 @@
 .contactus_border,.contactus_min_border{
-    border: 2px solid rgb(170,80,72);
+    border: 2px solid #d43a43;
     border-radius: 8px;
     display: "flex";
 }
@@ -14,7 +14,7 @@
     display: none;
 }
 
-@media screen and (max-width:1099px) {
+@media screen and (max-width:675px) {
   .contactus_border{
     display: none;
   }   
@@ -33,7 +33,7 @@
 
 
 
-@media screen and (min-width:1100px) {
+@media screen and (min-width:675px) {
     .contactus_border{
         display: flex;
     }

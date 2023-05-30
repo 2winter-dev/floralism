@@ -10,6 +10,7 @@
   /* width: inherit;
   height: inherit; */
   display: block;
+  border-radius: 16px;
   background-color: rgba(0,0,0,0.3);
   width: 100%;
   left: 0;
@@ -21,8 +22,8 @@
 .goods_img_cover:hover .buy_btn{
     display: flex;
 }
-.goods_img_cover:hover img{
-   animation: fangda 200ms;
+.goods_img_cover:hover .an_fangda{
+   animation: fangda 400ms;
 }
 .buy_btn{
     position: absolute;
@@ -33,6 +34,7 @@
     display: none;
     border:none;
     z-index: 2;
+    white-space: nowrap;
     background-color: rgba(0,0,0,0.5);
     color: white;
     cursor: pointer;
@@ -45,9 +47,16 @@
         transform: scale(1);
     }
 }
+.Iscategory:hover .goods_title{
+    /* backgroundColor:'#d43a43',color:'white' */
+    animation: littletransition 0.4s;
+    background-color:#d43a43;
+    color:white
+}
 
-
-
+.Iscategory:hover .buy_btn{
+    display: flex;
+}
 /* .GoodsItem:hover::before{
     display: block;
     background-color: rgba(0,0,0,0.3);
@@ -72,7 +81,16 @@
     height: 100px;
 
 } */
-
+@keyframes littletransition {
+    from {
+        background-color: white;
+        color:black
+    }
+    to{
+        background-color:#d43a43;
+        color: white;
+    }
+}
 
 .goods_carsouel_price{
     background-color: black;
@@ -87,12 +105,12 @@
 
 .goods_price{
     text-align: center;
-    color: rgb(170,80,72);
+    color: #d43a43;
     margin-top: 10px;
     width: 100%;
     overflow:hidden;
     text-overflow: ellipsis;
-
+    white-space: nowrap;
 }
 
 .goods_title{
@@ -101,15 +119,16 @@
     overflow:hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-
+    border-radius: 4px;
     margin: 0 auto;
     padding: 0.3rem 0.2rem;
     font-size: 1rem;
     text-align: center;
-    border: 1px solid rgb(170,80,72);
+    border: 1px solid #d43a43;
 }
 
 .goods_img{
+    border-radius: 16px;
     position: relative;
 }
 

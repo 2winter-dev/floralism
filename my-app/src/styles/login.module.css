@@ -43,7 +43,7 @@
 }
 
 .forget_password{
-    color: rgb(170,80,72);
+    color: #d43a43;
     cursor: pointer;
 }
 .submit_button{
@@ -59,7 +59,7 @@
 }
 
 .to_register{
-    color: rgb(170,80,72);
+    color: #d43a43;
     /* color: white; */
     cursor:pointer
 }

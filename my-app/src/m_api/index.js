@@ -184,8 +184,33 @@ export default {
     }),
     fetchGoods: (data) => {
         //console.log("123");
-        return fetch(`${constant.api_url}/api/flowers/index?keyword=${data.keyword}&flower_category_id=${data.flower_category_id}&listRows=${data.listRows}&page=${data.page}`, {    
+        return fetch(`${constant.api_url}/api/flowers/index?keyword=${data.keyword}&flower_category_id=${data.flower_category_id}&listRows=${data.listRows}&page=${data.page}`, {
             method: 'GET',
+            headers: {
+                "Authorization": `Bearer ${data.cookie}`,
+                "Content-Type": "application/json",
+                "Access-Control-Request-Method": "GET,POST",
+                "Access-Control-Request-Headers": "Content-Type",
+                // "Access-Control-Request-Credentials":"true",
+            }
+        })
+    },
+    fetchOrderDetail: async(data) => {
+        return await fetch(`${constant.api_url}/api/order/detail?order_id=${data.id}`, {
+            method: 'GET',
+            headers: {
+                "Authorization": `Bearer ${data.cookie}`,
+                "Content-Type": "application/json",
+                "Access-Control-Request-Method": "GET,POST",
+                "Access-Control-Request-Headers": "Content-Type",
+                // "Access-Control-Request-Credentials":"true",
+            }
+        })
+    },
+    updateUserMessage:async(data)=>{
+        return await fetch(`${constant.api_url}/api/User/changeUserInfo`,{
+            method:'POST',
+            body:JSON.stringify(data),
             headers: {
                 "Authorization": `Bearer ${data.cookie}`,
                 "Content-Type": "application/json",

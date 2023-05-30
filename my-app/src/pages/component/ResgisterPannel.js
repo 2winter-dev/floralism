@@ -79,7 +79,7 @@ export default function RegisterPannerl(props) {
                 if (isSuccess.code === 1) {
                     props.close();
                     Cookies.set('token', isSuccess.data.token, { expires: 1 });
-                    Cookies.set('user', JSON.stringify(isSuccess.data.userinfo), { expires: 1 });
+                    // Cookies.set('user', JSON.stringify(isSuccess.data.userinfo), { expires: 1 });
                     alert("注冊成功");
                     // props.hasLogin();
                     location.reload();

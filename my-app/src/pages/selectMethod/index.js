@@ -8,22 +8,24 @@ import Footer from "../component/Footer";
 import { constant } from "@/constant";
 import { useRouter } from "next/router";
 import styles from '@/styles/selectMethod.module.css'
+import style from '@/styles/user.module.css';
 import AddressPannel from "../component/addressPannel";
 import { useMutation, useQueries } from "@tanstack/react-query";
 import dynamic from 'next/dynamic'
 import m_api from "@/m_api";
 import Cookies from "js-cookie";
 import { Radio } from "@nextui-org/react";
+import { redirect } from "next/dist/server/api-utils";
 
 
 export default function selectMethod(props) {
     const stripe = require('stripe')(props.secretKey);
-    const router=useRouter();
+    const router = useRouter();
     // ////console.log("000000000");
     // ////console.log(stripe);      
     const DynamicComponentWithNoSSR = dynamic(
-      () => import('./DynamicStripe'),
-      { ssr: false }
+        () => import('./DynamicStripe'),
+        { ssr: false }
     )
 
     const { deliverytype, deliverydate, cart_ids, remark, amount, payment_amount } = useRouter().query
@@ -32,6 +34,9 @@ export default function selectMethod(props) {
     const [login, setLogin] = useState(false);
     const [register, setRegister] = useState(false);
     const [visible, setVisible] = useState(false);
+    const [shopMess,setShopMess]=useState(props.shopList[0])
+
+    const [flag, setFlag] = useState(false);
     const [page, setPage] = useState(1);//第一頁:選擇地址，第二頁選擇支付方式，第三頁結果。
     const [process, setProcess] = useState(1);//0尚未進行，1進行中，2完成
 
@@ -40,7 +45,10 @@ export default function selectMethod(props) {
     const [add_vis, setAdd_vis] = useState(false);
     const [payment, setPayment] = useState("");
     const [add, setAdd] = useState("");
-    const [url,setUrl]=useState("")
+    const [url, setUrl] = useState("");
+
+
+    const [order, setOrder] = useState({});
     // const 
 
     const setDefault = useMutation({
@@ -51,15 +59,15 @@ export default function selectMethod(props) {
         mutationKey: ['CreateOrder'],
         mutationFn: (data) => m_api.createOrder(data)
     })
-    const deleteAddress=useMutation({
-        mutationFn:(data)=>m_api.deleteAddress(data),
-        mutationKey:['deleteAddress'],
+    const deleteAddress = useMutation({
+        mutationFn: (data) => m_api.deleteAddress(data),
+        mutationKey: ['deleteAddress'],
     })
 
-    const toDelte=(item)=>{
-        deleteAddress.mutate({id:item,cookie:Cookies.get('token')},{
-            onSuccess:async(res)=>{
-                let _res=await res.json();
+    const toDelte = (item) => {
+        deleteAddress.mutate({ id: item, cookie: Cookies.get('token') }, {
+            onSuccess: async (res) => {
+                let _res = await res.json();
                 if (_res.code === 401) {
                     Cookies.remove('token');
                     location.reload();
@@ -69,9 +77,17 @@ export default function selectMethod(props) {
                     alert(_res.msg);
                 }
             },
-            onError:(res)=>{
+            onError: (res) => {
                 alert("删除失败")
             }
+        })
+    }
+    const changeDefault = (id) => {
+        let m_list = addList;
+        let res = m_list.map((item) => {
+            if (item.id === id) {
+                item.is_default = true;
+            } else item.is_default = false;
         })
     }
     const setPosition = (id) => {
@@ -84,7 +100,8 @@ export default function selectMethod(props) {
                     Cookies.remove('token');
                     location.reload();
                 } else if (_res.code === 1) {
-                    location.reload();
+                    // location.reload();
+                    changeDefault(id);
                 } else {
                     alert(_res.msg);
                 }
@@ -101,7 +118,7 @@ export default function selectMethod(props) {
                 }
             })
             setAdd(res[0].id);
-        }else{
+        } else {
             alert("登陸失效");
             router.replace('/');
         }
@@ -110,6 +127,7 @@ export default function selectMethod(props) {
 
 
     const ToCreateOrder = () => {
+        setFlag(true);
         if (payment !== "" && add !== "") {
             // ////console.log(deliverytype, deliverydate, cart_ids, remark, amount, payment_amount, add)
             createOrder.mutate({
@@ -125,14 +143,13 @@ export default function selectMethod(props) {
             }, {
                 onSuccess: async (res) => {
                     let _res = await res.json();
-                    // ////console.log("========================");S
-                    // ////console.log(_res.data);
                     if (_res.code === 401) {
                         Cookies.remove("token");
                         location.reload();
                     } else if (_res.code === 1) {
                         // ////console.log(_res);
-                        if(payment==="paypal"){
+                        setFlag(false);
+                        if (payment === "paypal") {
                             setUrl(_res.data.payment_info.approval_url)
                         }
                         setPage(2);
@@ -146,10 +163,10 @@ export default function selectMethod(props) {
             })
         }
     }
-   useEffect(()=>{
-    // ////console.log("==============");
-    //  ////console.log(createOrder.data);
-   },[createOrder])
+    useEffect(() => {
+        // ////console.log("==============");
+        //  ////console.log(createOrder.data);
+    }, [createOrder])
 
     return (<div>
         <DynamicComponent cateList={props.cateList} setLogin={setLogin} />
@@ -190,31 +207,34 @@ export default function selectMethod(props) {
             </div>
             <div style={{ marginTop: 24 }}>
                 {
-                    page === 1 && deliverytype ?
-                        <div className={styles.column_control} style={{ display: 'flex' }}>
-                            <div style={{ flex: 1, marginRight: 12, backgroundColor: 'white', padding: '3%', borderRadius: 8, marginRight: 12 }}>
-                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
+                    page === 1 &&
+                    <div className={styles.column_control} style={{ display: 'flex' }}>
+                        <div style={{ flex: 1, marginRight: 12, backgroundColor: 'white', padding: '3%', borderRadius: 8, marginRight: 12 }}>
+                            {deliverytype === 1 ? <div>
+                                <div className={styles.title_area} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
                                     <div className={styles.title} >選擇地址</div>
+                                    {/* <div onClick={() => {
+                                        setAdd_vis(true);
+                                        setType(0);
+                                    }} style={{ cursor: 'pointer' }}>新增地址&gt;&gt;</div> */}
                                     <div onClick={() => {
                                         setAdd_vis(true);
                                         setType(0);
-                                    }} style={{ cursor: 'pointer' }}>新增地址&gt;&gt;</div>
+                                    }} className={style.addAddress_btn} style={{}}>+ 添加地址</div>
                                 </div>
-                                <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+                                <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', marginTop: 24 }}>
                                     {
                                         props.addList.data.length ? props.addList.data.map((item, index) => {
-                                            return (<div key={item.id} className={styles.addressItem} style={{ height: 180 }}>
-                                                <div className={item.is_default ? styles.check : styles.uncheck} style={{ width: '10%' }}>
-
-                                                </div>
-                                                <div onClick={() => setPosition(item.id)} className={styles.addressItemDetail} style={{ paddingLeft: 4 }}>
-                                                    <div style={{ display: 'flex', alignItems: 'center' }}>
-                                                        <div style={{ fontSize: 18, fontWeight: 'bold' }}>{item.name}</div>
+                                            return <div key={item.id} className={styles.addressItem} style={{ padding: 14 }}>
+                                                <div onClick={() => setPosition(item.id)} className={styles.addressItemDetail} style={{ paddingLeft: 4, flex: 1 }}>
+                                                    <div style={{ display: 'flex', alignItems: 'baseline' }}>
+                                                        <div style={{ fontSize: 18, fontWeight: 'bold' }}>{item?.name}</div>
                                                         <div style={{ marginLeft: 10 }}>收</div>
                                                     </div>
-                                                    <div style={{ marginTop: '3%' }}>詳細地址:{item.location}</div>
-                                                    <div style={{ marginTop: '3%' }}>聯係電話:{item.mobile}</div>
-                                                    <div onClick={(e) => e.stopPropagation()} style={{ position: 'absolute', bottom: 5, display: 'flex', alignItems: 'center', right: 5 }}>
+                                                    <div style={{ marginTop: 8 }}>{item?.mobile}</div>
+                                                    <div style={{ marginTop: 4 }}>{item?.location}</div>
+
+                                                    <div onClick={(e) => e.stopPropagation()} style={{ display: 'flex', alignItems: 'flex-start', marginTop: 12, justifyContent: 'flex-end' }}>
                                                         {
                                                             item.is_default ?
                                                                 <span style={{ marginRight: 12 }} className={`iconfont`}>&#xe798;</span> :
@@ -227,66 +247,133 @@ export default function selectMethod(props) {
                                                         }} style={{ marginRight: 12, fontSize: 14 }} className={`iconfont`} >&#x34b2;</span>
                                                         <span onClick={(e) => {
                                                             setAdd_vis(true);
-                                                            setType(1);
+                                                            setAdd_type(1);
                                                             setItem(item);
                                                             e.stopPropagation();
                                                         }} style={{ fontSize: 15 }} className={`iconfont`} >&#xe61e;</span>
                                                     </div>
 
                                                 </div>
-                                            </div>)
+                                            </div>
                                         }) : props.addList.code === 401 ? <div style={{ marginTop: 24, width: '100%', textAlign: 'center' }}>登錄失效，請重新登錄</div> : <div style={{ marginTop: 24, width: '100%', textAlign: 'center' }}>暫無數據，請先添加</div>
                                     }
                                 </div>
-                                <div>
-                                    <div className={styles.title} >支付方式</div>
-                                    <div>
-                                        <Radio.Group onChange={setPayment} >
-                                            <div className={styles.selectPayment} style={{ padding: 8, marginTop: 8 }}>
-                                                <Radio value="paypal" >
-                                                    <img src="/paypal.png" style={{ height: 80, marginRight: 8 }} /> paypal
-                                                </Radio>
-                                            </div>
-                                            {/* <div className={styles.selectPayment} style={{ padding: 8, marginTop: 8 }}>
+                            </div> : <div>
+                                <div className={styles.title_area} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
+                                    <div className={styles.title} >選擇門店地址</div>
+                                </div>
+                                {/* <select onChange={(event) => {
+                                    setCardType(event.target.value);
+                                    console.log(event.target.value);
+                                }} Value={'請選擇地址'} >
+                                    {
+                                        props.shopList.map((item) => {
+                                            return (<option value={item.id}>{item.storename}</option>)
+                                        })
+                                    }
+                                </select> */}
+                            </div>}
+                            <div className={styles.title_area} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginTop: 24 }}>
+                                <div className={styles.title} >支付方式</div>
+                            </div>
+                            <div style={{ marginTop: 24 }}>
+                                <Radio.Group onChange={setPayment} >
+                                    <div className={styles.selectPayment} style={{ padding: 8, marginTop: 8 }}>
+                                        <Radio value="paypal" >
+                                            <img src="/paypal.png" style={{ height: 80, marginRight: 16, marginLeft: 16, borderRadius: 4 }} /> <span style={{ fontWeight: 700, fontSize: 16 }}>使用paypal 支付</span>
+                                        </Radio>
+                                    </div>
+                                    {/* <div className={styles.selectPayment} style={{ padding: 8, marginTop: 8 }}>
                                                 <Radio value="stripe" >
                                                     <img src="/stripe.png" style={{ height: 80, marginRight: 8 }} />stripe</Radio>
                                             </div> */}
-                                        </Radio.Group>
-                                    </div>
-                                </div>
+                                </Radio.Group>
                             </div>
-                            <div className={styles.rightContain} style={{ backgroundColor: 'white', padding: '3%', borderRadius: 8 }}>
+                        </div>
+                        <div className={styles.rightContain} style={{ backgroundColor: 'white', padding: '3%', borderRadius: 8 }}>
+                            <div className={styles.title_area}>
                                 <div className={styles.title}>訂單商品</div>
+                            </div>
+                            <div className={styles.title_area}>
                                 {
                                     props.goodsList && props.goodsList.map((item, index) =>
                                         <div key={item.id} style={{ display: 'flex', alignItems: 'center', marginTop: 24 }}>
                                             <img src={item.coverimage} style={{ width: '30%', marginRight: 12 }} />
-                                            <div>
+                                            <div style={{ flex: 1 }}>
                                                 <div style={{ fontSize: 18, height: 40, width: '100%', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{item.productname}</div>
                                                 <div style={{ fontSize: 12, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{item.cardtype ? "需要心意卡" : "無需心意卡"}</div>
                                             </div>
-                                            <div style={{ textAlign: 'center' }}>
-                                                <div>${item.price}</div>
+                                            <div style={{ textAlign: 'right' }}>
+                                                <div style={{ fontSize: 12 }}>${item.price}</div>
                                                 <div>×{item.num}</div>
                                             </div>
                                         </div>
                                     )
                                 }
-                                <div style={{ marginTop: 12 }}>總價:${amount}</div>
-                                <div style={{ marginTop: 12 }}>應付價格:${payment_amount}</div>
-                                <div style={{ display: 'flex', marginTop: 24, alignItems: 'center', justifyContent: 'center' }}>
-                                    <div onClick={() => ToCreateOrder()} className={styles.new_Step}>確認訂單</div>
+                            </div>
+                            <div className={styles.title_area}>
+                                <div style={{ marginTop: 8, display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+
+                                    <div>商品總價</div>
+                                    <div>${amount}</div>
+                                </div>
+                                <div style={{ marginTop: 8, display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+
+                                    <div>應付價格:</div>
+                                    <div>${payment_amount}</div>
+                                </div>
+                                <div style={{ marginTop: 8, display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+
+                                    <div style={{ fontWeight: 700, fontSize: 18 }}>總價:</div>
+                                    <div style={{ color: '#dc3545', fontWeight: 700, fontSize: 18 }}>HK${payment_amount}</div>
                                 </div>
                             </div>
+                            <div style={{ display: 'flex', marginTop: 12, alignItems: 'center', justifyContent: 'center' }}>
+                                {flag ? <div className={styles.new_Step} >確認訂單</div> : <div onClick={() => ToCreateOrder()} className={styles.new_Step}>確認訂單</div>}
+                            </div>
                         </div>
-                        :
-                        page === 2 && (payment==="stripe" ?<DynamicComponentWithNoSSR />:
-                        <div style={{display:"flex",alignItems:'center',justifyContent:'center',textAlign:'center'}}>
-                            <div style={{paddingLeft:24,paddingRight:24,paddingTop:4,paddingBottom:4,cursor:'pointer'}} onClick={()=>router.replace(`${url}`)} >checkout</div>
-                        </div>)
-                      
-                }
+                    </div>
 
+
+
+                }
+                {
+                    page === 2 && (payment === "stripe" ? <DynamicComponentWithNoSSR /> :
+                        <div style={{ display: "flex", flexDirection: 'column', justifyContent: 'center', textAlign: 'center', padding: '5%', borderRadius: 8, backgroundColor: 'white' }}>
+                            <div style={{ fontSize: 24, fontWeight: 700 }}>
+                                訂單創建成功，請支付
+                            </div>
+                            <div style={{ textAlign: 'center', marginTop: 12, marginBottom: 12, display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', padding: 16, backgroundColor: 'rgb(255,250,240)' }}>
+                                <div style={{ display: 'flex', flex: 1, alignItems: 'baseline' }}>
+                                    <div>支付方式:</div>
+                                    <div style={{ fontSize: 17, fontWeight: 600 }}>paypal</div>
+                                </div>
+                                <div style={{ display: 'flex', flex: 1, alignItems: 'baseline' }}>
+                                    <div>總價:</div>
+                                    <div style={{ fontSize: 17, fontWeight: 600 }}>HK$123</div>
+                                </div>
+                                <div style={{ display: 'flex', flex: 1, alignItems: 'baseline' }}>
+                                    <div>狀態:</div>
+                                    <div style={{ fontSize: 17, fontWeight: 600 }}>等待支付</div>
+                                </div>
+                            </div>
+                            <div
+                                style={{
+                                    paddingLeft: 24,
+                                    paddingRight: 24,
+                                    paddingTop: 6,
+                                    paddingBottom: 6,
+                                    cursor: 'pointer',
+                                    marginTop: 12,
+                                    // background: 'rgb(255,196,57)',
+                                    borderRadius: 4
+                                }}
+                                onClick={() => router.replace(`${url}`)}
+                            >
+                                <span className={`iconfont`}>&#xea24;</span>點此前往支付
+                            </div>
+                        </div>)
+                }
 
             </div>
         </div>
@@ -322,25 +409,28 @@ export default function selectMethod(props) {
 
 
 export async function getServerSideProps(context) {
-    ////console.log(context.query);
+    // console.log(context.query.deliverytype);
     const response = await fetch(
-        `${constant.api_url}/api/flowercategory/index`,{
-            mode: 'cors',
-            headers: {
-                // "Authorization": `Bearer ${data.cookie}`,
-                "Content-Type": "application/json",
-                "Access-Control-Request-Method": "POST",
-                "Access-Control-Request-Headers": "Content-Type",
-            }
+        `${constant.api_url}/api/flowercategory/index`, {
+        mode: 'cors',
+        headers: {
+            // "Authorization": `Bearer ${data.cookie}`,
+            "Content-Type": "application/json",
+            "Access-Control-Request-Method": "POST",
+            "Access-Control-Request-Headers": "Content-Type",
         }
+    }
     );
     let data = await response.json();
 
 
     // let res;
+    let s_list;
     let i, sc, res;
     let add_data;
     let goods_data;
+
+
     if (context.req.headers.cookie) {
         res = context.req.headers.cookie.split(';');
         let _res = res.filter(item => {
@@ -371,24 +461,51 @@ export async function getServerSideProps(context) {
             `${constant.api_url}/api/cart/detail?ids=${context.query.cart_ids}`, {
             headers: {
                 Authorization: `Bearer ${i}`,
-                 "Content-Type": "application/json",
+                "Content-Type": "application/json",
                 "Access-Control-Request-Method": "POST",
                 "Access-Control-Request-Headers": "Content-Type",
             },
             mode: 'cors',
         }
         );
+
+        if (context.query.deliverytype) {
+            const shopList = await fetch(`${constant.api_url}/api/store/index`, {
+                headers: {
+                    Authorization: `Bearer ${i}`,
+                    "Content-Type": "application/json",
+                    "Access-Control-Request-Method": "GET,POST",
+                    "Access-Control-Request-Headers": "Content-Type",
+                },
+                mode: 'cors',
+            })
+            s_list = await shopList.json();
+        }
+
         goods_data = await goods_list_response.json();
         ////console.log("=========");
-
         add_data = await add_response.json();
     } else {
         add_data = { data: [], code: 401 };
         goods_data = { data: [], code: 401 };
+        s_list = { data: [], code: 401 };
     }
     ////console.log(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
-    ////console.log(goods_data);
+    console.log(goods_data);
+    if (!goods_data.code) {
+        return {
+            redirect: {
+                permanent: false,
+                destination: '/shopCar/shopCar',
+            }
+        }
+    }
+
+
+
+
     ////console.log(add_data);
+    console.log(s_list);
     return {
         props: {
             cateList: data.data,
@@ -396,7 +513,8 @@ export async function getServerSideProps(context) {
             addList: add_data,
             goodsList: goods_data.data,
             publishableKey: `${process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY}`,
-            secretKey:`${process.env.STRIPE_SECRET_KEY}`
+            secretKey: `${process.env.STRIPE_SECRET_KEY}`,
+            shopList: s_list.data,
         },
     };
 }

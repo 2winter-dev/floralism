@@ -64,7 +64,7 @@ export default function LoginPannel(props) {
                         // ////console.log("================");
                         // ////console.log();
                         Cookies.set('token',isSuccess.data.token,{expires:1});
-                        Cookies.set('user',JSON.stringify(isSuccess.data.userinfo),{expires:1});
+                        // Cookies.set('user',JSON.stringify(isSuccess.data.userinfo),{expires:1});
                         alert("登陆成功");
                         
                         props.close();
@@ -91,7 +91,7 @@ export default function LoginPannel(props) {
                       if(body.code){
                         // ////console.log("================");
                         Cookies.set('token',body.data.token,{expires:1});
-                        Cookies.set('user',JSON.stringify(body.data.userinfo),{expires:1});
+                        // Cookies.set('user',JSON.stringify(body.data.userinfo),{expires:1});
                         // ////console.log("========");
                         // ////console.log(Cookies.get('token'));
                         

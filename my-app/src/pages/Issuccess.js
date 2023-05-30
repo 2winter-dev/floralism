@@ -29,7 +29,7 @@ export default function SuccessPage() {
                 <span style={{fontSize:64,color:'green'}} className={"iconfont"}>&#xe633;</span>
                 <div style={{marginTop:24,fontSize:28,fontWeight:600}}>付款成功</div>
                 <div style={{marginTop:24,paddingLeft:12,paddingRight:12,paddingTop:4,paddingBottom:4,cursor:'pointer'}} onClick={()=>{
-                       window.history.replaceState(null, null, `http://localhost:3000/`);
+                       window.history.replaceState(null, null, `/selectMethod?page=3&type=success`);
                 }} >點擊返回</div>
             </div>
         }
@@ -38,7 +38,7 @@ export default function SuccessPage() {
                 <span  style={{fontSize:64,color:'red'}} className={"iconfont"}>&#xe618;</span>
                 <div style={{marginTop:24,fontSize:28,fontWeight:600}}>付款失敗</div>
                 <div style={{marginTop:24,paddingLeft:12,paddingRight:12,paddingTop:4,paddingBottom:4,cursor:'pointer'}} onClick={()=>{
-                     window.history.replaceState(null, null, `${constant.api_url}/`);
+                     window.history.replaceState(null, null, `/selectMethod?page=3&type=fail`);
                 }} >點擊返回</div>
             </div>
         }
@@ -47,7 +47,7 @@ export default function SuccessPage() {
                 <span  style={{fontSize:64}} className={"iconfont"}>&#xe618;</span>
                 <div style={{marginTop:24,fontSize:28,fontWeight:600}}>你已取消支付</div>
                 <div style={{marginTop:24,paddingLeft:12,paddingRight:12,paddingTop:4,paddingBottom:4,cursor:'pointer'}} onClick={()=>{
-                   window.history.replaceState(null, null, `${constant.api_url}/`);
+                   window.history.replaceState(null, null, `/selectMethod?page=3&type=cancel`);
                 //    router.replace('/');
                 }} >點擊返回</div>
             </div>

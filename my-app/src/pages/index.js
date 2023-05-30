@@ -29,7 +29,7 @@ const inter = Inter({ subsets: ['latin'] })
 export default function Home({ allcate, cateList, GoodsPage, carousel }) {
   // ////console.log("====");
   const router=useRouter();
-  // ////console.log(cateList);
+  // console.log(GoodsPage);
   const [flag, setFlag] = useState(1);
   const [category, setCategory] = useState([]);
   const [categoryPage, setCategoryPage] = useState(1);
@@ -102,7 +102,7 @@ export default function Home({ allcate, cateList, GoodsPage, carousel }) {
         {/* <Image priority src="/homepage/top-banner.png" width={1920} height={700} style={{width:'100%'}}/> */}
         <div style={{}} className={styles.top_banner_area}>
           <img src="/homepage/banner-desc.png" width={'100%'} />
-          <button onClick={()=>router.push('/productSearch/3')} style={{ border: 'none', display: 'block' }} className={styles.banner_buttom} >點擊選購</button>
+          <button onClick={()=>router.push('/productSearch/3')} style={{ border: 'none', display: 'block',cursor:'pointer' }} className={styles.banner_buttom} >點擊選購</button>
         </div>
       </div>
       <div>
@@ -117,11 +117,12 @@ export default function Home({ allcate, cateList, GoodsPage, carousel }) {
             type={'category'}
             perPage={!flag ? 4 : flag === 1 ? 6 : flag === 2 && 8}
             setPage={setCategoryPage}
+            animation
           // click={() => //////console.log("1")}
           />
         </div>
         <BodyBanner
-          flag={flag < 2}
+          flag={flag}
           imgTiny={"/homepage/小段背景-m.png"}
           img={"/homepage/小段背景.png"}
           title={'FLORALISM 情人節定制花束'}
@@ -140,53 +141,28 @@ export default function Home({ allcate, cateList, GoodsPage, carousel }) {
             maxPage={GoodsPage.last_page}
             setList={setGoodsList}
             type={''}
+            animation
           />
         </div>
         <div className={styles.goods_scroll}>
-          <div className={style.youMaybeLike} style={{ padding: 5, position: 'relative' }}>
+          <div className={style.youMaybeLike} style={{ padding: '5%', position: 'relative' }}>
             <div style={{ display: 'flex', alignItems: 'center' }}>
               <div className={styles.distance} style={{ borderBottomWidth: 1, borderBottomColor: 'white' }}></div>
               <div className={styles.title} style={{ color: "white", marginRight: 16, marginLeft: 16 }}>情人節禮物 | 最受歡迎的</div>
               <div className={styles.distance} style={{ borderBottomWidth: 1, borderBottomColor: 'white' }}></div>
             </div>
-           
-
-              {/* <div style={{ padding: 8 }}>
-                <div className='swiper-container' style={{ height: carousel_slice().length > 4 && flag < 2 ? 620 : 320 }}>
-                  <div className="swiper-wrapper" style={{ height: 320 }}>
-                    {
-                      carousel_slice().map((item, index) => {
-                        ////console.log(carousel_slice().length);
-                        return (<div key={item.id + index.toString()} className="swiper-slide" style={{ height: 320, width: 212, display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap' }}>
-                          {
-                            item.map((it, ii) => {
-                              return (<GoodsItem key={item.id + index.toString() + ii.toString()} item={it} type={'carsouel'} top_style={{ height: 320, width: 200 }} imgStyle={{ height: 200, width: 200 }} />)
-                            })
-                          }
-                        </div>)
-                      })
-                    }
-                  </div>
-                </div>
-              </div>
-              <div className={styles.scroll_left} onClick={() => MySwiper.swipePrev()} style={{}}>
-                &lt;
-              </div>
-              <div className={styles.scroll_right} onClick={() => MySwiper.swipeNext()} style={{}}>
-                &gt;
-              </div> */}
               <div style={{ position: "relative" }}>
 
-                <div style={{ padding: 8 }}>
+                <div style={{ padding: 8,marginTop:24}}>
 
-                  <Carousel loop>
+                  <Carousel infiniteLoop showIndicators={false} preventMovementUntilSwipeScrollTolerance={true} swipeScrollTolerance={50} showStatus={false}>
                   {
                       carousel_slice().map((item, index) => {
                         ////console.log(carousel_slice().length);
-                        return (<div key={item.id + index.toString()} style={{  display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap' }}>
+                        return (<div key={item.id + index.toString()} style={{  display: 'flex', flexWrap: 'wrap' }}>
                           {
                             item.map((it, ii) => {
-                              return (<GoodsItem key={item.id + index.toString() + ii.toString()} item={it} type={'carsouel'} top_style={{  }} imgStyle={{  }} />)
+                              return (<GoodsItem imgTopStyle={{}} key={item.id + index.toString() + ii.toString()} item={it} type={'carsouel'} top_style={{  }} imgStyle={{  }} animation />)
                             })
                           }
                         </div>)
@@ -279,8 +255,9 @@ export async function getStaticProps({ local }) {
     }
   }
   )
+  console.log(allcate);
   const goods_response = await fetch(
-    `${constant.api_url}/api/flowers/index`, {
+    `${constant.api_url}/api/flowers/index?flower_category_id=${allcate.data[1].id}`, {
     mode: 'cors',
     headers: {
       // "Authorization": `Bearer ${data.cookie}`,

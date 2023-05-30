@@ -25,7 +25,7 @@ export default function AboutUs({ cateList }) {
                 <img src={'/about-us.jpg'} style={{ width: '100%' }} />
             </div>
             <div className={styles.right_item}>
-                <div style={{ color: 'rgb(213,59,69)', fontSize: 24, fontWeight: 600, marginBottom: 24 }}>
+                <div style={{ color: '#d43a43', fontSize: 24, fontWeight: 600, marginBottom: 24 }}>
                     FlORALISM -<br />
                     創造獨特的花藝<br />
                     傳遞愛和祝福
@@ -45,7 +45,7 @@ export default function AboutUs({ cateList }) {
                 <div style={{ fontSize: 20, fontWeight: 600 }}>
                     創造獨特的花藝，傳遞愛和祝福
                 </div>
-                <div style={{ color: 'rgb(213,59,69)', fontSize: 20, fontWeight: 600, lineHeight: 1.8 }}>
+                <div style={{ color: '#d43a43', fontSize: 20, fontWeight: 600, lineHeight: 1.8 }}>
                     FLORALISM
                 </div>
             </div>

@@ -62,7 +62,7 @@ export default function CateScroll(props) {
         <div style={{ display: 'flex', flexWrap: 'wrap',  marginTop: 12 }}>
           {
             props?.list?.length && props.list[props.page - 1].map((item, index) => {
-              return <GoodsItem key={index} src={item.src} item={item} title={item.categoryname} price={item.price} type={props.type} animation={props.animation} />
+               return <GoodsItem key={index} src={item.src} item={item} title={item.categoryname} price={item.price} type={props.type} animation={props.animation} />
             })
           }
           {/* <GoodsItem src="/homepage/圖1.png" title={'綠色'} type={'category'} /> */}
@@ -78,8 +78,13 @@ export default function CateScroll(props) {
             return <div key={index} onClick={() => {
               props.setPage(item);
             }}
-              className={item === props.page ? G_styles.select : "common"}
-              style={{ marginLeft: 8, cursor: 'pointer', marginRight: 4, paddingLeft: props.page >= 10 ? 5 : 10, paddingRight: props.page >= 10 ? 5 : 10, paddingTop: 4, paddingBottom: 4, borderRadius: 50 }}>{item}</div>
+              className={
+                 item === props.page ?
+                 G_styles.select 
+                 : 
+                 "common"
+              }
+              style={{ marginLeft: 8, cursor: 'pointer', marginRight: 4, paddingLeft: item >= 10 ? 8 : 12, paddingRight: item >= 10 ? 8 : 12, paddingTop: 4, paddingBottom: 4, borderRadius: 50 }}>{item}</div>
           })
         }
         {

@@ -62,6 +62,13 @@
       "unicode_decimal": 59289
     },
     {
+      "icon_id": "3176823",
+      "name": "Paypal",
+      "font_class": "Paypal",
+      "unicode": "ea24",
+      "unicode_decimal": 59940
+    },
+    {
       "icon_id": "5394536",
       "name": "shop-car",
       "font_class": "shop-car",

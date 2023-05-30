@@ -41,10 +41,10 @@ export default function Header(props) {
                 </div>
             </div>
             <div className={`${header.header_right}`}>
-                <div  onClick={props.login} style={{display:'flex',alignItems:'center',cursor: "pointer" }}>
-                    <span style={{ }} className={`iconfont ${header.mine_icon}`}>&#xe70e;</span>
+                <div onClick={props.login} style={{ display: 'flex', alignItems: 'center', cursor: "pointer" }}>
+                    <span style={{}} className={`iconfont ${header.mine_icon}`}>&#xe70e;</span>
                     {
-                        Cookies.get("token")?"logout":"login"
+                        Cookies.get("token") ? "logout" : "login"
                     }
                 </div>
             </div>
@@ -62,24 +62,30 @@ export default function Header(props) {
                     </div>
                 </div> */}
                 {
-                   props?.list?.length && props.list.map((item, index) => {
+                    props?.list?.length && props.list.map((item, index) => {
                         return (
                             <div key={index} className={`${header.drop_item}`}>
                                 <div className={`${header.drop_label}`}>{item.categoryname}</div>
                                 <div className={`${header.child_list}`}>
-                                    {item.get_child && <div className={`${header.header_center_dropdown}`}>
-                                        {
-                                            item.get_child.map((it, ii) => {
-                                                return (<Link href={`/category/${it.id}`} key={index.toString() + ii.toString()}>{it.categoryname}</Link>)
-                                            })
-                                        }
-                                    </div>}
+                                    {item.get_child &&
+
+                                        item.get_child.map((it, ii) => {
+                                            return (<div key={index.toString() + ii.toString()} className={`${header.header_center_dropdown}`}>
+                                                <Link href={`/category/${it.id}`} >{it.categoryname}</Link>
+                                            </div>)
+                                        })
+
+                                    }
                                 </div>
                             </div>
                         )
                     })
                 }
                 <div className={`${header.drop_item}`}>
+                <div className={`${header.drop_label}`}>
+                        <Link href={'/Aboutus'} >關於我們</Link>
+
+                    </div>
                     <div className={`${header.drop_label}`}>
                         <Link href={'/ContactPage'} >聯絡我們</Link>
 

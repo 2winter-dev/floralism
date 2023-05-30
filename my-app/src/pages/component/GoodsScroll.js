@@ -9,7 +9,7 @@ export default function GoodsScoll(props) {
   const [goodsList, setGoodsList] = useState(
     props.list
   );
-  // //console.log(props.list)
+  // console.log(props.maxPage);
   // ////console.log(props.list);
   //////console.log(props);
   //////console.log("0000");
@@ -34,10 +34,10 @@ export default function GoodsScoll(props) {
       }
       case 2: {
         if (props.maxPage === 3) {
-          ////console.log("是3");
+          console.log("是3");
           return ([1, 2, 3]);
         } else if(props.maxPage===2){
-          ////console.log("是2");
+          console.log("是2");
           return ([1, 2])
         }else{
           return ([1,2,3,4]);
@@ -108,7 +108,7 @@ export default function GoodsScoll(props) {
               //////console.log("Page change");
             }}
               className={item === props.page ? G_styles.select : "common"}
-              style={{ marginLeft: 8, cursor: 'pointer', marginRight: 4, paddingLeft: props.page >= 10 ? 5 : 10, paddingRight: props.page >= 10 ? 5 : 10, paddingTop: 4, paddingBottom: 4, borderRadius: 50 }}>{item}</div>
+              style={{ marginLeft: 8, cursor: 'pointer', marginRight: 4, paddingLeft: props.page >= 10 ? 5 : 12, paddingRight: props.page >= 10 ? 5 : 12, paddingTop: 4, paddingBottom: 4, borderRadius: 50 }}>{item}</div>
           })
         }
         {

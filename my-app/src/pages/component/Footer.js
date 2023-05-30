@@ -4,9 +4,9 @@ export default function Footer() {
     return (<div className={style.footer} style={{ width: '100%' }}>
         <div className={style.footer_three_column} style={{ display: 'flex', justifyContent: 'space-between' }}>
             <div className={style.footer_column} style={{ display: 'flex', flexDirection: 'column' }}>
-                <p>產品</p>
-                <a>玫瑰熊</a>
-                <a>節日花束</a>
+                <p >產品</p>
+                <a href={`/category/9`}>玫瑰熊</a>
+                <a href={`/category/`}>節日花束</a>
                 <div>
                     <a>永生花</a>/<a>鮮花</a>
                 </div>
@@ -34,22 +34,22 @@ export default function Footer() {
                 <div>對我們的產品及服務有興趣？</div>
                 <div>請聯係我們</div>
             </div>
-            <div className={`${style.special_column}`} style={{ display: 'flex', flexDirection: 'column' }}>
-                <div className={style.footer_contactList} style={{ display: 'flex', justifyContent: 'center', backgroundColor: 'black', flexWrap:'wrap',alignItems: 'center', flexDirection: 'column', padding: '10%' }}>
+            <div className={`${style.special_column}`} style={{ display: 'flex', flexDirection: 'column',minWidth:163 }}>
+                <div className={style.footer_contactList} style={{ display: 'flex', justifyContent: 'center', backgroundColor: 'black', flexWrap:'wrap',alignItems: 'center', flexDirection: 'column', padding: 14 }}>
                     <div style={{ flex: 1, fontSize: 20 }}>FOLLOW US</div>
                     <div style={{ flex: 1, display: 'flex', alignItems: 'center', flexWrap:'wrap', marginTop: 16 }}>
-                        <a>
+                        <div style={{cursor:'pointer'}}>
                             <img src='/矢量智能对象-3.png' className={style.footer_Image} />
-                        </a>
-                        <a>
+                        </div>
+                        <div style={{cursor:'pointer'}}>
                             <img src='/矢量智能对象-2.png' className={style.footer_Image} />
-                        </a>
-                        <a>
+                        </div>
+                        <div style={{cursor:'pointer'}}>
                             <img src='/矢量智能对象-1.png' className={style.footer_Image} />
-                        </a>
-                        <a>
+                        </div>
+                        <div style={{cursor:'pointer'}}>
                             <img src='/矢量智能对象.png' className={{ ...style.footer_Image, marginRight: 0 }} />
-                        </a>
+                        </div>
                     </div>
                 </div>
             </div>
