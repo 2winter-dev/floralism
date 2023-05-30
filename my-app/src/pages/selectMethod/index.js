@@ -116,8 +116,8 @@ export default function selectMethod(props) {
     }
 
     useEffect(() => {
-        if (props.addList && Cookies.get("token")) {
-            let res = props.addList.data.filter((item) => {
+        if (props?.addList && Cookies.get("token")) {
+            let res = props.addList?.data.filter((item) => {
                 // ////console.log(item);
                 if (item.is_default) {
                     return item;
@@ -275,9 +275,9 @@ export default function selectMethod(props) {
                                                 props.shopList.map(item => {
                                                     return (<Radio className={styles.shopItem} value={`${item.id}`} key={item.id}>
                                                         <div style={{ display: 'flex', flexDirection: 'column', marginLeft: 12, fontSize: 12 }}>
-                                                            <div style={{ fontSize: 14, fontWeight: 700 }}>{item.storename}</div>
-                                                            <div>地址:{item.address}</div>
-                                                            <div>聯係人:{item.name} {"電話:" + item.mobile}</div>
+                                                            <div style={{ fontSize: 14, fontWeight: 700 }}>{item?.storename}</div>
+                                                            <div>地址:{item?.address}</div>
+                                                            <div>聯係人:{item?.name} {"電話:" + item?.mobile}</div>
                                                         </div>
                                                     </Radio>)
                                                 })

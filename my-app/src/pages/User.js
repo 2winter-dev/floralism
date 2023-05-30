@@ -15,9 +15,9 @@ export default function User(props) {
     const [type, setType] = useState("message");
     const [item, setItem] = useState({});
 
-    const [username, setUsername] = useState(props.user_data.username);
-    const [email, setEmail] = useState(props.user_data.email);
-    const [mobile, setMobile] = useState(props.user_data.mobile);
+    const [username, setUsername] = useState(props.user_data?.username);
+    const [email, setEmail] = useState(props.user_data?.email);
+    const [mobile, setMobile] = useState(props.user_data?.mobile);
 
     const [addList, setAddList] = useState(props.addList);
     const [add, setAdd] = useState();
@@ -105,9 +105,9 @@ export default function User(props) {
             onSuccess: async (res) => {
                 let _res = await res.json();
                 if (_res.code === 1) {
-                    setUsername(_res.data.username);
-                    setMobile(_res.data.mobile);
-                    setEmail(_res.data.email);
+                    setUsername(_res.data?.username);
+                    setMobile(_res.data?.mobile);
+                    setEmail(_res.data?.email);
                 }
             }
         })
@@ -218,13 +218,13 @@ export default function User(props) {
 
                                                 <div onClick={(e) => e.stopPropagation()} style={{ display: 'flex', alignItems: 'flex-start', marginTop: 12, justifyContent: 'flex-end' }}>
                                                     {
-                                                        item.is_default ?
+                                                        item?.is_default ?
                                                             <span style={{ marginRight: 12 }} className={`iconfont`}>&#xe798;</span> :
                                                             <span onClick={() => setPosition(item.id)} style={{ marginRight: 12 }} className={`iconfont`}>&#xe799;</span>
                                                     }
                                                     <span onClick={(e) => {
                                                         // ////console.log("刪除");
-                                                        toDelte(item.id);
+                                                        toDelte(item?.id);
                                                         e.stopPropagation();
                                                     }} style={{ marginRight: 12, fontSize: 14 }} className={`iconfont`} >&#x34b2;</span>
                                                     <span onClick={(e) => {
@@ -268,10 +268,10 @@ export default function User(props) {
                                                 <td className={`${styles.tr_padding} ${styles.order_desc}`} colSpan={4} >
                                                     <div style={{ display: 'flex' }}>
                                                         <div>
-                                                            {item.create_time_format}
+                                                            {item?.create_time_format}
                                                         </div>
                                                         <div style={{ marginLeft: 12 }}>
-                                                            訂單號:{item.order_no}
+                                                            訂單號:{item?.order_no}
                                                         </div>
                                                     </div>
                                                 </td>
@@ -280,28 +280,28 @@ export default function User(props) {
                                                 <td className={`${styles.tr_padding} ${styles.first_column}`} >
                                                     <div style={{ display: 'flex', alignItems: 'center', wordBreak: 'break-all' }}>
                                                         <div className={styles.product_img}>
-                                                            <img src={item.product_coverimage} style={{ width: '100%' }} />
+                                                            <img src={item?.product_coverimage} style={{ width: '100%' }} />
                                                         </div>
                                                         <div style={{ flex: 1 }}>
                                                             <div className={styles.product_title} style={{ fontSize: 14, width: '100%', overflow: 'hidden', textOverflow: 'ellipsis', wordWrap: 'break-word' }}>
-                                                                {item.product_productname}
+                                                                {item?.product_productname}
                                                             </div>
-                                                            <div>✖ {item.product_num}</div>
+                                                            <div>✖ {item?.product_num}</div>
                                                         </div>
                                                     </div>
                                                 </td>
                                                 <td style={{ fontSize: 14 }} className={`${styles.tr_padding} ${styles.second_column}`}>
-                                                    HD${item.amount}
+                                                    HD${item?.amount}
                                                 </td>
                                                 <td style={{ fontSize: 14 }} className={`${styles.tr_padding} ${styles.third_column}`}>
-                                                    {item.payment_status_mean}
+                                                    {item?.payment_status_mean}
                                                 </td>
                                                 <td style={{ fontSize: 14 }} className={`${styles.tr_padding} ${styles.last_column}`}>
                                                     <div style={{ display: "flex", alignItems: 'center', cursor: 'pointer' }}>
                                                         <div onClick={() => {
                                                             // setType("OrderDetail");
-                                                            OrderDetail(item.id);
-                                                        }} className={styles.check_btn}>{item.payment_status ? null : 'check'}</div>
+                                                            OrderDetail(item?.id);
+                                                        }} className={styles.check_btn}>{item?.payment_status ? null : 'check'}</div>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -341,7 +341,7 @@ export default function User(props) {
                             </table>
                         </div>
                     </div>
-                    <div className={styles.order_detail_area} style={{ marginTop: 24 }}>
+                    {/* <div className={styles.order_detail_area} style={{ marginTop: 24 }}>
                         <div style={{ display: 'flex', alignItems: 'flex-start', flexDirection: 'column', marginTop: 12 }}>
                             <h5 className={styles.right_contain_title}>訂單信息</h5>
                             <div>
@@ -351,7 +351,7 @@ export default function User(props) {
                                 <div></div>
                             </div>
                         </div>
-                    </div>
+                    </div> */}
                     <div className={styles.order_detail_area} style={{ marginTop: 24 }}>
                         <div style={{ display: 'flex', alignItems: 'flex-start', flexDirection: 'column' }}>
                             <h5 className={styles.right_contain_title}>訂單商品列表</h5>
@@ -371,7 +371,7 @@ export default function User(props) {
                                                 </div>
                                             </div>
                                             <div style={{ marginLeft: 'auto' }}>
-                                                HK${item.price} ✖ {item.num}
+                                                HK${item?.price} ✖ {item?.num}
                                             </div>
                                         </div>)
                                     })
@@ -382,23 +382,23 @@ export default function User(props) {
                                     </div>
                                     {
                                         orderDetail?.order_info?.shipping_pirce && <div style={{ marginBottom: 8, display: 'flex', width: 140 }}>
-                                            <div style={{}}>運費 </div>:HK$<div style={{ marginLeft: 3, color: '#d43a43' }}>{" " + orderDetail.order_info.amount}</div>
+                                            <div style={{}}>運費 </div>:HK$<div style={{ marginLeft: 3, color: '#d43a43' }}>{" " + orderDetail?.order_info?.amount}</div>
                                         </div>
                                     }
                                     <div style={{ marginBottom: 8, display: 'flex', width: 140 }}>
-                                        <div style={{}}>優惠 </div>:HK$<div style={{ marginLeft: 3, color: 'rgb(64,224,208)' }}>{" " + orderDetail.order_info.coupon_price}</div>
+                                        <div style={{}}>優惠 </div>:HK$<div style={{ marginLeft: 3, color: 'rgb(64,224,208)' }}>{" " + orderDetail?.order_info?.coupon_price}</div>
                                     </div>
                                 </div>
                                 <div style={{ height: 1, width: '100%', backgroundColor: 'rgba(0,0,0,0.2)', marginTop: 12 }} />
                                 <div style={{ width: '100%', display: 'flex', justifyContent: 'flex-end', fontSize: 14 }}>
                                     <div style={{ marginTop: 8, display: 'flex', width: 140, alignItems: 'center' }}>
-                                        <div style={{}}>實付 </div>:HK$<div style={{ marginLeft: 3, fontSize: 18, fontWeight: 700 }}>{" " + orderDetail.order_info.payment_amount}</div>
+                                        <div style={{}}>實付 </div>:HK$<div style={{ marginLeft: 3, fontSize: 18, fontWeight: 700 }}>{" " + orderDetail?.order_info?.payment_amount}</div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div className={styles.order_detail_area} style={{ marginTop: 24 }}>
+                    {/* <div className={styles.order_detail_area} style={{ marginTop: 24 }}>
                         <div style={{ display: 'flex', alignItems: 'flex-start', flexDirection: 'column' }}>
                             <h5 className={styles.right_contain_title}>訂單狀態</h5>
                         </div>
@@ -419,7 +419,7 @@ export default function User(props) {
                                 </thead>
                             </table>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             }
         </div>

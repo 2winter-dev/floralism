@@ -159,7 +159,7 @@ export default function ShopCar({ cateList, shopCar }) {
         let num = 0;
         sc.map((item, index) => {
             if (selected.findIndex((it, index) => it === item.id) != -1) {
-                money += parseFloat((item.num * item.price).toFixed(2));
+                money += parseFloat((item?.num * item?.price).toFixed(2));
                 console.log(money)
                 num += parseInt(item.num);
             }
@@ -254,10 +254,10 @@ export default function ShopCar({ cateList, shopCar }) {
                                                 <td className={`${styles.tr_padding} ${styles.order_desc}`} colSpan={4} >
                                                     <div style={{ display: 'flex' }}>
                                                         <div>
-                                                            {item.flower_category_name}
+                                                            {item?.flower_category_name}
                                                         </div>
                                                         <div style={{ marginLeft: 12 }}>
-                                                            {item.flower_specs_name}
+                                                            {item?.flower_specs_name}
                                                         </div>
                                                     </div>
                                                 </td>
@@ -274,7 +274,7 @@ export default function ShopCar({ cateList, shopCar }) {
                                                         </div>
                                                         <div style={{ flex: 1 }}>
                                                             <div className={styles.product_title} style={{ fontSize: 14, width: '100%', overflow: 'hidden', textOverflow: 'ellipsis', wordWrap: 'break-word' }}>
-                                                                {item.productname}
+                                                                {item?.productname}
                                                             </div>
                                                             {/* <div>×</div> */}
                                                             <input type={'number'} style={{ width: 40,  textAlign: 'center' }} onChange={(e) => ToUpdate(item, index, e.target.value)} value={item.num} />
@@ -282,10 +282,10 @@ export default function ShopCar({ cateList, shopCar }) {
                                                     </div>
                                                 </td>
                                                 <td style={{ fontSize: 14 }} className={`${styles.tr_padding} ${styles.second_column}`}>
-                                                    HD${item.price}
+                                                    HD${item?.price}
                                                 </td>
                                                 <td style={{ fontSize: 14 }} className={`${styles.tr_padding} ${styles.last_column}`}>
-                                                    {item.couponprice ? "HK$" + item.couponprice : "無"}
+                                                    {item?.couponprice ? "HK$" + item?.couponprice : "無"}
                                                 </td>
 
                                             </tr>
