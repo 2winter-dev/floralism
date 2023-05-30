@@ -242,7 +242,7 @@ export default function ProductDetail({ cateList, product }) {
                                                 if (isSuccess.code === 1){
                                                     Cookies.set("isAdd",true);
                                                     setIsAdd(true);
-                                                    alert("加入购物车成功");
+                                                    // alert("加入购物车成功");
                                                 }
                                             } else {
                                                 alert(isSuccess.msg);
