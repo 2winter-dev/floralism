@@ -20,11 +20,11 @@ export default function Footer() {
         queryFn: fetchCate,
         queryKey:['footerCate'],
         onSuccess:(res)=>{
-            console.log(res);
+            //console.log(res);
         }
     })
     if(cateList.isSuccess){
-        console.log(cateList.data);
+        //console.log(cateList.data);
     }
     return (<div className={style.footer} style={{ width: '100%' }}>
         <div className={style.footer_three_column} style={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -43,7 +43,7 @@ export default function Footer() {
                 <a>更多品類</a> */}
                 {
                     cateList.isSuccess&&cateList.data.data.map((item,index)=>{
-                        // console.log(item);
+                        // //console.log(item);
                         return (<a key={index} href={`/category/${item.id}`}>{item.categoryname}</a>)
                     })
                 }

@@ -21,8 +21,8 @@ import { redirect } from "next/dist/server/api-utils";
 export default function selectMethod(props) {
     const stripe = require('stripe')(props.secretKey);
     const router = useRouter();
-    // ////console.log("000000000");
-    // ////console.log(stripe);      
+    // //////console.log("000000000");
+    // //////console.log(stripe);      
     const DynamicComponentWithNoSSR = dynamic(
         () => import('./DynamicStripe'),
         { ssr: false }
@@ -33,9 +33,9 @@ export default function selectMethod(props) {
     if (useRouter().query.page) {
         setPage(useRouter().query.page);
     }
-    console.log("----------");
-    console.log(deliverytype);
-    // ////console.log(useRouter());
+    //console.log("----------");
+    //console.log(deliverytype);
+    // //////console.log(useRouter());
     const [login, setLogin] = useState(false);
     const [register, setRegister] = useState(false);
     const [visible, setVisible] = useState(false);
@@ -95,9 +95,10 @@ export default function selectMethod(props) {
                 item.is_default = true;
             } else item.is_default = false;
         })
+        setAddList([...m_list])
     }
     const setPosition = (id) => {
-        // ////console.log(id);
+        // //////console.log(id);
         setAdd(id);
         setDefault.mutate({ id, cookie: Cookies.get('token') }, {
             onSuccess: async (res) => {
@@ -118,7 +119,7 @@ export default function selectMethod(props) {
     useEffect(() => {
         if (props?.addList && Cookies.get("token")) {
             let res = props.addList?.data.filter((item) => {
-                // ////console.log(item);
+                // //////console.log(item);
                 if (item.is_default) {
                     return item;
                 }
@@ -135,7 +136,7 @@ export default function selectMethod(props) {
     const ToCreateOrder = () => {
         setFlag(true);
         if (payment !== "" && add !== "") {
-            // ////console.log(deliverytype, deliverydate, cart_ids, remark, amount, payment_amount, add)
+            // //////console.log(deliverytype, deliverydate, cart_ids, remark, amount, payment_amount, add)
             createOrder.mutate({
                 deliverytype,
                 deliverydate,
@@ -153,7 +154,7 @@ export default function selectMethod(props) {
                         Cookies.remove("token");
                         location.reload();
                     } else if (_res.code === 1) {
-                        // ////console.log(_res);
+                        // //////console.log(_res);
                         setFlag(false);
                         if (payment === "paypal") {
                             setUrl(_res.data.payment_info.approval_url)
@@ -170,8 +171,8 @@ export default function selectMethod(props) {
         }
     }
     useEffect(() => {
-        // ////console.log("==============");
-        //  ////console.log(createOrder.data);
+        // //////console.log("==============");
+        //  //////console.log(createOrder.data);
     }, [createOrder])
 
     return (<div>
@@ -248,7 +249,7 @@ export default function selectMethod(props) {
                                                                     <span onClick={() => setPosition(item.id)} style={{ marginRight: 12 }} className={`iconfont`}>&#xe799;</span>
                                                             }
                                                             <span onClick={(e) => {
-                                                                // ////console.log("刪除");
+                                                                // //////console.log("刪除");
                                                                 toDelte(item.id);
                                                                 e.stopPropagation();
                                                             }} style={{ marginRight: 12, fontSize: 14 }} className={`iconfont`} >&#x34b2;</span>
@@ -421,7 +422,7 @@ export default function selectMethod(props) {
 
 
 export async function getServerSideProps(context) {
-    // console.log(context.query.deliverytype);
+    // //console.log(context.query.deliverytype);
     const response = await fetch(
         `${constant.api_url}/api/flowercategory/index`, {
         mode: 'cors',
@@ -446,17 +447,17 @@ export async function getServerSideProps(context) {
     if (context.req.headers.cookie) {
         res = context.req.headers.cookie.split(';');
         let _res = res.filter(item => {
-            ////console.log(item.trim().split("=")[0]);
+            //////console.log(item.trim().split("=")[0]);
             if (item.trim().split("=")[0] === "token")
                 return item;
         })
         if (_res.length) {
             i = _res[0].trim().split("=")[1];
         } else i = null;
-        //    ////console.log(_res[0].trim().split("=")[1]);
+        //    //////console.log(_res[0].trim().split("=")[1]);
     }
     if (i) {
-        ////console.log("進來了");
+        //////console.log("進來了");
         const add_response = await fetch(
             `${constant.api_url}/api/address/index`, {
             headers: {
@@ -495,15 +496,15 @@ export async function getServerSideProps(context) {
         }
 
         goods_data = await goods_list_response.json();
-        ////console.log("=========");
+        //////console.log("=========");
         add_data = await add_response.json();
     } else {
         add_data = { data: [], code: 401 };
         goods_data = { data: [], code: 401 };
         s_list = { data: [], code: 401 };
     }
-    ////console.log(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
-    console.log(goods_data);
+    //////console.log(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
+    //console.log(goods_data);
     if (!goods_data.code) {
         return {
             redirect: {
@@ -514,8 +515,8 @@ export async function getServerSideProps(context) {
     }
 
 
-    ////console.log(add_data);
-    console.log(s_list);
+    //////console.log(add_data);
+    //console.log(s_list);
     return {
         props: {
             cateList: data.data,

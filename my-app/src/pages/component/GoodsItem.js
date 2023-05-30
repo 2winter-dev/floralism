@@ -2,9 +2,9 @@ import styles from '@/styles/goodsItem.module.css'
 
 export default function GoodsItem(props) {
     return (<div className={`${styles.GoodsItem} ${props.type==="category"&&styles.Iscategory}`} onClick={() => {
-        ////console.log("123");
+        //////console.log("123");
         if (props.type !== "category") {
-            ////console.log("不是分類");
+            //////console.log("不是分類");
             location.href = `/production/${props.item.id}`
         } else {
             location.href = `/category/${props.item.id}`

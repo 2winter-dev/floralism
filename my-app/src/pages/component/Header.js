@@ -1,8 +1,10 @@
 import header from "@/styles/header.module.css"
 import Cookies from "js-cookie"
 import Link from "next/link"
+import { useRouter } from "next/router"
 
 export default function Header(props) {
+    const router=useRouter();
     return (<div className={`${header.header_background}`}>
         <div className={`${header.header_layout}`}>
             <div className={`${header.logo}`}>
@@ -41,7 +43,7 @@ export default function Header(props) {
                 </div>
             </div>
             <div className={`${header.header_right}`}>
-                <div onClick={props.login} style={{ display: 'flex', alignItems: 'center', cursor: "pointer" }}>
+                <div onClick={ ()=>{Cookies.get("token")?router.push(`/User`):props.login()}} style={{ display: 'flex', alignItems: 'center', cursor: "pointer" }}>
                     <span style={{}} className={`iconfont ${header.mine_icon}`}>&#xe70e;</span>
                     {
                         Cookies.get("token") ? "歡迎" : "登入"

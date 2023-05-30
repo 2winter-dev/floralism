@@ -7,13 +7,13 @@ export default function SuccessPage() {
     const [statement,setStatement]=useState("")
     // const { url } = router.query;
     // url.splice("?")
-    ////console.log(router.query.url);
+    //////console.log(router.query.url);
     const getState = () => {
         
         let res = router.query.url.split("?")[1];
         let _res = res.split("&")[0];
         let statement = _res.split("=")[0];
-        ////console.log(statement);
+        //////console.log(statement);
         return statement;
     }
 

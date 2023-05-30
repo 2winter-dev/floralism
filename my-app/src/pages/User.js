@@ -9,9 +9,11 @@ import dynamic from "next/dynamic";
 import DynamicComponent from "./component/Dynamic";
 import { useMutation } from "@tanstack/react-query";
 import m_api from "../m_api";
+import { useRouter } from "next/router";
 import AddressPannel from "./component/addressPannel";
 import Cookies from "js-cookie";
 export default function User(props) {
+    const router=useRouter();
     const [type, setType] = useState("message");
     const [item, setItem] = useState({});
 
@@ -50,17 +52,23 @@ export default function User(props) {
         m_list.splice(m_list.findIndex((it, index) => item === it.id), 1);
         setAddList([...m_list]);
         alert("刪除成功");
-        console.log(m_list);
+        //console.log(m_list);
     }
 
     const changeDefault = (id) => {
         let m_list = addList;
+        console.log(m_list);
         let res = m_list.map((item) => {
+            console.log(item);
+            console.log(id);
+            console.log(typeof item.id,typeof id);
             if (item.id === id) {
                 item.is_default = true;
-            } else item.is_default = false;
+            } else{
+                item.is_default = false;
+            }
         })
-        console.log(res);
+        setAddList([...m_list]);
     }
 
     const toDelte = (item) => {
@@ -83,7 +91,8 @@ export default function User(props) {
         })
     }
     const setPosition = (id) => {
-        // ////console.log(id);
+        // //////console.log(id);
+        console.log("123");
         setAdd(id);
         setDefault.mutate({ id, cookie: Cookies.get('token') }, {
             onSuccess: async (res) => {
@@ -101,13 +110,16 @@ export default function User(props) {
     }
 
     const updateUserMessage = () => {
+        console.log(username,email,mobile);
         updateUserMess.mutate({ username: username.trim(), email: email.trim(), mobile: mobile.trim(), cookie: Cookies.get('token') }, {
             onSuccess: async (res) => {
                 let _res = await res.json();
                 if (_res.code === 1) {
-                    setUsername(_res.data?.username);
-                    setMobile(_res.data?.mobile);
-                    setEmail(_res.data?.email);
+                    location.reload();
+                    console.log(_res);
+                    // setUsername(_res.data?.username);
+                    // setMobile(_res.data?.mobile);
+                    // setEmail(_res.data?.email);
                 }
             }
         })
@@ -118,19 +130,19 @@ export default function User(props) {
             onSuccess: async (res) => {
                 let _res = await res.json();
                 if (_res.code === 1) {
-                    console.log(_res.data);
+                    //console.log(_res.data);
 
                     setOrderDetail(_res.data);
                     setType("orderDetail");
                 }
-                console.log(_res);
-                // console.log(res);
+                //console.log(_res);
+                // //console.log(res);
             },
         })
     }
 
     useEffect(() => {
-        console.log(orderDetail);
+        //console.log(orderDetail);
     }, [orderDetail])
 
 
@@ -164,9 +176,12 @@ export default function User(props) {
                         </div>
                     </div>
                     <div className={styles.border} onClick={() =>{
-                        let  res=prompt("你確定要退出登陸嗎?");
-                        res&&Cookies.remove("token");
-                        location.href="/";
+                        let res=confirm("你確定要退出登陸嗎?");
+                        if(res){
+                            Cookies.remove("token");
+                            router.replace("/");
+                        }
+                      
                     }}>
                         <div className={`${styles.user_btn}`} style={{ display: 'flex' }}>
                             <div>退出登錄</div>
@@ -181,7 +196,7 @@ export default function User(props) {
                             <h5 className={styles.right_contain_title}>信息修改</h5>
                             <div style={{ marginTop: 12, display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
                                 <div style={{ marginTop: 24 }}>
-                                    username <input onInput={(e) => setUsername(e.target.value)} value={username} style={{ marginLeft: 12, borderRadius: 4, outline: 'none', paddingLeft: 4, paddingTop: 4, paddingBottom: 4 }} type="text" />
+                                    username <input onInput={(e) =>setUsername(e.target.value)} value={username} style={{ marginLeft: 12, borderRadius: 4, outline: 'none', paddingLeft: 4, paddingTop: 4, paddingBottom: 4 }} type="text" />
                                 </div>
                                 <div style={{ marginTop: 24 }}>
                                     email<input onInput={(e) => setEmail(e.target.value)} value={email} style={{ marginLeft: 46, borderRadius: 4, outline: 'none', paddingLeft: 4, paddingTop: 4, paddingBottom: 4 }} type="text" />
@@ -205,7 +220,7 @@ export default function User(props) {
                             <div style={{ display: 'flex', width: '100%' }}>
                                 {
                                     addList.length ? addList.map((item, index) => {
-                                        return <div key={item.id} className={style.addressItem} style={{ padding: 14 }}>
+                                        return <div key={item.id} className={style.addressItem} style={{ padding: 14,marginRight:10,marginTop:10 }}>
                                             {/* <div className={item.is_default ? style.check : style.uncheck} style={{ width: '10%' }}>
                                     </div> */}
                                             <div onClick={() => setPosition(item.id)} className={style.addressItemDetail} style={{ paddingLeft: 4, flex: 1 }}>
@@ -223,7 +238,7 @@ export default function User(props) {
                                                             <span onClick={() => setPosition(item.id)} style={{ marginRight: 12 }} className={`iconfont`}>&#xe799;</span>
                                                     }
                                                     <span onClick={(e) => {
-                                                        // ////console.log("刪除");
+                                                        // //////console.log("刪除");
                                                         toDelte(item?.id);
                                                         e.stopPropagation();
                                                     }} style={{ marginRight: 12, fontSize: 14 }} className={`iconfont`} >&#x34b2;</span>
@@ -495,7 +510,7 @@ export async function getServerSideProps(context) {
         addList = await add_response.json();
         sc = await sc_res.json();
         orderList = await order_response.json();
-        console.log(orderList);
+        //console.log(orderList);
         // if (sc.code === 401) {
         //     sc.data = [];
         // }
@@ -508,7 +523,7 @@ export async function getServerSideProps(context) {
     }
 
 
-    //    console.log(sc);
+    //    //console.log(sc);
     return {
         props: {
             cateList: JSON.parse(data).data,

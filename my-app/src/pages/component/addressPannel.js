@@ -5,7 +5,7 @@ import { useMutation } from "@tanstack/react-query";
 import m_api from "@/m_api";
 import Cookies from "js-cookie";
 export default function AddressPannel(props) {
-    // ////console.log(props);
+    // //////console.log(props);
     const [username,setUsername]=useState("");
     const [address,setAddress]=useState("");
     const [mobile,setMobile]=useState("");
@@ -30,7 +30,7 @@ export default function AddressPannel(props) {
         if(!props.type){
             addAddress.mutate({username:username.trim(),address:address.trim(),mobile:mobile.trim(),cookie:Cookies.get('token')},{
                 onSuccess:async(res)=>{
-                    // ////console.log(res);
+                    // //////console.log(res);
                     let _res=await res.json();
                     if(_res.code===401){
                         Cookies.remove("token");
@@ -43,7 +43,7 @@ export default function AddressPannel(props) {
                     }
                 },
                 onError:(res)=>{
-                    // ////console.log("error");
+                    // //////console.log("error");
                 }
             })
         }else{
@@ -61,7 +61,7 @@ export default function AddressPannel(props) {
                     }
                 },
                 onError:(res)=>{
-                    // ////console.log(res);
+                    // //////console.log(res);
                 }
             })
         }
