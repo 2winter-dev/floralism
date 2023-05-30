@@ -65,7 +65,7 @@ export default function LoginPannel(props) {
                         // ////console.log();
                         Cookies.set('token',isSuccess.data.token,{expires:1});
                         // Cookies.set('user',JSON.stringify(isSuccess.data.userinfo),{expires:1});
-                        alert("登陆成功");
+                        // alert("登陆成功");
                         
                         props.close();
                         // props.hasLogin();
@@ -95,7 +95,7 @@ export default function LoginPannel(props) {
                         // ////console.log("========");
                         // ////console.log(Cookies.get('token'));
                         
-                    alert("登陸成功");
+                    // alert("登陸成功");
                         props.close();
                         // props.hasLogin();
                         location.reload();
