@@ -8,7 +8,7 @@ import { useBearStore } from '@/zustand';
 import RegisterPannerl from './ResgisterPannel';
 import ForgetPassword from './ForgetPassword';
 export default function LoginPannel(props) {
-    // ////////console.log(window.innerHeight)
+    // //////////console.log(window.innerHeight)
     const [type, setType] = useState(0);//0為密碼登錄，1為驗證碼登錄
     const [time, setTime] = useState(0);
     const [email, setEmail] = useState("");
@@ -49,7 +49,7 @@ export default function LoginPannel(props) {
 
             },
             onError: (res) => {
-                ////////console.log(res);
+                //////////console.log(res);
                 alert("發送驗證碼失敗");
             }
         })
@@ -62,10 +62,10 @@ export default function LoginPannel(props) {
             loginByPassword.mutate({ email: email.trim(), password: code.trim() }, {
                 onSuccess: async (res) => {
                     let isSuccess = await res.json()
-                    // ////////console.log(await res.json());
+                    // //////////console.log(await res.json());
                     if (isSuccess.code) {
-                        // //////console.log("================");
-                        // //////console.log();
+                        // ////////console.log("================");
+                        // ////////console.log();
                         Cookies.set('token', isSuccess.data.token, { expires: 1 });
                         // Cookies.set('user',JSON.stringify(isSuccess.data.userinfo),{expires:1});
                         // alert("登陆成功");
@@ -88,15 +88,15 @@ export default function LoginPannel(props) {
                 onSuccess: async (res) => {
 
                     let body = await res.json()
-                    ////////console.log("====123====")
-                    ////////console.log(body)
+                    //////////console.log("====123====")
+                    //////////console.log(body)
 
                     if (body.code) {
-                        // //////console.log("================");
+                        // ////////console.log("================");
                         Cookies.set('token', body.data.token, { expires: 1 });
                         // Cookies.set('user',JSON.stringify(body.data.userinfo),{expires:1});
-                        // //////console.log("========");
-                        // //////console.log(Cookies.get('token'));
+                        // ////////console.log("========");
+                        // ////////console.log(Cookies.get('token'));
 
                         // alert("登陸成功");
                         props.close();

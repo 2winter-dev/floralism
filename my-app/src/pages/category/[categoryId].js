@@ -15,8 +15,8 @@ import Head from "next/head";
 import CateScroll from "../component/cateScroll";
 import { useRouter } from "next/router";
 export default function Category({ allcate, cateList, data,top_banner,middle_banner }) {
-    // //////console.log("----");
-    ////console.log(data);
+    // ////////console.log("----");
+    //////console.log(data);
     const router = useRouter();
     const [login, setLogin] = useState(false);
     const [register, setRegister] = useState(false);
@@ -38,12 +38,12 @@ export default function Category({ allcate, cateList, data,top_banner,middle_ban
     useEffect(() => {
         window.addEventListener("resize", resizeUpdate);
         if (window.innerWidth <= 675) {
-            ////////console.log("====", e.target.innerWidth);
+            //////////console.log("====", e.target.innerWidth);
             setFlag(0);
         } else if (window.innerWidth <= 1100) {
             setFlag(1)
         } else {
-            ////////console.log("-----", e.target.innerWidth);
+            //////////console.log("-----", e.target.innerWidth);
             setFlag(2);
         }
         return () => {
@@ -51,16 +51,16 @@ export default function Category({ allcate, cateList, data,top_banner,middle_ban
         }
     }, [])
     useEffect(() => {
-        ////////console.log("flag改變", flag);
+        //////////console.log("flag改變", flag);
         setCategory(spliceArr(allcate, !flag ? 4 : flag === 1 ? 6 : flag === 2 && 8, 1));
-        ////////console.log(spliceArr(GoodsPage,  !flag ? 4 :flag===1? 6:flag===2&&8))
+        //////////console.log(spliceArr(GoodsPage,  !flag ? 4 :flag===1? 6:flag===2&&8))
         setGoodsList(spliceArr(data.data, !flag ? 4 : flag === 1 ? 6 : flag === 2 && 8));
         setGoodsPage(1);
         setCategoryPage(1);
     }, [flag])
 
     // const checkname = () => {
-    //     //    //////console.log(goodsList);
+    //     //    ////////console.log(goodsList);
     //     let res = allcate.filter((item) => {
     //         if (item.id === data.data[0].flower_category_id) {
     //             return item;
@@ -71,10 +71,10 @@ export default function Category({ allcate, cateList, data,top_banner,middle_ban
     // }
 
     useEffect(() => {
-        // //////console.log(goodsList);
+        // ////////console.log(goodsList);
     }, [goodsList])
-    //console.log("======");
-    //console.log(data);
+    ////console.log("======");
+    ////console.log(data);
     return (<div>
         <Head>
             {/* <meta title={}  /> */}
@@ -121,7 +121,7 @@ export default function Category({ allcate, cateList, data,top_banner,middle_ban
                 type={'category'}
                 perPage={!flag ? 4 : flag === 1 ? 6 : flag === 2 && 8}
                 setPage={setCategoryPage}
-            // click={() => ////////console.log("1")}
+            // click={() => //////////console.log("1")}
             />
         </div>
         <div className={styles.contactus}>
@@ -161,7 +161,7 @@ export async function getStaticPaths() {
         res.push({ params: { categoryId: item.id.toString() } });
 
     })
-    // //////console.log(res);
+    // ////////console.log(res);
     // const data=await response.json()
     // TODO get product id to be array
     return {
@@ -172,7 +172,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps(context) {
     const { params } = context;
-    // //////console.log(params);
+    // ////////console.log(params);
     
     const response = await fetch(
         `${constant.api_url}/api/flowers/index?keyword=&flower_category_id=${params.categoryId}`, {
@@ -222,16 +222,16 @@ export async function getStaticProps(context) {
     const tt_data = await tt_response.text()
     const data = await response.text();
     const banner_list=await banner.json();
-    console.log("------------");
-    console.log(JSON.parse(data).data);
-    //console.log("--------");
-    //console.log(banner_list.data);
-    //console.log(banner_list.data.top_banner.web);
-    //console.log(banner_list.data.middle_banner.web);
-    //console.log(params.categoryId)
+    //console.log("------------");
+    //console.log(JSON.parse(data).data);
+    ////console.log("--------");
+    ////console.log(banner_list.data);
+    ////console.log(banner_list.data.top_banner.web);
+    ////console.log(banner_list.data.middle_banner.web);
+    ////console.log(params.categoryId)
     let top_banner=banner_list.data.top_banner.web.filter((item)=>{
         if(item.flower_category_ids.includes(parseInt(params.categoryId))){
-            //console.log("找到了");
+            ////console.log("找到了");
             return item;
         }
     })
@@ -239,9 +239,9 @@ export async function getStaticProps(context) {
         if(item.flower_category_ids.includes(parseInt(params.categoryId))){
             return item;
         }
-        // //console.log(item.flower_category_ids.includes(params.categoryId))
+        // ////console.log(item.flower_category_ids.includes(params.categoryId))
     })
-    //console.log(top_banner,middle_banner);
+    ////console.log(top_banner,middle_banner);
     return {
         props: {
             allcate: allcate.data,
