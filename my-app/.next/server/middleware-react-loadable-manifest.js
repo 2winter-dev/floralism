@@ -1,1 +1,1 @@
-self.__REACT_LOADABLE_MANIFEST={"component\\Dynamic.js -> ./Header":{"id":"component\\Dynamic.js -> ./Header","files":["static/chunks/src_pages_component_Header_js.js"]}}
+self.__REACT_LOADABLE_MANIFEST={"component\\Dynamic.js -> ./Header":{id:6991,files:["static/chunks/664-8dad9758a737e774.js","static/css/dee59c768991ad7c.css","static/chunks/991.a38147bfc4d6d8f6.js"]},"selectMethod\\index.js -> ./DynamicStripe":{id:4213,files:["static/chunks/213.09c66a83820ae69e.js"]}};

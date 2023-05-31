@@ -100,7 +100,7 @@ export default function ProductDetail({ cateList, product }) {
             <meta title={'descirption'} content={`${product.flowerList[index].metadescription}`} />
             <meta title={'keywords'} content={`${product.flowerList[index].meta}`} />
         </Head>
-        {/* <DynamicComponent cateList={cateList} setLogin={setLogin} /> */}
+        <DynamicComponent cateList={cateList} setLogin={setLogin} />
         <main style={{ paddingLeft: '21%', paddingRight: '21%' }}>
             <div>
                 <div style={{ marginTop: 32, display: 'flex' }}>
