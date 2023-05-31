@@ -1,7 +1,7 @@
 (() => {
 var exports = {};
 exports.id = 2810;
-exports.ids = [2810,8693,839,8968,6163,1577,7720,9925];
+exports.ids = [2810,8693,7720,839,6163,8968,1577,9925];
 exports.modules = {
 
 /***/ 3788:
@@ -87,8 +87,8 @@ var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_com
 function selectMethod(props) {
     const stripe = __webpack_require__(8174)(props.secretKey);
     const router = (0,next_router__WEBPACK_IMPORTED_MODULE_8__.useRouter)();
-    // ////////console.log("000000000");
-    // ////////console.log(stripe);      
+    // //////////console.log("000000000");
+    // //////////console.log(stripe);      
     const DynamicComponentWithNoSSR = next_dynamic__WEBPACK_IMPORTED_MODULE_11___default()(null, {
         loadableGenerated: {
             modules: [
@@ -98,10 +98,10 @@ function selectMethod(props) {
         ssr: false
     });
     const { deliverytype , deliverydate , cart_ids , remark , amount , payment_amount  } = router.query;
-    // //console.log();
-    ////console.log("----------");
-    ////console.log(deliverytype);
-    // ////////console.log(useRouter());
+    // ////console.log();
+    //////console.log("----------");
+    //////console.log(deliverytype);
+    // //////////console.log(useRouter());
     const [login, setLogin] = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(false);
     const [register, setRegister] = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(false);
     const [visible, setVisible] = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(false);
@@ -169,7 +169,7 @@ function selectMethod(props) {
         ]);
     };
     const setPosition = (id)=>{
-        // ////////console.log(id);
+        // //////////console.log(id);
         setAdd(id);
         setDefault.mutate({
             id,
@@ -192,7 +192,7 @@ function selectMethod(props) {
     (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(()=>{
         if (props?.addList && js_cookie__WEBPACK_IMPORTED_MODULE_13__["default"].get("token")) {
             let res = props.addList?.data.filter((item)=>{
-                // ////////console.log(item);
+                // //////////console.log(item);
                 if (item.is_default) {
                     return item;
                 }
@@ -203,12 +203,12 @@ function selectMethod(props) {
             router.replace("/");
         }
     }, []);
-    //console.log("1111----");
-    //console.log(router.query?.type === "success");
+    ////console.log("1111----");
+    ////console.log(router.query?.type === "success");
     const ToCreateOrder = ()=>{
         setFlag(true);
         if (payment !== "" && add !== "") {
-            // ////////console.log(deliverytype, deliverydate, cart_ids, remark, amount, payment_amount, add)
+            // //////////console.log(deliverytype, deliverydate, cart_ids, remark, amount, payment_amount, add)
             createOrder.mutate({
                 deliverytype,
                 deliverydate,
@@ -226,7 +226,7 @@ function selectMethod(props) {
                         js_cookie__WEBPACK_IMPORTED_MODULE_13__["default"].remove("token");
                         location.reload();
                     } else if (_res.code === 1) {
-                        // ////////console.log(_res);
+                        // //////////console.log(_res);
                         setFlag(false);
                         if (payment === "paypal") {
                             setUrl(_res.data.payment_info.approval_url);
@@ -243,8 +243,8 @@ function selectMethod(props) {
         }
     };
     (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(()=>{
-    // ////////console.log("==============");
-    //  ////////console.log(createOrder.data);
+    // //////////console.log("==============");
+    //  //////////console.log(createOrder.data);
     }, [
         createOrder
     ]);
@@ -493,7 +493,7 @@ function selectMethod(props) {
                                                                                 }),
                                                                                 /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("span", {
                                                                                     onClick: (e)=>{
-                                                                                        // ////////console.log("刪除");
+                                                                                        // //////////console.log("刪除");
                                                                                         toDelte(item.id);
                                                                                         e.stopPropagation();
                                                                                     },
@@ -1010,7 +1010,7 @@ function selectMethod(props) {
     });
 }
 async function getServerSideProps(context) {
-    //console.log(context.query.page);
+    ////console.log(context.query.page);
     const response = await fetch(`${_constant__WEBPACK_IMPORTED_MODULE_7__/* .constant.api_url */ .a.api_url}/api/flowercategory/index`, {
         mode: "cors",
         headers: {
@@ -1029,16 +1029,16 @@ async function getServerSideProps(context) {
     if (context.req.headers.cookie) {
         res = context.req.headers.cookie.split(";");
         let _res = res.filter((item)=>{
-            ////////console.log(item.trim().split("=")[0]);
+            //////////console.log(item.trim().split("=")[0]);
             if (item.trim().split("=")[0] === "token") return item;
         });
         if (_res.length) {
             i = _res[0].trim().split("=")[1];
         } else i = null;
-    //    ////////console.log(_res[0].trim().split("=")[1]);
+    //    //////////console.log(_res[0].trim().split("=")[1]);
     }
     if (i) {
-        ////////console.log("進來了");
+        //////////console.log("進來了");
         const add_response = await fetch(`${_constant__WEBPACK_IMPORTED_MODULE_7__/* .constant.api_url */ .a.api_url}/api/address/index`, {
             headers: {
                 Authorization: `Bearer ${i}`,
@@ -1070,7 +1070,7 @@ async function getServerSideProps(context) {
             s_list = await shopList.json();
         }
         goods_data = await goods_list_response.json();
-        ////////console.log("=========");
+        //////////console.log("=========");
         add_data = await add_response.json();
     } else {
         add_data = {
@@ -1086,11 +1086,11 @@ async function getServerSideProps(context) {
             code: 401
         };
     }
-    ////////console.log(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
-    //console.log("============");
-    //console.log(add_data);
+    //////////console.log(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
+    ////console.log("============");
+    ////console.log(add_data);
     if (context.query.page !== "3") {
-        //console.log("不为3");
+        ////console.log("不为3");
         if (!goods_data.code) {
             return {
                 redirect: {
@@ -1100,8 +1100,8 @@ async function getServerSideProps(context) {
             };
         }
     }
-    ////////console.log(add_data);
-    ////console.log(s_list);
+    //////////console.log(add_data);
+    //////console.log(s_list);
     return {
         props: {
             cateList: data.data,

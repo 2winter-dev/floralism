@@ -14,9 +14,9 @@ import m_api from '@/m_api';
 import DynamicComponent from '../component/Dynamic';
 import Router from 'next/router';
 export default function ShopCar({ cateList, shopCar }) {
-    // ////////console.log(Cookies.get('token'));
-    // ////////console.log("============");
-    // ////////console.log(shopCar.data);
+    // //////////console.log(Cookies.get('token'));
+    // //////////console.log("============");
+    // //////////console.log(shopCar.data);
     const [selected, setSelected] = useState([]);
     const [selAll, setSelAll] = useState(false);
     const [sc, setSc] = useState(shopCar.data);
@@ -39,7 +39,7 @@ export default function ShopCar({ cateList, shopCar }) {
     })
 
     const ToUpdate = (item, index, value) => {
-        ////console.log(value);
+        //////console.log(value);
         if (value <= 0) {
             alert("不能少於1");
             return;
@@ -88,30 +88,30 @@ export default function ShopCar({ cateList, shopCar }) {
         let money = total_money;
         let res = selected.findIndex((item, index) => item === data.id);
         if (res === -1) {
-            ////////console.log("未被选中，选中");
+            //////////console.log("未被选中，选中");
             setSelected([...arr, data.id]);
             money += data.num * data.price;
             if (arr.length + 1 === sc.length) {
                 setSelAll(true);
             }
         } else {
-            ////////console.log("已被选中，取消,位置:" + res);
+            //////////console.log("已被选中，取消,位置:" + res);
             let _res = arr.splice(res, 1)
-            ////////console.log(_res, arr);
+            //////////console.log(_res, arr);
             money -= data.num * data.price;
             setSelected([...arr]);
             setSelAll(false);
         }
-        ////////console.log(arr.length, sc.length);
+        //////////console.log(arr.length, sc.length);
         // culTotalPrice();
     }
     const deleteProduct = () => {
-        ////////console.log(selected);
+        //////////console.log(selected);
         deleteProductionFromShopCar.mutate({ ids: selected.join(","), cookie: Cookies.get('token') }, {
             onSuccess: async (res) => {
-                // ////////console.log(await res.text())
+                // //////////console.log(await res.text())
                 let _res = await res.json();
-                ////////console.log(_res);
+                //////////console.log(_res);
                 if (_res.code === 1) {
                     let arr = sc;
                     selected.map((item) => {
@@ -128,7 +128,7 @@ export default function ShopCar({ cateList, shopCar }) {
                     alert(_res.msg);
                 }
                 // let _res=JSON.parse(res)
-                // ////////console.log(_res);
+                // //////////console.log(_res);
 
                 // culTotalPrice();
             },
@@ -160,14 +160,14 @@ export default function ShopCar({ cateList, shopCar }) {
         sc.map((item, index) => {
             if (selected.findIndex((it, index) => it === item.id) != -1) {
                 money += parseFloat((item?.num * item?.price).toFixed(2));
-                ////console.log(money)
+                //////console.log(money)
                 num += parseInt(item.num);
             }
         })
         !sc.length && setSelAll(false);
         setTotal_money(money.toFixed(2));
         setTotal_num(num);
-        //  ////////console.log(money);
+        //  //////////console.log(money);
     }, [sc, selected])
 
     const limitTime = () => {
@@ -175,7 +175,7 @@ export default function ShopCar({ cateList, shopCar }) {
         let year = date.getFullYear();
         let month = date.getMonth() + 1;
         let day = date.getDate();
-        ////////console.log(year + '-' + (month < 10 ? "0" + month : month) + "-" + day);
+        //////////console.log(year + '-' + (month < 10 ? "0" + month : month) + "-" + day);
         return year + '-' + (month < 10 ? "0" + month : month) + "-" + day
 
     }
@@ -185,15 +185,15 @@ export default function ShopCar({ cateList, shopCar }) {
             if (date !== "") {
                 // Cookies.set("shopCar",);
                 let res = selected.map((item, index) => {
-                    ////////console.log(item);
+                    //////////console.log(item);
                     return sc.filter((it, index) => {
-                        ////////console.log(it);
+                        //////////console.log(it);
                         if (it.id === item) {
                             return item;
                         }
                     })
                 })
-                // ////////console.log();
+                // //////////console.log();
                 // Cookies.set("shopCar",JSON.stringify(res.flat(1)));
                 Router.replace({
                     pathname: '/selectMethod',
@@ -220,10 +220,10 @@ export default function ShopCar({ cateList, shopCar }) {
         <DynamicComponent cateList={cateList} setLogin={() => {
             setLogin(true);
         }} />
-        <main style={{ paddingLeft: '21%', paddingRight: '21%' }}>
+        <main className={style.total_container} style={{ }}>
             <div>
                 <div style={{ marginTop: 32, display: 'flex', marginBottom: 32 }}>
-                    <Link style={{ cursor: 'pointer' }} href={'/'}>首頁</Link><span className={style.separator}>/</span><a>{'我的賬單'}</a>
+                    <Link style={{ cursor: 'pointer' }} href={'/'}>首頁</Link><span className={style.separator} style={{padding:'0 4px'}}>/</span><a>{'我的賬單'}</a>
                 </div>
                 <div className={style.mediaArea} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
 
@@ -236,7 +236,7 @@ export default function ShopCar({ cateList, shopCar }) {
                                         <th className={styles.tr_padding} width={130}>
                                             <input type='checkbox' checked={selAll} onChange={() => null} onClick={selectedAll} style={{ width: 15, height: 15 }} />
                                             <span>全選</span>
-                                            <span onClick={deleteProduct} style={{ marginLeft: 8, cursor: 'pointer' }}>删除</span>
+                                            <span onClick={deleteProduct} style={{ marginLeft: 8, cursor: 'pointer',color:'#d43a43' }}>删除</span>
                                         </th>
                                         <th className={styles.tr_padding}>商品</th>
                                         <th className={styles.tr_padding} width={120}>總價</th>
@@ -350,8 +350,8 @@ export default function ShopCar({ cateList, shopCar }) {
 }
 export async function getServerSideProps(context) {
     const cookies = context.req.headers.cookie;
-    ////////console.log("-----------");
-    // ////////console.log(context.req.headers.cookie.split('=')[1]);
+    //////////console.log("-----------");
+    // //////////console.log(context.req.headers.cookie.split('=')[1]);
 
     const response = await fetch(
         `${constant.api_url}/api/flowercategory/index`, {

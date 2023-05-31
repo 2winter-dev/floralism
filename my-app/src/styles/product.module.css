@@ -1,10 +1,10 @@
 .separator {
-    padding: 0 4px;
+    padding: 0 12px;
 }
 
 .left_button {
     position: absolute;
-    left: -20px;
+    left: 0;
     top: 50%;
     transform: translateY(-50%);
     width: 15px;
@@ -47,7 +47,7 @@
 
 .right_button {
     position: absolute;
-    right: -20px;
+    right: 0px;
     width: 15px;
     height: 50%;
     display: flex;
@@ -91,7 +91,7 @@
 .left_button:hover,
 .right_button:hover {
     animation: changeColor 1s;
-    background-color: rgba(0, 0, 0, 0.4);
+    /* background-color: rgba(0, 0, 0, 0.4); */
     ;
 }
 
@@ -117,7 +117,9 @@
     background-color: white;
     font-size: 20px;
 }
-
+.total_container{
+    padding: 0 21%;
+}
 .product_number {
     width: 60px;
     border-left: none;
@@ -136,7 +138,9 @@
     border-top-right-radius: 2px;
     border-bottom-right-radius: 2px;
 }
-
+.swiper_margin{
+  margin: 0 21% ;
+}
 .detail_left {
     width: 50%;
 }
@@ -186,7 +190,13 @@
     .type_selector {
         width: 100%
     }
-
+     .total_container{
+        /* padding: 10px; */
+        padding: 20px;
+     }
+     .swiper_margin{
+        margin:0
+     }
 }
 
 .buy_btn {

@@ -2,7 +2,7 @@
 (() => {
 var exports = {};
 exports.id = 4291;
-exports.ids = [4291,8693,839,8968,6163,1577,7720,9925];
+exports.ids = [4291,8693,7720,839,6163,8968,1577,9925];
 exports.modules = {
 
 /***/ 8681:
@@ -54,9 +54,9 @@ var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_com
 
 
 function ShopCar({ cateList , shopCar  }) {
-    // ////////console.log(Cookies.get('token'));
-    // ////////console.log("============");
-    // ////////console.log(shopCar.data);
+    // //////////console.log(Cookies.get('token'));
+    // //////////console.log("============");
+    // //////////console.log(shopCar.data);
     const [selected, setSelected] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]);
     const [selAll, setSelAll] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
     const [sc, setSc] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(shopCar.data);
@@ -79,7 +79,7 @@ function ShopCar({ cateList , shopCar  }) {
         ]
     });
     const ToUpdate = (item, index, value)=>{
-        ////console.log(value);
+        //////console.log(value);
         if (value <= 0) {
             alert("不能少於1");
             return;
@@ -137,7 +137,7 @@ function ShopCar({ cateList , shopCar  }) {
         let money = total_money;
         let res = selected.findIndex((item, index)=>item === data.id);
         if (res === -1) {
-            ////////console.log("未被选中，选中");
+            //////////console.log("未被选中，选中");
             setSelected([
                 ...arr,
                 data.id
@@ -147,28 +147,28 @@ function ShopCar({ cateList , shopCar  }) {
                 setSelAll(true);
             }
         } else {
-            ////////console.log("已被选中，取消,位置:" + res);
+            //////////console.log("已被选中，取消,位置:" + res);
             let _res = arr.splice(res, 1);
-            ////////console.log(_res, arr);
+            //////////console.log(_res, arr);
             money -= data.num * data.price;
             setSelected([
                 ...arr
             ]);
             setSelAll(false);
         }
-    ////////console.log(arr.length, sc.length);
+    //////////console.log(arr.length, sc.length);
     // culTotalPrice();
     };
     const deleteProduct = ()=>{
-        ////////console.log(selected);
+        //////////console.log(selected);
         deleteProductionFromShopCar.mutate({
             ids: selected.join(","),
             cookie: js_cookie__WEBPACK_IMPORTED_MODULE_9__["default"].get("token")
         }, {
             onSuccess: async (res)=>{
-                // ////////console.log(await res.text())
+                // //////////console.log(await res.text())
                 let _res = await res.json();
-                ////////console.log(_res);
+                //////////console.log(_res);
                 if (_res.code === 1) {
                     let arr = sc;
                     selected.map((item)=>{
@@ -185,7 +185,7 @@ function ShopCar({ cateList , shopCar  }) {
                     alert(_res.msg);
                 }
             // let _res=JSON.parse(res)
-            // ////////console.log(_res);
+            // //////////console.log(_res);
             // culTotalPrice();
             },
             onError: (res)=>{
@@ -215,14 +215,14 @@ function ShopCar({ cateList , shopCar  }) {
         sc.map((item, index)=>{
             if (selected.findIndex((it, index)=>it === item.id) != -1) {
                 money += parseFloat((item?.num * item?.price).toFixed(2));
-                ////console.log(money)
+                //////console.log(money)
                 num += parseInt(item.num);
             }
         });
         !sc.length && setSelAll(false);
         setTotal_money(money.toFixed(2));
         setTotal_num(num);
-    //  ////////console.log(money);
+    //  //////////console.log(money);
     }, [
         sc,
         selected
@@ -232,7 +232,7 @@ function ShopCar({ cateList , shopCar  }) {
         let year = date.getFullYear();
         let month = date.getMonth() + 1;
         let day = date.getDate();
-        ////////console.log(year + '-' + (month < 10 ? "0" + month : month) + "-" + day);
+        //////////console.log(year + '-' + (month < 10 ? "0" + month : month) + "-" + day);
         return year + "-" + (month < 10 ? "0" + month : month) + "-" + day;
     };
     const toCreateOrder = ()=>{
@@ -240,15 +240,15 @@ function ShopCar({ cateList , shopCar  }) {
             if (date !== "") {
                 // Cookies.set("shopCar",);
                 let res = selected.map((item, index)=>{
-                    ////////console.log(item);
+                    //////////console.log(item);
                     return sc.filter((it, index)=>{
-                        ////////console.log(it);
+                        //////////console.log(it);
                         if (it.id === item) {
                             return item;
                         }
                     });
                 });
-                // ////////console.log();
+                // //////////console.log();
                 // Cookies.set("shopCar",JSON.stringify(res.flat(1)));
                 next_router__WEBPACK_IMPORTED_MODULE_13___default().replace({
                     pathname: "/selectMethod",
@@ -277,10 +277,8 @@ function ShopCar({ cateList , shopCar  }) {
                 }
             }),
             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("main", {
-                style: {
-                    paddingLeft: "21%",
-                    paddingRight: "21%"
-                },
+                className: (_styles_shopcarbtn_module_css__WEBPACK_IMPORTED_MODULE_14___default().total_container),
+                style: {},
                 children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                     children: [
                         /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
@@ -299,6 +297,9 @@ function ShopCar({ cateList , shopCar  }) {
                                 }),
                                 /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("span", {
                                     className: (_styles_shopcarbtn_module_css__WEBPACK_IMPORTED_MODULE_14___default().separator),
+                                    style: {
+                                        padding: "0 4px"
+                                    },
                                     children: "/"
                                 }),
                                 /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("a", {
@@ -358,7 +359,8 @@ function ShopCar({ cateList , shopCar  }) {
                                                                             onClick: deleteProduct,
                                                                             style: {
                                                                                 marginLeft: 8,
-                                                                                cursor: "pointer"
+                                                                                cursor: "pointer",
+                                                                                color: "#d43a43"
                                                                             },
                                                                             children: "删除"
                                                                         })
@@ -737,8 +739,8 @@ function ShopCar({ cateList , shopCar  }) {
 }
 async function getServerSideProps(context) {
     const cookies = context.req.headers.cookie;
-    ////////console.log("-----------");
-    // ////////console.log(context.req.headers.cookie.split('=')[1]);
+    //////////console.log("-----------");
+    // //////////console.log(context.req.headers.cookie.split('=')[1]);
     const response = await fetch(`${_constant__WEBPACK_IMPORTED_MODULE_5__/* .constant.api_url */ .a.api_url}/api/flowercategory/index`, {
         mode: "cors",
         headers: {

@@ -146,6 +146,10 @@
  .common_animation{
     opacity: 0;
  }
+
+ .total_container{
+    padding: 0 21%;
+ }
  @keyframes shopcar_add{
      from {
         opacity:0;
@@ -219,4 +223,10 @@
     .right_area{
         width:100%
     }
+}
+
+@media screen and (max-width:675px) {
+     .total_container{
+        padding:0 5%;
+     }
 }

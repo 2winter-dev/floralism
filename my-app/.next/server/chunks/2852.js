@@ -67,7 +67,7 @@ function ForgetPassword(props) {
                 alert("發送驗證碼成功，請到填寫的郵箱内查看驗證碼");
             },
             onError: (res)=>{
-                //////////console.log(res);
+                ////////////console.log(res);
                 alert("發送驗證碼失敗");
             }
         });

@@ -20,6 +20,7 @@ export default function Header(props) {
             <div className={`${header.header_center}`}>
                 {
                     props?.list?.length && props.list.map((item, index) => {
+                        if(index>2) return null; 
                         return (<div key={item.id} className={`${header.header_center_label}`}>
                             <div className={`${header.header_center_parent}`}>{item.categoryname}
                                 {

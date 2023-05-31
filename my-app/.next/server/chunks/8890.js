@@ -72,18 +72,18 @@ _tanstack_react_query__WEBPACK_IMPORTED_MODULE_3__ = (__webpack_async_dependenci
 
 function GoodsScoll(props) {
     const [goodsList, setGoodsList] = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(props.list);
-    // //console.log("===============");
-    // //console.log(props.list);
-    // ////console.log(props.maxPage);
-    // ////////console.log(props.list);
-    //////////console.log(props);
-    //////////console.log("0000");
-    // ////////console.log(props.list);
-    //////////console.log(props);
+    // ////console.log("===============");
+    // ////console.log(props.list);
+    // //////console.log(props.maxPage);
+    // //////////console.log(props.list);
+    ////////////console.log(props);
+    ////////////console.log("0000");
+    // //////////console.log(props.list);
+    ////////////console.log(props);
     // const [btnList, setBtnList] = useState(props.list.length);
     // const [props.page, setprops.page] = useState(props.page);
     // const [props.list.length, setprops.list.length] = useState(props.list.length);
-    //////////console.log(props.list.length)
+    ////////////console.log(props.list.length)
     const setBtn = ()=>{
         switch(props.page){
             case 1:
@@ -108,14 +108,14 @@ function GoodsScoll(props) {
             case 2:
                 {
                     if (props.maxPage === 3) {
-                        ////console.log("是3");
+                        //////console.log("是3");
                         return [
                             1,
                             2,
                             3
                         ];
                     } else if (props.maxPage === 2) {
-                        ////console.log("是2");
+                        //////console.log("是2");
                         return [
                             1,
                             2
@@ -153,9 +153,9 @@ function GoodsScoll(props) {
                 ];
         }
     };
-    ////////////console.log("最大页面发生变化")
-    ////////////console.log("当前页面发生变化")
-    // ////////////console.log(props.page,props.page)
+    //////////////console.log("最大页面发生变化")
+    //////////////console.log("当前页面发生变化")
+    // //////////////console.log(props.page,props.page)
     // useEffect(()=>{
     // },[])
     // 大页面为8，小页面为4，当大页面切换至小页面时。
@@ -167,8 +167,8 @@ function GoodsScoll(props) {
         mutationFn: (data)=>_m_api__WEBPACK_IMPORTED_MODULE_4__/* ["default"].fetchGoods */ .Z.fetchGoods(data)
     });
     const toFetchGoods = (page)=>{
-        //////////console.log("====");
-        //////////console.log(page);
+        ////////////console.log("====");
+        ////////////console.log(page);
         fetchGoods.mutate({
             keyword: "",
             flower_category_id: props.id,
@@ -177,11 +177,11 @@ function GoodsScoll(props) {
         }, {
             onSuccess: async (res)=>{
                 let _res = await res.json();
-                // ////////console.log(_res);
+                // //////////console.log(_res);
                 props.setList(_res.data.data);
             },
             onError: (res)=>{
-                // ////////console.log(res);
+                // //////////console.log(res);
                 Toast.show("獲取失敗");
             }
         });
@@ -217,7 +217,7 @@ function GoodsScoll(props) {
                         marginTop: 32
                     },
                     children: !!props?.list?.length ? props.list.map((item, index)=>{
-                        //console.log(item);
+                        ////console.log(item);
                         return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_GoodsItem__WEBPACK_IMPORTED_MODULE_1__["default"], {
                             top_style: {
                                 marginTop: 12
@@ -254,7 +254,7 @@ function GoodsScoll(props) {
                                 onClick: ()=>{
                                     props.setPage(item);
                                     toFetchGoods(item);
-                                //////////console.log("Page change");
+                                ////////////console.log("Page change");
                                 },
                                 className: item === props.page ? (_styles_goodsScroll_module_css__WEBPACK_IMPORTED_MODULE_6___default().select) : "common",
                                 style: {

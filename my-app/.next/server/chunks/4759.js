@@ -71,7 +71,7 @@ function DynamicComponent(props) {
     return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(DynamicLazyComponent, {
         list: props.cateList,
         login: ()=>{
-            //console.log("123");
+            ////console.log("123");
             if (js_cookie__WEBPACK_IMPORTED_MODULE_2__["default"].get("token")) {
                 alert("你先退出登陆吗");
             } else props.setLogin(true);

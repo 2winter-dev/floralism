@@ -38,13 +38,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function GoodsItem(props) {
-    // props.type !== "category"&&//console.log(props.item,props.type)
+    // props.type !== "category"&&////console.log(props.item,props.type)
     return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
         className: `${(_styles_goodsItem_module_css__WEBPACK_IMPORTED_MODULE_1___default().GoodsItem)} ${props.type === "category" && (_styles_goodsItem_module_css__WEBPACK_IMPORTED_MODULE_1___default().Iscategory)}`,
         onClick: ()=>{
-            ////////console.log("123");
+            //////////console.log("123");
             if (props.type !== "category") {
-                ////////console.log("不是分類");
+                //////////console.log("不是分類");
                 location.href = `/production/${props.item.id}`;
             } else {
                 location.href = `/category/${props.item.id}`;
@@ -73,7 +73,9 @@ function GoodsItem(props) {
                     }),
                     props.type !== "category" && props.type !== "carsouel" && props.item?.photoimages[0] && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("img", {
                         src: props?.item?.photoimages[0],
-                        style: {},
+                        style: {
+                            borderRadius: 16
+                        },
                         className: (_styles_goodsItem_module_css__WEBPACK_IMPORTED_MODULE_1___default().goods_hover_img)
                     }),
                     props.type === "carsouel" && /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("button", {

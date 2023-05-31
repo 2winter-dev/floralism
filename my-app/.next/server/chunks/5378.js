@@ -29,7 +29,7 @@ js_cookie__WEBPACK_IMPORTED_MODULE_1__ = (__webpack_async_dependencies__.then ? 
 function ShopcarBottom(props) {
     const router = (0,next_router__WEBPACK_IMPORTED_MODULE_2__.useRouter)();
     const toAddAnimation = (props)=>{
-        //////////console.log("點擊了");
+        ////////////console.log("點擊了");
         js_cookie__WEBPACK_IMPORTED_MODULE_1__["default"].remove("isAdd");
         router.push("/shopCar/shopCar");
     // location.href='/shopCar/shopCar'

@@ -1,7 +1,7 @@
 (() => {
 var exports = {};
 exports.id = 7978;
-exports.ids = [7978,8693,839,8968,6163,1577,7720,9925];
+exports.ids = [7978,8693,7720,839,6163,8968,1577,9925];
 exports.modules = {
 
 /***/ 2494:
@@ -69,7 +69,7 @@ var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_com
 
 
 function ProductSearch({ cateList , data  }) {
-    // ////////console.log(data);
+    // //////////console.log(data);
     const router = (0,next_router__WEBPACK_IMPORTED_MODULE_12__.useRouter)();
     const [flag, setFlag] = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)(false);
     const [page, setPage] = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)(1);
@@ -87,7 +87,7 @@ function ProductSearch({ cateList , data  }) {
         mutationFn: async (data)=>await _m_api__WEBPACK_IMPORTED_MODULE_11__/* ["default"].fetchGoods */ .Z.fetchGoods(data)
     });
     const ToSearch = ()=>{
-        //////console.log("點擊了");
+        ////////console.log("點擊了");
         fetchGoods.mutate({
             keyword,
             flower_category_id: "",
@@ -98,23 +98,23 @@ function ProductSearch({ cateList , data  }) {
                 let _res = await res.json();
                 if (_res.code === 1) {
                     setSearchResult(_res.data.data);
-                    //////console.log(_res);
+                    ////////console.log(_res);
                     setPage(1);
                 } else {
                     alert(_res.msg);
                 }
             },
             onError: (res)=>{
-            ////////console.log(res);
+            //////////console.log(res);
             }
         });
     };
     const resizeUpdate = (e)=>{
         if (e.target.innerWidth <= 1100) {
-            //////////console.log("====", e.target.innerWidth);
+            ////////////console.log("====", e.target.innerWidth);
             setFlag(true);
         } else {
-            //////////console.log("-----", e.target.innerWidth);
+            ////////////console.log("-----", e.target.innerWidth);
             setFlag(false);
         }
     };
@@ -134,7 +134,7 @@ function ProductSearch({ cateList , data  }) {
         };
     }, []);
     (0,react__WEBPACK_IMPORTED_MODULE_5__.useEffect)(()=>{
-        //////////console.log("flag改變", flag);
+        ////////////console.log("flag改變", flag);
         setPage(1);
         setGoodsList((0,_method__WEBPACK_IMPORTED_MODULE_6__/* .spliceArr */ .e)(data.data, 16));
     // setCategoryPage(1);
@@ -142,7 +142,7 @@ function ProductSearch({ cateList , data  }) {
         flag
     ]);
     (0,react__WEBPACK_IMPORTED_MODULE_5__.useEffect)(()=>{
-    //////////console.log(goodsList)
+    ////////////console.log(goodsList)
     }, [
         goodsList
     ]);
@@ -283,7 +283,7 @@ async function getStaticPaths() {
 }
 async function getStaticProps(context) {
     const { params  } = context;
-    // ////////console.log(params);
+    // //////////console.log(params);
     const response = await fetch(`${_constant__WEBPACK_IMPORTED_MODULE_7__/* .constant.api_url */ .a.api_url}/api/flowers/index?keyword=&flower_category_id=${params.ProductSearchId}&listRows=16`, {
         headers: {
             // "Authorization": `Bearer ${data.cookie}`,
@@ -302,8 +302,8 @@ async function getStaticProps(context) {
     });
     const tt_data = await tt_response.text();
     const data = await response.text();
-    // ////////console.log("------======-----")
-    // ////////console.log(data);
+    // //////////console.log("------======-----")
+    // //////////console.log(data);
     return {
         props: {
             cateList: JSON.parse(tt_data).data,

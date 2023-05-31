@@ -130,7 +130,7 @@ function RegisterPannerl(props) {
         }, {
             onSuccess: async (res)=>{
                 let isSuccess = await res.json();
-                //////////console.log(res);
+                ////////////console.log(res);
                 if (isSuccess.code === 1) {
                     props.close();
                     js_cookie__WEBPACK_IMPORTED_MODULE_5__["default"].set("token", isSuccess.data.token, {
@@ -146,7 +146,7 @@ function RegisterPannerl(props) {
                 }
             },
             onError: (res)=>{
-                //////////console.log(res);
+                ////////////console.log(res);
                 alert("注冊失敗");
             }
         });
@@ -250,7 +250,7 @@ function RegisterPannerl(props) {
                                 value: email,
                                 onChange: (event)=>{
                                     setEmail(event.target.value);
-                                //////////console.log(event)
+                                ////////////console.log(event)
                                 }
                             })
                         }),

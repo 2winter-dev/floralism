@@ -2,11 +2,11 @@ import styles from '@/styles/goodsItem.module.css'
 
 export default function GoodsItem(props) {
 
-    // props.type !== "category"&&//console.log(props.item,props.type)
+    // props.type !== "category"&&////console.log(props.item,props.type)
     return (<div className={`${styles.GoodsItem} ${props.type === "category" && styles.Iscategory}`} onClick={() => {
-        ////////console.log("123");
+        //////////console.log("123");
         if (props.type !== "category") {
-            ////////console.log("不是分類");
+            //////////console.log("不是分類");
             location.href = `/production/${props.item.id}`
         } else {
             location.href = `/category/${props.item.id}`
@@ -14,7 +14,7 @@ export default function GoodsItem(props) {
     }} style={{ padding: '2%', ...props.top_style }}>
         <div className={props.animation&&(props.type==="category"||props.type==="carsouel") ? styles.goods_img_cover : ""} style={{ position: 'relative',...props.imgTopStyle }}>
             <img src={props?.item?.photoimage} style={{ width: '100%',display:'block', ...props.imgStyle }} className={props.animation==="toLarge"?`${styles.goods_img} ${styles.an_fangda}`:`${styles.goods_img}`} />
-            {props.type!=="category"&&props.type!=="carsouel"&&props.item?.photoimages[0]&&<img src={props?.item?.photoimages[0]} style={{}} className={styles.goods_hover_img} /> }
+            {props.type!=="category"&&props.type!=="carsouel"&&props.item?.photoimages[0]&&<img src={props?.item?.photoimages[0]} style={{borderRadius:16}} className={styles.goods_hover_img} /> }
             {
                 props.type === "carsouel" && <button className={styles.buy_btn}>點擊購買</button> 
             }

@@ -2,7 +2,7 @@
 (() => {
 var exports = {};
 exports.id = 5405;
-exports.ids = [5405,8693,839,8968,6163,1577,7720,9925];
+exports.ids = [5405,8693,7720,839,6163,8968,1577,9925];
 exports.modules = {
 
 /***/ 8733:
@@ -13,9 +13,9 @@ const { useState , useEffect  } = __webpack_require__(6689);
 function useBrowserChange() {
     const [height, setHeight] = useState();
     const [width, setWidth] = useState();
-    //    //////////console.log(window);
+    //    ////////////console.log(window);
     const resizeUpdate = (e)=>{
-        // //////////console.log(e.target.innerHeight,e.target.innerWidth);
+        // ////////////console.log(e.target.innerHeight,e.target.innerWidth);
         setHeight(e.target.innerHeight);
         setWidth(e.target.innerWidth);
     };
@@ -103,9 +103,9 @@ var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_com
 
 
 function Home({ allcate , cateList , GoodsPage , carousel  }) {
-    // ////////console.log("====");
+    // //////////console.log("====");
     const router = (0,next_router__WEBPACK_IMPORTED_MODULE_20__.useRouter)();
-    // ////console.log(GoodsPage);
+    // //////console.log(GoodsPage);
     const [flag, setFlag] = (0,react__WEBPACK_IMPORTED_MODULE_10__.useState)(1);
     const [category, setCategory] = (0,react__WEBPACK_IMPORTED_MODULE_10__.useState)([]);
     const [categoryPage, setCategoryPage] = (0,react__WEBPACK_IMPORTED_MODULE_10__.useState)(1);
@@ -117,24 +117,24 @@ function Home({ allcate , cateList , GoodsPage , carousel  }) {
     const [isShow, setIsShow] = (0,react__WEBPACK_IMPORTED_MODULE_10__.useState)(false);
     const resizeUpdate = (e)=>{
         if (e.target.innerWidth <= 675) {
-            //////////console.log("====", e.target.innerWidth);
+            ////////////console.log("====", e.target.innerWidth);
             setFlag(0);
         } else if (e.target.innerWidth <= 1100) {
             setFlag(1);
         } else {
-            //////////console.log("-----", e.target.innerWidth);
+            ////////////console.log("-----", e.target.innerWidth);
             setFlag(2);
         }
     };
     (0,react__WEBPACK_IMPORTED_MODULE_10__.useEffect)(()=>{
         window.addEventListener("resize", resizeUpdate);
         if (window.innerWidth <= 675) {
-            //////////console.log("====", e.target.innerWidth);
+            ////////////console.log("====", e.target.innerWidth);
             setFlag(0);
         } else if (window.innerWidth <= 1100) {
             setFlag(1);
         } else {
-            //////////console.log("-----", e.target.innerWidth);
+            ////////////console.log("-----", e.target.innerWidth);
             setFlag(2);
         }
         return ()=>{
@@ -151,17 +151,17 @@ function Home({ allcate , cateList , GoodsPage , carousel  }) {
     };
     let MySwiper;
     (0,react__WEBPACK_IMPORTED_MODULE_10__.useEffect)(()=>{
-        ////////console.log("flag改變", flag);
+        //////////console.log("flag改變", flag);
         setCategory((0,_method__WEBPACK_IMPORTED_MODULE_11__/* .spliceArr */ .e)(allcate, !flag ? 4 : flag === 1 ? 6 : flag === 2 && 8, "cat"));
-        //////////console.log(spliceArr(GoodsPage,  !flag ? 4 :flag===1? 6:flag===2&&8))
+        ////////////console.log(spliceArr(GoodsPage,  !flag ? 4 :flag===1? 6:flag===2&&8))
         setGoodsList((0,_method__WEBPACK_IMPORTED_MODULE_11__/* .spliceArr */ .e)(GoodsPage.data, !flag ? 4 : flag === 1 ? 6 : flag === 2 && 8));
         setGoodsPage(1);
         setCategoryPage(1);
     }, [
         flag
     ]);
-    // //////////console.log("=======");
-    // //////////console.log(category[categoryPage]);
+    // ////////////console.log("=======");
+    // ////////////console.log(category[categoryPage]);
     return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
         style: {
             position: "relative"
@@ -307,7 +307,7 @@ function Home({ allcate , cateList , GoodsPage , carousel  }) {
                                             swipeScrollTolerance: 50,
                                             showStatus: false,
                                             children: carousel_slice().map((item, index)=>{
-                                                ////////console.log(carousel_slice().length);
+                                                //////////console.log(carousel_slice().length);
                                                 return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                                                     style: {
                                                         display: "flex",
@@ -366,7 +366,7 @@ function Home({ allcate , cateList , GoodsPage , carousel  }) {
     });
 }
 async function getStaticProps({ local  }) {
-    //  //////////console.log(constant.api_url);
+    //  ////////////console.log(constant.api_url);
     const response = await fetch(`${_constant_index__WEBPACK_IMPORTED_MODULE_16__/* .constant.api_url */ .a.api_url}/api/flowercategory/index`, {
         mode: "cors",
         headers: {
@@ -387,8 +387,8 @@ async function getStaticProps({ local  }) {
     });
     let allcate = await allcate_response.json();
     let data = await response.text();
-    // ////////console.log("====================");
-    // ////////console.log(allcate);
+    // //////////console.log("====================");
+    // //////////console.log(allcate);
     const swiper_response = await fetch(`${_constant_index__WEBPACK_IMPORTED_MODULE_16__/* .constant.api_url */ .a.api_url}/api/flowers/getTopicFlower?flower_category_id=${JSON.parse(data).data[0].id}`, {
         mode: "cors",
         headers: {
@@ -398,7 +398,7 @@ async function getStaticProps({ local  }) {
             "Access-Control-Request-Headers": "Content-Type"
         }
     });
-    ////console.log(allcate);
+    //////console.log(allcate);
     const goods_response = await fetch(`${_constant_index__WEBPACK_IMPORTED_MODULE_16__/* .constant.api_url */ .a.api_url}/api/flowers/index?flower_category_id=${allcate.data[1].id}`, {
         mode: "cors",
         headers: {
@@ -408,12 +408,12 @@ async function getStaticProps({ local  }) {
             "Access-Control-Request-Headers": "Content-Type"
         }
     });
-    //////////console.log(response);
+    ////////////console.log(response);
     let swiper_data = await swiper_response.text();
     let goods_data = await goods_response.text();
-    ////////console.log("====================");
-    ////////console.log(JSON.parse(goods_data).data);
-    // ////////console.log(data);
+    //////////console.log("====================");
+    //////////console.log(JSON.parse(goods_data).data);
+    // //////////console.log(data);
     return {
         props: {
             allcate: allcate.data,

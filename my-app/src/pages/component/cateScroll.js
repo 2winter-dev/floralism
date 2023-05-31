@@ -7,14 +7,14 @@ export default function CateScroll(props) {
   const [goodsList, setGoodsList] = useState(
     props.list
   );
-  //////////console.log("0000");
-  ////console.log("=====");
-  ////console.log(props.list);
-  // //////////console.log(props);
+  ////////////console.log("0000");
+  //////console.log("=====");
+  //////console.log(props.list);
+  // ////////////console.log(props);
   // const [btnList, setBtnList] = useState(props.list.length);
   // const [props.page, setprops.page] = useState(props.page);
   // const [props.list.length, setprops.list.length] = useState(props.list.length);
-  //////////console.log(props.list.length)
+  ////////////console.log(props.list.length)
   const setBtn = () => {
     switch (props.page) {
       case 1: {
@@ -30,10 +30,10 @@ export default function CateScroll(props) {
       }
       case 2: {
         if (props?.list?.length === 3) {
-          //////////console.log("是3");
+          ////////////console.log("是3");
           return ([1, 2, 3]);
         } else if (props?.list?.length === 2) {
-          //////////console.log("是2");
+          ////////////console.log("是2");
           return ([1, 2])
         } else {
           return ([1, 2, 3, 4]);
@@ -45,9 +45,9 @@ export default function CateScroll(props) {
       default: return ([props.page - 2, props.page - 1, props.page, props.page + 1, props.page + 2]);
     }
   }
-  //////////console.log("最大页面发生变化")
-  //////////console.log("当前页面发生变化")
-  // //////////console.log(props.page,props.page)
+  ////////////console.log("最大页面发生变化")
+  ////////////console.log("当前页面发生变化")
+  // ////////////console.log(props.page,props.page)
   // useEffect(()=>{
 
   // },[])

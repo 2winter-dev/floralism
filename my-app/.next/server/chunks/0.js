@@ -21,6 +21,8 @@ module.exports = {
 	"decrease": "product_decrease__RM7s0",
 	"increase": "product_increase__3P5_7",
 	"product_number": "product_product_number__YThzp",
+	"total_container": "product_total_container__vfKUT",
+	"swiper_margin": "product_swiper_margin__YwKVP",
 	"detail_left": "product_detail_left__d5KlS",
 	"main_detail": "product_main_detail__fA_lJ",
 	"detail_right": "product_detail_right__wSKuH",

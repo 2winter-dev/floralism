@@ -22,19 +22,19 @@ export default function Footer() {
          queryFn: fetchCate,
          queryKey:['footerCate'],
          onSuccess:(res)=>{
-             console.log(res);
+             //console.log(res);
          }
      })
      if(cateList.isSuccess){
-         console.log(cateList.data);
+         //console.log(cateList.data);
      }
     return (<div className={style.footer} style={{ width: '100%' }}>
         <div className={style.footer_three_column} style={{ display: 'flex', justifyContent: 'space-between' }}>
             <div className={style.footer_column} style={{ display: 'flex', flexDirection: 'column' }}>
                 <p >產品</p>
                 {
-                    cateList.isSuccess && cateList.data.data.map((item, index) => {
-                        // //console.log(item);
+                    cateList.isSuccess && cateList.data.data.slice(6).map((item, index) => {
+                        // ////console.log(item);
                         return (<a key={index} href={`/category/${item.id}`}>{item.categoryname}</a>)
                     })
                 }
@@ -51,15 +51,15 @@ export default function Footer() {
                 <div>香港新界葵涌國瑞路116-122號</div>
                 <div>城市工業中心1樓H&J室</div>
                 <div>T +852 65818053</div>
-                <div>F +852 65818053</div>
-                <div>E info@floralismhk.com</div>
+                <div>F <a href="tel:+85265818053">+852 65818053</a></div>
+                <div>E <a href="mailto:info@floralismhk.com">info@floralismhk.com</a></div>
                 <div>對我們的產品及服務有興趣？</div>
                 <div>請聯係我們</div>
             </div>
             <div className={`${style.special_column}`} style={{ display: 'flex', flexDirection: 'column', minWidth: 163 }}>
                 <div className={style.footer_contactList} style={{ display: 'flex', justifyContent: 'center', backgroundColor: 'black', flexWrap: 'wrap', alignItems: 'center', flexDirection: 'column', padding: 14 }}>
                     <div style={{ flex: 1, fontSize: 20 }}>FOLLOW US</div>
-                    <div style={{ flex: 1, display: 'flex', alignItems: 'center', flexWrap: 'wrap', marginTop: 16, justifyContent: 'space-between' }}>
+                    <div className={style.icon_group} style={{ flex: 1, display: 'flex', alignItems: 'center', flexWrap: 'wrap', marginTop: 16, justifyContent: 'space-between' }}>
                         <div style={{ cursor: 'pointer' }}>
                             <img src='/矢量智能对象-3.png' className={style.footer_Image} />
                         </div>

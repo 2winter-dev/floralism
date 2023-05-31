@@ -10,6 +10,7 @@ module.exports = {
 	"footer": "footer_footer__uSNcK",
 	"footer_column": "footer_footer_column__BHwLV",
 	"footer_contactList": "footer_footer_contactList__tOCzW",
+	"icon_group": "footer_icon_group__2B7IN",
 	"footer_Image": "footer_footer_Image__srQen",
 	"footer_three_column": "footer_footer_three_column__69nmD",
 	"footer_icon_group": "footer_footer_icon_group__DYK07",
@@ -58,11 +59,11 @@ function Footer() {
             "footerCate"
         ],
         onSuccess: (res)=>{
-            console.log(res);
+        //console.log(res);
         }
     });
     if (cateList.isSuccess) {
-        console.log(cateList.data);
+    //console.log(cateList.data);
     }
     return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
         className: (_styles_footer_module_css__WEBPACK_IMPORTED_MODULE_3___default().footer),
@@ -87,8 +88,8 @@ function Footer() {
                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
                                 children: "產品"
                             }),
-                            cateList.isSuccess && cateList.data.data.map((item, index)=>{
-                                // //console.log(item);
+                            cateList.isSuccess && cateList.data.data.slice(6).map((item, index)=>{
+                                // ////console.log(item);
                                 return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("a", {
                                     href: `/category/${item.id}`,
                                     children: item.categoryname
@@ -140,11 +141,23 @@ function Footer() {
                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                                 children: "T +852 65818053"
                             }),
-                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                                children: "F +852 65818053"
+                            /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                                children: [
+                                    "F ",
+                                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("a", {
+                                        href: "tel:+85265818053",
+                                        children: "+852 65818053"
+                                    })
+                                ]
                             }),
-                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                                children: "E info@floralismhk.com"
+                            /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                                children: [
+                                    "E ",
+                                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("a", {
+                                        href: "mailto:info@floralismhk.com",
+                                        children: "info@floralismhk.com"
+                                    })
+                                ]
                             }),
                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                                 children: "對我們的產品及服務有興趣？"
@@ -181,6 +194,7 @@ function Footer() {
                                     children: "FOLLOW US"
                                 }),
                                 /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                                    className: (_styles_footer_module_css__WEBPACK_IMPORTED_MODULE_3___default().icon_group),
                                     style: {
                                         flex: 1,
                                         display: "flex",

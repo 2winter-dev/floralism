@@ -33,7 +33,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function BodyBanner(props) {
-    ////console.log("flag为:"+props.flag);
+    //////console.log("flag为:"+props.flag);
     return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
         style: {
             width: "100%",

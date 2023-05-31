@@ -81,6 +81,7 @@ function Header(props) {
                         className: `${(_styles_header_module_css__WEBPACK_IMPORTED_MODULE_5___default().header_center)}`,
                         children: [
                             props?.list?.length && props.list.map((item, index)=>{
+                                if (index > 2) return null;
                                 return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                                     className: `${(_styles_header_module_css__WEBPACK_IMPORTED_MODULE_5___default().header_center_label)}`,
                                     children: [

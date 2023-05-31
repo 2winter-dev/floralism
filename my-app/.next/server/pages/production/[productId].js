@@ -1,7 +1,7 @@
 (() => {
 var exports = {};
 exports.id = 1951;
-exports.ids = [1951,8693,5568,9855,839,8968,6163,4846,1577,7720,9925];
+exports.ids = [1951,9855,5568,8693,7720,839,6163,8968,1577,4846,9925];
 exports.modules = {
 
 /***/ 8710:
@@ -66,7 +66,7 @@ function DynamicComponent(props) {
     return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(DynamicLazyComponent, {
         list: props.cateList,
         login: ()=>{
-            //console.log("123");
+            ////console.log("123");
             if (js_cookie__WEBPACK_IMPORTED_MODULE_2__["default"].get("token")) {
                 alert("你先退出登陆吗");
             } else props.setLogin(true);
@@ -143,7 +143,7 @@ var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_com
 
 
 function ProductDetail({ cateList , product  }) {
-    // ////////console.log(product);
+    // //////////console.log(product);
     const [index, setIndex] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
     const [login, setLogin] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
     const [register, setRegister] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
@@ -164,13 +164,13 @@ function ProductDetail({ cateList , product  }) {
         ],
         mutationFn: (data)=>_m_api__WEBPACK_IMPORTED_MODULE_14__/* ["default"].AddToCart */ .Z.AddToCart(data)
     });
-    // ////////console.log(product);
+    // //////////console.log(product);
     const resizeUpdate = (e)=>{
         if (e.target.innerWidth <= 1100) {
-            //////////console.log("====", e.target.innerWidth);
+            ////////////console.log("====", e.target.innerWidth);
             setFlag(true);
         } else {
-            //////////console.log("-----", e.target.innerWidth);
+            ////////////console.log("-----", e.target.innerWidth);
             setFlag(false);
         }
     };
@@ -243,16 +243,13 @@ function ProductDetail({ cateList , product  }) {
                 setLogin: setLogin
             }),
             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("main", {
-                style: {
-                    paddingLeft: "21%",
-                    paddingRight: "21%"
-                },
+                className: (_styles_product_module_css__WEBPACK_IMPORTED_MODULE_18___default().total_container),
+                style: {},
                 children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                     children: [
                         /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                             style: {
-                                marginTop: 32,
-                                display: "flex"
+                                marginTop: 32
                             },
                             children: [
                                 /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_15___default()), {
@@ -272,19 +269,6 @@ function ProductDetail({ cateList , product  }) {
                                 /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_15___default()), {
                                     href: `/category/${product.flowerCategory.id}`,
                                     children: product.flowerCategory.categoryname
-                                }),
-                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("span", {
-                                    className: (_styles_product_module_css__WEBPACK_IMPORTED_MODULE_18___default().separator),
-                                    children: "/"
-                                }),
-                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                                    style: {
-                                        overflow: "hidden",
-                                        textOverflow: "ellipsis",
-                                        display: "flex",
-                                        flexWrap: "nowrap"
-                                    },
-                                    children: product.flowerDetail[index].flowername
                                 })
                             ]
                         }),
@@ -328,11 +312,13 @@ function ProductDetail({ cateList , product  }) {
                                                             ref: contain,
                                                             style: {
                                                                 width: "100%",
-                                                                position: "relative"
+                                                                position: "relative",
+                                                                display: "flex",
+                                                                justifyContent: "center"
                                                             },
                                                             children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                                                                 style: {
-                                                                    width: "100%",
+                                                                    width: "90%",
                                                                     display: "flex",
                                                                     alignItems: "center"
                                                                 },
@@ -356,17 +342,17 @@ function ProductDetail({ cateList , product  }) {
                                                     children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("span", {
                                                         className: "iconfont",
                                                         onClick: ()=>{
-                                                            // ////////console.log(btnLength);
+                                                            // //////////console.log(btnLength);
                                                             if (btnLength) {
                                                                 if (product.flowerDetail[index].flowerimages.length < 5) return;
                                                                 if (contain.current.style.left) {
-                                                                    // ////////console.log(contain.current.style.left)
+                                                                    // //////////console.log(contain.current.style.left)
                                                                     contain.current.style.left = parseInt(contain.current.style.left) - 17 + "%";
                                                                 } else {
                                                                     contain.current.style.left = -17 + "%";
                                                                 }
                                                             }
-                                                        // ////////console.log("------------------");
+                                                        // //////////console.log("------------------");
                                                         },
                                                         style: {
                                                             fontSize: 24
@@ -379,13 +365,13 @@ function ProductDetail({ cateList , product  }) {
                                                     children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("span", {
                                                         className: "iconfont",
                                                         onClick: ()=>{
-                                                            // ////////console.log(btnLength);
+                                                            // //////////console.log(btnLength);
                                                             if (product.flowerDetail[index].flowerimages.length > 5) {
                                                                 let l = btnLength;
                                                                 if (l + 1 > product.flowerDetail[index].flowerimage.length) return;
                                                                 setBtnLength(btnLength + 1);
                                                                 if (contain.current.style.left) {
-                                                                    // ////////console.log(contain.current.style.left)
+                                                                    // //////////console.log(contain.current.style.left)
                                                                     contain.current.style.left = parseInt(contain.current.style.left) + 17 + "%";
                                                                 } else {
                                                                     contain.current.style.left = 17 + "%";
@@ -453,9 +439,7 @@ function ProductDetail({ cateList , product  }) {
                                                 display: "flex",
                                                 marginTop: 32,
                                                 width: "100%",
-                                                justifyContent: "space-between",
-                                                textAlign: "center",
-                                                alignItems: "center"
+                                                justifyContent: "space-between"
                                             },
                                             children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                                                 className: (_styles_product_module_css__WEBPACK_IMPORTED_MODULE_18___default().type_selector),
@@ -467,12 +451,12 @@ function ProductDetail({ cateList , product  }) {
                                                         value: cardtype,
                                                         onChange: (event)=>{
                                                             setCardType(event.target.value);
-                                                        ////console.log(event.target.value);
+                                                        //////console.log(event.target.value);
                                                         },
                                                         style: {
                                                             borderRadius: 8,
                                                             paddingLeft: 10,
-                                                            width: "100%",
+                                                            width: "50%",
                                                             paddingTop: 4,
                                                             paddingBottom: 4,
                                                             paddingRight: 10
@@ -582,8 +566,8 @@ function ProductDetail({ cateList , product  }) {
                                             },
                                             children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("button", {
                                                 onClick: ()=>{
-                                                    //console.log("1");
-                                                    // ////////console.log(Cookies.get('token'), id, num, cardtype, cardcontent);
+                                                    ////console.log("1");
+                                                    // //////////console.log(Cookies.get('token'), id, num, cardtype, cardcontent);
                                                     addToCart.mutate({
                                                         cookie: js_cookie__WEBPACK_IMPORTED_MODULE_12__["default"].get("token"),
                                                         flower_specs_id: id,
@@ -593,7 +577,7 @@ function ProductDetail({ cateList , product  }) {
                                                     }, {
                                                         onSuccess: async (res)=>{
                                                             let isSuccess = await res.json();
-                                                            // ////////console.log(isSuccess);
+                                                            // //////////console.log(isSuccess);
                                                             if (isSuccess.code) {
                                                                 if (isSuccess.code.toString() === "401") {
                                                                     js_cookie__WEBPACK_IMPORTED_MODULE_12__["default"].remove("token");
@@ -629,9 +613,7 @@ function ProductDetail({ cateList , product  }) {
                 })
             }),
             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                style: {
-                    margin: "0 21%"
-                },
+                className: (_styles_product_module_css__WEBPACK_IMPORTED_MODULE_18___default().swiper_margin),
                 children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                     className: (_styles_product_module_css__WEBPACK_IMPORTED_MODULE_18___default().youMaybeLike),
                     style: {
@@ -657,7 +639,6 @@ function ProductDetail({ cateList , product  }) {
                                 /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                                     className: (_styles_Home_module_css__WEBPACK_IMPORTED_MODULE_19___default().title),
                                     style: {
-                                        color: "white",
                                         marginRight: 16,
                                         marginLeft: 16
                                     },
@@ -689,7 +670,7 @@ function ProductDetail({ cateList , product  }) {
                                     swipeScrollTolerance: 50,
                                     showStatus: false,
                                     children: carousel_slice(4).map((item, index)=>{
-                                        ////////console.log(carousel_slice().length);
+                                        //////////console.log(carousel_slice().length);
                                         return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                                             style: {
                                                 display: "flex",
@@ -777,7 +758,7 @@ async function getStaticPaths() {
 }
 async function getStaticProps(context) {
     const { params  } = context;
-    //  //////////console.log(constant.api_url);
+    //  ////////////console.log(constant.api_url);
     const response = await fetch(`${_constant_index__WEBPACK_IMPORTED_MODULE_11__/* .constant.api_url */ .a.api_url}/api/flowercategory/index`, {
         mode: "cors",
         headers: {
@@ -788,7 +769,7 @@ async function getStaticProps(context) {
         }
     });
     const data = await response.text();
-    //   //////////console.log(Cookies.get('token'));
+    //   ////////////console.log(Cookies.get('token'));
     const detail_response = await fetch(`${_constant_index__WEBPACK_IMPORTED_MODULE_11__/* .constant.api_url */ .a.api_url}/api/flowers/flowerDetail?id=${params.productId}`, {
         Authorization: `Bearer ${js_cookie__WEBPACK_IMPORTED_MODULE_12__["default"].get("token")}`,
         mode: "cors",
@@ -799,7 +780,7 @@ async function getStaticProps(context) {
             "Access-Control-Request-Headers": "Content-Type"
         }
     });
-    //////////console.log(Cookies.get("token"));
+    ////////////console.log(Cookies.get("token"));
     const detail = await detail_response.json();
     //   let data=await response.text();
     //   const swiper_response=await fetch(
@@ -808,12 +789,12 @@ async function getStaticProps(context) {
     //   const goods_response=await fetch(
     //     `${constant.api_url}/api/flowers/index`
     //   )
-    //    //////////console.log(data);
-    //   //////////console.log(detail);
-    //   //////////console.log("====================");
-    //   //////////console.log(detail.data.product.flowerDetail[index]);
-    // //////////console.log(data[1]);
-    // ////////console.log(detail.data);
+    //    ////////////console.log(data);
+    //   ////////////console.log(detail);
+    //   ////////////console.log("====================");
+    //   ////////////console.log(detail.data.product.flowerDetail[index]);
+    // ////////////console.log(data[1]);
+    // //////////console.log(detail.data);
     return {
         props: {
             cateList: JSON.parse(data).data,

@@ -24,6 +24,7 @@ module.exports = {
 	"add_animation": "shopcarbtn_add_animation__8ch1i",
 	"shopcar_add": "shopcarbtn_shopcar_add__1IctT",
 	"common_animation": "shopcarbtn_common_animation__fDmN2",
+	"total_container": "shopcarbtn_total_container__FkwNy",
 	"mediaArea": "shopcarbtn_mediaArea__Z4LLT",
 	"left_area": "shopcarbtn_left_area__xIghI",
 	"mediaArea_delivery": "shopcarbtn_mediaArea_delivery__PzV3u",

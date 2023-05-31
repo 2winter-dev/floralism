@@ -30,7 +30,14 @@
 .footer_contactList a {
     cursor: pointer;
 }
-
+.icon_group{
+    display: flex;
+    justify-content: space-between;
+}
+.icon_group>div>img{
+   /* width:1.7rem; */
+   height: 1.7rem;
+}
 .footer_Image {
     width: 1.7rem;
     /* height:1.7rem; */
@@ -97,7 +104,7 @@
     }
 
     .footer_Image {
-        padding-right: 21%;
+        /* padding-right: 21%; */
     }
 
     /* .footer_contactList{
@@ -105,17 +112,22 @@
     } */
 }
 
-@media screen and (max-width:500px) {
+@media screen and (max-width:675px) {
     .footer_three_column {
         flex-direction: column;
         flex-wrap: wrap;
         justify-content: space-between;
     }
 
+    .footer{
+        padding:30px 10% 0;
+    }
+
     .special_column,
     .footer_column {
         width: 100%;
-        align-items: center;
+        /* align-items: center; */
+        /* text-align: left; */
     }
 
     /* .special_column{

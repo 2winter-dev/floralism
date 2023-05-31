@@ -31,7 +31,7 @@ var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_tan
 
 
 function AddressPannel(props) {
-    // ////////console.log(props);
+    // //////////console.log(props);
     const [username, setUsername] = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)("");
     const [address, setAddress] = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)("");
     const [mobile, setMobile] = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)("");
@@ -63,7 +63,7 @@ function AddressPannel(props) {
                 cookie: js_cookie__WEBPACK_IMPORTED_MODULE_5__["default"].get("token")
             }, {
                 onSuccess: async (res)=>{
-                    // ////////console.log(res);
+                    // //////////console.log(res);
                     let _res = await res.json();
                     if (_res.code === 401) {
                         js_cookie__WEBPACK_IMPORTED_MODULE_5__["default"].remove("token");
@@ -76,7 +76,7 @@ function AddressPannel(props) {
                     }
                 },
                 onError: (res)=>{
-                // ////////console.log("error");
+                // //////////console.log("error");
                 }
             });
         } else {
@@ -100,7 +100,7 @@ function AddressPannel(props) {
                     }
                 },
                 onError: (res)=>{
-                // ////////console.log(res);
+                // //////////console.log(res);
                 }
             });
         }

@@ -1,7 +1,7 @@
 (() => {
 var exports = {};
 exports.id = 1814;
-exports.ids = [1814,8693,9855,839,8968,6163,4846,1577,1709,7720,9925];
+exports.ids = [1814,9855,8693,7720,839,6163,8968,1577,4846,1709,9925];
 exports.modules = {
 
 /***/ 1976:
@@ -112,28 +112,28 @@ function AboutUs({ cateList , allcate  }) {
     const [visible, setVisible] = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(false);
     const [flag, setFlag] = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(1);
     const [category, setCategory] = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)([]);
-    // ////console.log(allcate);
+    // //////console.log(allcate);
     const [categoryPage, setCategoryPage] = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(1);
     const resizeUpdate = (e)=>{
         if (e.target.innerWidth <= 675) {
-            //////////console.log("====", e.target.innerWidth);
+            ////////////console.log("====", e.target.innerWidth);
             setFlag(0);
         } else if (e.target.innerWidth <= 1100) {
             setFlag(1);
         } else {
-            //////////console.log("-----", e.target.innerWidth);
+            ////////////console.log("-----", e.target.innerWidth);
             setFlag(2);
         }
     };
     (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(()=>{
         window.addEventListener("resize", resizeUpdate);
         if (window.innerWidth <= 675) {
-            //////////console.log("====", e.target.innerWidth);
+            ////////////console.log("====", e.target.innerWidth);
             setFlag(0);
         } else if (window.innerWidth <= 1100) {
             setFlag(1);
         } else {
-            //////////console.log("-----", e.target.innerWidth);
+            ////////////console.log("-----", e.target.innerWidth);
             setFlag(2);
         }
         return ()=>{
@@ -141,9 +141,9 @@ function AboutUs({ cateList , allcate  }) {
         };
     }, []);
     (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(()=>{
-        ////console.log("flag改變", flag);
+        //////console.log("flag改變", flag);
         setCategory((0,_method__WEBPACK_IMPORTED_MODULE_9__/* .spliceArr */ .e)(allcate, !flag ? 4 : flag === 1 ? 6 : flag === 2 && 8, "cat"));
-        ////console.log(spliceArr(allcate, !flag ? 4 : flag === 1 ? 6 : flag === 2 && 8, 'cat'))
+        //////console.log(spliceArr(allcate, !flag ? 4 : flag === 1 ? 6 : flag === 2 && 8, 'cat'))
         setCategoryPage(1);
     }, [
         flag
@@ -328,7 +328,7 @@ function AboutUs({ cateList , allcate  }) {
     });
 }
 async function getStaticProps({ local  }) {
-    //  //////////console.log(constant.api_url);
+    //  ////////////console.log(constant.api_url);
     const allcate_response = await fetch(`${_constant__WEBPACK_IMPORTED_MODULE_6__/* .constant.api_url */ .a.api_url}/api/Flowercategory/allIndex`, {
         mode: "cors",
         headers: {

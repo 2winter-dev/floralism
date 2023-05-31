@@ -1,7 +1,7 @@
 (() => {
 var exports = {};
 exports.id = 980;
-exports.ids = [980,8693,839,8968,6163,1577,7720,9925];
+exports.ids = [980,8693,7720,839,6163,8968,1577,9925];
 exports.modules = {
 
 /***/ 1139:
@@ -71,8 +71,8 @@ var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_com
 
 
 function Category({ allcate , cateList , data , top_banner , middle_banner  }) {
-    // ////////console.log("----");
-    //////console.log(data);
+    // //////////console.log("----");
+    ////////console.log(data);
     const router = (0,next_router__WEBPACK_IMPORTED_MODULE_14__.useRouter)();
     const [login, setLogin] = (0,react__WEBPACK_IMPORTED_MODULE_8__.useState)(false);
     const [register, setRegister] = (0,react__WEBPACK_IMPORTED_MODULE_8__.useState)(false);
@@ -94,12 +94,12 @@ function Category({ allcate , cateList , data , top_banner , middle_banner  }) {
     (0,react__WEBPACK_IMPORTED_MODULE_8__.useEffect)(()=>{
         window.addEventListener("resize", resizeUpdate);
         if (window.innerWidth <= 675) {
-            //////////console.log("====", e.target.innerWidth);
+            ////////////console.log("====", e.target.innerWidth);
             setFlag(0);
         } else if (window.innerWidth <= 1100) {
             setFlag(1);
         } else {
-            //////////console.log("-----", e.target.innerWidth);
+            ////////////console.log("-----", e.target.innerWidth);
             setFlag(2);
         }
         return ()=>{
@@ -107,9 +107,9 @@ function Category({ allcate , cateList , data , top_banner , middle_banner  }) {
         };
     }, []);
     (0,react__WEBPACK_IMPORTED_MODULE_8__.useEffect)(()=>{
-        //////////console.log("flag改變", flag);
+        ////////////console.log("flag改變", flag);
         setCategory((0,_method__WEBPACK_IMPORTED_MODULE_9__/* .spliceArr */ .e)(allcate, !flag ? 4 : flag === 1 ? 6 : flag === 2 && 8, 1));
-        //////////console.log(spliceArr(GoodsPage,  !flag ? 4 :flag===1? 6:flag===2&&8))
+        ////////////console.log(spliceArr(GoodsPage,  !flag ? 4 :flag===1? 6:flag===2&&8))
         setGoodsList((0,_method__WEBPACK_IMPORTED_MODULE_9__/* .spliceArr */ .e)(data.data, !flag ? 4 : flag === 1 ? 6 : flag === 2 && 8));
         setGoodsPage(1);
         setCategoryPage(1);
@@ -117,7 +117,7 @@ function Category({ allcate , cateList , data , top_banner , middle_banner  }) {
         flag
     ]);
     // const checkname = () => {
-    //     //    ////////console.log(goodsList);
+    //     //    //////////console.log(goodsList);
     //     let res = allcate.filter((item) => {
     //         if (item.id === data.data[0].flower_category_id) {
     //             return item;
@@ -126,12 +126,12 @@ function Category({ allcate , cateList , data , top_banner , middle_banner  }) {
     //     return res[0].categoryname;
     // }
     (0,react__WEBPACK_IMPORTED_MODULE_8__.useEffect)(()=>{
-    // ////////console.log(goodsList);
+    // //////////console.log(goodsList);
     }, [
         goodsList
     ]);
-    ////console.log("======");
-    ////console.log(data);
+    //////console.log("======");
+    //////console.log(data);
     return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
         children: [
             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_head__WEBPACK_IMPORTED_MODULE_12___default()), {}),
@@ -276,7 +276,7 @@ async function getStaticPaths() {
             }
         });
     });
-    // ////////console.log(res);
+    // //////////console.log(res);
     // const data=await response.json()
     // TODO get product id to be array
     return {
@@ -286,7 +286,7 @@ async function getStaticPaths() {
 }
 async function getStaticProps(context) {
     const { params  } = context;
-    // ////////console.log(params);
+    // //////////console.log(params);
     const response = await fetch(`${_constant_index__WEBPACK_IMPORTED_MODULE_1__/* .constant.api_url */ .a.api_url}/api/flowers/index?keyword=&flower_category_id=${params.categoryId}`, {
         mode: "cors",
         headers: {
@@ -327,16 +327,16 @@ async function getStaticProps(context) {
     const tt_data = await tt_response.text();
     const data = await response.text();
     const banner_list = await banner.json();
-    //console.log("------------");
-    //console.log(JSON.parse(data).data);
-    ////console.log("--------");
-    ////console.log(banner_list.data);
-    ////console.log(banner_list.data.top_banner.web);
-    ////console.log(banner_list.data.middle_banner.web);
-    ////console.log(params.categoryId)
+    ////console.log("------------");
+    ////console.log(JSON.parse(data).data);
+    //////console.log("--------");
+    //console.log(banner_list.data);
+    //console.log(banner_list.data.top_banner.web);
+    //console.log(banner_list.data.middle_banner.web);
+    //////console.log(params.categoryId)
     let top_banner = banner_list.data.top_banner.web.filter((item)=>{
         if (item.flower_category_ids.includes(parseInt(params.categoryId))) {
-            ////console.log("找到了");
+            //////console.log("找到了");
             return item;
         }
     });
@@ -344,9 +344,9 @@ async function getStaticProps(context) {
         if (item.flower_category_ids.includes(parseInt(params.categoryId))) {
             return item;
         }
-    // ////console.log(item.flower_category_ids.includes(params.categoryId))
+    // //////console.log(item.flower_category_ids.includes(params.categoryId))
     });
-    ////console.log(top_banner,middle_banner);
+    //////console.log(top_banner,middle_banner);
     return {
         props: {
             allcate: allcate.data,

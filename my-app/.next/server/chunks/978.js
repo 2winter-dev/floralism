@@ -37,7 +37,7 @@ var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_tan
 
 
 function LoginPannel(props) {
-    // //////////console.log(window.innerHeight)
+    // ////////////console.log(window.innerHeight)
     const [type, setType] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0); //0為密碼登錄，1為驗證碼登錄
     const [time, setTime] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
     const [email, setEmail] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)("");
@@ -85,7 +85,7 @@ function LoginPannel(props) {
                 }
             },
             onError: (res)=>{
-                //////////console.log(res);
+                ////////////console.log(res);
                 alert("發送驗證碼失敗");
             }
         });
@@ -100,10 +100,10 @@ function LoginPannel(props) {
             }, {
                 onSuccess: async (res)=>{
                     let isSuccess = await res.json();
-                    // //////////console.log(await res.json());
+                    // ////////////console.log(await res.json());
                     if (isSuccess.code) {
-                        // ////////console.log("================");
-                        // ////////console.log();
+                        // //////////console.log("================");
+                        // //////////console.log();
                         js_cookie__WEBPACK_IMPORTED_MODULE_5__["default"].set("token", isSuccess.data.token, {
                             expires: 1
                         });
@@ -129,16 +129,16 @@ function LoginPannel(props) {
             }, {
                 onSuccess: async (res)=>{
                     let body = await res.json();
-                    //////////console.log("====123====")
-                    //////////console.log(body)
+                    ////////////console.log("====123====")
+                    ////////////console.log(body)
                     if (body.code) {
-                        // ////////console.log("================");
+                        // //////////console.log("================");
                         js_cookie__WEBPACK_IMPORTED_MODULE_5__["default"].set("token", body.data.token, {
                             expires: 1
                         });
                         // Cookies.set('user',JSON.stringify(body.data.userinfo),{expires:1});
-                        // ////////console.log("========");
-                        // ////////console.log(Cookies.get('token'));
+                        // //////////console.log("========");
+                        // //////////console.log(Cookies.get('token'));
                         // alert("登陸成功");
                         props.close();
                         // props.hasLogin();

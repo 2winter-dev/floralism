@@ -1,7 +1,7 @@
 (() => {
 var exports = {};
 exports.id = 7115;
-exports.ids = [7115,8693,839,8968,6163,1577,7720,9925];
+exports.ids = [7115,8693,7720,839,6163,8968,1577,9925];
 exports.modules = {
 
 /***/ 3788:
@@ -124,15 +124,15 @@ function User(props) {
             ...m_list
         ]);
         alert("刪除成功");
-    ////console.log(m_list);
+    //////console.log(m_list);
     };
     const changeDefault = (id)=>{
         let m_list = addList;
-        //console.log(m_list);
+        ////console.log(m_list);
         let res = m_list.map((item)=>{
-            //console.log(item);
-            //console.log(id);
-            //console.log(typeof item.id, typeof id);
+            ////console.log(item);
+            ////console.log(id);
+            ////console.log(typeof item.id, typeof id);
             if (item.id === id) {
                 item.is_default = true;
             } else {
@@ -166,8 +166,8 @@ function User(props) {
         });
     };
     const setPosition = (id)=>{
-        // ////////console.log(id);
-        //console.log("123");
+        // //////////console.log(id);
+        ////console.log("123");
         setAdd(id);
         setDefault.mutate({
             id,
@@ -187,7 +187,7 @@ function User(props) {
         });
     };
     const updateUserMessage = ()=>{
-        //console.log(username, email, mobile);
+        ////console.log(username, email, mobile);
         updateUserMess.mutate({
             username: username.trim(),
             email: email.trim(),
@@ -198,7 +198,7 @@ function User(props) {
                 let _res = await res.json();
                 if (_res.code === 1) {
                     location.reload();
-                //console.log(_res);
+                ////console.log(_res);
                 // setUsername(_res.data?.username);
                 // setMobile(_res.data?.mobile);
                 // setEmail(_res.data?.email);
@@ -214,17 +214,17 @@ function User(props) {
             onSuccess: async (res)=>{
                 let _res = await res.json();
                 if (_res.code === 1) {
-                    ////console.log(_res.data);
+                    //////console.log(_res.data);
                     setOrderDetail(_res.data);
                     setType("orderDetail");
                 }
-            ////console.log(_res);
-            // ////console.log(res);
+            //////console.log(_res);
+            // //////console.log(res);
             }
         });
     };
     (0,react__WEBPACK_IMPORTED_MODULE_5__.useEffect)(()=>{
-    ////console.log(orderDetail);
+    //////console.log(orderDetail);
     }, [
         orderDetail
     ]);
@@ -570,7 +570,7 @@ function User(props) {
                                                                 }),
                                                                 /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("span", {
                                                                     onClick: (e)=>{
-                                                                        // ////////console.log("刪除");
+                                                                        // //////////console.log("刪除");
                                                                         toDelte(item?.id);
                                                                         e.stopPropagation();
                                                                     },
@@ -1174,7 +1174,7 @@ async function getServerSideProps(context) {
         addList = await add_response.json();
         sc = await sc_res.json();
         orderList = await order_response.json();
-    ////console.log(orderList);
+    //////console.log(orderList);
     // if (sc.code === 401) {
     //     sc.data = [];
     // }
@@ -1190,7 +1190,7 @@ async function getServerSideProps(context) {
             code: 401
         };
     }
-    //    ////console.log(sc);
+    //    //////console.log(sc);
     return {
         props: {
             cateList: JSON.parse(data).data,

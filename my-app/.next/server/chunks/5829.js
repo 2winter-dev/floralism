@@ -57,7 +57,7 @@ const constant = {
                 "Access-Control-Request-Headers": "Content-Type"
             }
         }),
-    loginByPassword: (data)=>fetch(`${_constant_index__WEBPACK_IMPORTED_MODULE_0__/* .constant.api_url */ .a.api_url}/api/user/passwordLogin`, {
+    loginByPassword: (data)=>fetch(`${_constant_index__WEBPACK_IMPORTED_MODULE_0__/* .constant.api_url */ .a.api_url}/api/user/passwordLogin/`, {
             body: JSON.stringify(data),
             method: "POST",
             mode: "cors",
@@ -88,7 +88,7 @@ const constant = {
             }
         }),
     AddToCart: (data)=>{
-        ////////console.log(data);
+        //////////console.log(data);
         return fetch(`${_constant_index__WEBPACK_IMPORTED_MODULE_0__/* .constant.api_url */ .a.api_url}/api/cart/create`, {
             body: JSON.stringify({
                 flower_specs_id: data.flower_specs_id,
@@ -107,7 +107,7 @@ const constant = {
         });
     },
     changeShopCarNumber: (data)=>{
-        ////////console.log(data);
+        //////////console.log(data);
         return fetch(`${_constant_index__WEBPACK_IMPORTED_MODULE_0__/* .constant.api_url */ .a.api_url}/api/cart/updateNum`, {
             body: JSON.stringify({
                 id: data.id,
@@ -181,7 +181,7 @@ const constant = {
             }
         }),
     createOrder: (data)=>{
-        ////////console.log(data);
+        //////////console.log(data);
         return fetch(`${_constant_index__WEBPACK_IMPORTED_MODULE_0__/* .constant.api_url */ .a.api_url}/api/order/create`, {
             body: JSON.stringify(data),
             method: "POST",
@@ -208,7 +208,7 @@ const constant = {
             }
         }),
     fetchGoods: (data)=>{
-        //////console.log("123");
+        ////////console.log("123");
         return fetch(`${_constant_index__WEBPACK_IMPORTED_MODULE_0__/* .constant.api_url */ .a.api_url}/api/flowers/index?keyword=${data.keyword}&flower_category_id=${data.flower_category_id}&listRows=${data.listRows}&page=${data.page}`, {
             method: "GET",
             headers: {
