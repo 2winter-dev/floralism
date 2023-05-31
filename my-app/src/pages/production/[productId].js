@@ -186,10 +186,10 @@ export default function ProductDetail({ cateList, product }) {
 
                         <div style={{ display: 'flex', marginTop: 32, width: '100%', justifyContent: 'space-between' }}>
                             <div className={style.type_selector} style={{ marginRight: 12 }}>
-                                <select value={cardtype} onChange={(event) => {
+                                <select className={style.selector} value={cardtype} onChange={(event) => {
                                     setCardType(event.target.value);
                                     //////console.log(event.target.value);
-                                }} style={{ borderRadius: 8, paddingLeft: 10, width: '50%', paddingTop: 4, paddingBottom: 4, paddingRight: 10 }} >
+                                }} style={{ borderRadius: 8, paddingLeft: 10, paddingTop: 4, paddingBottom: 4, paddingRight: 10 }} >
                                     <option value={0}>默認心意卡</option>
                                     <option value={1}>店家代寫心意卡</option>
                                     <option value={2}>留空，自己寫</option>

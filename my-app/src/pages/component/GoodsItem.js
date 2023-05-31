@@ -3,7 +3,7 @@ import styles from '@/styles/goodsItem.module.css'
 export default function GoodsItem(props) {
     if (props.type !== "category" && props.type !== "carsouel") {
         return (<div className={`${styles.GoodsItem}`} onClick={() => {
-            location.href = `/category/${props.item.id}`
+            location.href = `/production/${props.item.id}`
         }} style={{ padding: '2%', ...props.top_style }}>
             <div className={props.animation && (props.type === "category" || props.type === "carsouel") ? styles.goods_img_cover : ""} style={{ position: 'relative', ...props.imgTopStyle }}>
                 <img src={props?.item?.photoimage} style={{ width: '100%', display: 'block', ...props.imgStyle }} className={props.animation === "toLarge" ? `${styles.goods_img} ${styles.an_fangda}` : `${styles.goods_img}`} />

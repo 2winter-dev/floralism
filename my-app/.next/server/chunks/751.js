@@ -14,6 +14,7 @@ module.exports = {
 	"an_fangda": "goodsItem_an_fangda__4vw9J",
 	"fangda": "goodsItem_fangda__3Fzv7",
 	"buy_btn": "goodsItem_buy_btn__MHuB_",
+	"selector": "goodsItem_selector__gAyb2",
 	"Iscategory": "goodsItem_Iscategory__FPyCL",
 	"goods_title": "goodsItem_goods_title__AocWN",
 	"littletransition": "goodsItem_littletransition__uOyya",
@@ -43,7 +44,7 @@ function GoodsItem(props) {
         return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
             className: `${(_styles_goodsItem_module_css__WEBPACK_IMPORTED_MODULE_1___default().GoodsItem)}`,
             onClick: ()=>{
-                location.href = `/category/${props.item.id}`;
+                location.href = `/production/${props.item.id}`;
             },
             style: {
                 padding: "2%",

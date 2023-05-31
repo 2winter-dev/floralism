@@ -1,7 +1,7 @@
 (() => {
 var exports = {};
 exports.id = 1951;
-exports.ids = [1951,9855,8693,5568,7720,839,8968,6163,1577,4846,9925];
+exports.ids = [1951,8693,9855,5568,839,7720,8968,6163,4846,1577,9925];
 exports.modules = {
 
 /***/ 8710:
@@ -448,6 +448,7 @@ function ProductDetail({ cateList , product  }) {
                                                 },
                                                 children: [
                                                     /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("select", {
+                                                        className: (_styles_product_module_css__WEBPACK_IMPORTED_MODULE_18___default().selector),
                                                         value: cardtype,
                                                         onChange: (event)=>{
                                                             setCardType(event.target.value);
@@ -456,7 +457,6 @@ function ProductDetail({ cateList , product  }) {
                                                         style: {
                                                             borderRadius: 8,
                                                             paddingLeft: 10,
-                                                            width: "50%",
                                                             paddingTop: 4,
                                                             paddingBottom: 4,
                                                             paddingRight: 10
