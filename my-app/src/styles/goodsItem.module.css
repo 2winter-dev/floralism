@@ -8,20 +8,43 @@
 }
 
 .goods_img_cover:hover::before {
-    /* width: inherit;
-  height: inherit; */
     display: block;
     border-radius: 16px;
     background-color: rgba(0, 0, 0, 0.3);
+    /* display: block; */
+    border-radius: 16px;
+    opacity: 0;
+    transition: 300ms;
+}
+
+.goods_hover_img {
+    display: block;
+    top: 0;
+    position: absolute;
     width: 100%;
     left: 0;
     z-index: 1;
     height: 100%;
-    content: "";
-    overflow: hidden;
+    opacity: 0;
+    transition: 300ms;
     position: absolute;
 }
 
+.GoodsItem:hover .goods_hover_img {
+    opacity: 1;
+}
+
+/* .goods_img_cover:hover::before{
+  display: block;
+  border-radius: 16px;
+  background-color: rgba(0,0,0,0.3);
+  width: 100%;
+  left: 0;
+  z-index: 1;
+  height: 100%;
+  content: "";
+  position: absolute;
+} */
 .goods_img_cover:hover .buy_btn {
     display: flex;
 }

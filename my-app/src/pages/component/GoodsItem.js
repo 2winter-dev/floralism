@@ -1,6 +1,8 @@
 import styles from '@/styles/goodsItem.module.css'
 
 export default function GoodsItem(props) {
+
+    props.type !== "category"&&console.log(props.item,props.type)
     return (<div className={`${styles.GoodsItem} ${props.type === "category" && styles.Iscategory}`} onClick={() => {
         //////console.log("123");
         if (props.type !== "category") {
@@ -10,8 +12,9 @@ export default function GoodsItem(props) {
             location.href = `/category/${props.item.id}`
         }
     }} style={{ padding: '2%', ...props.top_style }}>
-        <div className={props.animation ? styles.goods_img_cover : ""} style={{ position: 'relative', ...props.imgTopStyle, borderRadius: 20, overflow: 'hidden' }}>
-            <img src={props?.item?.photoimage} style={{ display: 'block', ...props.imgStyle, height: '100%', width: '100%', backgroundColor: 'rgb(236,236,236)', verticalAlign: 'top', objectFit: 'fill', borderRadius: 20 }} className={props.animation === "toLarge" ? `${styles.goods_img} ${styles.an_fangda}` : `${styles.goods_img}`} />
+        <div className={props.animation ? styles.goods_img_cover : ""} style={{ position: 'relative',...props.imgTopStyle }}>
+            <img src={props?.item?.photoimage} style={{ width: '100%',display:'block', ...props.imgStyle }} className={props.animation==="toLarge"?`${styles.goods_img} ${styles.an_fangda}`:`${styles.goods_img}`} />
+            {props.type!=="category"&&props.type!=="carsouel"&&props.item?.photoimages[0]&&<img src={props?.item?.photoimages[0]} style={{}} className={styles.goods_hover_img} /> }
             {
                 props.type !== "category" ? <button className={styles.buy_btn}>點擊購買</button> : null
             }

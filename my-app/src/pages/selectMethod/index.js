@@ -28,8 +28,8 @@ export default function selectMethod(props) {
         { ssr: false }
     )
 
-    const { deliverytype, deliverydate, cart_ids, remark, amount, payment_amount } = useRouter().query
-
+    const { deliverytype, deliverydate, cart_ids, remark, amount, payment_amount } = router.query
+    // console.log();
     //console.log("----------");
     //console.log(deliverytype);
     // //////console.log(useRouter());
@@ -40,7 +40,7 @@ export default function selectMethod(props) {
     const [addList, setAddList] = useState(props.addList.data)
 
     const [flag, setFlag] = useState(false);
-    const [page, setPage] = useState(1);//第一頁:選擇地址，第二頁選擇支付方式，第三頁結果。
+    const [page, setPage] = useState(Number(props.page) ?? 1);//第一頁:選擇地址，第二頁選擇支付方式，第三頁結果。
     const [process, setProcess] = useState(1);//0尚未進行，1進行中，2完成
 
     const [type, setType] = useState(0);
@@ -128,8 +128,8 @@ export default function selectMethod(props) {
         }
     }, [])
 
-
-
+    console.log("1111----");
+    console.log(router.query?.type === "success");
     const ToCreateOrder = () => {
         setFlag(true);
         if (payment !== "" && add !== "") {
@@ -202,13 +202,13 @@ export default function selectMethod(props) {
                         page >= 3 ? styles.complete : styles.wrong
                     } style={{ height: 4, flex: 1 }}></div>
                     <div className={
-                        page >= 4 ? styles.complete : styles.wrong
-                    } style={{ width: 20, height: 20, borderRadius: 50, backgroundColor: 'red' }}></div>
+                        page >= 3 ? styles.complete : styles.wrong
+                    } style={{ width: 20, height: 20, borderRadius: 50 }}></div>
                     <div className={
-                        page >= 4 ? styles.complete : styles.wrong
-                    } style={{ height: 4, flex: 1, background: 'red' }}></div>
+                        page >= 3 ? styles.complete : styles.wrong
+                    } style={{ height: 4, flex: 1 }}></div>
                 </div>
-            </div> 
+            </div>
             <div style={{ marginTop: 24 }}>
                 {
                     page === 1 &&
@@ -339,7 +339,7 @@ export default function selectMethod(props) {
                                 </div>
                             </div>
                             <div style={{ display: 'flex', marginTop: 12, alignItems: 'center', justifyContent: 'center' }}>
-                                {flag ? <div className={styles.new_Step} >確認訂單</div> : <div onClick={() => ToCreateOrder()} className={styles.new_Step}>確認訂單</div>}
+                                {flag ? <div className={styles.new_Step} style={{ backgroundColor: 'rgba(0,0,0,0.4)' }} >確認訂單</div> : <div onClick={() => ToCreateOrder()} className={styles.new_Step}>確認訂單</div>}
                             </div>
                         </div>
                     </div>
@@ -385,7 +385,15 @@ export default function selectMethod(props) {
                         </div>)
                 }
                 {
-                    page === 3 && (success&&<div>付款成功</div>)
+                    page === 3 && (<div style={{ width: '100%', height: 200, display: 'flex', flexDirection:'column',justifyContent: 'center', alignItems: 'center' }}>{
+                        router.query?.type === "success" ?  <div style={{marginTop:24,fontSize:28,fontWeight:600}}>付款成功</div> 
+                        : 
+                        router.query?.type === "fail" ?  <div style={{marginTop:24,fontSize:28,fontWeight:600}}>付款失敗</div> 
+                        :  <div style={{marginTop:24,fontSize:28,fontWeight:600}}>用戶取消支付</div>
+                    }
+                        <div style={{marginTop:24,cursor:'pointer'}} onClick={()=>router.replace("/")}>返回首頁</div>
+                    </div>
+                    )
                 }
             </div>
         </div>
@@ -492,8 +500,9 @@ export async function getServerSideProps(context) {
         s_list = { data: [], code: 401 };
     }
     //////console.log(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
-    // console.log(goods_data);
-    // if (context.query.page !== "3") {
+    console.log("============");
+    console.log(add_data);
+    if (context.query.page !== "3") {
         console.log("不为3");
         if (!goods_data.code) {
             return {
@@ -503,7 +512,7 @@ export async function getServerSideProps(context) {
                 }
             }
         }
-    // }
+    }
 
 
 
@@ -519,6 +528,7 @@ export async function getServerSideProps(context) {
             publishableKey: `${process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY}`,
             secretKey: `${process.env.STRIPE_SECRET_KEY}`,
             shopList: s_list?.data ?? [],
+            page: context.query.page ?? undefined,
         },
     };
 }

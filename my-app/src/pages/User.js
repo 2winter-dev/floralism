@@ -149,7 +149,7 @@ export default function User(props) {
 
 
     return (<div style={{ backgroundColor: 'rgb(244,244,244)' }}>
-        <DynamicComponent cateList={props.cateList} setLogin={setLogin} />
+         <DynamicComponent cateList={props.cateList} setLogin={setLogin} />
         <div className={styles.main_contain} style={{ marginTop: 24, marginBottom: 46, alignItems: 'flex-start' }}>
             <div className={styles.left_contain}>
                 <div className={styles.left_totalPannel}>
@@ -194,19 +194,22 @@ export default function User(props) {
             {
                 type !== "orderDetail" && <div className={styles.right_contain}>
                     {
-                        type === "message" && <div style={{ display: 'flex', alignItems: 'flex-start', flexDirection: 'column', minHeight: 500 }}>
+                        type === "message" && <div style={{ display: 'flex',width:'100%', alignItems: 'flex-start', flexDirection: 'column', minHeight: 500 }}>
                             <h5 className={styles.right_contain_title}>信息修改</h5>
-                            <div style={{ marginTop: 12, display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-                                <div style={{ marginTop: 24 }}>
-                                    username <input onInput={(e) => setUsername(e.target.value)} value={username} style={{ marginLeft: 12, borderRadius: 4, outline: 'none', paddingLeft: 4, paddingTop: 4, paddingBottom: 4 }} type="text" />
+                            <div className={styles.total_contain}  style={{ marginTop: 12, display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+                                <div className={styles.message_contain} style={{ marginTop: 24 }}>
+                                    username <input onInput={(e) =>setUsername(e.target.value)} value={username} style={{ borderRadius: 4, outline: 'none', paddingLeft: 4, paddingTop: 4, paddingBottom: 4 }} type="text" />
                                 </div>
-                                <div style={{ marginTop: 24 }}>
-                                    email<input onInput={(e) => setEmail(e.target.value)} value={email} style={{ marginLeft: 46, borderRadius: 4, outline: 'none', paddingLeft: 4, paddingTop: 4, paddingBottom: 4 }} type="text" />
+                                <div className={styles.message_contain} style={{ marginTop: 24 }}>
+                                    email<input onInput={(e) => setEmail(e.target.value)} value={email} style={{  borderRadius: 4, outline: 'none', paddingLeft: 4, paddingTop: 4, paddingBottom: 4 }} type="text" />
                                 </div>
-                                <div style={{ marginTop: 24 }}>
-                                    mobile<input onInput={(e) => setMobile(e.target.value)} value={mobile} style={{ marginLeft: 36, borderRadius: 4, outline: 'none', paddingLeft: 4, paddingTop: 4, paddingBottom: 4 }} type="text" />
+                                <div className={styles.message_contain} style={{ marginTop: 24 }}>
+                                    mobile<input onInput={(e) => setMobile(e.target.value)} value={mobile} style={{  borderRadius: 4, outline: 'none', paddingLeft: 4, paddingTop: 4, paddingBottom: 4 }} type="text" />
                                 </div>
+                                <div style={{display:'flex',justifyContent:'center',width:'100%',alignItems:'center'}}>
+
                                 <div className={styles.submit_btn} onClick={updateUserMessage} style={{ cursor: 'pointer' }}>submit</div>
+                                </div>
                             </div>
                         </div>
                     }
@@ -219,7 +222,7 @@ export default function User(props) {
                                     setAdd_type(0);
                                 }} className={styles.addAddress_btn} style={{ marginRight: 14 }}>+ 添加地址</div>
                             </h5>
-                            <div style={{ display: 'flex', width: '100%' }}>
+                            <div style={{ display: 'flex',flexWrap:'wrap', width: '100%' }}>
                                 {
                                     addList.length ? addList.map((item, index) => {
                                         return <div key={item.id} className={style.addressItem} style={{ padding: 14, marginRight: 10, marginTop: 10 }}>
@@ -264,9 +267,9 @@ export default function User(props) {
                         </div>
                     }
                     {
-                        type === "order" && <div style={{ display: 'flex', alignItems: 'flex-start', flexDirection: 'column', minHeight: 500 }}>
+                        type === "order" && <div style={{ display: 'flex',overflow:'auto', alignItems: 'flex-start', flexDirection: 'column', minHeight: 500 }}>
                             <h5 className={styles.right_contain_title}>訂單列表</h5>
-                            <table style={{ width: '100%', marginTop: 24, textAlign: 'left' }}>
+                            <table style={{ width: '100%',minWidth:440, marginTop: 24, textAlign: 'left' }}>
                                 <thead>
                                     <tr style={{ backgroundColor: 'rgb(245,245,245)' }}>
                                         <th className={styles.tr_padding}>訂單詳情</th>
@@ -300,7 +303,7 @@ export default function User(props) {
                                                             <img src={item?.product_coverimage} style={{ width: '100%' }} />
                                                         </div>
                                                         <div style={{ flex: 1 }}>
-                                                            <div className={styles.product_title} style={{ fontSize: 14, width: '100%', overflow: 'hidden', textOverflow: 'ellipsis', wordWrap: 'break-word' }}>
+                                                            <div className={styles.product_title} style={{ fontSize: 14, width: '100%', overflow: 'hidden', textOverflow: 'ellipsis',whiteSpace:'nowrap' }}>
                                                                 {item?.product_productname}
                                                             </div>
                                                             <div>✖ {item?.product_num}</div>
@@ -318,7 +321,7 @@ export default function User(props) {
                                                         <div onClick={() => {
                                                             // setType("OrderDetail");
                                                             OrderDetail(item?.id);
-                                                        }} className={styles.check_btn}>{item?.payment_status ? null : 'check'}</div>
+                                                        }} className={styles.check_btn}>{item?.payment_status ? null : '查看訂單'}</div>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -334,9 +337,9 @@ export default function User(props) {
                 </div>
             }
             {
-                type === "orderDetail" && <div style={{ backgroundColor: 'transparent', width: '72.5%' }} >
-                    <div className={styles.order_detail_area}>
-                        <div style={{ display: 'flex', alignItems: 'flex-start', flexDirection: 'column' }}>
+                type === "orderDetail" && <div className={styles.right_contain} style={{ backgroundColor: 'transparent' }} >
+                    <div className={styles.order_detail_area} style={{overflow:'auto'}}>
+                        <div style={{ minWidth:630,display: 'flex', alignItems: 'flex-start', flexDirection: 'column' }}>
                             <h5 className={styles.right_contain_title}>訂單詳情</h5>
                             <table style={{ marginTop: 24, width: '100%', backgroundColor: 'rgb(248,249,250)', padding: 8, textAlign: 'left' }}>
                                 <thead>

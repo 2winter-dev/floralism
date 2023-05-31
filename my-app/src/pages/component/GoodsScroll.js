@@ -9,6 +9,8 @@ export default function GoodsScoll(props) {
   const [goodsList, setGoodsList] = useState(
     props.list
   );
+  // console.log("===============");
+  // console.log(props.list);
   // //console.log(props.maxPage);
   // //////console.log(props.list);
   ////////console.log(props);
@@ -89,6 +91,7 @@ export default function GoodsScoll(props) {
         <div style={{ display: 'flex', flexWrap: 'wrap',  marginTop: 32 }}>
           {
             !!props?.list?.length ? props.list.map((item, index) => {
+              console.log(item);
               return <GoodsItem top_style={{marginTop:12}} key={index} src={item.src} item={item} title={item.categoryname} price={item.price} type={props.type} animation={props.animation} />
             }):<div style={{width:'100%',textAlign:'center'}}>商品列表为空</div>
           }

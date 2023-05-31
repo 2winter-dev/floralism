@@ -110,7 +110,6 @@ export default function ContactPage({ cateList, allcate }) {
         </div>
         <div className={style.ContactusLayout}>
             <Contactus />
-
         </div>
         <Footer />
         {
