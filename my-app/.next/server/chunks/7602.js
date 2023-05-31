@@ -88,7 +88,7 @@ function Footer() {
                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
                                 children: "產品"
                             }),
-                            cateList.isSuccess && cateList.data.data.slice(6).map((item, index)=>{
+                            cateList.isSuccess && cateList.data.data.slice(8).map((item, index)=>{
                                 // ////console.log(item);
                                 return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("a", {
                                     href: `/category/${item.id}`,
@@ -138,17 +138,17 @@ function Footer() {
                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                                 children: "城市工業中心1樓H&J室"
                             }),
-                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                                children: "T +852 65818053"
-                            }),
                             /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                                 children: [
-                                    "F ",
+                                    "T ",
                                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("a", {
                                         href: "tel:+85265818053",
                                         children: "+852 65818053"
                                     })
                                 ]
+                            }),
+                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                                children: "F +852 65818053"
                             }),
                             /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                                 children: [
@@ -163,6 +163,9 @@ function Footer() {
                                 children: "對我們的產品及服務有興趣？"
                             }),
                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                                style: {
+                                    marginTop: 4
+                                },
                                 children: "請聯係我們"
                             })
                         ]
@@ -208,9 +211,12 @@ function Footer() {
                                             style: {
                                                 cursor: "pointer"
                                             },
-                                            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("img", {
-                                                src: "/矢量智能对象-3.png",
-                                                className: (_styles_footer_module_css__WEBPACK_IMPORTED_MODULE_3___default().footer_Image)
+                                            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("a", {
+                                                href: "https://wa.me/85263396652",
+                                                children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("img", {
+                                                    src: "/矢量智能对象-3.png",
+                                                    className: (_styles_footer_module_css__WEBPACK_IMPORTED_MODULE_3___default().footer_Image)
+                                                })
                                             })
                                         }),
                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {

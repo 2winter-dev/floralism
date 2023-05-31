@@ -234,7 +234,7 @@ function GoodsScoll(props) {
                             width: "100%",
                             textAlign: "center"
                         },
-                        children: "商品列表为空"
+                        children: "商品列表為空"
                     })
                 })
             }),

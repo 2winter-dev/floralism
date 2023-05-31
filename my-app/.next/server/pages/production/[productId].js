@@ -1,7 +1,7 @@
 (() => {
 var exports = {};
 exports.id = 1951;
-exports.ids = [1951,9855,5568,8693,7720,839,6163,8968,1577,4846,9925];
+exports.ids = [1951,8693,9855,5568,839,7720,8968,6163,1577,4846,9925];
 exports.modules = {
 
 /***/ 8710:
@@ -581,7 +581,7 @@ function ProductDetail({ cateList , product  }) {
                                                             if (isSuccess.code) {
                                                                 if (isSuccess.code.toString() === "401") {
                                                                     js_cookie__WEBPACK_IMPORTED_MODULE_12__["default"].remove("token");
-                                                                    alert("登錄失效");
+                                                                    alert("請先登錄");
                                                                     return;
                                                                 }
                                                                 if (isSuccess.code === 1) {

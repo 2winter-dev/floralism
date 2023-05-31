@@ -111,7 +111,7 @@ export default function Home({ allcate, cateList, GoodsPage, carousel }) {
       <main className={`${styles.main_body}`}>
         <div className={styles.goods_list}>
           <CateScroll
-            title={'【FLORALISM】 全部分类'}
+            title={'【FLORALISM】 全部分類'}
             list={category}
             page={categoryPage}
             type={'category'}

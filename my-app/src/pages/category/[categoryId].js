@@ -115,7 +115,7 @@ export default function Category({ allcate, cateList, data,top_banner,middle_ban
         </div>
         <div className={styles.goods_list}>
             <CateScroll
-                title={'【FLORALISM】 全部分类'}
+                title={'【FLORALISM】 全部分類'}
                 list={category}
                 page={categoryPage}
                 type={'category'}

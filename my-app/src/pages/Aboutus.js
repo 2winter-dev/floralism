@@ -99,7 +99,7 @@ export default function AboutUs({ cateList, allcate }) {
         <div className={styles.goods_list} style={{}}>
             {/* <div> */}
             <CateScroll
-                title={'【FLORALISM】 全部分类'}
+                title={'【FLORALISM】 全部分類'}
                 list={category}
                 flag={flag}
                 page={categoryPage}

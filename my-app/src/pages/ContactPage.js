@@ -99,7 +99,7 @@ export default function ContactPage({ cateList, allcate }) {
 
         <div className={styles.goods_list} style={{}}>
             <CateScroll
-                title={'【FLORALISM】 全部分类'}
+                title={'【FLORALISM】 全部分類'}
                 list={category}
                 page={categoryPage}
                 type={'category'}

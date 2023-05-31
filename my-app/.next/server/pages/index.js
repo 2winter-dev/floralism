@@ -2,7 +2,7 @@
 (() => {
 var exports = {};
 exports.id = 5405;
-exports.ids = [5405,8693,7720,839,6163,8968,1577,9925];
+exports.ids = [5405,8693,839,7720,8968,6163,1577,9925];
 exports.modules = {
 
 /***/ 8733:
@@ -220,7 +220,7 @@ function Home({ allcate , cateList , GoodsPage , carousel  }) {
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                         className: (_styles_Home_module_css__WEBPACK_IMPORTED_MODULE_21___default().goods_list),
                         children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_component_cateScroll__WEBPACK_IMPORTED_MODULE_18__["default"], {
-                            title: "【FLORALISM】 全部分类",
+                            title: "【FLORALISM】 全部分類",
                             list: category,
                             page: categoryPage,
                             type: "category",

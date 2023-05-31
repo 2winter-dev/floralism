@@ -1,7 +1,7 @@
 (() => {
 var exports = {};
 exports.id = 980;
-exports.ids = [980,8693,7720,839,6163,8968,1577,9925];
+exports.ids = [980,8693,839,7720,8968,6163,1577,9925];
 exports.modules = {
 
 /***/ 1139:
@@ -229,7 +229,7 @@ function Category({ allcate , cateList , data , top_banner , middle_banner  }) {
             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                 className: (_styles_Home_module_css__WEBPACK_IMPORTED_MODULE_15___default().goods_list),
                 children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_component_cateScroll__WEBPACK_IMPORTED_MODULE_13__["default"], {
-                    title: "【FLORALISM】 全部分类",
+                    title: "【FLORALISM】 全部分類",
                     list: category,
                     page: categoryPage,
                     type: "category",

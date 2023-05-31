@@ -237,7 +237,7 @@ export default function ProductDetail({ cateList, product }) {
                                         if (isSuccess.code) {
                                             if (isSuccess.code.toString() === '401') {
                                                 Cookies.remove('token');
-                                                alert("登錄失效");
+                                                alert("請先登錄");
                                                 return;
                                             }
                                             if (isSuccess.code === 1) {
