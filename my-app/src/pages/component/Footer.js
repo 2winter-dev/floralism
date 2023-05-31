@@ -33,8 +33,9 @@ export default function Footer() {
             <div className={style.footer_column} style={{ display: 'flex', flexDirection: 'column' }}>
                 <p >產品</p>
                 {
-                    cateList.isSuccess && cateList.data.data.slice(8).map((item, index) => {
+                    cateList.isSuccess && cateList.data.data.map((item, index) => {
                         // ////console.log(item);
+                        if(index>6) return null;
                         return (<a key={index} href={`/category/${item.id}`}>{item.categoryname}</a>)
                     })
                 }
