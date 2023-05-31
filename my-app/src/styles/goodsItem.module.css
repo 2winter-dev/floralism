@@ -1,62 +1,71 @@
-
-.GoodsItem{
+.GoodsItem {
     width: 25%;
     cursor: pointer;
     /* height: 10%; */
+
     position: relative;
     /* height: 15rem; */
 }
-.goods_img_cover:hover::before{
-  /* width: inherit;
+
+.goods_img_cover:hover::before {
+    /* width: inherit;
   height: inherit; */
-  display: block;
-  border-radius: 16px;
-  background-color: rgba(0,0,0,0.3);
-  width: 100%;
-  left: 0;
-  z-index: 1;
-  height: 100%;
-  content: "";
-  position: absolute;
+    display: block;
+    border-radius: 16px;
+    background-color: rgba(0, 0, 0, 0.3);
+    width: 100%;
+    left: 0;
+    z-index: 1;
+    height: 100%;
+    content: "";
+    overflow: hidden;
+    position: absolute;
 }
-.goods_img_cover:hover .buy_btn{
+
+.goods_img_cover:hover .buy_btn {
     display: flex;
 }
-.goods_img_cover:hover .an_fangda{
-   animation: fangda 400ms;
+
+.goods_img_cover:hover .an_fangda {
+    animation: fangda 400ms;
 }
-.buy_btn{
+
+.buy_btn {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
     bottom: 20%;
     padding: 1.5% 6%;
     display: none;
-    border:none;
+    border: none;
     z-index: 2;
     white-space: nowrap;
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0, 0, 0, 0.5);
     color: white;
     cursor: pointer;
 }
+
 @keyframes fangda {
     from {
         transform: scale(0);
     }
-    to{
+
+    to {
         transform: scale(1);
     }
 }
-.Iscategory:hover .goods_title{
+
+.Iscategory:hover .goods_title {
     /* backgroundColor:'#d43a43',color:'white' */
     animation: littletransition 0.4s;
-    background-color:#d43a43;
-    color:white
+    background-color: #d43a43;
+    color: white
 }
 
-.Iscategory:hover .buy_btn{
+.Iscategory:hover .buy_btn {
     display: flex;
 }
+
 /* .GoodsItem:hover::before{
     display: block;
     background-color: rgba(0,0,0,0.3);
@@ -84,64 +93,66 @@
 @keyframes littletransition {
     from {
         background-color: white;
-        color:black
+        color: black
     }
-    to{
-        background-color:#d43a43;
+
+    to {
+        background-color: #d43a43;
         color: white;
     }
 }
 
-.goods_carsouel_price{
+.goods_carsouel_price {
     background-color: black;
     padding: 2px 1rem;
     color: white;
     /* width: 100%; */
-    margin-top:12px;
-    overflow:hidden;
+    margin-top: 12px;
+    overflow: hidden;
     text-overflow: ellipsis;
 
 }
 
-.goods_price{
+.goods_price {
     text-align: center;
     color: #d43a43;
     margin-top: 10px;
     width: 100%;
-    overflow:hidden;
+    overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
-.goods_title{
+.goods_title {
     /* width: 50%; */
-    width: 70%;
-    overflow:hidden;
+    width: 80%;
+    overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
     border-radius: 4px;
     margin: 0 auto;
     color: #d43a43;
     padding: 0.3rem 0.2rem;
-    font-size: 1rem;
+    font-size: 0.8rem;
     text-align: center;
     border: 1px solid #d43a43;
 }
 
-.goods_img{
+.goods_img {
     border-radius: 16px;
     position: relative;
 }
 
 
-@media screen and (max-width:1100px){
-    .GoodsItem{
+@media screen and (max-width:1100px) {
+    .GoodsItem {
         width: 33%;
         /* height: 15rem; */
-    }     
+    }
 }
+
 @media screen and (max-width:670px) {
-    .GoodsItem{
-        width:50%
+    .GoodsItem {
+        width: 50%
     }
 }

@@ -148,7 +148,7 @@ export default function Home({ allcate, cateList, GoodsPage, carousel }) {
           <div className={style.youMaybeLike} style={{ padding: '5%', position: 'relative' }}>
             <div style={{ display: 'flex', alignItems: 'center' }}>
               <div className={styles.distance} style={{ borderBottomWidth: 1, borderBottomColor: 'white' }}></div>
-              <div className={styles.title} style={{ color: "white", marginRight: 16, marginLeft: 16 }}>情人節禮物 | 最受歡迎的</div>
+              <div className={styles.title} style={{ whiteSpace: "nowrap" }}>情人節禮物 | 最受歡迎的</div>
               <div className={styles.distance} style={{ borderBottomWidth: 1, borderBottomColor: 'white' }}></div>
             </div>
             <div style={{ position: "relative" }}>

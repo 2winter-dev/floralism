@@ -93,10 +93,11 @@ export default function ContactPage({ cateList, allcate }) {
 
                 </div>
             </div>
-            <Contactus topStyle={{ marginTop: 48 }} />
+
 
         </div>
-        <div className={styles.goods_list} style={{ paddingLeft: '15%', paddingRight: '15%' }}>
+
+        <div className={styles.goods_list} style={{}}>
             <CateScroll
                 title={'【FLORALISM】 全部分类'}
                 list={category}
@@ -106,6 +107,10 @@ export default function ContactPage({ cateList, allcate }) {
                 setPage={setCategoryPage}
                 animation
             />
+        </div>
+        <div className={style.ContactusLayout}>
+            <Contactus />
+
         </div>
         <Footer />
         {

@@ -234,7 +234,7 @@ export default function ShopCar({ cateList, shopCar }) {
                                 <thead>
                                     <tr style={{ backgroundColor: 'rgb(245,245,245)' }}>
                                         <th className={styles.tr_padding} width={130}>
-                                            <input type='checkbox' checked={selAll} onChange={()=>null} onClick={selectedAll} style={{ width: 15, height: 15 }} />
+                                            <input type='checkbox' checked={selAll} onChange={() => null} onClick={selectedAll} style={{ width: 15, height: 15 }} />
                                             <span>全選</span>
                                             <span onClick={deleteProduct} style={{ marginLeft: 8, cursor: 'pointer' }}>删除</span>
                                         </th>
@@ -264,7 +264,7 @@ export default function ShopCar({ cateList, shopCar }) {
                                             </tr>
                                             <tr>
                                                 <td style={{ fontSize: 14 }} className={`${styles.tr_padding} ${styles.first_column}`}>
-                                                    <input type='checkbox' onClick={() => changeStatus(item)} onChange={()=>null}    checked={selected.some((it, ii) => it === item.id)} style={{ width: 15, height: 15, marginRight: 12 }} />
+                                                    <input type='checkbox' onClick={() => changeStatus(item)} onChange={() => null} checked={selected.some((it, ii) => it === item.id)} style={{ width: 15, height: 15, marginRight: 12 }} />
                                                 </td>
                                                 <td className={`${styles.tr_padding} ${styles.first_column}`} >
 
@@ -277,7 +277,7 @@ export default function ShopCar({ cateList, shopCar }) {
                                                                 {item?.productname}
                                                             </div>
                                                             {/* <div>×</div> */}
-                                                            <input type={'number'} style={{ width: 40,  textAlign: 'center' }} onChange={(e) => ToUpdate(item, index, e.target.value)} value={item.num} />
+                                                            <input type={'number'} style={{ width: 40, textAlign: 'center' }} onChange={(e) => ToUpdate(item, index, e.target.value)} value={item.num} />
                                                         </div>
                                                     </div>
                                                 </td>

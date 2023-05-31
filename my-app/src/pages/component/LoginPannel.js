@@ -1,5 +1,5 @@
 import style from '@/styles/login.module.css'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Modal } from "@nextui-org/react";
 import { useMutation } from '@tanstack/react-query';
 import m_api from '@/m_api';
@@ -124,14 +124,24 @@ export default function LoginPannel(props) {
         }, 1000)
     }
 
+
+
+
+    const clientW = useState(1200)
+
+    useEffect(() => {
+        clientW[1](window.innerWidth);
+    }, [])
+
+
     return (<Modal
         open={props.login}
-        onClose={() => { props.close(); setType(0);setMType("login") }}
-        className={mtype==="register"?style.register_layout :mtype==="forget"? style.login_layout :style.login_layout}
+        onClose={() => { props.close(); setType(0); setMType("login") }}
+        className={mtype === "register" ? style.register_layout : mtype === "forget" ? style.login_layout : style.login_layout}
         // style={{width:'70%'}}
-        width={'70%'}
-        // style={{width:window.innerWidth*0.7,height:window.innerHeight*0.6}}
-        blur
+        width={clientW[0] > 1100 ? '50%' : '90%'}
+    // style={{width:window.innerWidth*0.7,height:window.innerHeight*0.6}}
+    // blur
     // css={{width:}}
     >
         {
@@ -152,7 +162,7 @@ export default function LoginPannel(props) {
                                     <input type='password' placeholder='密码' value={code} onChange={(e) => setCode(e.target.value.trim())} className={style.account_input}></input>
                                 </div>
                                 <div style={{ marginTop: '2.5%', paddingLeft: '3%' }}>
-                                    <div onClick={()=>setMType("forget")} className={style.forget_password}>忘记密码？</div>
+                                    <div onClick={() => setMType("forget")} className={style.forget_password}>忘记密码？</div>
                                 </div>
                                 <div style={{ marginTop: '2.5%' }}>
                                     <input type='button' onClick={_submit} className={style.submit_button} value="登錄"></input>
@@ -182,7 +192,7 @@ export default function LoginPannel(props) {
                                     </div>}
                                 </div>
                                 <div style={{ marginTop: '2.5%', paddingLeft: '3%' }}>
-                                    <div onClick={()=>setMType("forget")} className={style.forget_password}>忘记密码？</div>
+                                    <div onClick={() => setMType("forget")} className={style.forget_password}>忘记密码？</div>
                                 </div>
                                 <div style={{ marginTop: '2.5%' }}>
                                     <input type='button' onClick={_submit} className={style.submit_button} style={{ fontSize: 18 }} value="登錄"></input>
@@ -202,13 +212,13 @@ export default function LoginPannel(props) {
         }
         {
             mtype === "register" && <Modal.Body>
-                <RegisterPannerl toLogin={()=>setMType("login")} />
+                <RegisterPannerl toLogin={() => setMType("login")} />
             </Modal.Body>
         }
         {
-            mtype === "forget" &&<Modal.Body>
-              <ForgetPassword  toLogin={()=>setMType("login")} />
-        </Modal.Body>
+            mtype === "forget" && <Modal.Body>
+                <ForgetPassword toLogin={() => setMType("login")} />
+            </Modal.Body>
         }
     </Modal>)
 

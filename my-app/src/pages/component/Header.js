@@ -2,9 +2,14 @@ import header from "@/styles/header.module.css"
 import Cookies from "js-cookie"
 import Link from "next/link"
 import { useRouter } from "next/router"
+import { useState } from "react";
 
 export default function Header(props) {
-    const router=useRouter();
+    const router = useRouter();
+
+
+    const [navStatus, setNavStatus] = useState(false);
+
     return (<div className={`${header.header_background}`}>
         <div className={`${header.header_layout}`}>
             <div className={`${header.logo}`}>
@@ -42,20 +47,21 @@ export default function Header(props) {
                     </Link>
                 </div>
             </div>
-            <div className={`${header.header_right}`}>
-                <div onClick={ ()=>{Cookies.get("token")?router.push(`/User`):props.login()}} style={{ display: 'flex', alignItems: 'center', cursor: "pointer" }}>
+            <div className={`${header.header_right}`} style={{ marginLeft: 10 }}>
+                <div onClick={() => { Cookies.get("token") ? router.push(`/User`) : props.login() }} style={{ display: 'flex', alignItems: 'center', cursor: "pointer" }}>
                     <span style={{}} className={`iconfont ${header.mine_icon}`}>&#xe70e;</span>
                     {
-                        Cookies.get("token") ? "歡迎" : "登入"
+                        Cookies.get("token") ? " 歡迎" : " 登入"
                     }
                 </div>
             </div>
         </div>
-        <div className={`${header.header_menu}`}>
-            <div className={`${header.header_cate_layout}`}>
-                <div>分類</div>
+        <div className={`${header.header_menu}`} >
+            <div className={`${header.header_cate_layout}`} onClick={() => setNavStatus(!navStatus)} style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <span >分類</span>
+                <span style={{ display: 'inline-block', rotate: navStatus ? '45deg' : '0deg', fontSize: 20, transition: '200ms' }}>{navStatus ? '+' : '≡'}</span>
             </div>
-            <div className={`${header.dropdown}`}>
+            <div className={`${header.dropdown}`} style={{ display: navStatus ? 'block' : "none" }}>
                 {/* <div className={`${header.drop_item}`}>
                     <div className={`${header.drop_label}`}>情人節花束</div>
                     <div className={`${header.child_list}`}>
@@ -84,7 +90,7 @@ export default function Header(props) {
                     })
                 }
                 <div className={`${header.drop_item}`}>
-                <div className={`${header.drop_label}`}>
+                    <div className={`${header.drop_label}`}>
                         <Link href={'/Aboutus'} >關於我們</Link>
 
                     </div>

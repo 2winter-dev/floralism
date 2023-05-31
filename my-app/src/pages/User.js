@@ -14,7 +14,7 @@ import AddressPannel from "./component/addressPannel";
 import Cookies from "js-cookie";
 import LoginPannel from "./component/LoginPannel";
 export default function User(props) {
-    const router=useRouter();
+    const router = useRouter();
     const [type, setType] = useState("message");
     const [item, setItem] = useState({});
 
@@ -26,7 +26,7 @@ export default function User(props) {
     const [add, setAdd] = useState();
     const [add_type, setAdd_type] = useState();
     const [add_vis, setAdd_vis] = useState(false);
-    const [login,setLogin]=useState(false);
+    const [login, setLogin] = useState(false);
 
     const [orderList, setOrderList] = useState(props.orderList);
 
@@ -63,10 +63,10 @@ export default function User(props) {
         let res = m_list.map((item) => {
             console.log(item);
             console.log(id);
-            console.log(typeof item.id,typeof id);
+            console.log(typeof item.id, typeof id);
             if (item.id === id) {
                 item.is_default = true;
-            } else{
+            } else {
                 item.is_default = false;
             }
         })
@@ -112,7 +112,7 @@ export default function User(props) {
     }
 
     const updateUserMessage = () => {
-        console.log(username,email,mobile);
+        console.log(username, email, mobile);
         updateUserMess.mutate({ username: username.trim(), email: email.trim(), mobile: mobile.trim(), cookie: Cookies.get('token') }, {
             onSuccess: async (res) => {
                 let _res = await res.json();
@@ -149,7 +149,7 @@ export default function User(props) {
 
 
     return (<div style={{ backgroundColor: 'rgb(244,244,244)' }}>
-         <DynamicComponent cateList={cateList} setLogin={setLogin} />
+        <DynamicComponent cateList={props.cateList} setLogin={setLogin} />
         <div className={styles.main_contain} style={{ marginTop: 24, marginBottom: 46, alignItems: 'flex-start' }}>
             <div className={styles.left_contain}>
                 <div className={styles.left_totalPannel}>
@@ -177,13 +177,13 @@ export default function User(props) {
                             <div>訂單列表</div>
                         </div>
                     </div>
-                    <div className={styles.border} onClick={() =>{
-                        let res=confirm("你確定要退出登陸嗎?");
-                        if(res){
+                    <div className={styles.border} onClick={() => {
+                        let res = confirm("你確定要退出登陸嗎?");
+                        if (res) {
                             Cookies.remove("token");
                             router.replace("/");
                         }
-                      
+
                     }}>
                         <div className={`${styles.user_btn}`} style={{ display: 'flex' }}>
                             <div>退出登錄</div>
@@ -198,7 +198,7 @@ export default function User(props) {
                             <h5 className={styles.right_contain_title}>信息修改</h5>
                             <div style={{ marginTop: 12, display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
                                 <div style={{ marginTop: 24 }}>
-                                    username <input onInput={(e) =>setUsername(e.target.value)} value={username} style={{ marginLeft: 12, borderRadius: 4, outline: 'none', paddingLeft: 4, paddingTop: 4, paddingBottom: 4 }} type="text" />
+                                    username <input onInput={(e) => setUsername(e.target.value)} value={username} style={{ marginLeft: 12, borderRadius: 4, outline: 'none', paddingLeft: 4, paddingTop: 4, paddingBottom: 4 }} type="text" />
                                 </div>
                                 <div style={{ marginTop: 24 }}>
                                     email<input onInput={(e) => setEmail(e.target.value)} value={email} style={{ marginLeft: 46, borderRadius: 4, outline: 'none', paddingLeft: 4, paddingTop: 4, paddingBottom: 4 }} type="text" />
@@ -222,7 +222,7 @@ export default function User(props) {
                             <div style={{ display: 'flex', width: '100%' }}>
                                 {
                                     addList.length ? addList.map((item, index) => {
-                                        return <div key={item.id} className={style.addressItem} style={{ padding: 14,marginRight:10,marginTop:10 }}>
+                                        return <div key={item.id} className={style.addressItem} style={{ padding: 14, marginRight: 10, marginTop: 10 }}>
                                             {/* <div className={item.is_default ? style.check : style.uncheck} style={{ width: '10%' }}>
                                     </div> */}
                                             <div onClick={() => setPosition(item.id)} className={style.addressItemDetail} style={{ paddingLeft: 4, flex: 1 }}>

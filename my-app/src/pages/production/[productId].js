@@ -108,7 +108,7 @@ export default function ProductDetail({ cateList, product }) {
                 </div>
                 <div className={style.main_detail} style={{ width: '100%', display: "flex", marginTop: 24, marginBottom: 24 }}>
                     <div className={style.detail_left} style={{}}>
-                        <img className={style.img_show} src={Image} style={{ width: '100%' }} />
+                        <img className={style.img_show} src={Image} style={{ width: '100%', borderRadius: 20 }} />
                         <div style={{ marginTop: 16, position: 'relative' }}>
                             <div className={style.img_picker_contain} style={{ width: '100%', position: 'relative', overflow: 'hidden' }}>
                                 <div className={style.img_picker}>
@@ -116,7 +116,7 @@ export default function ProductDetail({ cateList, product }) {
                                         <div style={{ width: '100%', display: 'flex', alignItems: 'center' }}>
                                             {
                                                 product.flowerDetail[index].flowerimages.map((item, index) => {
-                                                    return <img onClick={() => setImage(item)} key={index.toString()} src={item} style={{ width: '17%', marginRight: '3%' }}></img>
+                                                    return <img onClick={() => setImage(item)} key={index.toString()} src={item} style={{ width: '17%', marginRight: '3%', borderRadius: 5 }}></img>
                                                 })
                                             }
                                         </div>
@@ -267,14 +267,14 @@ export default function ProductDetail({ cateList, product }) {
 
             {/* </div> */}
         </main >
-        <div>
-            <div className={style.youMaybeLike} style={{ padding: '2.5%', position: 'relative', marginBottom: 24 }}>
+        <div style={{ margin: '0 21%' }}>
+            <div className={style.youMaybeLike} style={{ padding: '2.5%', position: 'relative', marginBottom: 24, borderRadius: 20 }}>
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                     <div className={styles.distance} style={{ borderBottomWidth: 1, borderBottomColor: 'white' }}></div>
                     <div className={styles.title} style={{ color: "white", marginRight: 16, marginLeft: 16 }}>FLORALISM 情人節定制花束</div>
                     <div className={styles.distance} style={{ borderBottomWidth: 1, borderBottomColor: 'white' }}></div>
                 </div>
-                <div style={{ position: "relative" }}>
+                <div style={{ position: "relative", }}>
 
                     <div style={{ padding: 8, marginTop: 12 }}>
 

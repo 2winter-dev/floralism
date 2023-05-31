@@ -1,31 +1,47 @@
-
-.main_background{
+.main_background {
     display: flex;
 }
-.main_layout{
+
+.main_layout {
     padding: 5% 21%;
 }
 
-.contact_title{
-    color: rgb(214,68,77);
+.contact_title {
+    color: rgb(214, 68, 77);
     font-size: 32px;
 }
-.contact_distance{
-    margin-top:5%;
+
+.contact_distance {
+    margin-top: 5%;
 }
-.main_contain{
+
+.main_contain {
     width: 50%;
 }
 
+
+.ContactusLayout {
+    padding: 0 21%;
+    margin-bottom: 24px;
+    display: flex;
+    margin-top: 24px;
+}
+
 @media screen and (max-width:1100px) {
-    .main_background{
+    .main_background {
         flex-direction: column;
     }
-    .main_contain{
+
+    .main_layout {
+
+        padding: 5%;
+    }
+
+    .main_contain {
         width: 100%;
     }
 
-    .desc_layout{
+    .desc_layout {
         margin-top: 5%;
     }
 }

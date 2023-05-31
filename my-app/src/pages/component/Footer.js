@@ -3,9 +3,9 @@ import { useQuery } from '@tanstack/react-query'
 import { constant } from '@/constant/index';
 
 export default function Footer() {
- 
-    const fetchCate=async ()=>{
-       let response=await fetch(`${constant.api_url}/api/Flowercategory/allIndex`, {
+
+    const fetchCate = async () => {
+        let response = await fetch(`${constant.api_url}/api/Flowercategory/allIndex`, {
             mode: 'cors',
             headers: {
                 // "Authorization": `Bearer ${data.cookie}`,
@@ -13,17 +13,17 @@ export default function Footer() {
                 "Access-Control-Request-Method": "POST",
                 "Access-Control-Request-Headers": "Content-Type",
             }
-       })
-       return await response.json()
+        })
+        return await response.json()
     }
     const cateList = useQuery({
         queryFn: fetchCate,
-        queryKey:['footerCate'],
-        onSuccess:(res)=>{
+        queryKey: ['footerCate'],
+        onSuccess: (res) => {
             //console.log(res);
         }
     })
-    if(cateList.isSuccess){
+    if (cateList.isSuccess) {
         //console.log(cateList.data);
     }
     return (<div className={style.footer} style={{ width: '100%' }}>
@@ -42,7 +42,7 @@ export default function Footer() {
                 <a>情人節禮物</a>
                 <a>更多品類</a> */}
                 {
-                    cateList.isSuccess&&cateList.data.data.map((item,index)=>{
+                    cateList.isSuccess && cateList.data.data.map((item, index) => {
                         // //console.log(item);
                         return (<a key={index} href={`/category/${item.id}`}>{item.categoryname}</a>)
                     })
@@ -104,7 +104,7 @@ export default function Footer() {
                 </div>
             </div>
         </div> */}
-        <div style={{ width: '100%', textAlign: 'center', marginTop: 16, marginBottom: 16, fontSize: 12 }}>
+        <div style={{ width: '100%', textAlign: 'center', marginTop: 16, marginBottom: 16, fontSize: 12, whiteSpace: 'nowrap' }}>
             ©2023 floralismhk Ins All rights reserved
         </div>
     </div>)
