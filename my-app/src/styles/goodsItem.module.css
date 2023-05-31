@@ -6,16 +6,32 @@
     position: relative;
     /* height: 15rem; */
 }
-
-.goods_img_cover:hover::before {
+.GoodsItem:hover .goods_img_cover::before{
+    display: block;
+    border-radius: 16px;
+    background-color: rgba(0,0,0,0.3);
+    width: 100%;
+    left: 0;
+    z-index: 1;
+    height: 100%;
+    content: "";
+    position: absolute;
+    transition: 300ms;
+}
+/* .goods_img_cover:hover::before {
     display: block;
     border-radius: 16px;
     background-color: rgba(0, 0, 0, 0.3);
-    /* display: block; */
     border-radius: 16px;
     opacity: 0;
     transition: 300ms;
-}
+    top: 0;
+    position: absolute;
+    z-index: 10;
+    height: 100%;
+    opacity: 0;
+    transition: 300ms;
+} */
 
 .goods_hover_img {
     display: block;
@@ -23,7 +39,7 @@
     position: absolute;
     width: 100%;
     left: 0;
-    z-index: 1;
+    z-index: 10;
     height: 100%;
     opacity: 0;
     transition: 300ms;

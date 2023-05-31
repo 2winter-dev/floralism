@@ -12,11 +12,11 @@ export default function GoodsItem(props) {
             location.href = `/category/${props.item.id}`
         }
     }} style={{ padding: '2%', ...props.top_style }}>
-        <div className={props.animation ? styles.goods_img_cover : ""} style={{ position: 'relative',...props.imgTopStyle }}>
+        <div className={props.animation&&(props.type==="category"||props.type==="carsouel") ? styles.goods_img_cover : ""} style={{ position: 'relative',...props.imgTopStyle }}>
             <img src={props?.item?.photoimage} style={{ width: '100%',display:'block', ...props.imgStyle }} className={props.animation==="toLarge"?`${styles.goods_img} ${styles.an_fangda}`:`${styles.goods_img}`} />
             {props.type!=="category"&&props.type!=="carsouel"&&props.item?.photoimages[0]&&<img src={props?.item?.photoimages[0]} style={{}} className={styles.goods_hover_img} /> }
             {
-                props.type !== "category" ? <button className={styles.buy_btn}>點擊購買</button> : null
+                props.type === "carsouel" && <button className={styles.buy_btn}>點擊購買</button> 
             }
         </div>
         {/* <div>{props.item.id}</div> */}
