@@ -64,9 +64,9 @@
   content: "";
   position: absolute;
 } */
-.goods_img_cover:hover .buy_btn {
+/* .goods_img_cover:hover .buy_btn {
     display: flex;
-}
+} */
 
 .goods_img_cover:hover .an_fangda {
     animation: fangda 400ms;
@@ -113,7 +113,10 @@
         transform: scale(1);
     }
 }
-
+.GoodsItem:hover .buy_btn{
+   opacity: 1;
+   /* z-index: 2; */
+}
 .GoodsItem:hover .goods_img_cover::after{
    content:"";
    display: block;
@@ -131,9 +134,9 @@
     color: white
 }
 
-.Iscategory:hover .buy_btn {
+/* .Iscategory:hover .buy_btn {
     display: flex;
-}
+} */
 
 /* .GoodsItem:hover::before{
     display: block;
