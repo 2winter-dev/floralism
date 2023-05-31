@@ -60,7 +60,7 @@ export default function Contactus(props) {
                 />
                 <div style={{ width: '100%' }}>
                     <input type={'button'} value={'發送'}
-                        style={{ paddingLeft: 24, paddingRight: 24, letterSpacing: 2, paddingTop: 8, paddingBottom: 8, borderRadius: 8, marginTop: 24, fontSize: 16 }}
+                     className={style.submit_btn}
                     ></input>
                 </div>
 

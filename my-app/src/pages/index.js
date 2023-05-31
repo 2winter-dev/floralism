@@ -190,18 +190,6 @@ export default function Home({ allcate, cateList, GoodsPage, carousel }) {
         }
         } />
       }
-      {
-        <RegisterPannerl type={false} register={register} close={() => setRegister(false)} toLogin={() => {
-          setLogin(true);
-          setRegister(false)
-        }} />
-      }
-      {
-        <ForgetPassword type={0} close={() => setVisible(false)} visible={visible} toLogin={() => {
-          setVisible(false);
-          setLogin(true);
-        }} />
-      }
       <Script defer src="/swiper/js/idangerous.swiper.min.js" onReady={() => {
         MySwiper = new Swiper('.swiper-container', {
           loop: true,

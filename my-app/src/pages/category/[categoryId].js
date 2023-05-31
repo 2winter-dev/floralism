@@ -138,18 +138,7 @@ export default function Category({ allcate, cateList, data,top_banner,middle_ban
             }
             } />
         }
-        {
-            <RegisterPannerl type={false} register={register} close={() => setRegister(false)} toLogin={() => {
-                setLogin(true);
-                setRegister(false)
-            }} />
-        }
-        {
-            <ForgetPassword type={0} close={() => setVisible(false)} visible={visible} toLogin={() => {
-                setVisible(false);
-                setLogin(true);
-            }} />
-        }
+
     </div>)
 }
 

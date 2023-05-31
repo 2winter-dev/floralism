@@ -14,7 +14,7 @@ import m_api from "../../m_api";
 import { useRouter } from "next/router";
 import useDebounce from '@/hooks/useDebounce'
 import useThrottle from "../../hooks/useThrottle";
-
+import LoginPannel from "../component/LoginPannel";
 export default function ProductSearch({ cateList, data }) {
   // //////console.log(data);
   const router = useRouter();
@@ -96,8 +96,8 @@ export default function ProductSearch({ cateList, data }) {
       <div className={style.banner_search} style={{ position: 'absolute' }}>
         <img src="/product-search-desc.png" className={style.banner_desc}
         />
-        <div className={`${styles.search_area}`}>
-          <span className="iconfont" style={{ marginLeft: 8, fontSize: 20 }}>&#xe82e;</span>
+        <div className={`${styles.search_area}`} style={{marginBottom:12}}>
+          <span className={`${styles.serach_icon} iconfont`} style={{ marginLeft: 8}}>&#xe82e;</span>
           <input
             ref={input}
             type='text'
@@ -153,6 +153,16 @@ export default function ProductSearch({ cateList, data }) {
         />}
     </div>
     <Footer />
+    {
+        <LoginPannel login={login} close={() => setLogin(false)} toRegister={() => {
+          setLogin(false);
+          setRegister(true);
+        }} toForget={() => {
+          setLogin(false);
+          setVisible(true);
+        }
+        } />
+      }
   </div>)
 }
 

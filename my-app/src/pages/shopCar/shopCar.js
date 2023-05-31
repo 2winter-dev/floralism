@@ -346,18 +346,6 @@ export default function ShopCar({ cateList, shopCar }) {
             }
             } hasLogin={hasLogin} />
         }
-        {
-            <RegisterPannerl type={false} register={register} close={() => setRegister(false)} toLogin={() => {
-                setLogin(true);
-                setRegister(false)
-            }} hasLogin={hasLogin} />
-        }
-        {
-            <ForgetPassword type={0} close={() => setVisible(false)} visible={visible} toLogin={() => {
-                setVisible(false);
-                setLogin(true);
-            }} />
-        }
     </div>
 }
 export async function getServerSideProps(context) {

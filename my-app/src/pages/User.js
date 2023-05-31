@@ -12,6 +12,7 @@ import m_api from "../m_api";
 import { useRouter } from "next/router";
 import AddressPannel from "./component/addressPannel";
 import Cookies from "js-cookie";
+import LoginPannel from "./component/LoginPannel";
 export default function User(props) {
     const router=useRouter();
     const [type, setType] = useState("message");
@@ -25,6 +26,7 @@ export default function User(props) {
     const [add, setAdd] = useState();
     const [add_type, setAdd_type] = useState();
     const [add_vis, setAdd_vis] = useState(false);
+    const [login,setLogin]=useState(false);
 
     const [orderList, setOrderList] = useState(props.orderList);
 
@@ -147,7 +149,7 @@ export default function User(props) {
 
 
     return (<div style={{ backgroundColor: 'rgb(244,244,244)' }}>
-        <DynamicComponent cateList={props.cateList} />
+         <DynamicComponent cateList={cateList} setLogin={setLogin} />
         <div className={styles.main_contain} style={{ marginTop: 24, marginBottom: 46, alignItems: 'flex-start' }}>
             <div className={styles.left_contain}>
                 <div className={styles.left_totalPannel}>
@@ -441,6 +443,16 @@ export default function User(props) {
         <Footer />
         {
             <AddressPannel type={add_type} item={item} visible={add_vis} close={() => setAdd_vis(false)} />
+        }
+        {
+            <LoginPannel login={login} close={() => setLogin(false)} toRegister={() => {
+                setLogin(false);
+                setRegister(true);
+            }} toForget={() => {
+                setLogin(false);
+                setVisible(true);
+            }
+            } />
         }
     </div>)
 }

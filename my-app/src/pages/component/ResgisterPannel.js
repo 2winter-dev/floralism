@@ -101,13 +101,7 @@ export default function RegisterPannerl(props) {
         }, 1000)
     }
 
-    return (<Modal
-        open={props.register}
-        onClose={props.close}
-        className={style.register_layout}
-        width={'70%'}
-        blur
-    >
+    return (
         <div className={style.register_total} style={{}}>
             <div className={""} >
                 <div style={{ width: "100%", cursor: 'pointer', alignItems: 'flex-end', display: 'flex', justifyContent: 'flex-end' }}>
@@ -154,7 +148,7 @@ export default function RegisterPannerl(props) {
                 }
             </div>
         </div>
-    </Modal>)
+    )
 
     // return (<div className={style.register_total} style={{}}>
     //     <div className={style.register_layout} style={{ height: window.innerHeight * 0.6, width: window.innerWidth * 0.7 }}>

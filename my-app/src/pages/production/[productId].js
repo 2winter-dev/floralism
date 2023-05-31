@@ -8,13 +8,11 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"
 import GoodsItem from "../component/GoodsItem";
 // import GoodsScoll from "./component/GoodsScroll";
 import LoginPannel from '../component/LoginPannel'
-import RegisterPannerl from '../component/ResgisterPannel'
 import ShopcarBottom from "../component/ShopcarBottom";
 import ShopCarPage from "../component/shopCarPage";
 import Head from 'next/head'
 import { constant } from "@/constant/index";
-import ForgetPassword from "../component/ForgetPassword";
-import { Cookie } from "next/font/google";
+
 import Cookies from "js-cookie";
 import { useMutation } from "@tanstack/react-query";
 import m_api from "@/m_api";
@@ -35,7 +33,7 @@ export default function ProductDetail({ cateList, product }) {
     const [Image, setImage] = useState(product?.flowerDetail[index].flowerimage);
     const [num, setNum] = useState(1);
     const contain = useRef();
-    const [isAdd,setIsAdd]=useState(Cookies.get("isAdd"));
+    const [isAdd, setIsAdd] = useState(Cookies.get("isAdd"));
     const [id, setId] = useState(product?.flowerDetail[index].id)
     const [cardcontent, setCardContent] = useState("");
     const [cardtype, setCardType] = useState(0);
@@ -185,7 +183,7 @@ export default function ProductDetail({ cateList, product }) {
                         </div>
 
                         <div style={{ display: 'flex', marginTop: 32, width: '100%', justifyContent: 'space-between', textAlign: 'center', alignItems: 'center' }}>
-                            <div style={{ marginRight: 12, flex: 1 }}>
+                            <div className={style.type_selector} style={{ marginRight: 12 }}>
                                 <select value={cardtype} onChange={(event) => {
                                     setCardType(event.target.value);
                                     //console.log(event.target.value);
@@ -196,10 +194,11 @@ export default function ProductDetail({ cateList, product }) {
                                     <option value={3}>不需要心意卡</option>
                                 </select>
                                 {cardtype === "1" && <textarea type={'text'} style={{ resize: 'none', paddingTop: 4, paddingBottom: 4, borderRadius: 4, marginTop: 12, width: '100%', paddingLeft: 10, paddingRight: 10 }} value={cardcontent} onInput={(e) => setCardContent(e.target.value)} placeholder="请输入心意卡内容" />}
+                                {cardtype === "0" && <img src='/心意卡.png' style={{ width: '100%', height: '100%', marginTop: 12 }} />}
                             </div>
-                            <div style={{ flex: 1, borderWidth: 2, borderColor: 'black', borderRadius: 8 }}>
+                            {/* <div style={{ flex: 1, borderWidth: 2, borderColor: 'black', borderRadius: 8 }}>
                                 {cardtype === "1" && <img src='/心意卡.png' style={{ width: '100%',height:'100%' }} />}
-                            </div>
+                            </div> */}
 
                         </div>
 
@@ -227,77 +226,38 @@ export default function ProductDetail({ cateList, product }) {
 
                         <div style={{ marginTop: 24 }}>
                             <button onClick={() => {
-                                if (cardtype) {
-                                    // //////console.log(Cookies.get('token'), id, num, cardtype, cardcontent);
-                                    addToCart.mutate({ cookie: Cookies.get('token'), flower_specs_id: id, num, cardtype, cardcontent: cardcontent.trim() }, {
-                                        onSuccess: async (res) => {
-                                            let isSuccess = await res.json()
-                                            // //////console.log(isSuccess);
-                                            if (isSuccess.code) {
-                                                if (isSuccess.code.toString() === '401') {
-                                                    Cookies.remove('token');
-                                                    alert("登錄失效");
-                                                    return;
-                                                }
-                                                if (isSuccess.code === 1){
-                                                    Cookies.set("isAdd",true);
-                                                    setIsAdd(true);
-                                                    // alert("加入购物车成功");
-                                                }
-                                            } else {
-                                                alert(isSuccess.msg);
+                                console.log("1");
+                                // //////console.log(Cookies.get('token'), id, num, cardtype, cardcontent);
+                                addToCart.mutate({ cookie: Cookies.get('token'), flower_specs_id: id, num, cardtype, cardcontent: cardcontent.trim() }, {
+                                    onSuccess: async (res) => {
+                                        let isSuccess = await res.json()
+                                        // //////console.log(isSuccess);
+                                        if (isSuccess.code) {
+                                            if (isSuccess.code.toString() === '401') {
+                                                Cookies.remove('token');
+                                                alert("登錄失效");
+                                                return;
                                             }
-                                        },
-                                        onError: (err) => {
-                                            alert("添加失敗");
+                                            if (isSuccess.code === 1) {
+                                                Cookies.set("isAdd", true);
+                                                setIsAdd(true);
+                                                // alert("加入购物车成功");
+                                            }
+                                        } else {
+                                            alert(isSuccess.msg);
                                         }
-                                    })
-                                } else {
-                                    alert("請選擇心意卡類型")
-                                }
+                                    },
+                                    onError: (err) => {
+                                        alert("添加失敗");
+                                    }
+                                })
+
 
                             }} className={style.buy_btn} style={{ cursor: 'pointer' }}>點擊購買</button>
                         </div>
                     </div>
                 </div>
-                <div>
-                    <div className={style.youMaybeLike} style={{ padding: '2.5%', position: 'relative', marginBottom: 24 }}>
-                        <div style={{ display: 'flex', alignItems: 'center' }}>
-                            <div className={styles.distance} style={{ borderBottomWidth: 1, borderBottomColor: 'white' }}></div>
-                            <div className={styles.title} style={{ color: "white", marginRight: 16, marginLeft: 16 }}>FLORALISM 情人節定制花束</div>
-                            <div className={styles.distance} style={{ borderBottomWidth: 1, borderBottomColor: 'white' }}></div>
-                        </div>
-                        <div style={{ position: "relative" }}>
 
-                            <div style={{ padding: 8, marginTop: 12 }}>
-                               
-                                <Carousel infiniteLoop showIndicators={false} preventMovementUntilSwipeScrollTolerance={true} swipeScrollTolerance={50} showStatus={false}>
-                                    {
-                                        carousel_slice(4).map((item, index) => {
-                                            //////console.log(carousel_slice().length);
-                                            return (<div key={item.id + index.toString()} style={{ display: 'flex', flexWrap: 'wrap' }}>
-                                                {
-                                                    item.map((it, ii) => {
-                                                        return (<GoodsItem imgTopStyle={{  }} key={item.id + index.toString() + ii.toString()} item={it} type={'carsouel'} top_style={{}} imgStyle={{}} animation />)
-                                                    })
-                                                }
-                                            </div>)
-                                        })
-                                    }
-                                </Carousel>
-
-                            </div>
-                            {/* <div className={styles.scroll_left} style={{ zIndex: 10, cursor: 'pointer' }} onClick={() => MySwiper.swipePrev()} >
-                                <span className="iconfont" style={{ fontSize: 24 }}>&#xe628;</span>
-                            </div>
-                            <div className={styles.scroll_right} style={{ zIndex: 10, cursor: 'pointer' }} onClick={() => MySwiper.swipeNext()}>
-                                <span className="iconfont" style={{ fontSize: 24 }}>&#xe642;</span>
-                            </div> */}
-                        </div>
-
-                    </div>
-
-                </div>
                 {/* <div className={style.scroll_right} style={{ marginLeft: '2.5%' }}>
                             &gt;
                         </div> */}
@@ -307,6 +267,44 @@ export default function ProductDetail({ cateList, product }) {
 
             {/* </div> */}
         </main >
+        <div>
+            <div className={style.youMaybeLike} style={{ padding: '2.5%', position: 'relative', marginBottom: 24 }}>
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <div className={styles.distance} style={{ borderBottomWidth: 1, borderBottomColor: 'white' }}></div>
+                    <div className={styles.title} style={{ color: "white", marginRight: 16, marginLeft: 16 }}>FLORALISM 情人節定制花束</div>
+                    <div className={styles.distance} style={{ borderBottomWidth: 1, borderBottomColor: 'white' }}></div>
+                </div>
+                <div style={{ position: "relative" }}>
+
+                    <div style={{ padding: 8, marginTop: 12 }}>
+
+                        <Carousel showThumbs={false} infiniteLoop showIndicators={false} preventMovementUntilSwipeScrollTolerance={true} swipeScrollTolerance={50} showStatus={false}>
+                            {
+                                carousel_slice(4).map((item, index) => {
+                                    //////console.log(carousel_slice().length);
+                                    return (<div key={item.id + index.toString()} style={{ display: 'flex', flexWrap: 'wrap' }}>
+                                        {
+                                            item.map((it, ii) => {
+                                                return (<GoodsItem imgTopStyle={{}} key={item.id + index.toString() + ii.toString()} item={it} type={'carsouel'} top_style={{}} imgStyle={{}} animation />)
+                                            })
+                                        }
+                                    </div>)
+                                })
+                            }
+                        </Carousel>
+
+                    </div>
+                    {/* <div className={styles.scroll_left} style={{ zIndex: 10, cursor: 'pointer' }} onClick={() => MySwiper.swipePrev()} >
+                                <span className="iconfont" style={{ fontSize: 24 }}>&#xe628;</span>
+                            </div>
+                            <div className={styles.scroll_right} style={{ zIndex: 10, cursor: 'pointer' }} onClick={() => MySwiper.swipeNext()}>
+                                <span className="iconfont" style={{ fontSize: 24 }}>&#xe642;</span>
+                            </div> */}
+                </div>
+
+            </div>
+
+        </div>
         <Footer />
         {
             <LoginPannel login={login} close={() => setLogin(false)} toRegister={() => {
@@ -317,18 +315,6 @@ export default function ProductDetail({ cateList, product }) {
                 setVisible(true);
             }
             } />
-        }
-        {
-            <RegisterPannerl type={false} register={register} close={() => setRegister(false)} toLogin={() => {
-                setLogin(true);
-                setRegister(false)
-            }} />
-        }
-        {
-            <ForgetPassword type={0} close={() => setVisible(false)} visible={visible} toLogin={() => {
-                setVisible(false);
-                setLogin(true);
-            }} />
         }
         <ShopcarBottom isAdd={isAdd} />
         {

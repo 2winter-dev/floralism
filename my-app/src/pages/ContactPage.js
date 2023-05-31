@@ -10,8 +10,6 @@ import BodyBanner from "./component/BodyBanner";
 import { constant } from "@/constant/index";
 import CateScroll from './component/cateScroll';
 import LoginPannel from "./component/LoginPannel";
-import RegisterPannerl from "./component/ResgisterPannel";
-import ForgetPassword from "./component/ForgetPassword";
 import DynamicComponent from './component/Dynamic';
 export default function ContactPage({ cateList, allcate }) {
     ////////console.log(cateList)
@@ -119,18 +117,6 @@ export default function ContactPage({ cateList, allcate }) {
                 setVisible(true);
             }
             } />
-        }
-        {
-            <RegisterPannerl type={false} register={register} close={() => setRegister(false)} toLogin={() => {
-                setLogin(true);
-                setRegister(false)
-            }} />
-        }
-        {
-            <ForgetPassword type={0} close={() => setVisible(false)} visible={visible} toLogin={() => {
-                setVisible(false);
-                setLogin(true);
-            }} />
         }
     </div>)
 }

@@ -2,7 +2,6 @@
     top: 0;
     width: 100%;
     padding: 8% 20%;
-  
 }
 .banner_desc{
     /* width: 100%; */
@@ -16,5 +15,11 @@
 @media screen and (max-width:1100px) {
     .banner_desc{
         width: 100%;
+    }
+}
+
+@media screen and (max-width:675px) {
+    .banner_search{
+        padding:4.5% 15%;
     }
 }

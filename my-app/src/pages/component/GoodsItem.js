@@ -23,11 +23,11 @@ export default function GoodsItem(props) {
             </div> :
             props.type === "carsouel" ? <div style={{ display: 'flex', flexDirection: 'column', marginTop: 16, paddingLeft: '10%', paddingRight: '10%', alignItems: 'center' }}>
                 <div style={{ width: '100%', textOverflow: 'ellipsis', textAlign: 'center', overflow: 'hidden', whiteSpace: 'nowrap' }}>{props?.item?.flowername??""}</div>
-                <div className={styles.goods_carsouel_price}>{'HK$ ' + props?.item?.price??""}</div>
+                <div className={styles.goods_carsouel_price} style={{ width: '100%', textAlign: 'center', whiteSpace: 'nowrap' }}>{'HK$ ' + props?.item?.price??""}</div>
             </div> :
                 <div style={{ display: 'flex', flexDirection: 'column', marginTop: 16, paddingLeft: '10%', paddingRight: '10%', alignItems: 'center' }}>
                     <div style={{ width: '100%', textOverflow: 'ellipsis', textAlign: 'center', whiteSpace: 'nowrap', overflow: 'hidden' }}>{props?.item?.flowername??""}</div>
-                    <div className={styles.goods_price}>{'HK$ ' + props?.item?.price??""}</div>
+                    <div className={styles.goods_price} style={{ width: '100%', textAlign: 'center', whiteSpace: 'nowrap', overflow: 'hidden' }}>{'HK$ ' + props?.item?.price??""}</div>
                 </div>}
     </div>)
 

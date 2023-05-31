@@ -30,9 +30,6 @@ export default function selectMethod(props) {
 
     const { deliverytype, deliverydate, cart_ids, remark, amount, payment_amount } = useRouter().query
 
-    if (useRouter().query.page) {
-        setPage(useRouter().query.page);
-    }
     //console.log("----------");
     //console.log(deliverytype);
     // //////console.log(useRouter());
@@ -211,14 +208,14 @@ export default function selectMethod(props) {
                         page >= 4 ? styles.complete : styles.wrong
                     } style={{ height: 4, flex: 1, background: 'red' }}></div>
                 </div>
-            </div>
+            </div> 
             <div style={{ marginTop: 24 }}>
                 {
                     page === 1 &&
                     <div className={styles.column_control} style={{ display: 'flex', alignItems: 'flex-start' }}>
                         <div style={{ flex: 1, marginRight: 12, backgroundColor: 'white', padding: '3%', borderRadius: 8, marginRight: 12 }}>
                             {
-                                deliverytype.toString() === "1" ? <div>
+                                deliverytype?.toString() === "1" ? <div>
                                     <div className={styles.title_area} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
                                         <div className={styles.title} >選擇地址</div>
                                         {/* <div onClick={() => {
@@ -387,7 +384,9 @@ export default function selectMethod(props) {
                             </div>
                         </div>)
                 }
-
+                {
+                    page === 3 && (success&&<div>付款成功</div>)
+                }
             </div>
         </div>
 
@@ -402,18 +401,7 @@ export default function selectMethod(props) {
             }
             } />
         }
-        {
-            <RegisterPannerl type={false} register={register} close={() => setRegister(false)} toLogin={() => {
-                setLogin(true);
-                setRegister(false)
-            }} />
-        }
-        {
-            <ForgetPassword type={0} close={() => setVisible(false)} visible={visible} toLogin={() => {
-                setVisible(false);
-                setLogin(true);
-            }} />
-        }
+
         {
             <AddressPannel type={type} item={item} visible={add_vis} close={() => setAdd_vis(false)} />
         }
@@ -422,7 +410,7 @@ export default function selectMethod(props) {
 
 
 export async function getServerSideProps(context) {
-    // //console.log(context.query.deliverytype);
+    console.log(context.query.page);
     const response = await fetch(
         `${constant.api_url}/api/flowercategory/index`, {
         mode: 'cors',
@@ -504,15 +492,20 @@ export async function getServerSideProps(context) {
         s_list = { data: [], code: 401 };
     }
     //////console.log(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
-    //console.log(goods_data);
-    if (!goods_data.code) {
-        return {
-            redirect: {
-                permanent: false,
-                destination: '/shopCar/shopCar',
+    // console.log(goods_data);
+    // if (context.query.page !== "3") {
+        console.log("不为3");
+        if (!goods_data.code) {
+            return {
+                redirect: {
+                    permanent: false,
+                    destination: '/shopCar/shopCar',
+                }
             }
         }
-    }
+    // }
+
+
 
 
     //////console.log(add_data);
@@ -525,7 +518,7 @@ export async function getServerSideProps(context) {
             goodsList: goods_data.data,
             publishableKey: `${process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY}`,
             secretKey: `${process.env.STRIPE_SECRET_KEY}`,
-            shopList: s_list.data,
+            shopList: s_list?.data ?? [],
         },
     };
 }

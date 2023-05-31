@@ -9,7 +9,7 @@ export default function SuccessPage() {
     // url.splice("?")
     //////console.log(router.query.url);
     const getState = () => {
-        
+        console.log(router.query.url)
         let res = router.query.url.split("?")[1];
         let _res = res.split("&")[0];
         let statement = _res.split("=")[0];

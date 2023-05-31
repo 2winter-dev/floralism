@@ -26,7 +26,9 @@
     background-size: 100% 100%;
     background-repeat: no-repeat;
 }
-
+.type_selector{
+    width: 50%;
+}
 .img_picker img{
    border-radius: 8px;
    cursor: pointer;
@@ -152,6 +154,13 @@
         width: 100%;
     }
 } 
+
+@media  screen  and (max-width:675px){
+    .type_selector{
+        width:100%
+    }
+    
+}
 
 .buy_btn{
     padding: 0.5rem 1.5rem;
