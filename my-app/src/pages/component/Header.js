@@ -23,10 +23,10 @@ export default function Header(props) {
                         return (<div key={item.id} className={`${header.header_center_label}`}>
                             <div className={`${header.header_center_parent}`}>{item.categoryname}
                                 {
-                                    item.get_child && <span className={`iconfont ${header.dropdown_btn}`} style={{ fontSize: 10 }}>&#xe645;</span>
+                                    item.get_child?.length && <span className={`iconfont ${header.dropdown_btn}`} style={{ fontSize: 10 }}>&#xe645;</span>
                                 }
                             </div>
-                            {item.get_child && <div className={`${header.header_center_dropdown}`}>
+                            {item.get_child?.length && <div className={`${header.header_center_dropdown}`}>
                                 {
                                     item.get_child.map((it, ii) => {
                                         return (<div key={index.toString() + ii.toString()}><a href={`/category/${it.id}`} >{it.categoryname}</a></div>)
