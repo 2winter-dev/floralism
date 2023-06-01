@@ -2,7 +2,7 @@
 (() => {
 var exports = {};
 exports.id = 5405;
-exports.ids = [5405,839,7720,8693,6163,8968,1577,9925];
+exports.ids = [5405,8693,839,7720,8968,6163,1577,9925];
 exports.modules = {
 
 /***/ 8733:
@@ -41,7 +41,7 @@ __webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __we
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ Home),
-/* harmony export */   "getStaticProps": () => (/* binding */ getStaticProps)
+/* harmony export */   "getServerSideProps": () => (/* binding */ getServerSideProps)
 /* harmony export */ });
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(5893);
 /* harmony import */ var next_script__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4298);
@@ -311,7 +311,9 @@ function Home({ allcate , cateList , GoodsPage , carousel  }) {
                                                 return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                                                     style: {
                                                         display: "flex",
-                                                        flexWrap: "wrap"
+                                                        flexWrap: "wrap",
+                                                        width: "95%",
+                                                        margin: "0 2.5%"
                                                     },
                                                     children: item.map((it, ii)=>{
                                                         return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_component_GoodsItem__WEBPACK_IMPORTED_MODULE_2__["default"], {
@@ -365,7 +367,7 @@ function Home({ allcate , cateList , GoodsPage , carousel  }) {
         ]
     });
 }
-async function getStaticProps({ local  }) {
+async function getServerSideProps({ local  }) {
     //  ////////////console.log(constant.api_url);
     const response = await fetch(`${_constant_index__WEBPACK_IMPORTED_MODULE_16__/* .constant.api_url */ .a.api_url}/api/flowercategory/index`, {
         mode: "cors",

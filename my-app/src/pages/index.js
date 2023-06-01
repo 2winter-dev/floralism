@@ -159,7 +159,7 @@ export default function Home({ allcate, cateList, GoodsPage, carousel }) {
                   {
                     carousel_slice().map((item, index) => {
                       //////////console.log(carousel_slice().length);
-                      return (<div key={item.id + index.toString()} style={{ display: 'flex', flexWrap: 'wrap' }}>
+                      return (<div key={item.id + index.toString()} style={{ display: 'flex', flexWrap: 'wrap', width: '95%', margin: '0 2.5%' }}>
                         {
                           item.map((it, ii) => {
                             return (<GoodsItem imgTopStyle={{}} key={item.id + index.toString() + ii.toString()} item={it} type={'carsouel'} top_style={{}} imgStyle={{}} animation />)
@@ -204,7 +204,7 @@ export default function Home({ allcate, cateList, GoodsPage, carousel }) {
 }
 
 
-export async function getStaticProps({ local }) {
+export async function getServerSideProps({ local }) {
   //  ////////////console.log(constant.api_url);
   const response = await fetch(
     `${constant.api_url}/api/flowercategory/index`, {
