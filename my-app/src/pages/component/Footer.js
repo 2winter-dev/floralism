@@ -50,9 +50,9 @@ export default function Footer() {
             <div className={style.footer_column} style={{ display: 'flex', flexDirection: 'column' }}>
                 <p>聯絡我們</p>
                 <div>香港新界葵涌國瑞路116-122號</div>
-                <div>城市工業中心1樓H&J室</div>
+                <div style={{marginTop:4}}>城市工業中心1樓H&J室</div>
                 <div>T <a href="tel:+85265818053">+852 65818053</a></div>
-                <div>F +852 65818053</div>
+                <div>F <a href="">+852 65818053</a></div>
                 <div>E <a href="mailto:info@floralismhk.com">info@floralismhk.com</a></div>
                 <div>對我們的產品及服務有興趣？</div>
                 <div style={{marginTop:4}}>請聯係我們</div>
