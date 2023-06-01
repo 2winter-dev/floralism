@@ -41,7 +41,7 @@ class MyDocument extends (next_document__WEBPACK_IMPORTED_MODULE_2___default()) 
                 /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(next_document__WEBPACK_IMPORTED_MODULE_2__.Head, {
                     children: [
                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("meta", {
-                            "http-equiv": "Content-Security-Policy",
+                            httpEquiv: "Content-Security-Policy",
                             content: "upgrade-insecure-requests"
                         }),
                         _nextui_org_react__WEBPACK_IMPORTED_MODULE_3__.CssBaseline.flush(),

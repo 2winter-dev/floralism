@@ -18,7 +18,7 @@ class MyDocument extends Document {
       <Html lang="zh-cn">
         <Head>
           <meta
-            http-equiv="Content-Security-Policy"
+            httpEquiv="Content-Security-Policy"
             content="upgrade-insecure-requests"
           />
           {CssBaseline.flush()}

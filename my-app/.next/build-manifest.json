@@ -5,8 +5,8 @@
   "devFiles": [],
   "ampDevFiles": [],
   "lowPriorityFiles": [
-    "static/isJbVaaKPSBhxaFmcD4FJ/_buildManifest.js",
-    "static/isJbVaaKPSBhxaFmcD4FJ/_ssgManifest.js"
+    "static/oRsD3SAizrLuOvx6exRrm/_buildManifest.js",
+    "static/oRsD3SAizrLuOvx6exRrm/_ssgManifest.js"
   ],
   "rootMainFiles": [],
   "pages": {
@@ -16,10 +16,10 @@
       "static/chunks/main-ee170d285abd517d.js",
       "static/chunks/871-61e13b618a0a13ca.js",
       "static/chunks/962-c8e37ee919a7e436.js",
-      "static/chunks/731-5a807d9f8b5e676c.js",
+      "static/chunks/731-43a5917c1c4ee6f3.js",
       "static/chunks/116-61f9aa809a22b730.js",
       "static/chunks/736-6a12ce6beb722337.js",
-      "static/chunks/102-74c0d0ce2f2edab8.js",
+      "static/chunks/102-4b99dbdf43362d18.js",
       "static/css/57c5be3cd923cc7e.css",
       "static/css/b3d31507e140c934.css",
       "static/chunks/pages/index-ee44e442862a0c96.js"
@@ -38,7 +38,7 @@
       "static/chunks/962-c8e37ee919a7e436.js",
       "static/chunks/116-61f9aa809a22b730.js",
       "static/chunks/736-6a12ce6beb722337.js",
-      "static/chunks/102-74c0d0ce2f2edab8.js",
+      "static/chunks/102-4b99dbdf43362d18.js",
       "static/css/15be5f04ced7fd8a.css",
       "static/chunks/pages/Aboutus-7bc286d273dd8ca8.js"
     ],
@@ -51,7 +51,7 @@
       "static/chunks/664-8dad9758a737e774.js",
       "static/chunks/116-61f9aa809a22b730.js",
       "static/chunks/736-6a12ce6beb722337.js",
-      "static/chunks/102-74c0d0ce2f2edab8.js",
+      "static/chunks/102-4b99dbdf43362d18.js",
       "static/css/1926d07951c533bd.css",
       "static/chunks/pages/ContactPage-a7f72cd7e5f1e1d7.js"
     ],
@@ -71,7 +71,7 @@
       "static/chunks/345-e38b53fc45b5cdf4.js",
       "static/chunks/116-61f9aa809a22b730.js",
       "static/chunks/736-6a12ce6beb722337.js",
-      "static/chunks/569-ac390a8752f73e13.js",
+      "static/chunks/569-c03ba89d3c0ca2ae.js",
       "static/css/9c96d5a57f8d159d.css",
       "static/chunks/pages/User-5d4fdd6a66a41b8b.js"
     ],
@@ -103,7 +103,7 @@
       "static/chunks/664-8dad9758a737e774.js",
       "static/chunks/116-61f9aa809a22b730.js",
       "static/chunks/736-6a12ce6beb722337.js",
-      "static/chunks/102-74c0d0ce2f2edab8.js",
+      "static/chunks/102-4b99dbdf43362d18.js",
       "static/css/097f8d3eabca4d62.css",
       "static/chunks/pages/category/[categoryId]-7b23485e6833cd4a.js"
     ],
@@ -132,7 +132,7 @@
       "static/chunks/framework-2c79e2a64abdb08b.js",
       "static/chunks/main-ee170d285abd517d.js",
       "static/css/1cd0086b6e439b6a.css",
-      "static/chunks/pages/component/Footer-4582aeca5e22c82f.js"
+      "static/chunks/pages/component/Footer-d3aa3475a7281a5a.js"
     ],
     "/component/ForgetPassword": [
       "static/chunks/webpack-45e94aacaefda3d4.js",
@@ -234,7 +234,7 @@
       "static/chunks/664-8dad9758a737e774.js",
       "static/chunks/116-61f9aa809a22b730.js",
       "static/chunks/736-6a12ce6beb722337.js",
-      "static/chunks/102-74c0d0ce2f2edab8.js",
+      "static/chunks/102-4b99dbdf43362d18.js",
       "static/css/764f603addb6e1c6.css",
       "static/chunks/pages/productSearch/[ProductSearchId]-4ecbbd0a62cd0d95.js"
     ],
@@ -245,13 +245,13 @@
       "static/chunks/871-61e13b618a0a13ca.js",
       "static/chunks/962-c8e37ee919a7e436.js",
       "static/chunks/664-8dad9758a737e774.js",
-      "static/chunks/731-5a807d9f8b5e676c.js",
+      "static/chunks/731-43a5917c1c4ee6f3.js",
       "static/chunks/116-61f9aa809a22b730.js",
       "static/chunks/736-6a12ce6beb722337.js",
       "static/chunks/423-47325986d8493bf4.js",
       "static/css/57c5be3cd923cc7e.css",
       "static/css/b538ed6b7c12aad3.css",
-      "static/chunks/pages/production/[productId]-ba9893b92cf590f1.js"
+      "static/chunks/pages/production/[productId]-81f71be15f2ea55e.js"
     ],
     "/selectMethod": [
       "static/chunks/webpack-45e94aacaefda3d4.js",
@@ -260,10 +260,10 @@
       "static/chunks/871-61e13b618a0a13ca.js",
       "static/chunks/962-c8e37ee919a7e436.js",
       "static/chunks/345-e38b53fc45b5cdf4.js",
-      "static/chunks/946-bb3c0173be54239d.js",
+      "static/chunks/946-dc5c85224d02760b.js",
       "static/chunks/116-61f9aa809a22b730.js",
       "static/chunks/736-6a12ce6beb722337.js",
-      "static/chunks/569-ac390a8752f73e13.js",
+      "static/chunks/569-c03ba89d3c0ca2ae.js",
       "static/css/3e2bf6cb2ff874c8.css",
       "static/chunks/pages/selectMethod-305d8d23cdf5ad41.js"
     ],
@@ -283,7 +283,7 @@
       "static/chunks/116-61f9aa809a22b730.js",
       "static/chunks/736-6a12ce6beb722337.js",
       "static/css/2c2f79bd74463fe2.css",
-      "static/chunks/pages/shopCar/shopCar-30191073d75847bd.js"
+      "static/chunks/pages/shopCar/shopCar-11b458cdd7be0501.js"
     ]
   },
   "ampFirstPages": []

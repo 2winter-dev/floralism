@@ -53,11 +53,12 @@ function Footer() {
     };
     const [cateList, setList] = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)([]);
     (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(()=>{
-        fetchCate().then((res)=>setList(res)).catch((er)=>{
+        fetchCate().then((res)=>setList(res.data)).catch((er)=>{
             console.log("cat_list error:");
             console.log(er);
         });
     }, []);
+    console.log(cateList);
     return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
         className: (_styles_footer_module_css__WEBPACK_IMPORTED_MODULE_3___default().footer),
         style: {
@@ -81,7 +82,7 @@ function Footer() {
                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
                                 children: "產品"
                             }),
-                            cateList.isSuccess && cateList.data.data.map((item, index)=>{
+                            cateList.map((item, index)=>{
                                 // ////console.log(item);
                                 if (index > 5) return null;
                                 return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("a", {

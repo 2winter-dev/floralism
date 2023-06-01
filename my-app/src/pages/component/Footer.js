@@ -21,19 +21,22 @@ export default function Footer() {
 
 
     const [cateList, setList] = useState([])
+
     useEffect(() => {
-        fetchCate().then((res) => setList(res)).catch((er) => {
+        fetchCate().then((res) => setList(res.data)).catch((er) => {
             console.log('cat_list error:')
             console.log(er)
         })
     }, [])
+
+    console.log(cateList)
 
     return (<div className={style.footer} style={{ width: '100%' }}>
         <div className={style.footer_three_column} style={{ display: 'flex', justifyContent: 'space-between' }}>
             <div className={style.footer_column} style={{ display: 'flex', flexDirection: 'column' }}>
                 <p >產品</p>
                 {
-                    cateList.isSuccess && cateList.data.data.map((item, index) => {
+                    cateList.map((item, index) => {
                         // ////console.log(item);
                         if (index > 5) return null;
                         return (<a key={index} href={`/category/${item.id}`}>{item.categoryname}</a>)
