@@ -35,7 +35,7 @@ export default function Footer() {
                 {
                     cateList.isSuccess && cateList.data.data.map((item, index) => {
                         // ////console.log(item);
-                        if(index>6) return null;
+                        if(index>5) return null;
                         return (<a key={index} href={`/category/${item.id}`}>{item.categoryname}</a>)
                     })
                 }
@@ -45,7 +45,7 @@ export default function Footer() {
                 <a>購物指南</a>
                 <a>訂製服務</a>
                 <a>送貨服務</a>
-                <a href='/Contactus'>關於我們</a>
+                <a href='/ContactPage'>關於我們</a>
             </div>
             <div className={style.footer_column} style={{ display: 'flex', flexDirection: 'column' }}>
                 <p>聯絡我們</p>
@@ -62,7 +62,7 @@ export default function Footer() {
                     <div style={{ flex: 1, fontSize: 20 }}>FOLLOW US</div>
                     <div className={style.icon_group} style={{ flex: 1, display: 'flex', alignItems: 'center', flexWrap: 'wrap', marginTop: 16, justifyContent: 'space-between' }}>
                         <div style={{ cursor: 'pointer' }}>
-                            <a href="https://wa.me/85263396652"><img src='/矢量智能对象-3.png' className={style.footer_Image} /></a>
+                            <a ><img src='/矢量智能对象-3.png' className={style.footer_Image} /></a>
                         </div>
                         <div style={{ cursor: 'pointer' }}>
                             <img src='/矢量智能对象-2.png' className={style.footer_Image} />
@@ -71,7 +71,7 @@ export default function Footer() {
                             <img src='/矢量智能对象-1.png' className={style.footer_Image} />
                         </div>
                         <div style={{ cursor: 'pointer' }}>
-                            <img src='/矢量智能对象.png' className={{ ...style.footer_Image, marginRight: 0 }} />
+                            <a href="https://wa.me/85263396652"><img src='/矢量智能对象.png' className={{ ...style.footer_Image, marginRight: 0 }} /></a>
                         </div>
                     </div>
                 </div>

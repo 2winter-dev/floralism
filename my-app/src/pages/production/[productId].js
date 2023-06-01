@@ -218,7 +218,7 @@ export default function ProductDetail({ cateList, product }) {
                                         setNum(num - 1);
                                     }
                                 }} className={style.decrease} style={{ cursor: 'pointer' }}>-</button>
-                                <input type="text" className={style.product_number} contentEditable={false} value={num} onChange={() => {
+                                <input type="text" className={style.product_number} style={{borderRadius:0}} contentEditable={false} value={num} onChange={() => {
                                 }} />
                                 <button onClick={() => {
                                     setNum(num + 1);
@@ -393,20 +393,6 @@ export async function getStaticProps(context) {
     );
     ////////////console.log(Cookies.get("token"));
     const detail = await detail_response.json();
-    //   let data=await response.text();
-    //   const swiper_response=await fetch(
-    //     `${constant.api_url}/api/flowers/getTopicFlower?flower_category_id=${JSON.parse(data).data[index].id}`
-    //   )
-    //   const goods_response=await fetch(
-    //     `${constant.api_url}/api/flowers/index`
-    //   )
-    //    ////////////console.log(data);
-    //   ////////////console.log(detail);
-
-    //   ////////////console.log("====================");
-    //   ////////////console.log(detail.data.product.flowerDetail[index]);
-    // ////////////console.log(data[1]);
-    // //////////console.log(detail.data);
     return {
         props: {
             cateList: JSON.parse(data).data,

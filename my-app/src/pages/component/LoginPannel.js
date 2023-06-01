@@ -212,12 +212,20 @@ export default function LoginPannel(props) {
         }
         {
             mtype === "register" && <Modal.Body>
-                <RegisterPannerl toLogin={() => setMType("login")} />
+                <RegisterPannerl close={() => {
+                    props.close();
+                    setType(0);
+                    setMType("login");
+                }} toLogin={() => setMType("login")} />
             </Modal.Body>
         }
         {
             mtype === "forget" && <Modal.Body>
-                <ForgetPassword toLogin={() => setMType("login")} />
+                <ForgetPassword close={() => {
+                    props.close();
+                    setType(0);
+                    setMType("login");
+                }} toLogin={() => setMType("login")} />
             </Modal.Body>
         }
     </Modal>)

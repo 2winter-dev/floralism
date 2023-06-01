@@ -11,7 +11,7 @@ export default function DynamicComponent(props) {
     return (<DynamicLazyComponent list={props.cateList} login={() => {
         ////console.log("123");
         if (Cookies.get('token')) {
-            alert("你先退出登陆吗")
+            router.push("/User")
         } else props.setLogin(true);
     }} />)
 }
