@@ -101,7 +101,7 @@ export default function ProductDetail({ cateList, product }) {
             <meta title={'keywords'} content={`${product.flowerList[index].meta}`} />
         </Head>
         <DynamicComponent cateList={cateList} setLogin={setLogin} />
-        <main className={style.total_container} style={{  }}>
+        <main className={style.total_container} style={{}}>
             <div>
                 <div style={{ marginTop: 32 }}>
                     <Link href={'/'} style={{ cursor: 'pointer' }}>首頁</Link><span className={style.separator} style={{ cursor: 'pointer' }}>/</span><Link href={`/category/${product.flowerCategory.id}`}>{product.flowerCategory.categoryname}</Link>
@@ -114,7 +114,7 @@ export default function ProductDetail({ cateList, product }) {
                         <div style={{ marginTop: 16, position: 'relative' }}>
                             <div className={style.img_picker_contain} style={{ width: '100%', position: 'relative', overflow: 'hidden' }}>
                                 <div className={style.img_picker}>
-                                    <div ref={contain} style={{ width: '100%', position: 'relative',display:'flex',justifyContent:'center' }}>
+                                    <div ref={contain} style={{ width: '100%', position: 'relative', display: 'flex', justifyContent: 'center' }}>
                                         <div style={{ width: '90%', display: 'flex', alignItems: 'center' }}>
                                             {
                                                 product.flowerDetail[index].flowerimages.map((item, index) => {
@@ -269,11 +269,11 @@ export default function ProductDetail({ cateList, product }) {
 
             {/* </div> */}
         </main >
-        <div  className={style.swiper_margin}>
+        <div className={style.swiper_margin}>
             <div className={style.youMaybeLike} style={{ padding: '2.5%', position: 'relative', marginBottom: 24, borderRadius: 20 }}>
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                     <div className={styles.distance} style={{ borderBottomWidth: 1, borderBottomColor: 'white' }}></div>
-                    <div className={styles.title} style={{  marginRight: 16, marginLeft: 16 }}>FLORALISM 情人節定制花束</div>
+                    <div className={styles.title} style={{ marginRight: 16, marginLeft: 16 }}>FLORALISM 情人節定制花束</div>
                     <div className={styles.distance} style={{ borderBottomWidth: 1, borderBottomColor: 'white' }}></div>
                 </div>
                 <div style={{ position: "relative", }}>
@@ -398,5 +398,6 @@ export async function getStaticProps(context) {
             cateList: JSON.parse(data).data,
             product: detail.data
         },
+        revalidate: 30, // In seconds
     };
 }

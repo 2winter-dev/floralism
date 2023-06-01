@@ -14,7 +14,7 @@ import DynamicComponent from "../component/Dynamic";
 import Head from "next/head";
 import CateScroll from "../component/cateScroll";
 import { useRouter } from "next/router";
-export default function Category({ allcate, cateList, data,top_banner,middle_banner }) {
+export default function Category({ allcate, cateList, data, top_banner, middle_banner }) {
     // //////////console.log("----");
     ////////console.log(data);
     const router = useRouter();
@@ -80,11 +80,11 @@ export default function Category({ allcate, cateList, data,top_banner,middle_ban
             {/* <meta title={}  /> */}
         </Head>
         <DynamicComponent cateList={cateList} setLogin={setLogin} />
-        <div style={{ width: '100%', position: 'relative', backgroundImage:`url(${top_banner.coverimage})`,marginBottom:0 }} className={styles.banner} >
+        <div style={{ width: '100%', position: 'relative', backgroundImage: `url(${top_banner.coverimage})`, marginBottom: 0 }} className={styles.banner} >
             {/* <Image priority src="/homepage/top-banner.png" width={1920} height={700} style={{width:'100%'}}/> */}
             <div className={styles.top_banner_area} style={{}}>
                 <img src={`${constant.api_url}/uploads/20230523/0c024bf065eaa139d865a7a6af18f7dc.png`} width={'100%'} />
-                <button onClick={() => data.data.length?router.push(`/productSearch/${data.data[0].flower_category_id}`):router.push('/')} style={{ border: 'none', display: 'block', cursor: 'pointer' }} className={styles.banner_buttom} >點擊選購</button>
+                <button onClick={() => data.data.length ? router.push(`/productSearch/${data.data[0].flower_category_id}`) : router.push('/')} style={{ border: 'none', display: 'block', cursor: 'pointer' }} className={styles.banner_buttom} >點擊選購</button>
             </div>
         </div>
         <div className={styles.goods_view} style={{ marginBottom: 32 }}>
@@ -173,7 +173,7 @@ export async function getStaticPaths() {
 export async function getStaticProps(context) {
     const { params } = context;
     // //////////console.log(params);
-    
+
     const response = await fetch(
         `${constant.api_url}/api/flowers/index?keyword=&flower_category_id=${params.categoryId}`, {
         mode: 'cors',
@@ -221,7 +221,7 @@ export async function getStaticProps(context) {
     let allcate = await allcate_response.json();
     const tt_data = await tt_response.text()
     const data = await response.text();
-    const banner_list=await banner.json();
+    const banner_list = await banner.json();
     ////console.log("------------");
     ////console.log(JSON.parse(data).data);
     //////console.log("--------");
@@ -229,14 +229,14 @@ export async function getStaticProps(context) {
     //console.log(banner_list.data.top_banner.web);
     //console.log(banner_list.data.middle_banner.web);
     //////console.log(params.categoryId)
-    let top_banner=banner_list.data.top_banner.web.filter((item)=>{
-        if(item.flower_category_ids.includes(parseInt(params.categoryId))){
+    let top_banner = banner_list.data.top_banner.web.filter((item) => {
+        if (item.flower_category_ids.includes(parseInt(params.categoryId))) {
             //////console.log("找到了");
             return item;
         }
     })
-    let middle_banner=banner_list.data.middle_banner.web.filter((item)=>{
-        if(item.flower_category_ids.includes(parseInt(params.categoryId))){
+    let middle_banner = banner_list.data.middle_banner.web.filter((item) => {
+        if (item.flower_category_ids.includes(parseInt(params.categoryId))) {
             return item;
         }
         // //////console.log(item.flower_category_ids.includes(params.categoryId))
@@ -247,8 +247,9 @@ export async function getStaticProps(context) {
             allcate: allcate.data,
             cateList: JSON.parse(tt_data).data,
             data: JSON.parse(data).data,
-            top_banner:middle_banner.length?top_banner[0]:{coverimage:`${constant.api_url}/uploads/20230523/637cfca2255479e7b2fb99f6364b11b4.png)`},
-            middle_banner:middle_banner.length?middle_banner[0]:{coverimage:`${constant.api_url}/uploads/20230523/94430a50cbdf2a5a5a2d10a2af501ec3.png`},
+            top_banner: middle_banner.length ? top_banner[0] : { coverimage: `${constant.api_url}/uploads/20230523/637cfca2255479e7b2fb99f6364b11b4.png)` },
+            middle_banner: middle_banner.length ? middle_banner[0] : { coverimage: `${constant.api_url}/uploads/20230523/94430a50cbdf2a5a5a2d10a2af501ec3.png` },
         },
+        revalidate: 30, // In seconds
     };
 }
