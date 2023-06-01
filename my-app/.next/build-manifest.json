@@ -5,8 +5,8 @@
   "devFiles": [],
   "ampDevFiles": [],
   "lowPriorityFiles": [
-    "static/Bsid0b6UWuED7wpK13ga2/_buildManifest.js",
-    "static/Bsid0b6UWuED7wpK13ga2/_ssgManifest.js"
+    "static/cFJdyLrR-OctdHYSc8-bK/_buildManifest.js",
+    "static/cFJdyLrR-OctdHYSc8-bK/_ssgManifest.js"
   ],
   "rootMainFiles": [],
   "pages": {
@@ -20,10 +20,10 @@
       "static/chunks/731-5a807d9f8b5e676c.js",
       "static/chunks/116-b39167ded86775ea.js",
       "static/chunks/736-fe851eec44bb7788.js",
-      "static/chunks/102-ddc9da91d50e6cf4.js",
+      "static/chunks/102-49c8c7b83129a984.js",
       "static/css/57c5be3cd923cc7e.css",
       "static/css/b3d31507e140c934.css",
-      "static/chunks/pages/index-962556f239cabdf8.js"
+      "static/chunks/pages/index-d27c32d454610bb3.js"
     ],
     "/404": [
       "static/chunks/webpack-6fd2e1c8d048f415.js",
@@ -40,9 +40,9 @@
       "static/chunks/962-c8e37ee919a7e436.js",
       "static/chunks/116-b39167ded86775ea.js",
       "static/chunks/736-fe851eec44bb7788.js",
-      "static/chunks/102-ddc9da91d50e6cf4.js",
+      "static/chunks/102-49c8c7b83129a984.js",
       "static/css/15be5f04ced7fd8a.css",
-      "static/chunks/pages/Aboutus-deaa45d5b3584df7.js"
+      "static/chunks/pages/Aboutus-b33af4157fcbc465.js"
     ],
     "/ContactPage": [
       "static/chunks/webpack-6fd2e1c8d048f415.js",
@@ -54,9 +54,9 @@
       "static/chunks/664-8dad9758a737e774.js",
       "static/chunks/116-b39167ded86775ea.js",
       "static/chunks/736-fe851eec44bb7788.js",
-      "static/chunks/102-ddc9da91d50e6cf4.js",
+      "static/chunks/102-49c8c7b83129a984.js",
       "static/css/42560ca7ffbd4dd6.css",
-      "static/chunks/pages/ContactPage-639f522c8519498f.js"
+      "static/chunks/pages/ContactPage-a52b0f0cff7db634.js"
     ],
     "/Issuccess": [
       "static/chunks/webpack-6fd2e1c8d048f415.js",
@@ -108,9 +108,9 @@
       "static/chunks/664-8dad9758a737e774.js",
       "static/chunks/116-b39167ded86775ea.js",
       "static/chunks/736-fe851eec44bb7788.js",
-      "static/chunks/102-ddc9da91d50e6cf4.js",
+      "static/chunks/102-49c8c7b83129a984.js",
       "static/css/cbbb5ca7344b7140.css",
-      "static/chunks/pages/category/[categoryId]-56a55d4833d88504.js"
+      "static/chunks/pages/category/[categoryId]-e8bb80938c3801f3.js"
     ],
     "/component/BodyBanner": [
       "static/chunks/webpack-6fd2e1c8d048f415.js",
@@ -159,7 +159,7 @@
       "static/chunks/framework-2c79e2a64abdb08b.js",
       "static/chunks/main-ee170d285abd517d.js",
       "static/css/d35fd2d231f72105.css",
-      "static/chunks/pages/component/GoodsScroll-b0d069590762bb7b.js"
+      "static/chunks/pages/component/GoodsScroll-399f897f002d3846.js"
     ],
     "/component/Header": [
       "static/chunks/webpack-6fd2e1c8d048f415.js",
@@ -215,7 +215,7 @@
       "static/chunks/framework-2c79e2a64abdb08b.js",
       "static/chunks/main-ee170d285abd517d.js",
       "static/css/d35fd2d231f72105.css",
-      "static/chunks/pages/component/cateScroll-49e04841d2ba2ce7.js"
+      "static/chunks/pages/component/cateScroll-c8800871185e7ddc.js"
     ],
     "/component/shopCarPage": [
       "static/chunks/webpack-6fd2e1c8d048f415.js",
@@ -241,9 +241,9 @@
       "static/chunks/664-8dad9758a737e774.js",
       "static/chunks/116-b39167ded86775ea.js",
       "static/chunks/736-fe851eec44bb7788.js",
-      "static/chunks/102-ddc9da91d50e6cf4.js",
+      "static/chunks/102-49c8c7b83129a984.js",
       "static/css/7c996b556dcda1c0.css",
-      "static/chunks/pages/productSearch/[ProductSearchId]-c78bae3ce108f14c.js"
+      "static/chunks/pages/productSearch/[ProductSearchId]-cd41469dc87296f2.js"
     ],
     "/production/[productId]": [
       "static/chunks/webpack-6fd2e1c8d048f415.js",
@@ -269,7 +269,7 @@
       "static/chunks/848-0c45cb422ca64888.js",
       "static/chunks/962-c8e37ee919a7e436.js",
       "static/chunks/345-e38b53fc45b5cdf4.js",
-      "static/chunks/946-f3bca2c0aba454d4.js",
+      "static/chunks/946-bb3c0173be54239d.js",
       "static/chunks/116-b39167ded86775ea.js",
       "static/chunks/736-fe851eec44bb7788.js",
       "static/chunks/569-fcf951db4fc24bb3.js",

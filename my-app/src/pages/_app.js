@@ -6,6 +6,7 @@ export default function App({ Component, pageProps }) {
   return <NextUIProvider>
     <QueryClientProvider client={queryClient}>
       <Component {...pageProps} />
+
     </QueryClientProvider>
   </NextUIProvider>
 }
