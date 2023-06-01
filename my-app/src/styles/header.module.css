@@ -66,6 +66,7 @@
 }
 
 .child_list>div,
+.show_list>div,
 .drop_label {
     cursor: pointer;
 }
@@ -105,7 +106,7 @@
         color: rgb(130, 90, 90);
         font-size: 14px;
     }
-
+    .show_list>div,
     .child_list>div {
         border-bottom: 0.5px solid rgba(0, 0, 0, 0.1);
         padding: 0.75rem 15%;
@@ -131,11 +132,16 @@
     }
 
     .child_list {
+        /* display: none; */
         display: none;
     }
 
-    .drop_item:hover .child_list {
+    /* .drop_item:hover .child_list {
         display: block;
+    } */
+    .show_list{
+      display: block;
+        
     }
 
 

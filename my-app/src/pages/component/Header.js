@@ -9,6 +9,7 @@ export default function Header(props) {
 
 
     const [navStatus, setNavStatus] = useState(false);
+    const [index,setIndex]=useState();
 
     return (<div className={`${header.header_background}`}>
         <div className={`${header.header_layout}`}>
@@ -65,14 +66,20 @@ export default function Header(props) {
             </div>
             <div className={`${header.dropdown}`} style={{ display: navStatus ? 'block' : "none" }}>
                 {
-                    props?.list?.length && props.list.map((item, index) => {
+                    props?.list?.length && props.list.map((item, i) => {
                         return (
-                            <div key={index} className={`${header.drop_item}`}>
+                            <div onClick={()=>{
+                                index===i?setIndex():setIndex(i)
+                            }} key={i} className={`${header.drop_item}`}>
                                 <div className={`${header.drop_label}`}>{item.categoryname}</div>
-                                <div className={`${header.child_list}`}>
+                                <div className={index===i?`${header.show_list}`:`${header.child_list}`}>
                                     {item.get_child &&
                                         item.get_child.map((it, ii) => {
-                                            return (<div key={index.toString() + ii.toString()} className={`${header.header_center_dropdown}`}>
+                                            if(ii>3){
+                                                console.log("123");
+                                                return;
+                                            }
+                                            return (<div key={index + ii.toString()} className={`${header.header_center_dropdown}`}>
                                                 <Link href={`/category/${it.id}`} >{it.categoryname}</Link>
                                             </div>)
                                         })
