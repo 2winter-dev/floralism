@@ -1,33 +1,33 @@
 import style from '@/styles/footer.module.css'
-import { useQuery } from '@tanstack/react-query'
 import { constant } from '@/constant/index';
+import { useEffect, useState } from 'react';
 
 export default function Footer() {
 
-    const fetchCate=async ()=>{
-        let response=await fetch(
+    const fetchCate = async () => {
+        let response = await fetch(
             `${constant.api_url}/api/Flowercategory/allIndex`, {
             mode: 'cors',
             headers: {
-              // "Authorization": `Bearer ${data.cookie}`,
-              "Content-Type": "application/json",
-              "Access-Control-Request-Method": "GET,POST",
-              "Access-Control-Request-Headers": "Content-Type",
+                // "Authorization": `Bearer ${data.cookie}`,
+                "Content-Type": "application/json",
+                "Access-Control-Request-Method": "GET,POST",
+                "Access-Control-Request-Headers": "Content-Type",
             }
-          }
-          )
+        }
+        )
         return await response.json()
-     }
-     const cateList = useQuery({
-         queryFn: fetchCate,
-         queryKey:['footerCate'],
-         onSuccess:(res)=>{
-             //console.log(res);
-         }
-     })
-     if(cateList.isSuccess){
-         //console.log(cateList.data);
-     }
+    }
+
+
+    const [cateList, setList] = useState([])
+    useEffect(() => {
+        fetchCate().then((res) => setList(res)).catch((er) => {
+            console.log('cat_list error:')
+            console.log(er)
+        })
+    }, [])
+
     return (<div className={style.footer} style={{ width: '100%' }}>
         <div className={style.footer_three_column} style={{ display: 'flex', justifyContent: 'space-between' }}>
             <div className={style.footer_column} style={{ display: 'flex', flexDirection: 'column' }}>
@@ -35,7 +35,7 @@ export default function Footer() {
                 {
                     cateList.isSuccess && cateList.data.data.map((item, index) => {
                         // ////console.log(item);
-                        if(index>5) return null;
+                        if (index > 5) return null;
                         return (<a key={index} href={`/category/${item.id}`}>{item.categoryname}</a>)
                     })
                 }
@@ -50,12 +50,12 @@ export default function Footer() {
             <div className={style.footer_column} style={{ display: 'flex', flexDirection: 'column' }}>
                 <p>聯絡我們</p>
                 <div>香港新界葵涌國瑞路116-122號</div>
-                <div style={{marginTop:4}}>城市工業中心1樓H&J室</div>
+                <div style={{ marginTop: 4 }}>城市工業中心1樓H&J室</div>
                 <div>T <a href="tel:+85265818053">+852 65818053</a></div>
                 <div>F <a href="">+852 65818053</a></div>
                 <div>E <a href="mailto:info@floralismhk.com">info@floralismhk.com</a></div>
                 <div>對我們的產品及服務有興趣？</div>
-                <div style={{marginTop:4}}>請聯係我們</div>
+                <div style={{ marginTop: 4 }}>請聯係我們</div>
             </div>
             <div className={`${style.special_column}`} style={{ display: 'flex', flexDirection: 'column', minWidth: 163 }}>
                 <div className={style.footer_contactList} style={{ display: 'flex', justifyContent: 'center', backgroundColor: 'black', flexWrap: 'wrap', alignItems: 'center', flexDirection: 'column', padding: 14 }}>

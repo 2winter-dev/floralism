@@ -17,6 +17,10 @@ class MyDocument extends Document {
     return (
       <Html lang="zh-cn">
         <Head>
+          <meta
+            http-equiv="Content-Security-Policy"
+            content="upgrade-insecure-requests"
+          />
           {CssBaseline.flush()}
           <link rel="stylesheet" href="/swiper/css/idangerous.swiper.css" />
         </Head>

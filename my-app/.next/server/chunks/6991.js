@@ -18,6 +18,7 @@ module.exports = {
 	"header_center_parent": "header_header_center_parent__RXp7c",
 	"mine_icon": "header_mine_icon__ExnTv",
 	"child_list": "header_child_list__n_G0u",
+	"show_list": "header_show_list__6pkZL",
 	"drop_label": "header_drop_label__8aU7Y",
 	"header_menu": "header_header_menu__SpgaE",
 	"header_cate_layout": "header_header_cate_layout__gQhX3",
@@ -60,6 +61,7 @@ js_cookie__WEBPACK_IMPORTED_MODULE_1__ = (__webpack_async_dependencies__.then ? 
 function Header(props) {
     const router = (0,next_router__WEBPACK_IMPORTED_MODULE_3__.useRouter)();
     const [navStatus, setNavStatus] = (0,react__WEBPACK_IMPORTED_MODULE_4__.useState)(false);
+    const [index, setIndex] = (0,react__WEBPACK_IMPORTED_MODULE_4__.useState)();
     return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
         className: `${(_styles_header_module_css__WEBPACK_IMPORTED_MODULE_5___default().header_background)}`,
         children: [
@@ -191,8 +193,11 @@ function Header(props) {
                             display: navStatus ? "block" : "none"
                         },
                         children: [
-                            props?.list?.length && props.list.map((item, index)=>{
+                            props?.list?.length && props.list.map((item, i)=>{
                                 return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                                    onClick: ()=>{
+                                        index === i ? setIndex() : setIndex(i);
+                                    },
                                     className: `${(_styles_header_module_css__WEBPACK_IMPORTED_MODULE_5___default().drop_item)}`,
                                     children: [
                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
@@ -200,19 +205,23 @@ function Header(props) {
                                             children: item.categoryname
                                         }),
                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                                            className: `${(_styles_header_module_css__WEBPACK_IMPORTED_MODULE_5___default().child_list)}`,
+                                            className: index === i ? `${(_styles_header_module_css__WEBPACK_IMPORTED_MODULE_5___default().show_list)}` : `${(_styles_header_module_css__WEBPACK_IMPORTED_MODULE_5___default().child_list)}`,
                                             children: item.get_child && item.get_child.map((it, ii)=>{
+                                                if (ii > 3) {
+                                                    console.log("123");
+                                                    return;
+                                                }
                                                 return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                                                     className: `${(_styles_header_module_css__WEBPACK_IMPORTED_MODULE_5___default().header_center_dropdown)}`,
                                                     children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_2___default()), {
                                                         href: `/category/${it.id}`,
                                                         children: it.categoryname
                                                     })
-                                                }, index.toString() + ii.toString());
+                                                }, index + ii.toString());
                                             })
                                         })
                                     ]
-                                }, index);
+                                }, i);
                             }),
                             /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                                 className: `${(_styles_header_module_css__WEBPACK_IMPORTED_MODULE_5___default().drop_item)}`,

@@ -21,10 +21,9 @@ module.exports = {
 /***/ }),
 
 /***/ 7602:
-/***/ ((module, __webpack_exports__, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-__webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ Footer)
@@ -32,17 +31,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(5893);
 /* harmony import */ var _styles_footer_module_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(9796);
 /* harmony import */ var _styles_footer_module_css__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_styles_footer_module_css__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _tanstack_react_query__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(9752);
-/* harmony import */ var _constant_index__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(3409);
-var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_tanstack_react_query__WEBPACK_IMPORTED_MODULE_1__]);
-_tanstack_react_query__WEBPACK_IMPORTED_MODULE_1__ = (__webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__)[0];
+/* harmony import */ var _constant_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(3409);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(6689);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
 
 
 
 
 function Footer() {
     const fetchCate = async ()=>{
-        let response = await fetch(`${_constant_index__WEBPACK_IMPORTED_MODULE_2__/* .constant.api_url */ .a.api_url}/api/Flowercategory/allIndex`, {
+        let response = await fetch(`${_constant_index__WEBPACK_IMPORTED_MODULE_1__/* .constant.api_url */ .a.api_url}/api/Flowercategory/allIndex`, {
             mode: "cors",
             headers: {
                 // "Authorization": `Bearer ${data.cookie}`,
@@ -53,18 +51,13 @@ function Footer() {
         });
         return await response.json();
     };
-    const cateList = (0,_tanstack_react_query__WEBPACK_IMPORTED_MODULE_1__.useQuery)({
-        queryFn: fetchCate,
-        queryKey: [
-            "footerCate"
-        ],
-        onSuccess: (res)=>{
-        //console.log(res);
-        }
-    });
-    if (cateList.isSuccess) {
-    //console.log(cateList.data);
-    }
+    const [cateList, setList] = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)([]);
+    (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(()=>{
+        fetchCate().then((res)=>setList(res)).catch((er)=>{
+            console.log("cat_list error:");
+            console.log(er);
+        });
+    }, []);
     return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
         className: (_styles_footer_module_css__WEBPACK_IMPORTED_MODULE_3___default().footer),
         style: {
@@ -137,6 +130,9 @@ function Footer() {
                                 children: "香港新界葵涌國瑞路116-122號"
                             }),
                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                                style: {
+                                    marginTop: 4
+                                },
                                 children: "城市工業中心1樓H&J室"
                             }),
                             /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
@@ -148,8 +144,14 @@ function Footer() {
                                     })
                                 ]
                             }),
-                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                                children: "F +852 65818053"
+                            /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                                children: [
+                                    "F ",
+                                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("a", {
+                                        href: "",
+                                        children: "+852 65818053"
+                                    })
+                                ]
                             }),
                             /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                                 children: [
@@ -274,8 +276,6 @@ function Footer() {
     });
 }
 
-__webpack_async_result__();
-} catch(e) { __webpack_async_result__(e); } });
 
 /***/ })
 

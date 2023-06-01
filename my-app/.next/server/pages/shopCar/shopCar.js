@@ -2,7 +2,7 @@
 (() => {
 var exports = {};
 exports.id = 4291;
-exports.ids = [4291,8693,839,7720,8968,6163,1577,9925];
+exports.ids = [4291,8693,839,7720,6163,1577,8968,9925];
 exports.modules = {
 
 /***/ 8681:
@@ -35,8 +35,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _component_Dynamic__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(8932);
 /* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(1853);
 /* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_13__);
-var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_component_Header__WEBPACK_IMPORTED_MODULE_2__, _component_Footer__WEBPACK_IMPORTED_MODULE_4__, _component_LoginPannel__WEBPACK_IMPORTED_MODULE_6__, _component_ResgisterPannel__WEBPACK_IMPORTED_MODULE_7__, _component_ForgetPassword__WEBPACK_IMPORTED_MODULE_8__, js_cookie__WEBPACK_IMPORTED_MODULE_9__, _tanstack_react_query__WEBPACK_IMPORTED_MODULE_10__, _component_Dynamic__WEBPACK_IMPORTED_MODULE_12__]);
-([_component_Header__WEBPACK_IMPORTED_MODULE_2__, _component_Footer__WEBPACK_IMPORTED_MODULE_4__, _component_LoginPannel__WEBPACK_IMPORTED_MODULE_6__, _component_ResgisterPannel__WEBPACK_IMPORTED_MODULE_7__, _component_ForgetPassword__WEBPACK_IMPORTED_MODULE_8__, js_cookie__WEBPACK_IMPORTED_MODULE_9__, _tanstack_react_query__WEBPACK_IMPORTED_MODULE_10__, _component_Dynamic__WEBPACK_IMPORTED_MODULE_12__] = __webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__);
+var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_component_Header__WEBPACK_IMPORTED_MODULE_2__, _component_LoginPannel__WEBPACK_IMPORTED_MODULE_6__, _component_ResgisterPannel__WEBPACK_IMPORTED_MODULE_7__, _component_ForgetPassword__WEBPACK_IMPORTED_MODULE_8__, js_cookie__WEBPACK_IMPORTED_MODULE_9__, _tanstack_react_query__WEBPACK_IMPORTED_MODULE_10__, _component_Dynamic__WEBPACK_IMPORTED_MODULE_12__]);
+([_component_Header__WEBPACK_IMPORTED_MODULE_2__, _component_LoginPannel__WEBPACK_IMPORTED_MODULE_6__, _component_ResgisterPannel__WEBPACK_IMPORTED_MODULE_7__, _component_ForgetPassword__WEBPACK_IMPORTED_MODULE_8__, js_cookie__WEBPACK_IMPORTED_MODULE_9__, _tanstack_react_query__WEBPACK_IMPORTED_MODULE_10__, _component_Dynamic__WEBPACK_IMPORTED_MODULE_12__] = __webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__);
 
 
 

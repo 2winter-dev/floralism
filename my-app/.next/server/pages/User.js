@@ -1,7 +1,7 @@
 (() => {
 var exports = {};
 exports.id = 7115;
-exports.ids = [7115,8693,839,7720,8968,6163,1577,9925];
+exports.ids = [7115,8693,839,7720,6163,1577,8968,9925];
 exports.modules = {
 
 /***/ 3788:
@@ -61,8 +61,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _component_addressPannel__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(3822);
 /* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(9915);
 /* harmony import */ var _component_LoginPannel__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(978);
-var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_component_Header__WEBPACK_IMPORTED_MODULE_1__, _component_Footer__WEBPACK_IMPORTED_MODULE_2__, _component_Dynamic__WEBPACK_IMPORTED_MODULE_7__, _tanstack_react_query__WEBPACK_IMPORTED_MODULE_8__, _component_addressPannel__WEBPACK_IMPORTED_MODULE_11__, js_cookie__WEBPACK_IMPORTED_MODULE_12__, _component_LoginPannel__WEBPACK_IMPORTED_MODULE_13__]);
-([_component_Header__WEBPACK_IMPORTED_MODULE_1__, _component_Footer__WEBPACK_IMPORTED_MODULE_2__, _component_Dynamic__WEBPACK_IMPORTED_MODULE_7__, _tanstack_react_query__WEBPACK_IMPORTED_MODULE_8__, _component_addressPannel__WEBPACK_IMPORTED_MODULE_11__, js_cookie__WEBPACK_IMPORTED_MODULE_12__, _component_LoginPannel__WEBPACK_IMPORTED_MODULE_13__] = __webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__);
+var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_component_Header__WEBPACK_IMPORTED_MODULE_1__, _component_Dynamic__WEBPACK_IMPORTED_MODULE_7__, _tanstack_react_query__WEBPACK_IMPORTED_MODULE_8__, _component_addressPannel__WEBPACK_IMPORTED_MODULE_11__, js_cookie__WEBPACK_IMPORTED_MODULE_12__, _component_LoginPannel__WEBPACK_IMPORTED_MODULE_13__]);
+([_component_Header__WEBPACK_IMPORTED_MODULE_1__, _component_Dynamic__WEBPACK_IMPORTED_MODULE_7__, _tanstack_react_query__WEBPACK_IMPORTED_MODULE_8__, _component_addressPannel__WEBPACK_IMPORTED_MODULE_11__, js_cookie__WEBPACK_IMPORTED_MODULE_12__, _component_LoginPannel__WEBPACK_IMPORTED_MODULE_13__] = __webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__);
 
 
 
