@@ -64,13 +64,6 @@ export default function Header(props) {
                 <span style={{ display: 'inline-block', rotate: navStatus ? '45deg' : '0deg', fontSize: 20, transition: '200ms' }}>{navStatus ? '+' : '≡'}</span>
             </div>
             <div className={`${header.dropdown}`} style={{ display: navStatus ? 'block' : "none" }}>
-                {/* <div className={`${header.drop_item}`}>
-                    <div className={`${header.drop_label}`}>情人節花束</div>
-                    <div className={`${header.child_list}`}>
-                        <div>情人節花束</div>
-                        <div>情人節禮物</div>
-                    </div>
-                </div> */}
                 {
                     props?.list?.length && props.list.map((item, index) => {
                         return (
@@ -78,7 +71,6 @@ export default function Header(props) {
                                 <div className={`${header.drop_label}`}>{item.categoryname}</div>
                                 <div className={`${header.child_list}`}>
                                     {item.get_child &&
-
                                         item.get_child.map((it, ii) => {
                                             return (<div key={index.toString() + ii.toString()} className={`${header.header_center_dropdown}`}>
                                                 <Link href={`/category/${it.id}`} >{it.categoryname}</Link>

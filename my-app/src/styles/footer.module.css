@@ -34,7 +34,7 @@
     display: flex;
     justify-content: space-between;
 }
-.icon_group>div>img{
+.icon_group>div img{
    /* width:1.7rem; */
    height: 1.7rem;
 }
