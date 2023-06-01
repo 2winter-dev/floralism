@@ -226,6 +226,6 @@ export async function getStaticProps(context) {
       cateList: JSON.parse(tt_data).data,
       data: JSON.parse(data).data,
     },
-    revalidate: 30, // In seconds
+
   };
 }

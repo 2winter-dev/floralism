@@ -272,7 +272,7 @@ export async function getServerSideProps({ local }) {
       cateList: JSON.parse(data).data,
       GoodsPage: JSON.parse(goods_data).data,
       carousel: JSON.parse(swiper_data).data.data,
-    },
-    revalidate: 30, // In seconds
+    }
+
   };
 }

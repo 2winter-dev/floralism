@@ -218,7 +218,7 @@ export default function ProductDetail({ cateList, product }) {
                                         setNum(num - 1);
                                     }
                                 }} className={style.decrease} style={{ cursor: 'pointer' }}>-</button>
-                                <input type="text" className={style.product_number} style={{borderRadius:0}} contentEditable={false} value={num} onChange={() => {
+                                <input type="text" className={style.product_number} style={{ borderRadius: 0 }} contentEditable={false} value={num} onChange={() => {
                                 }} />
                                 <button onClick={() => {
                                     setNum(num + 1);
@@ -398,6 +398,6 @@ export async function getStaticProps(context) {
             cateList: JSON.parse(data).data,
             product: detail.data
         },
-        revalidate: 30, // In seconds
+
     };
 }

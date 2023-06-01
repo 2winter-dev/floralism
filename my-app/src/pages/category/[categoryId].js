@@ -250,6 +250,6 @@ export async function getStaticProps(context) {
             top_banner: middle_banner.length ? top_banner[0] : { coverimage: `${constant.api_url}/uploads/20230523/637cfca2255479e7b2fb99f6364b11b4.png)` },
             middle_banner: middle_banner.length ? middle_banner[0] : { coverimage: `${constant.api_url}/uploads/20230523/94430a50cbdf2a5a5a2d10a2af501ec3.png` },
         },
-        revalidate: 30, // In seconds
+
     };
 }
