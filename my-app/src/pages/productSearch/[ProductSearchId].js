@@ -64,10 +64,10 @@ export default function ProductSearch({ cateList, data }) {
     window.addEventListener("resize", resizeUpdate);
     window.innerWidth < 1100 ? (!flag && setFlag(true)) : (flag && setFlag(false))
     window.addEventListener("keypress", (e) => {
-      
+
       if (e.key === "Enter") {
         ToSearch();
-        if(keyword===""){
+        if (keyword === "") {
           setSearchResult([]);
         }
       }
@@ -96,8 +96,8 @@ export default function ProductSearch({ cateList, data }) {
       <div className={style.banner_search} style={{ position: 'absolute' }}>
         <img src="/product-search-desc.png" className={style.banner_desc}
         />
-        <div className={`${styles.search_area}`} style={{marginBottom:12}}>
-          <span className={`${styles.serach_icon} iconfont`} style={{ marginLeft: 8}}>&#xe82e;</span>
+        <div className={`${styles.search_area}`} style={{ marginBottom: 12 }}>
+          <span className={`${styles.serach_icon} iconfont`} style={{ marginLeft: 8 }}>&#xe82e;</span>
           <input
             ref={input}
             type='text'
@@ -154,15 +154,15 @@ export default function ProductSearch({ cateList, data }) {
     </div>
     <Footer />
     {
-        <LoginPannel login={login} close={() => setLogin(false)} toRegister={() => {
-          setLogin(false);
-          setRegister(true);
-        }} toForget={() => {
-          setLogin(false);
-          setVisible(true);
-        }
-        } />
+      <LoginPannel login={login} close={() => setLogin(false)} toRegister={() => {
+        setLogin(false);
+        setRegister(true);
+      }} toForget={() => {
+        setLogin(false);
+        setVisible(true);
       }
+      } />
+    }
   </div>)
 }
 
@@ -226,5 +226,6 @@ export async function getStaticProps(context) {
       cateList: JSON.parse(tt_data).data,
       data: JSON.parse(data).data,
     },
+    revalidate: 30, // In seconds
   };
 }

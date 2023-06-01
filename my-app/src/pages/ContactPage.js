@@ -159,5 +159,6 @@ export async function getStaticProps(context) {
             cateList: JSON.parse(data).data,
             allcate: allcate.data,
         },
+        revalidate: 30, // In seconds
     };
 }
