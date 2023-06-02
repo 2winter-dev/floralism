@@ -16,7 +16,7 @@ import useDebounce from '@/hooks/useDebounce'
 import useThrottle from "../../hooks/useThrottle";
 import LoginPannel from "../component/LoginPannel";
 export default function ProductSearch({ cateList, data }) {
-  // //////////console.log(data);
+  //console.log(data);
   const router = useRouter();
   // const debounce=useDebounce();
   const [flag, setFlag] = useState(false);
@@ -35,32 +35,32 @@ export default function ProductSearch({ cateList, data }) {
   })
 
   const ToSearch = (data) => {
-    ////////console.log("點擊了");
-    // console.log(keyword);
+    //////////console.log("點擊了");
+    // //console.log(keyword);
     setType(true);
     fetchGoods.mutate({ keyword:data, flower_category_id: "", listRows: 16, page: page }, {
       onSuccess: async (res) => {
         let _res = await res.json();
         if (_res.code === 1) {
           setSearchResult(_res.data.data);
-          ////////console.log(_res);
+          //////////console.log(_res);
           setPage(1);
         } else {
           alert(_res.msg);
         }
       },
       onError: (res) => {
-        //////////console.log(res);
+        ////////////console.log(res);
 
       }
     })
   }
   const resizeUpdate = (e) => {
     if (e.target.innerWidth <= 1100) {
-      ////////////console.log("====", e.target.innerWidth);
+      //////////////console.log("====", e.target.innerWidth);
       setFlag(true);
     } else {
-      ////////////console.log("-----", e.target.innerWidth);
+      //////////////console.log("-----", e.target.innerWidth);
       setFlag(false);
     }
   }
@@ -85,14 +85,14 @@ export default function ProductSearch({ cateList, data }) {
   }, [])
 
   useEffect(() => {
-    ////////////console.log("flag改變", flag);
+    //////////////console.log("flag改變", flag);
     setPage(1);
     setGoodsList(spliceArr(data.data, 16))
     // setCategoryPage(1);
   }, [flag])
 
   useEffect(() => {
-    ////////////console.log(goodsList)
+    //////////////console.log(goodsList)
 
   }, [])
 
@@ -132,7 +132,7 @@ export default function ProductSearch({ cateList, data }) {
                  ButtonGroupStyle={{marginTop:6}}
                  animation
                  click={(data) => {
-                    ////////////console.log(data);
+                    //////////////console.log(data);
                     
                   }}
                  /> */}
@@ -208,7 +208,7 @@ export async function getStaticPaths() {
 export async function getStaticProps(context) {
 
   const { params } = context;
-  // //////////console.log(params);
+  // ////////////console.log(params);
   const response = await fetch(
     `${constant.api_url}/api/flowers/index?keyword=&flower_category_id=${params.ProductSearchId}&listRows=16`, {
     headers: {

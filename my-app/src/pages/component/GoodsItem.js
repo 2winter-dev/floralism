@@ -27,7 +27,7 @@ export default function GoodsItem(props) {
                     </div>}
         </div>)
     }
-    // props.type !== "category"&&////console.log(props.item,props.type)
+    // props.type !== "category"&&//////console.log(props.item,props.type)
     return (<div className={`${styles.GoodsItem} ${props.type === "category" && styles.Iscategory}`} onClick={() => {
         if (props.type !== "category") {
             location.href = `/production/${props.item.id}`

@@ -32,15 +32,16 @@ export default function ForgetPassword(props) {
         }
         sendEmail.mutate({ email: email.trim(), event: 'resetpwd' }, {
             onSuccess: () => {
-                alert("發送驗證碼成功，請到填寫的郵箱内查看驗證碼");
+                // alert("發送驗證碼成功，請到填寫的郵箱内查看驗證碼");
+                setTime(60);
+                setFlag(true);
             },
             onError: (res) => {
-                ////////////console.log(res);
+                //////////////console.log(res);
                 alert("發送驗證碼失敗");
             }
         })
-        setTime(60);
-        setFlag(true);
+
     }
 
     const reset = () => {
@@ -48,7 +49,6 @@ export default function ForgetPassword(props) {
             onSuccess: async (res) => {
                 let isSuccess = await res.json()
                 if (isSuccess.code) {
-                    alert("重置成功")
                     props.toLogin();
                 } else {
                     alert(isSuccess.msg);

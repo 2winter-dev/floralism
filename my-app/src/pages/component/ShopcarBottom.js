@@ -7,7 +7,7 @@ export default function ShopcarBottom(props) {
     const router = useRouter();
 
     const toAddAnimation = (props) => {
-        ////////////console.log("點擊了");
+        //////////////console.log("點擊了");
         Cookies.remove("isAdd");
         router.push('/shopCar/shopCar')
         // location.href='/shopCar/shopCar'

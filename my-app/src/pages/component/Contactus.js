@@ -1,7 +1,29 @@
 import style from '@/styles/contactComponent.module.css'
+import { useMutation } from '@tanstack/react-query';
 import { useState } from 'react';
+import m_api from '../../m_api';
+import useDebounce from '../../hooks/useDebounce';
 export default function Contactus(props) {
+    const [email,setEmail]=useState("");
     const [input,setInput] =useState("");
+
+    const description=useMutation({
+        mutationFn:(data)=>m_api.description(data),
+        mutationKey:['description'],
+    })
+
+    const book=()=>{
+        console.log("123");
+        description.mutate({email},{
+            onSuccess:(res)=>{
+                alert(res.msg);
+            },
+            onError:(res)=>{    
+                alert(res.msg)
+            }
+        })
+    }
+
     return (<div className={style.contact_total} style={{ display: "flex", flex: 1, backgroundColor: 'black', alignItems: 'center',...props.topStyle }}>
         <div style={{ flex: 1, padding: '5%', alignItems: 'center' }} className={style.contactus_border}>
             <div className={style.contact_img} style={{}}>
@@ -21,12 +43,12 @@ export default function Contactus(props) {
                     paddingLeft: 8
                 }}
                     placeholder="請輸入您的電郵地址"
-                    onInput={(e)=>setInput(e.target.value)}
+                    onInput={(e)=>setEmail(e.target.value)}
                 />
-                <div style={{ width: '100%',cursor:'pointer' }}>
-                    <input type={'button'} value={'發送'} onClick={()=>{
-                       if(input){
-                        alert("發送成功");
+                <div style={{ width: '100%' }}>
+                    <input type={'button'} value={'發送'} style={{cursor:"pointer"}} onClick={()=>{
+                       if(email){
+                        useDebounce(()=>book(),2000)()
                        }else alert("請填寫郵箱")
                     }}
                        className={style.submit_btn} 
@@ -59,7 +81,12 @@ export default function Contactus(props) {
                     placeholder="請輸入您的電郵地址"
                 />
                 <div style={{ width: '100%' }}>
-                    <input type={'button'} value={'發送'}
+                    <input type={'button'} style={{cursor:"pointer"}} value={'發送'}
+                    onClick={()=>{
+                        if(email){
+                         book()
+                        }else alert("請填寫郵箱")
+                     }}
                      className={style.submit_btn}
                     ></input>
                 </div>

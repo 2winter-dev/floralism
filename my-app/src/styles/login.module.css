@@ -16,7 +16,9 @@
 .address_layout,
 .login_layout,
 .register_layout {
-    background-image: url("/背景-登錄背景.png");
+    /* background-image: url("/背景-登錄背景.png");
+     */
+     background-color: #363636;
     /* object-fit:contain; */
     padding: 2%;
     background-size: cover;
@@ -25,7 +27,8 @@
 }
 
 .register_layout {
-    background-image: url("/注冊-背景.png");
+    /* background-image: url("/注冊-背景.png"); */
+    background-color:#363636;
 }
 
 

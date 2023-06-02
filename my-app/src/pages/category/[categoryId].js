@@ -84,7 +84,12 @@ export default function Category({ allcate, cateList, data, top_banner, middle_b
             {/* <Image priority src="/homepage/top-banner.png" width={1920} height={700} style={{width:'100%'}}/> */}
             <div className={styles.top_banner_area} style={{}}>
                 <img src={`${constant.api_url}/uploads/20230523/0c024bf065eaa139d865a7a6af18f7dc.png`} width={'100%'} />
-                <button onClick={() => data.data.length ? router.push(`/productSearch/${data.data[0].flower_category_id}`) : router.push('/')} style={{ border: 'none', display: 'block', cursor: 'pointer' }} className={styles.banner_buttom} >點擊選購</button>
+                <button onClick={() =>{
+                    // console.log(data.data.length);
+                data.data.length ? 
+                router.push(`/productSearch/${data.data[0].flower_category_id}`) 
+                :router.push('/')
+            }} style={{ border: 'none', display: 'block', cursor: 'pointer' }} className={styles.banner_buttom} >點擊選購</button>
             </div>
         </div>
         <div className={styles.goods_view} style={{ marginBottom: 32 }}>
