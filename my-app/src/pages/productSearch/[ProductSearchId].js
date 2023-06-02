@@ -18,12 +18,14 @@ import LoginPannel from "../component/LoginPannel";
 export default function ProductSearch({ cateList, data }) {
   // //////////console.log(data);
   const router = useRouter();
+  // const debounce=useDebounce();
   const [flag, setFlag] = useState(false);
   const [page, setPage] = useState(1);
   const [login, setLogin] = useState(false);
   const [register, setRegister] = useState(false);
   const [visible, setVisible] = useState(false);
   const [goodsList, setGoodsList] = useState([]);
+  const [type,setType]=useState(false);
   const [searchResult, setSearchResult] = useState([]);
   const input = useRef();
   const [keyword, setKeyWord] = useState("")
@@ -32,9 +34,11 @@ export default function ProductSearch({ cateList, data }) {
     mutationFn: async (data) => await m_api.fetchGoods(data),
   })
 
-  const ToSearch = () => {
+  const ToSearch = (data) => {
     ////////console.log("點擊了");
-    fetchGoods.mutate({ keyword, flower_category_id: "", listRows: 16, page: page }, {
+    // console.log(keyword);
+    setType(true);
+    fetchGoods.mutate({ keyword:data, flower_category_id: "", listRows: 16, page: page }, {
       onSuccess: async (res) => {
         let _res = await res.json();
         if (_res.code === 1) {
@@ -62,16 +66,18 @@ export default function ProductSearch({ cateList, data }) {
   }
   useEffect(() => {
     window.addEventListener("resize", resizeUpdate);
+    let str;
     window.innerWidth < 1100 ? (!flag && setFlag(true)) : (flag && setFlag(false))
-    window.addEventListener("keypress", (e) => {
+    // window.addEventListener("keypress", (e) => {
 
-      if (e.key === "Enter") {
-        ToSearch();
-        if (keyword === "") {
-          setSearchResult([]);
-        }
-      }
-    })
+    //   if (e.key === "Enter") {
+    //     ToSearch();
+    //     if (keyword === "") {
+    //       setSearchResult([]);
+    //     }
+    //   }
+    // })
+
     return () => {
       window.removeEventListener("resize", resizeUpdate);
     }
@@ -87,7 +93,8 @@ export default function ProductSearch({ cateList, data }) {
 
   useEffect(() => {
     ////////////console.log(goodsList)
-  }, [goodsList])
+
+  }, [])
 
   return (<div style={{ position: 'relative' }}>
     <DynamicComponent cateList={cateList} setLogin={setLogin} />
@@ -102,7 +109,10 @@ export default function ProductSearch({ cateList, data }) {
             ref={input}
             type='text'
             value={keyword}
-            onInput={(e) => setKeyWord(e.target.value)}
+            onInput={(e) =>{
+              setKeyWord(e.target.value);
+              useDebounce(()=>ToSearch(e.target.value),2000)()
+            }}
             placeholder='Search....'
             className={`${styles.input}`}
             style={{ flex: 1, padding: 1, marginLeft: 10, border: "none", outline: "none", backgroundColor: 'transparent' }}
@@ -126,10 +136,11 @@ export default function ProductSearch({ cateList, data }) {
                     
                   }}
                  /> */}
-      {searchResult?.length ?
+      {/* {
+        keyword.trim()!==""? */}
         <GoodsScoll
-          title={data.category_name}
-          list={searchResult}
+          title={keyword!==""?"搜索結果":data.category_name}
+          list={keyword!==""?searchResult:goodsList}
           page={page}
           id={data?.data[0]?.flower_category_id ?? 0}
           setPage={setPage}
@@ -138,7 +149,8 @@ export default function ProductSearch({ cateList, data }) {
           setList={setGoodsList}
           animation
           type={''}
-        /> :
+        /> 
+        {/* :
         <GoodsScoll
           title={data.category_name}
           list={goodsList}
@@ -150,7 +162,7 @@ export default function ProductSearch({ cateList, data }) {
           setList={setGoodsList}
           animation
           type={''}
-        />}
+        />} */}
     </div>
     <Footer />
     {
@@ -219,8 +231,7 @@ export async function getStaticProps(context) {
   );
   const tt_data = await tt_response.text()
   const data = await response.text()
-  // //////////console.log("------======-----")
-  // //////////console.log(data);
+
   return {
     props: {
       cateList: JSON.parse(tt_data).data,

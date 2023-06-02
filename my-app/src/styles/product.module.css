@@ -112,6 +112,7 @@
     width: 30px;
     height: 30px;
     display: flex;
+    border-radius: none;
     justify-content: center;
     align-items: center;
     background-color: white;
