@@ -245,7 +245,7 @@ export async function getServerSideProps({ local }) {
   )
   ////////console.log(allcate);
   const goods_response = await fetch(
-    `${constant.api_url}/api/flowers/index?flower_category_id=${allcate.data[1].id}`, {
+    `${constant.api_url}/api/flowers/index?flower_category_id=${2}`, {
     mode: 'cors',
     headers: {
       // "Authorization": `Bearer ${data.cookie}`,

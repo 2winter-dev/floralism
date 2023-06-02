@@ -4,7 +4,7 @@ import GoodsItem from './GoodsItem'
 import { useEffect, useState } from 'react'
 import { useMutation } from '@tanstack/react-query';
 import m_api from '../../m_api';
-
+import { ToastContainer, toast } from 'react-toastify';
 export default function GoodsScoll(props) {
   const [goodsList, setGoodsList] = useState(
     props.list
@@ -73,7 +73,7 @@ export default function GoodsScoll(props) {
       },
       onError:(res)=>{
         // ////////////console.log(res);
-        Toast.show("獲取失敗");
+        toast.error("獲取失敗");
       }
     })
 

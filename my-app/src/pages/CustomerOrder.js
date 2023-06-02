@@ -8,8 +8,11 @@ import DynamicComponent from './component/Dynamic';
 import LoginPannel from './component/LoginPannel';
 import { constant } from '../constant';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 export default function CustomerOrder(props) {
     // const [index, setIndex] = useState(-1);
+    const router=useRouter();
+
     const [login, setLogin] = useState(false);
     return (<div>
         <Head>

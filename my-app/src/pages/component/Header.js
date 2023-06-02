@@ -67,6 +67,7 @@ export default function Header(props) {
             <div className={`${header.dropdown}`} style={{ display: navStatus ? 'block' : "none" }}>
                 {
                     props?.list?.length && props.list.map((item, i) => {
+                        if(!item?.get_child?.length) return;
                         return (
                             <div onClick={()=>{
                                 index===i?setIndex():setIndex(i)

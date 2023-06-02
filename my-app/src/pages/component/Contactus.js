@@ -3,6 +3,7 @@ import { useMutation } from '@tanstack/react-query';
 import { useState } from 'react';
 import m_api from '../../m_api';
 import useDebounce from '../../hooks/useDebounce';
+import { ToastContainer, toast } from 'react-toastify';
 export default function Contactus(props) {
     const [email,setEmail]=useState("");
     const [input,setInput] =useState("");
@@ -16,10 +17,10 @@ export default function Contactus(props) {
         console.log("123");
         description.mutate({email},{
             onSuccess:(res)=>{
-                alert(res.msg);
+                toast(res.msg);
             },
             onError:(res)=>{    
-                alert(res.msg)
+                toast.error(res.msg)
             }
         })
     }
@@ -49,7 +50,7 @@ export default function Contactus(props) {
                     <input type={'button'} value={'發送'} style={{cursor:"pointer"}} onClick={()=>{
                        if(email){
                         useDebounce(()=>book(),2000)()
-                       }else alert("請填寫郵箱")
+                       }else toast.error("請填寫郵箱")
                     }}
                        className={style.submit_btn} 
                     //    style={{ paddingLeft: 24, paddingRight: 24, letterSpacing: 2, paddingTop: 8, paddingBottom: 8, borderRadius: 8, marginTop: 24, fontSize: 16 }}
@@ -85,7 +86,7 @@ export default function Contactus(props) {
                     onClick={()=>{
                         if(email){
                          book()
-                        }else alert("請填寫郵箱")
+                        }else toast.error("請填寫郵箱")
                      }}
                      className={style.submit_btn}
                     ></input>

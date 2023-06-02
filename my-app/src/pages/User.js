@@ -13,6 +13,7 @@ import { useRouter } from "next/router";
 import AddressPannel from "./component/addressPannel";
 import Cookies from "js-cookie";
 import LoginPannel from "./component/LoginPannel";
+import { ToastContainer, toast } from 'react-toastify';
 export default function User(props) {
     const router = useRouter();
     const [type, setType] = useState("message");
@@ -53,7 +54,7 @@ export default function User(props) {
         let m_list = addList;
         m_list.splice(m_list.findIndex((it, index) => item === it.id), 1);
         setAddList([...m_list]);
-        alert("刪除成功");
+        toast("刪除成功");
         ////////console.log(m_list);
     }
 
@@ -84,11 +85,11 @@ export default function User(props) {
                 } else if (_res.code === 1) {
                     delAddress(item);
                 } else {
-                    alert(_res.msg);
+                    toast(_res.msg);
                 }
             },
             onError: (res) => {
-                alert("删除失败")
+                toast.error("删除失败")
             }
         })
     }
@@ -105,7 +106,7 @@ export default function User(props) {
                 } else if (_res.code === 1) {
                     changeDefault(id);
                 } else {
-                    alert(_res.msg);
+                    toast(_res.msg);
                 }
             }
         })

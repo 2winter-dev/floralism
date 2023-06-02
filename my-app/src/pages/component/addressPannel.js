@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import m_api from "@/m_api";
 import Cookies from "js-cookie";
+import { ToastContainer, toast } from 'react-toastify';
 export default function AddressPannel(props) {
     // ////////////console.log(props);
     const [username,setUsername]=useState("");
@@ -36,10 +37,10 @@ export default function AddressPannel(props) {
                         Cookies.remove("token");
                         location.reload();
                     }else if(_res.code===1){
-                        alert(_res.msg);
+                        toast(_res.msg);
                         location.reload()
                     }else{
-                        alert(_res.msg);
+                        toast(_res.msg);
                     }
                 },
                 onError:(res)=>{
@@ -54,10 +55,10 @@ export default function AddressPannel(props) {
                         Cookies.remove("token");
                         location.reload();
                     }else if(_res.code===1){
-                        alert(_res.msg);
+                        toast(_res.msg);
                         location.reload();
                     }else{
-                        alert(_res.msg);
+                        toast(_res.msg);
                     }
                 },
                 onError:(res)=>{

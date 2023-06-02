@@ -20,7 +20,7 @@ import Link from "next/link";
 import { useRef } from "react";
 import DynamicComponent from "../component/Dynamic";
 import { Carousel } from "react-responsive-carousel";
-
+import { ToastContainer, toast } from 'react-toastify';
 export default function ProductDetail({ cateList, product }) {
 
     // ////////////console.log(product);
@@ -116,6 +116,7 @@ export default function ProductDetail({ cateList, product }) {
                                 <div className={style.img_picker}>
                                     <div ref={contain} style={{ width: '100%', position: 'relative', display: 'flex', justifyContent: 'center' }}>
                                         <div style={{ width: '90%', display: 'flex', alignItems: 'center' }}>
+                                            <img onClick={() => setImage(product?.flowerDetail[index].flowerimage)} key={index.toString()} src={product?.flowerDetail[index].flowerimage} style={{ width: '17%', marginRight: '3%', borderRadius: 5 }}></img>
                                             {
                                                 product.flowerDetail[index].flowerimages.map((item, index) => {
                                                     return <img onClick={() => setImage(item)} key={index.toString()} src={item} style={{ width: '17%', marginRight: '3%', borderRadius: 5 }}></img>
@@ -237,20 +238,23 @@ export default function ProductDetail({ cateList, product }) {
                                         if (isSuccess.code) {
                                             if (isSuccess.code.toString() === '401') {
                                                 Cookies.remove('token');
-                                                alert("請先登錄");
+                                                toast.error("請先登錄",{
+                                                    position:"bottom-right"
+                                                });
                                                 return;
                                             }
                                             if (isSuccess.code === 1) {
                                                 Cookies.set("isAdd", true);
                                                 setIsAdd(true);
+                                                toast("已加入購物車!");
                                                 // alert("加入购物车成功");
                                             }
                                         } else {
-                                            alert(isSuccess.msg);
+                                            toast.error(isSuccess.msg);
                                         }
                                     },
                                     onError: (err) => {
-                                        alert("添加失敗");
+                                        toast("添加失敗");
                                     }
                                 })
 

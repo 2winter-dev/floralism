@@ -2,9 +2,9 @@ import style from '@/styles/footer.module.css'
 import { constant } from '@/constant/index';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-
+import { ToastContainer, toast } from 'react-toastify';
 export default function Footer() {
-    const router=useRouter();
+    const router = useRouter();
     const fetchCate = async () => {
         let response = await fetch(
             `${constant.api_url}/api/Flowercategory/allIndex`, {
@@ -46,10 +46,10 @@ export default function Footer() {
             </div>
             <div className={style.footer_column} style={{ display: 'flex', flexDirection: 'column' }}>
                 <p>幫助</p>
-                <a onClick={()=>router.push('/ShoppingGuide')}>購物指南</a> 
-                <a onClick={()=>router.push('/CustomerOrder')}>訂製服務</a>
-                <a onClick={()=>router.push('/Delivery')}>送貨服務</a>
-                <a onClick={()=>router.push('/Aboutus')}>關於我們</a>
+                <a onClick={() => router.push('/ShoppingGuide')}>購物指南</a>
+                <a onClick={() => router.push('/CustomerOrder')}>訂製服務</a>
+                <a onClick={() => router.push('/Delivery')}>送貨服務</a>
+                <a onClick={() => router.push('/Aboutus')}>關於我們</a>
             </div>
             <div className={style.footer_column} style={{ display: 'flex', flexDirection: 'column' }}>
                 <p>聯絡我們</p>
@@ -103,5 +103,16 @@ export default function Footer() {
         <div style={{ width: '100%', textAlign: 'center', marginTop: 16, marginBottom: 16, fontSize: 12, whiteSpace: 'nowrap' }}>
             ©2023 floralismhk Ins All rights reserved
         </div>
+        <ToastContainer
+            autoClose={5000}
+            // position="bottom-right"
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="colored" />
     </div>)
 }

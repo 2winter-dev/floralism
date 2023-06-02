@@ -2,6 +2,7 @@ import style from '@/styles/login.module.css'
 import { useState } from 'react';
 import { Modal } from "@nextui-org/react";
 import { useMutation } from '@tanstack/react-query';
+import { ToastContainer, toast } from 'react-toastify';
 import m_api from '@/m_api';
 export default function ForgetPassword(props) {
     const [type, setType] = useState(0);
@@ -27,7 +28,7 @@ export default function ForgetPassword(props) {
 
     const getEmailCode = () => {
         if (!email.trim()) {
-            alert("請填寫郵箱以獲取驗證碼")
+           alert("請填寫郵箱以獲取驗證碼")
             return;
         }
         sendEmail.mutate({ email: email.trim(), event: 'resetpwd' }, {

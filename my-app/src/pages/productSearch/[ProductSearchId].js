@@ -15,7 +15,7 @@ import { useRouter } from "next/router";
 import useDebounce from '@/hooks/useDebounce'
 import useThrottle from "../../hooks/useThrottle";
 import LoginPannel from "../component/LoginPannel";
-export default function ProductSearch({ cateList, data }) {
+export default function ProductSearch({ cateList, data,top_banner }) {
   //console.log(data);
   const router = useRouter();
   // const debounce=useDebounce();
@@ -25,7 +25,7 @@ export default function ProductSearch({ cateList, data }) {
   const [register, setRegister] = useState(false);
   const [visible, setVisible] = useState(false);
   const [goodsList, setGoodsList] = useState([]);
-  const [type,setType]=useState(false);
+  const [type, setType] = useState(false);
   const [searchResult, setSearchResult] = useState([]);
   const input = useRef();
   const [keyword, setKeyWord] = useState("")
@@ -38,7 +38,7 @@ export default function ProductSearch({ cateList, data }) {
     //////////console.log("點擊了");
     // //console.log(keyword);
     setType(true);
-    fetchGoods.mutate({ keyword:data, flower_category_id: "", listRows: 16, page: page }, {
+    fetchGoods.mutate({ keyword: data, flower_category_id: "", listRows: 16, page: page }, {
       onSuccess: async (res) => {
         let _res = await res.json();
         if (_res.code === 1) {
@@ -99,9 +99,9 @@ export default function ProductSearch({ cateList, data }) {
   return (<div style={{ position: 'relative' }}>
     <DynamicComponent cateList={cateList} setLogin={setLogin} />
     <div style={{ width: '100%', position: 'relative' }}>
-      <img src="/banner-搜索背景.png" style={{ width: '100%' }} />
+      <img src={top_banner.coverimage} style={{ width: '100%' }} />
       <div className={style.banner_search} style={{ position: 'absolute' }}>
-        <img src="/product-search-desc.png" className={style.banner_desc}
+        <img src={top_banner.descriptionimage} className={style.banner_desc}
         />
         <div className={`${styles.search_area}`} style={{ marginBottom: 12 }}>
           <span className={`${styles.serach_icon} iconfont`} style={{ marginLeft: 8 }}>&#xe82e;</span>
@@ -109,9 +109,9 @@ export default function ProductSearch({ cateList, data }) {
             ref={input}
             type='text'
             value={keyword}
-            onInput={(e) =>{
+            onInput={(e) => {
               setKeyWord(e.target.value);
-              useDebounce(()=>ToSearch(e.target.value),2000)()
+              useDebounce(() => ToSearch(e.target.value), 2000)()
             }}
             placeholder='Search....'
             className={`${styles.input}`}
@@ -138,19 +138,19 @@ export default function ProductSearch({ cateList, data }) {
                  /> */}
       {/* {
         keyword.trim()!==""? */}
-        <GoodsScoll
-          title={keyword!==""?"搜索結果":data.category_name}
-          list={keyword!==""?searchResult:goodsList}
-          page={page}
-          id={data?.data[0]?.flower_category_id ?? 0}
-          setPage={setPage}
-          perPage={16}
-          maxPage={data.last_page}
-          setList={setGoodsList}
-          animation
-          type={''}
-        /> 
-        {/* :
+      <GoodsScoll
+        title={keyword !== "" ? "搜索結果" : data.category_name}
+        list={keyword !== "" ? searchResult : goodsList}
+        page={page}
+        id={data?.data[0]?.flower_category_id ?? 0}
+        setPage={setPage}
+        perPage={16}
+        maxPage={data.last_page}
+        setList={setGoodsList}
+        animation
+        type={''}
+      />
+      {/* :
         <GoodsScoll
           title={data.category_name}
           list={goodsList}
@@ -219,6 +219,28 @@ export async function getStaticProps(context) {
     }
   }
   );
+  let banner_list;
+  let top_banner
+  try {
+    const banner = await fetch(`${constant.api_url}/api/banner/index`, {
+      mode: 'cors',
+      headers: {
+        // "Authorization": `Bearer ${data.cookie}`,
+        "Content-Type": "application/json",
+        "Access-Control-Request-Method": "POST",
+        "Access-Control-Request-Headers": "Content-Type",
+      }
+    })
+    banner_list = await banner.json();
+  } catch (e) {
+     
+  }
+  top_banner = banner_list.data.top_banner.web.filter((item) => {
+    if (item.flower_category_ids.includes(parseInt(params.categoryId))) {
+      //////console.log("找到了");
+      return item;
+    }
+  })
   const tt_response = await fetch(
     `${constant.api_url}/api/flowercategory/index`, {
     headers: {
@@ -231,11 +253,13 @@ export async function getStaticProps(context) {
   );
   const tt_data = await tt_response.text()
   const data = await response.text()
-
+  console.log("----");
+  console.log(top_banner);
   return {
     props: {
       cateList: JSON.parse(tt_data).data,
       data: JSON.parse(data).data,
+      top_banner:top_banner.length ?top_banner[0]: { coverimage: `/banner-搜索背景.png`, descriptionimage: `/product-search-desc.png`},
     },
 
   };
