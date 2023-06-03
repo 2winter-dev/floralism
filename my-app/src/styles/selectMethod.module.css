@@ -20,15 +20,17 @@
     height: 15px;
     /* border: 1px solid black; */
 }
-.new_Step{
-   padding: 8px 48px;
-   background-color: red;
-   letter-spacing: 1px;
-   color: white;
-   border-radius: 8px;
-   cursor:pointer;
+
+.new_Step {
+    padding: 8px 48px;
+    background-color: #d43a43;
+    letter-spacing: 1px;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
 }
-.title{
+
+.title {
     font-size: 1rem;
     color: #282828;
     font-weight: 700;
@@ -36,16 +38,18 @@
     /* border-bottom: 1px solid black; */
     /* width: 50%; */
 }
-.title_area{
+
+.title_area {
     padding-bottom: 16px;
     border-bottom: 1px solid #f1f1f1;
 }
+
 .uncheck {
     background-color: black;
 }
 
 .wrong {
-    background-color: red;
+    background-color: #d43a43;
 }
 
 .complete {
@@ -55,17 +59,20 @@
 .processing {
     background-color: yellow;
 }
-.selectPayment{
-    border: 1px solid rgba(0,0,0,0.3);
+
+.selectPayment {
+    border: 1px solid rgba(0, 0, 0, 0.3);
     border-radius: 8px;
 }
-.shopItem{
-    border-bottom:1px solid #f1f1f1;
+
+.shopItem {
+    border-bottom: 1px solid #f1f1f1;
     padding-bottom: 12px;
 }
+
 .addressItem {
     display: flex;
-    border: 1px solid rgba(0,0,0,0.3);
+    border: 1px solid rgba(0, 0, 0, 0.3);
     border-left: none;
     cursor: pointer;
     position: relative;
@@ -78,8 +85,8 @@
     /* border-radius: 8px; */
 }
 
-.addressItem::before{
-    background: repeating-linear-gradient(-45deg,#d60404,#d60404 10px,#fff 0,#fff 20px,#4991f4 0,#4991f4 30px,#fff 0,#fff 40px);
+.addressItem::before {
+    background: repeating-linear-gradient(-45deg, #d60404, #d60404 10px, #fff 0, #fff 20px, #4991f4 0, #4991f4 30px, #fff 0, #fff 40px);
     content: "";
     height: calc(100% + 2px);
     left: 0;
@@ -87,69 +94,82 @@
     top: -1px;
     width: 4px;
 }
-.media_control{
+
+.media_control {
     margin-right: 12px;
 }
+
 .addressItemDetail>div {
     /* border-bottom: 1px solid black; */
     width: 100%;
     font-size: 14px;
 }
-.addressItemDetail>div:nth-child(4){
+
+.addressItemDetail>div:nth-child(4) {
     border: none;
     width: auto;
 }
+
 @media screen and (min-width:851px) {
     .addressItem {
         width: 49%;
         /* margin: 2.5%; */
     }
-    .rightContain{
+
+    .rightContain {
         width: 30%;
     }
 }
 
-@media screen and (min-width:960px) {
-     
-}
+@media screen and (min-width:960px) {}
 
 @media screen and (max-width:959px) {
-    .column_control{
+    .column_control {
         /* flex-direction: column; */
     }
-    .media_control{
-        margin:0;
-        width:100%
-    }
-    .tt_layout{
-        flex-direction: column;
-    }
-}
 
-@media screen and (max-width:850px) and (min-width:414px){
-    .addressItem {
-        width: 47%;
-        /* margin: 2.; */
+    .media_control {
+        margin: 0;
+        width: 100%
     }
-    .rightContain{
-        width: 100%;
-        margin-top: 24px;
-    }
-    .column_control{
-        flex-direction: column;
-    }
-}
 
-@media screen and (max-width:414px) {
-    .addressItem {
-        width: 100%;
-        /* margin: 2.; */
-    }
-    .rightContain{
-        width: 100%;
-        margin-top: 24px;
-    }
-    .column_control{
+    .tt_layout {
         flex-direction: column;
+
+        .total_layout {
+            padding: 10% 0;
+        }
+    }
+
+    @media screen and (max-width:850px) and (min-width:414px) {
+        .addressItem {
+            width: 47%;
+            /* margin: 2.; */
+        }
+
+        .rightContain {
+            width: 100%;
+            margin-top: 24px;
+        }
+
+        .column_control {
+            flex-direction: column;
+        }
+    }
+
+    @media screen and (max-width:414px) {
+        .addressItem {
+            width: 100%;
+            /* margin: 2.; */
+        }
+
+        .rightContain {
+            width: 100%;
+            margin-top: 24px;
+        }
+
+        .column_control {
+            flex-direction: column;
+        }
     }
 }

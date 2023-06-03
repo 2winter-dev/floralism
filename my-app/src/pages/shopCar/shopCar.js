@@ -326,7 +326,7 @@ export default function ShopCar({ cateList, shopCar }) {
                                     本地送貨
                                 </div>
                                 <div onClick={() => setType(2)} className={style.button_icon} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', backgroundColor: type === 2 ? "rgba(0,0,0,0.1)" : "white" }}>
-                                    <img src={'/門店自取.png'} ></img>
+                                    <img src={'/樵店自取.png'} ></img>
                                     門店自取
                                 </div>
                             </div>

@@ -146,26 +146,33 @@ export default function selectMethod(props) {
                 cookie: Cookies.get('token')
             }, {
                 onSuccess: async (res) => {
+
                     // let _res = await res.json();
-                    if (res.code === 401) {
-                        Cookies.remove("token");
-                        location.reload();
-                    } else if (res.code === 1) {
-                        console.log(res);
-                        setFlag(false);
-                        if (payment === "paypal") {
-                            setUrl(res.data.payment_info.approval_url)
+                    setFlag(!true);
+                        // let _res = await res.json();
+                        if (res.code === 401) {
+                            Cookies.remove("token");
+                            location.reload();
+                        } else if (res.code === 1) {
+                            console.log(res);
+                            setFlag(false);
+                            if (payment === "paypal") {
+                                setUrl(res.data.payment_info.approval_url)
+                            }
+                            setPage(2);
+                        } else {
+                            toast.error(res.msg);
                         }
-                        setPage(2);
-                    } else {
-                         setFlag(false);
-                        toast.error(res.msg);
-                    }
+
+
                 },
+
                 onError: (res) => {
-                     setFlag(false);
+                    setFlag(false);
                     toast.error("上傳失敗");
+                    setFlag(!true);
                 }
+
             })
         }
     }
@@ -183,8 +190,9 @@ export default function selectMethod(props) {
                     <div>确认订单</div>
                     <div style={{ flex: 1 }}></div>
                     <div>支付</div>
+                    <div>支付</div>
                     <div style={{ flex: 1 }}></div>
-                    <div>支付結果</div>
+                    <div>結果</div>
                     <div style={{ flex: 1 }}></div>
                 </div>
                 <div style={{ display: "flex", justifyContent: 'space-around', alignItems: 'center' }}>
@@ -379,7 +387,10 @@ export default function selectMethod(props) {
                                     paddingBottom: 6,
                                     cursor: 'pointer',
                                     marginTop: 12,
-                                    // background: 'rgb(255,196,57)',
+                                    width: "50%",
+                                    color: '#fff',
+                                    margin: '10px 25%',
+                                    background: '#1e80ff',
                                     borderRadius: 4
                                 }}
                                 onClick={() => router.replace(`${url}`)}
@@ -389,19 +400,19 @@ export default function selectMethod(props) {
                         </div>)
                 }
                 {
-                    page === 3 && (<div style={{ width: '100%', height: 200, display: 'flex', flexDirection:'column',justifyContent: 'center', alignItems: 'center' }}>{
-                        router.query?.type === "success" ?  <div style={{marginTop:24,fontSize:28,fontWeight:600}}>付款成功</div> 
-                        : 
-                        router.query?.type === "fail" ?  <div style={{marginTop:24,fontSize:28,fontWeight:600}}>付款失敗</div> 
-                        :  <div style={{marginTop:24,fontSize:28,fontWeight:600}}>用戶取消支付</div>
+                    page === 3 && (<div style={{ width: '100%', height: 200, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>{
+                        router.query?.type === "success" ? <div style={{ marginTop: 24, fontSize: 28, fontWeight: 600 }}>付款成功</div>
+                            :
+                            router.query?.type === "fail" ? <div style={{ marginTop: 24, fontSize: 28, fontWeight: 600 }}>付款失敗</div>
+                                : <div style={{ marginTop: 24, fontSize: 28, fontWeight: 600 }}>用戶取消支付</div>
                     }
-                        <div style={{marginTop:24,cursor:'pointer'}} onClick={()=>router.replace("/")}>返回首頁</div>
+                        <div style={{ marginTop: 24, cursor: 'pointer' }} onClick={() => router.replace("/")}>返回首頁</div>
                     </div>
                     )
                 }
             </div>
         </div>
-        {(!login||!add_vis)&&<ToastContainer />}
+        {(!login || !add_vis) && <ToastContainer />}
         <Footer />
         {
             <LoginPannel login={login} close={() => setLogin(false)} toRegister={() => {
@@ -469,7 +480,7 @@ export async function getServerSideProps(context) {
             mode: 'cors',
         }
         )
-     
+
 
         const goods_list_response = await fetch(
             `${constant.api_url}/api/cart/detail?ids=${context.query.cart_ids}`, {
@@ -493,18 +504,18 @@ export async function getServerSideProps(context) {
                 },
                 mode: 'cors',
             })
-            if(shopList.status!==200){
-                s_list={data:[],code:0}
-            }else s_list = await shopList.json();
+            if (shopList.status !== 200) {
+                s_list = { data: [], code: 0 }
+            } else s_list = await shopList.json();
         }
-        if(add_response.status!==200){
-            add_data={ data: [], code:0 };
-        }else   add_data = await add_response.json();
-        if(goods_list_response.status!=200){
-            goods_data={data:[],code:0}
-        }else goods_data = await goods_list_response.json();
+        if (add_response.status !== 200) {
+            add_data = { data: [], code: 0 };
+        } else add_data = await add_response.json();
+        if (goods_list_response.status != 200) {
+            goods_data = { data: [], code: 0 }
+        } else goods_data = await goods_list_response.json();
         ////////////console.log("=========");
-      
+
     } else {
         add_data = { data: [], code: 401 };
         goods_data = { data: [], code: 401 };

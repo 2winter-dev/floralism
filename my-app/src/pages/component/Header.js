@@ -1,15 +1,14 @@
-import header from "@/styles/header.module.css"
-import Cookies from "js-cookie"
-import Link from "next/link"
-import { useRouter } from "next/router"
+import header from "@/styles/header.module.css";
+import Cookies from "js-cookie";
+import Link from "next/link";
+import { useRouter } from "next/router";
 import { useState } from "react";
 
 export default function Header(props) {
-    const router = useRouter();
+  const router = useRouter();
 
-
-    const [navStatus, setNavStatus] = useState(false);
-    const [index,setIndex]=useState();
+  const [navStatus, setNavStatus] = useState(false);
+  const [index, setIndex] = useState();
 
     return (<div className={`${header.header_background}`}>
         <div className={`${header.header_layout}`}>

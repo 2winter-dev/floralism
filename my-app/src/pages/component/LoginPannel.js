@@ -91,7 +91,7 @@ export default function LoginPannel(props) {
                     // let body = await res.json()
                     //////////////console.log("====123====")
                     //////////////console.log(body)
-
+                    console.log(res);
                     if (res.code) {
                         // ////////////console.log("================");
                         Cookies.set('token', res.data.token, { expires: 1 });
@@ -99,7 +99,7 @@ export default function LoginPannel(props) {
                         // ////////////console.log("========");
                         // ////////////console.log(Cookies.get('token'));
 
-                        // alert("登陸成功");
+                        
                         props.close();
                         // props.hasLogin();
                         location.reload();

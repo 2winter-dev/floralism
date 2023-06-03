@@ -64,7 +64,7 @@ export default function User(props) {
         let m_list = addList;
         console.log(m_list);
         console.log(m_list.findIndex((it, index) => id === it.id));
-        let res= m_list.splice(m_list.findIndex((it, index) => item === it.id), 1);
+        let res= m_list.splice(m_list.findIndex((it, index) => id === it.id), 1);
         console.log(m_list);
         console.log(res);
         setAddList([...m_list]);
@@ -137,15 +137,16 @@ export default function User(props) {
                 // let _res = await res.json();
                 console.log(res);
                 if (res.code === 1) {
-                    toast(res.msg)           
+                    toast(res.msg)
+                 
                     setDef_name(username)
                     setDef_Email(email)
                     setDef_Mobile(mobile)
-                }else if(res.code===401){
-                    location.reload();
+                    // setMobile(_res.data?.mobile);
+                    // setEmail(_res.data?.email);
                 }else{
-                //    alert(res.msg);
-                toast("1")
+                    console.log(res.msg);
+                    toast(res.msg);
                 }
               
             },
