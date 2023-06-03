@@ -14,9 +14,9 @@ export default function Header(props) {
     <div className={`${header.header_background}`}>
       <div className={`${header.header_layout}`}>
         <div className={`${header.logo}`}>
-          <Link href={"/"}>
+          <a href={"/"}>
             <img src="/logo.png" style={{}} className={header.logo_pic} />
-          </Link>
+          </a>
         </div>
         <div className={`${header.header_center}`}>
           {props?.list?.length &&
@@ -59,14 +59,14 @@ export default function Header(props) {
               );
             })}
           <div className={`${header.header_center_label}`}>
-            <Link href={`/ContactPage`}>
+            <a href={`/ContactPage`}>
               <div className={`${header.header_center_parent}`}>聯係我們</div>
-            </Link>
+            </a>
           </div>
           <div className={`${header.header_center_label}`}>
-            <Link href={`/Aboutus`}>
+            <a href={`/Aboutus`}>
               <div className={`${header.header_center_parent}`}>關於我們</div>
-            </Link>
+            </a>
           </div>
         </div>
         <div className={`${header.header_right}`} style={{ marginLeft: 10 }}>
@@ -149,10 +149,10 @@ export default function Header(props) {
             })}
           <div className={`${header.drop_item}`}>
             <div className={`${header.drop_label}`}>
-              <Link href={"/Aboutus"}>關於我們</Link>
+              <a href={"/Aboutus"}>關於我們</a>
             </div>
             <div className={`${header.drop_label}`}>
-              <Link href={"/ContactPage"}>聯絡我們</Link>
+              <a href={"/ContactPage"}>聯絡我們</a>
             </div>
             <div className={`${header.child_list}`}></div>
           </div>
