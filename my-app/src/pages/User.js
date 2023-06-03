@@ -122,16 +122,18 @@ export default function User(props) {
         updateUserMess.mutate({ username: username.trim(), email: email.trim(), mobile: mobile.trim(), cookie: Cookies.get('token') }, {
             onSuccess: async (res) => {
                 // let _res = await res.json();
+                console.log(res);
                 if (res.code === 1) {
-                    // location.reload();
                     toast(res.msg)
-                    //////console.log(_res);
-                    // setUsername(_res.data?.username);
+                 
                     setDef_name(username)
                     setDef_Email(email)
                     setDef_Mobile(mobile)
                     // setMobile(_res.data?.mobile);
                     // setEmail(_res.data?.email);
+                }else{
+                    console.log(res.msg);
+                    toast(res.msg);
                 }
             },
             onError:(res)=>{
@@ -432,6 +434,7 @@ export default function User(props) {
                 </div>
             }
         </div>
+        {!login&& <ToastContainer />}
         <Footer />
         {
             <AddressPannel type={add_type} item={item} visible={add_vis} close={() => setAdd_vis(false)} />

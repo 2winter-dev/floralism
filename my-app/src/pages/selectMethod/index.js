@@ -151,7 +151,7 @@ export default function selectMethod(props) {
                         Cookies.remove("token");
                         location.reload();
                     } else if (_res.code === 1) {
-                        // ////////////console.log(_res);
+                        console.log(_res);
                         setFlag(false);
                         if (payment === "paypal") {
                             setUrl(_res.data.payment_info.approval_url)
@@ -362,7 +362,7 @@ export default function selectMethod(props) {
                                 </div>
                                 <div style={{ display: 'flex', flex: 1, alignItems: 'baseline' }}>
                                     <div>總價:</div>
-                                    <div style={{ fontSize: 17, fontWeight: 600 }}>HK$123</div>
+                                    <div style={{ fontSize: 17, fontWeight: 600 }}>HK${payment_amount}</div>
                                 </div>
                                 <div style={{ display: 'flex', flex: 1, alignItems: 'baseline' }}>
                                     <div>狀態:</div>

@@ -120,7 +120,7 @@ export default function ShopCar({ cateList, shopCar }) {
                     })
                     setSc([...arr]);
                     setSelected([]);
-                    toast.error(_res.msg);
+                    toast.success(_res.msg);
 
                 } else if (_res.code === 401) {
                     Cookies.remove('token');

@@ -186,4 +186,11 @@
         width: 100%;
         flex-direction: column;
     }
+    .product_img{
+        margin: 0;
+    }
+
+    .main_contain{
+        margin :0 ;
+    }
 }
