@@ -32,7 +32,10 @@ export default function Header(props) {
                                 !!item.get_child?.length && <div className={`${header.header_center_dropdown}`}>
                                     {
                                         item.get_child.map((it, ii) => {
-                                            return (<div key={index.toString() + ii.toString()}><a href={`/category/${it.id}`} >{it.categoryname}</a></div>)
+                                            return (<div key={index.toString() + ii.toString()}>
+                                                {/* <a href={`/category/${it.id}`} >{it.categoryname}</a> */}
+                                                  <Link href={`/category/${it.id}`}>{it.categoryname}</Link>
+                                                </div>)
                                         })
                                     }
                                 </div>}

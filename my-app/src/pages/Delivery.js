@@ -9,6 +9,7 @@ import LoginPannel from './component/LoginPannel';
 import { constant } from '../constant';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+import { ToastContainer, toast } from 'react-toastify';
 
 export default function Delivery(props) {
     const [login, setLogin] = useState(false);
@@ -118,6 +119,7 @@ export default function Delivery(props) {
         </div>
 
         <Footer />
+        {!login&&<ToastContainer />}
         {
             <LoginPannel login={login} close={() => setLogin(false)} toRegister={() => {
                 setLogin(false);

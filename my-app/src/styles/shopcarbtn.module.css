@@ -33,6 +33,7 @@
 .close_btn{
     position: fixed;
     padding: 0.5rem 0.7rem;
+    z-index: 1;
     bottom: 400px;
     right: 5%;
     border: 1px solid white;

@@ -23,6 +23,11 @@ export default function User(props) {
     const [email, setEmail] = useState(props.user_data?.email);
     const [mobile, setMobile] = useState(props.user_data?.mobile);
 
+       const [def_name, setDef_name] = useState(props.user_data?.username);
+    const [def_email, setDef_Email] = useState(props.user_data?.email);
+    const [def_mobile, setDef_Mobile] = useState(props.user_data?.mobile);
+
+
     const [addList, setAddList] = useState(props.addList);
     const [add, setAdd] = useState();
     const [add_type, setAdd_type] = useState();
@@ -116,14 +121,25 @@ export default function User(props) {
         //////console.log(username, email, mobile);
         updateUserMess.mutate({ username: username.trim(), email: email.trim(), mobile: mobile.trim(), cookie: Cookies.get('token') }, {
             onSuccess: async (res) => {
-                let _res = await res.json();
-                if (_res.code === 1) {
-                    location.reload();
+                // let _res = await res.json();
+                if (res.code === 1) {
+                    // location.reload();
+                    toast(res.msg)
                     //////console.log(_res);
                     // setUsername(_res.data?.username);
+                    setDef_name(username)
+                    setDef_Email(email)
+                    setDef_Mobile(mobile)
                     // setMobile(_res.data?.mobile);
                     // setEmail(_res.data?.email);
                 }
+            },
+            onError:(res)=>{
+                console.log(res.msg)
+                if(res instanceof Error)
+                toast.error(res.message);
+                else toast.error(JSON.stringify(res.msg));
+                // location.reload();
             }
         })
     }
@@ -159,9 +175,9 @@ export default function User(props) {
                         <div className={styles.avatar}>
                             <img src={props.user_data.avatar} style={{ width: '100%' }} />
                         </div>
-                        <div style={{ marginTop: 8, fontSize: 18, fontWeight: 700 }}>{username}</div>
-                        <div style={{ marginTop: 8 }}>{email}</div>
-                        <div style={{ marginTop: 8 }}>{mobile}</div>
+                        <div style={{ marginTop: 8, fontSize: 18, fontWeight: 700 }}>{def_name}</div>
+                        <div style={{ marginTop: 8 }}>{def_email}</div>
+                        <div style={{ marginTop: 8 }}>{def_mobile}</div>
                     </div>
                     <div className={styles.border} onClick={() => setType('message')}>
                         <div className={type === 'message' ? `${styles.user_btn} ${styles.choosen}` : `${styles.user_btn}`} style={{ display: 'flex' }}>
@@ -176,6 +192,11 @@ export default function User(props) {
                     <div className={styles.border} onClick={() => setType('order')}>
                         <div className={type === 'order' ? `${styles.user_btn} ${styles.choosen}` : `${styles.user_btn}`} style={{ display: 'flex' }}>
                             <div>訂單列表</div>
+                        </div>
+                    </div>
+                    <div className={styles.border} onClick={() => router.push('/shopCar/shopCar')}>
+                        <div className={`${styles.user_btn}`} style={{ display: 'flex' }}>
+                            <div>前往購物車</div>
                         </div>
                     </div>
                     <div className={styles.border} onClick={() => {
@@ -322,7 +343,7 @@ export default function User(props) {
                                                         <div onClick={() => {
                                                             // setType("OrderDetail");
                                                             OrderDetail(item?.id);
-                                                        }} className={styles.check_btn}>{item?.payment_status ? null : '查看訂單'}</div>
+                                                        }} className={styles.check_btn}>{'查看訂單'}</div>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -362,17 +383,6 @@ export default function User(props) {
                             </table>
                         </div>
                     </div>
-                    {/* <div className={styles.order_detail_area} style={{ marginTop: 24 }}>
-                        <div style={{ display: 'flex', alignItems: 'flex-start', flexDirection: 'column', marginTop: 12 }}>
-                            <h5 className={styles.right_contain_title}>訂單信息</h5>
-                            <div>
-                                <div>訂單地址:{ }</div>
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                            </div>
-                        </div>
-                    </div> */}
                     <div className={styles.order_detail_area} style={{ marginTop: 24 }}>
                         <div style={{ display: 'flex', alignItems: 'flex-start', flexDirection: 'column' }}>
                             <h5 className={styles.right_contain_title}>訂單商品列表</h5>
@@ -419,28 +429,6 @@ export default function User(props) {
                             </div>
                         </div>
                     </div>
-                    {/* <div className={styles.order_detail_area} style={{ marginTop: 24 }}>
-                        <div style={{ display: 'flex', alignItems: 'flex-start', flexDirection: 'column' }}>
-                            <h5 className={styles.right_contain_title}>訂單狀態</h5>
-                        </div>
-                        <div style={{ width: '100%' }}>
-                            <table style={{ width: '100%' }}>
-                                <thead>
-                                    <tr>
-                                        <th>
-
-                                        </th>
-                                        <th>
-
-                                        </th>
-                                        <th>
-
-                                        </th>
-                                    </tr>
-                                </thead>
-                            </table>
-                        </div>
-                    </div> */}
                 </div>
             }
         </div>
@@ -526,16 +514,13 @@ export async function getServerSideProps(context) {
         addList = await add_response.json();
         sc = await sc_res.json();
         orderList = await order_response.json();
-        ////////console.log(orderList);
-        // if (sc.code === 401) {
-        //     sc.data = [];
-        // }
-        // if(addList.code===401){
-
-        // }
     } else {
-        sc = { data: [], code: 401 };
-        addList = { data: [], code: 401 };
+        return {
+            redirect: {
+                permanent: false,
+                destination: '/',
+            }
+        }
     }
 
 

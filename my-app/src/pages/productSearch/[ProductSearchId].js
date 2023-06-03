@@ -14,6 +14,7 @@ import m_api from "../../m_api";
 import { useRouter } from "next/router";
 import useDebounce from '@/hooks/useDebounce'
 import useThrottle from "../../hooks/useThrottle";
+import { ToastContainer, toast } from 'react-toastify';
 import LoginPannel from "../component/LoginPannel";
 export default function ProductSearch({ cateList, data,top_banner }) {
   //console.log(data);
@@ -46,7 +47,7 @@ export default function ProductSearch({ cateList, data,top_banner }) {
           //////////console.log(_res);
           setPage(1);
         } else {
-          alert(_res.msg);
+          toast.error(_res.msg);
         }
       },
       onError: (res) => {
@@ -165,6 +166,7 @@ export default function ProductSearch({ cateList, data,top_banner }) {
         />} */}
     </div>
     <Footer />
+    {!login&&<ToastContainer />}
     {
       <LoginPannel login={login} close={() => setLogin(false)} toRegister={() => {
         setLogin(false);

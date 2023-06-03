@@ -11,6 +11,7 @@ import { constant } from "@/constant/index";
 import CateScroll from './component/cateScroll';
 import LoginPannel from "./component/LoginPannel";
 import DynamicComponent from './component/Dynamic';
+import { ToastContainer, toast } from 'react-toastify';
 import { useMutation } from "@tanstack/react-query";
 export default function ContactPage({ cateList, allcate }) {
     //////////////console.log(cateList)
@@ -51,8 +52,8 @@ export default function ContactPage({ cateList, allcate }) {
             window.removeEventListener("resize", resizeUpdate);
         }
     }, [])
-    
-   
+
+
 
     useEffect(() => {
         ////////console.log("flag改變", flag);
@@ -84,13 +85,18 @@ export default function ContactPage({ cateList, allcate }) {
                     <div className={style.contact_title}>歡迎查詢</div>
                     <div className={style.contact_distance} style={{ lineHeight: '200%', letterSpacing: 2 }}>如果你有任何花藝需求或疑問，歡迎聯係我們的專業花藝師團隊，我們會仔細聆聽您的需求，並根據不同場合和用途，提供最適合的花藝設計方案，您可以通過以下方式聯係我們</div>
                     <div className={`${style.contact_title}`} style={{ marginTop: '15%' }}>客戶熱綫</div>
-                    <div className={style.contact_distance} style={{ display: 'flex', alignItems: 'center' }}>
-                        <img src="/圖標-電話.png" />
-                        <div style={{ marginLeft: 16 }}>65818053</div>
+                    <div className={style.contact_distance} style={{ display: 'flex', alignItems: 'center' }} >
+                        <a href="tel:+85265818053" style={{ display: 'flex', alignItems: 'center' }}>
+                            <img src="/圖標-電話.png" />
+                            <div style={{ marginLeft: 16 }}>65818053</div>
+                        </a>
+
                     </div>
                     <div className={style.contact_distance} style={{ display: 'flex', alignItems: 'center' }}>
-                        <img src="/圖標-郵件.png" />
-                        <div style={{ marginLeft: 16 }}>info@floralismhk.com</div>
+                        <a href="mailto:info@floralismhk.com" style={{ display: 'flex', alignItems: 'center' }}>
+                            <img src="/圖標-郵件.png" />
+                            <div style={{ marginLeft: 16 }}>info@floralismhk.com</div>
+                        </a>
                     </div>
                 </div>
                 <div className={style.main_contain} style={{ display: "flex", alignItems: 'flex-end' }}>
@@ -116,6 +122,7 @@ export default function ContactPage({ cateList, allcate }) {
         <div className={style.ContactusLayout}>
             <Contactus />
         </div>
+        {!login && <ToastContainer />}
         <Footer />
         {
             <LoginPannel login={login} close={() => setLogin(false)} toRegister={() => {

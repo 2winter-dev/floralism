@@ -103,7 +103,7 @@ export default function Footer() {
         <div style={{ width: '100%', textAlign: 'center', marginTop: 16, marginBottom: 16, fontSize: 12, whiteSpace: 'nowrap' }}>
             ©2023 floralismhk Ins All rights reserved
         </div>
-        <ToastContainer
+        {/* <ToastContainer
             autoClose={5000}
             // position="bottom-right"
             hideProgressBar={false}
@@ -113,6 +113,6 @@ export default function Footer() {
             pauseOnFocusLoss
             draggable
             pauseOnHover
-            theme="colored" />
+            theme="colored" /> */}
     </div>)
 }

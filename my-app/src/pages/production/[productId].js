@@ -21,6 +21,7 @@ import { useRef } from "react";
 import DynamicComponent from "../component/Dynamic";
 import { Carousel } from "react-responsive-carousel";
 import { ToastContainer, toast } from 'react-toastify';
+// import { Toast } from "react-toastify/dist/components";
 export default function ProductDetail({ cateList, product }) {
 
     // ////////////console.log(product);
@@ -214,7 +215,7 @@ export default function ProductDetail({ cateList, product }) {
                             <div style={{ display: 'flex', alignItems: 'center' }}>
                                 <button onClick={() => {
                                     if (num === 1) {
-                                        alert("商品數量不能小於0")
+                                        toast.error("商品數量不能小於0")
                                     } else {
                                         setNum(num - 1);
                                     }
@@ -322,10 +323,11 @@ export default function ProductDetail({ cateList, product }) {
             }
             } />
         }
-        <ShopcarBottom isAdd={isAdd} />
+        {!login&&<ShopcarBottom isAdd={isAdd} />}
         {
             isShow && <ShopCarPage isShow={isShow} setIsShow={setIsShow} />
         }
+        {!login&&<ToastContainer />}
         {/**public\swiper */}
         <Script defer src="/swiper/js/idangerous.swiper.min.js" onReady={() => {
             MySwiper = new Swiper('.swiper-container', {

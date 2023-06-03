@@ -24,6 +24,7 @@ import Cookies from 'js-cookie';
 import CateScroll from './component/cateScroll';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+import { ToastContainer, toast } from 'react-toastify';
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home({ allcate, cateList, GoodsPage, carousel }) {
@@ -190,6 +191,7 @@ export default function Home({ allcate, cateList, GoodsPage, carousel }) {
         }
         } />
       }
+       {!login&&<ToastContainer />}
       <Script defer src="/swiper/js/idangerous.swiper.min.js" onReady={() => {
         MySwiper = new Swiper('.swiper-container', {
           loop: true,

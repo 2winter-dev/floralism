@@ -87,7 +87,9 @@
     top: -1px;
     width: 4px;
 }
-
+.media_control{
+    margin-right: 12px;
+}
 .addressItemDetail>div {
     /* border-bottom: 1px solid black; */
     width: 100%;
@@ -114,6 +116,10 @@
 @media screen and (max-width:959px) {
     .column_control{
         /* flex-direction: column; */
+    }
+    .media_control{
+        margin:0;
+        width:100%
     }
 }
 

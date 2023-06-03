@@ -28,7 +28,7 @@ export default function ForgetPassword(props) {
 
     const getEmailCode = () => {
         if (!email.trim()) {
-           alert("請填寫郵箱以獲取驗證碼")
+           toast.error("請填寫郵箱以獲取驗證碼")
             return;
         }
         sendEmail.mutate({ email: email.trim(), event: 'resetpwd' }, {
@@ -39,7 +39,7 @@ export default function ForgetPassword(props) {
             },
             onError: (res) => {
                 //////////////console.log(res);
-                alert("發送驗證碼失敗");
+                toast.error("發送驗證碼失敗");
             }
         })
 
@@ -48,15 +48,15 @@ export default function ForgetPassword(props) {
     const reset = () => {
         resetPassword.mutate({ email: email.trim(), password: password.trim(), confirmPassword: repassword.trim() }, {
             onSuccess: async (res) => {
-                let isSuccess = await res.json()
-                if (isSuccess.code) {
+                // let isSuccess = await res.json()
+                if (res.code) {
                     props.toLogin();
                 } else {
-                    alert(isSuccess.msg);
+                    toast.error(res.msg);
                 }
             },
             onError: (res) => {
-                alert("重置失敗")
+                toast.error("重置失敗")
             }
         })
     }
@@ -68,11 +68,11 @@ export default function ForgetPassword(props) {
                 if (isSuccess.code) {
                     setType(1);
                 } else {
-                    alert(isSuccess.msg);
+                    toast.error(isSuccess.msg);
                 }
             },
             onError: (res) => {
-                alert("驗證失敗")
+                toast.error("驗證失敗")
             }
         })
     }

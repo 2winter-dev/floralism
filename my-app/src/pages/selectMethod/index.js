@@ -16,7 +16,7 @@ import m_api from "@/m_api";
 import Cookies from "js-cookie";
 import { Radio } from "@nextui-org/react";
 import { redirect } from "next/dist/server/api-utils";
-
+import { ToastContainer, toast } from 'react-toastify';
 
 export default function selectMethod(props) {
     const stripe = require('stripe')(props.secretKey);
@@ -77,11 +77,11 @@ export default function selectMethod(props) {
                 } else if (_res.code === 1) {
                     location.reload();
                 } else {
-                    alert(_res.msg);
+                    toast.error(_res.msg);
                 }
             },
             onError: (res) => {
-                alert("删除失败")
+                toast.error("删除失败")
             }
         })
     }
@@ -107,7 +107,7 @@ export default function selectMethod(props) {
                     // location.reload();
                     changeDefault(id);
                 } else {
-                    alert(_res.msg);
+                    toast.error(_res.msg);
                 }
             }
         })
@@ -123,7 +123,7 @@ export default function selectMethod(props) {
             })
             setAdd(res[0].id);
         } else {
-            alert("登陸失效");
+            toast.error("登陸失效");
             router.replace('/');
         }
     }, [])
@@ -158,11 +158,11 @@ export default function selectMethod(props) {
                         }
                         setPage(2);
                     } else {
-                        alert(_res.msg);
+                        toast.error(_res.msg);
                     }
                 },
                 onError: (res) => {
-                    alert("上傳失敗");
+                    toast.error("上傳失敗");
                 }
             })
         }
@@ -213,7 +213,7 @@ export default function selectMethod(props) {
                 {
                     page === 1 &&
                     <div className={styles.column_control} style={{ display: 'flex', alignItems: 'flex-start' }}>
-                        <div style={{ flex: 1, marginRight: 12, backgroundColor: 'white', padding: '3%', borderRadius: 8, marginRight: 12 }}>
+                        <div className={styles.media_control} style={{ flex: 1, backgroundColor: 'white', padding: '3%', borderRadius: 8 }}>
                             {
                                 deliverytype?.toString() === "1" ? <div>
                                     <div className={styles.title_area} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
@@ -311,12 +311,14 @@ export default function selectMethod(props) {
                                             <img src={item.coverimage} style={{ width: '30%', marginRight: 12 }} />
                                             <div style={{ flex: 1 }}>
                                                 <div style={{ fontSize: 18, height: 40, width: '100%', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{item.productname}</div>
-                                                <div style={{ fontSize: 12, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{item.cardtype ? "需要心意卡" : "無需心意卡"}</div>
-                                            </div>
-                                            <div style={{ textAlign: 'right' }}>
+                                                {/* <div style={{ fontSize: 12, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{item.cardtype ? "需要心意卡" : "無需心意卡"}</div> */}
                                                 <div style={{ fontSize: 12 }}>${item.price}</div>
                                                 <div>×{item.num}</div>
                                             </div>
+                                            {/* <div style={{ textAlign: 'right' }}>
+                                                <div style={{ fontSize: 12 }}>${item.price}</div>
+                                                <div>×{item.num}</div>
+                                            </div> */}
                                         </div>
                                     )
                                 }
@@ -397,7 +399,7 @@ export default function selectMethod(props) {
                 }
             </div>
         </div>
-
+        {!login&&<ToastContainer />}
         <Footer />
         {
             <LoginPannel login={login} close={() => setLogin(false)} toRegister={() => {
@@ -465,6 +467,7 @@ export async function getServerSideProps(context) {
             mode: 'cors',
         }
         )
+     
 
         const goods_list_response = await fetch(
             `${constant.api_url}/api/cart/detail?ids=${context.query.cart_ids}`, {
@@ -488,21 +491,27 @@ export async function getServerSideProps(context) {
                 },
                 mode: 'cors',
             })
-            s_list = await shopList.json();
+            if(shopList.status!==200){
+                s_list={data:[],code:0}
+            }else s_list = await shopList.json();
         }
-
-        goods_data = await goods_list_response.json();
+        if(add_response.status!==200){
+            add_data={ data: [], code:0 };
+        }else   add_data = await add_response.json();
+        if(goods_list_response.status!=200){
+            goods_data={data:[],code:0}
+        }else goods_data = await goods_list_response.json();
         ////////////console.log("=========");
-        add_data = await add_response.json();
+      
     } else {
         add_data = { data: [], code: 401 };
         goods_data = { data: [], code: 401 };
         s_list = { data: [], code: 401 };
     }
-    ////////////console.log(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
-    //////console.log("============");
-    //////console.log(add_data);
-    if (context.query.page !== "3") {
+
+
+
+    if (context.query?.page !== "3") {
         //////console.log("不为3");
         if (!goods_data.code) {
             return {
@@ -528,7 +537,7 @@ export async function getServerSideProps(context) {
             publishableKey: `${process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY}`,
             secretKey: `${process.env.STRIPE_SECRET_KEY}`,
             shopList: s_list?.data ?? [],
-            page: context.query.page ?? undefined,
+            page: context.query?.page ?? 1,
         },
     };
 }

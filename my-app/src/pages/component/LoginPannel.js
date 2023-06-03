@@ -7,6 +7,7 @@ import Cookies from 'js-cookie';
 import { useBearStore } from '@/zustand';
 import RegisterPannerl from './ResgisterPannel';
 import ForgetPassword from './ForgetPassword';
+import {ToastContainer, toast} from 'react-toastify'
 export default function LoginPannel(props) {
     // //////////////console.log(window.innerHeight)
     const [type, setType] = useState(0);//0為密碼登錄，1為驗證碼登錄
@@ -34,23 +35,25 @@ export default function LoginPannel(props) {
     })
     const getEmailCode = () => {
         if (!email.trim()) {
-            alert("請填寫郵箱以獲取驗證碼")
+            toast("請填寫郵箱以獲取驗證碼",{
+                zIndex:99999
+            })
             return;
         }
         sendEmail.mutate({ email: email.trim(), event: 'emaillogin' }, {
             onSuccess: async (res) => {
                 let isSuccess = await res.json();
                 if (isSuccess.data) {
-                    alert("發送驗證碼成功，請到填寫的郵箱内查看驗證碼");
+                    toast("發送驗證碼成功，請到填寫的郵箱内查看驗證碼");
 
                 } else {
-                    alert(isSuccess.msg);
+                    toast.error(isSuccess.msg);
                 }
 
             },
             onError: (res) => {
                 //////////////console.log(res);
-                alert("發送驗證碼失敗");
+                toast.error("發送驗證碼失敗");
             }
         })
         setTime(60);
@@ -76,11 +79,11 @@ export default function LoginPannel(props) {
                         //token:res.data.token;
                         //userinfo:res.data.userinfo
                     } else {
-                        alert(isSuccess.msg);
+                        toast.error(isSuccess.msg);
                     }
                 },
                 onError: (err) => {
-                    alert("登陸失敗");
+                    toast.error("登陸失敗");
                 }
             })
         } else {
@@ -106,11 +109,11 @@ export default function LoginPannel(props) {
                         //userinfo:res.data.userinfo
                         // localStorage.setItem("token",body.data.token);
                     } else {
-                        alert(body.msg);
+                        toast.error(body.msg);
                     }
                 },
                 onError: (err) => {
-                    alert("登陸失敗");
+                    toast.error("登陸失敗");
                 }
             })
         }
@@ -140,6 +143,7 @@ export default function LoginPannel(props) {
         className={mtype === "register" ? style.register_layout : mtype === "forget" ? style.login_layout : style.login_layout}
         // style={{width:'70%'}}
         width={clientW[0] > 1100 ? '50%' : '90%'}
+        css={{zIndex:100}}
     // style={{width:window.innerWidth*0.7,height:window.innerHeight*0.6}}
     // blur
     // css={{width:}}
@@ -228,6 +232,7 @@ export default function LoginPannel(props) {
                 }} toLogin={() => setMType("login")} />
             </Modal.Body>
         }
+        <ToastContainer />
     </Modal>)
 
 }

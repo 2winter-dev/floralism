@@ -9,6 +9,7 @@ import styles from '@/styles/Aboutus.module.css'
 import Contactus from "./component/Contactus";
 import { spliceArr } from "@/method";
 import Head from 'next/head';
+import { ToastContainer, toast } from 'react-toastify';
 import CateScroll from "./component/cateScroll";
 export default function AboutUs({ cateList, allcate }) {
     const [login, setLogin] = useState(false);
@@ -116,7 +117,7 @@ export default function AboutUs({ cateList, allcate }) {
             <Contactus />
 
         </div>
-
+        {!login&&<ToastContainer />}
         <Footer />
         {
             <LoginPannel login={login} close={() => setLogin(false)} toRegister={() => {

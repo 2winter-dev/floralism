@@ -1,4 +1,5 @@
 import { constant } from "@/constant/index"
+import Cookies from "js-cookie"
 export default {
     sendEmail: (data) => fetch(`${constant.api_url}/api/ems/send`, {
         body: JSON.stringify(data),
@@ -50,7 +51,9 @@ export default {
             "Access-Control-Request-Headers": "Content-Type",
         }
     }),
-    resetPassword: (data) => fetch(`${constant.api_url}/api/user/resetPassword`, {
+    resetPassword: async(data) =>{
+        
+     const response=await fetch(`${constant.api_url}/api/user/resetPassword`, {
         body: JSON.stringify(data),
         method: 'POST',
         mode: 'cors',
@@ -59,7 +62,19 @@ export default {
             "Access-Control-Request-Method": "POST",
             "Access-Control-Request-Headers": "Content-Type",
         }
-    }),
+    })
+    if(response.status!==200){
+        console.log(response);
+        if(response.status===500){
+            throw new Error("500:An error occurred")
+        }
+        if(response.status===401){
+            Cookies.remove("token");
+            throw new Error("请先登录");          
+        }
+    }
+    return await response.json();
+},
     AddToCart: (data) => {
         ////////////console.log(data);
         return fetch(`${constant.api_url}/api/cart/create`, {
@@ -208,7 +223,7 @@ export default {
         })
     },
     updateUserMessage:async(data)=>{
-        return await fetch(`${constant.api_url}/api/User/changeUserInfo`,{
+        const response= await fetch(`${constant.api_url}/api/User/changeUserInfo`,{
             method:'POST',
             body:JSON.stringify(data),
             headers: {
@@ -219,6 +234,17 @@ export default {
                 // "Access-Control-Request-Credentials":"true",
             }
         })
+        if(response.status!==200){
+            console.log(response);
+            if(response.status===500){
+                throw new Error("500:An error occurred")
+            }
+            if(response.status===401){
+                Cookies.remove("token");
+                throw new Error("请先登录");          
+            }
+        }
+        return await response.json();
     },
 
     description:async (data)=>{
