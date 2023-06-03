@@ -9,6 +9,7 @@ import LoginPannel from './component/LoginPannel';
 import { constant } from '../constant';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+import { ToastContainer, toast } from 'react-toastify';
 export default function CustomerOrder(props) {
     // const [index, setIndex] = useState(-1);
     const router=useRouter();
@@ -91,6 +92,7 @@ export default function CustomerOrder(props) {
 
             </div>
         </div>
+        {!login&&<ToastContainer />}
         <Footer />
         {
             <LoginPannel login={login} close={() => setLogin(false)} toRegister={() => {

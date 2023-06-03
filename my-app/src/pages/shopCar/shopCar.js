@@ -13,6 +13,7 @@ import { useMutation } from '@tanstack/react-query';
 import m_api from '@/m_api';
 import DynamicComponent from '../component/Dynamic';
 import Router from 'next/router';
+import { ToastContainer, toast } from 'react-toastify';
 export default function ShopCar({ cateList, shopCar }) {
     // ////////////console.log(Cookies.get('token'));
     // ////////////console.log("============");
@@ -41,7 +42,7 @@ export default function ShopCar({ cateList, shopCar }) {
     const ToUpdate = (item, index, value) => {
         ////////console.log(value);
         if (value <= 0) {
-            alert("不能少於1");
+            toast.error("不能少於1");
             return;
         }
         updateNum.mutate({ id: item.id, num: value, cookie: Cookies.get("token") }, {
@@ -55,11 +56,11 @@ export default function ShopCar({ cateList, shopCar }) {
                     arr[index].num = value;
                     setSc([...arr]);
                 } else {
-                    alert(_res.msg);
+                    toast.error(_res.msg);
                 }
             },
             onError: (res) => {
-                alert("修改失敗");
+                toast.error("修改失敗");
             }
         })
     }
@@ -119,13 +120,13 @@ export default function ShopCar({ cateList, shopCar }) {
                     })
                     setSc([...arr]);
                     setSelected([]);
-                    alert(_res.msg);
+                    toast.error(_res.msg);
 
                 } else if (_res.code === 401) {
                     Cookies.remove('token');
                 } else if (!_res.code) {
 
-                    alert(_res.msg);
+                    toast.error(_res.msg);
                 }
                 // let _res=JSON.parse(res)
                 // ////////////console.log(_res);
@@ -133,7 +134,7 @@ export default function ShopCar({ cateList, shopCar }) {
                 // culTotalPrice();
             },
             onError: (res) => {
-                alert("删除失败")
+                toast.error("删除失败")
             }
         })
 
@@ -207,11 +208,11 @@ export default function ShopCar({ cateList, shopCar }) {
                     }
                 })
             } else {
-                alert("請選擇時間")
+                toast.error("請選擇時間")
             }
 
         } else {
-            alert("請選擇商品");
+            toast.error("請選擇商品");
         }
 
     }
@@ -230,7 +231,7 @@ export default function ShopCar({ cateList, shopCar }) {
                     <div className={style.right_area} style={{}}>
                         <div style={{ width: '100%', maxHeight: 630, overflow: 'auto' }}>
 
-                            <table style={{ width: '100%', minWidth: 478, textAlign: 'left' }}>
+                            <table style={{ width: '100%', minWidth: 500, textAlign: 'left' }}>
                                 <thead>
                                     <tr style={{ backgroundColor: 'rgb(245,245,245)' }}>
                                         <th className={styles.tr_padding} width={130}>
@@ -273,11 +274,16 @@ export default function ShopCar({ cateList, shopCar }) {
                                                             <img src={`${item.coverimage}`} style={{ width: '100%' }} />
                                                         </div>
                                                         <div style={{ flex: 1 }}>
-                                                            <div className={styles.product_title} style={{ fontSize: 14, width: '100%', overflow: 'hidden', textOverflow: 'ellipsis', wordWrap: 'break-word' }}>
+                                                            <div className={styles.product_title} style={{ fontSize: 14, width: '100%', overflow: 'hidden', textOverflow: 'ellipsis',whiteSpace:'nowrap', wordWrap: 'break-word' }}>
                                                                 {item?.productname}
                                                             </div>
                                                             {/* <div>×</div> */}
-                                                            <input type={'number'} style={{ width: 40, textAlign: 'center' }} onChange={(e) => ToUpdate(item, index, e.target.value)} value={item.num} />
+                                                            <div style={{display:'flex',alignItems:'center',textAlign:'center',width:60}}>
+                                                                <div onClick={(e) => ToUpdate(item, index, item.num-1)} style={{flex:1,border:"1px solid black",borderRight:'none',borderTopLeftRadius:4,cursor:'pointer',borderBottomLeftRadius:4}}>-</div>
+                                                                <span style={{border:"1px solid black",fontSize:16,width:'40%'}}>{item.num}</span>
+                                                                <div onClick={(e) => ToUpdate(item, index, item.num+1)} style={{flex:1,border:"1px solid black",borderLeft:'none',borderTopRightRadius:4,cursor:'pointer',borderBottomRightRadius:4}}>+</div>
+                                                            </div>
+                                                            {/* <input type={'number'} style={{ width: 40, textAlign: 'center' }} onChange={(e) => ToUpdate(item, index, e.target.value)} value={item.num} /> */}
                                                         </div>
                                                     </div>
                                                 </td>
@@ -291,7 +297,11 @@ export default function ShopCar({ cateList, shopCar }) {
                                             </tr>
 
                                         </tbody>)
-                                    }) : <div style={{}}>購物車爲空</div>
+                                    }) : <tbody style={{marginTop:24}}>
+                                        <tr >
+                                            <td rowSpan={4}>購物車爲空</td>
+                                            </tr>
+                                        </tbody>
                                 }
 
 
@@ -326,8 +336,8 @@ export default function ShopCar({ cateList, shopCar }) {
                                 <input type='date' min={limitTime()} style={{ width: '100%', marginTop: 12, borderRadius: 6, paddingLeft: 8, paddingRight: 8, paddingTop: 5, paddingBottom: 5 }} onInput={(e) => setDate(e.target.value)} />
                             </div>
                             <div className={style.mediaArea_btnGroup} style={{ marginBottom: 24, marginTop: 24, display: 'flex', justifyContent: 'space-between' }}>
-                                <button className={style.check_order} onClick={toCreateOrder} style={{ textAlign: 'center', paddingTop: 12, paddingBottom: 12, backgroundColor: '#d43a43', color: 'white', border: 'none', borderRadius: 8 }}>確認訂單</button>
-                                <Link className={style.btn_To_index} href="/" style={{ textAlign: 'center', paddingTop: 12, paddingBottom: 12, border: 'none', backgroundColor: 'black', color: 'white', borderRadius: 8 }}>繼續選購</Link>
+                                <button className={style.check_order} onClick={toCreateOrder} style={{ textAlign: 'center', paddingTop: 12, paddingBottom: 12, backgroundColor: '#d43a43', color: 'white', border: 'none', borderRadius: 8,cursor:'pointer' }}>確認訂單</button>
+                                <Link className={style.btn_To_index} href="/" style={{ textAlign: 'center', paddingTop: 12, paddingBottom: 12, border: 'none', backgroundColor: 'black', color: 'white', borderRadius: 8,cursor:'pointer'  }}>繼續選購</Link>
                             </div>
                         </div>
                     </div>
@@ -336,6 +346,7 @@ export default function ShopCar({ cateList, shopCar }) {
             </div>
         </main>
         <Footer />
+        {!login&&<ToastContainer />}
         {
             <LoginPannel login={login} close={() => setLogin(false)} toRegister={() => {
                 setLogin(false);

@@ -14,6 +14,7 @@ import DynamicComponent from "../component/Dynamic";
 import Head from "next/head";
 import CateScroll from "../component/cateScroll";
 import { useRouter } from "next/router";
+import { ToastContainer, toast } from 'react-toastify';
 export default function Category({ allcate, cateList, data, top_banner, middle_banner }) {
     // //////////console.log("----");
     ////////console.log(data);
@@ -82,7 +83,7 @@ export default function Category({ allcate, cateList, data, top_banner, middle_b
         <DynamicComponent cateList={cateList} setLogin={setLogin} />
         <div style={{ width: '100%', position: 'relative', backgroundImage: `url(${top_banner.coverimage})`, marginBottom: 0 }} className={styles.banner} >
             {/* <Image priority src="/homepage/top-banner.png" width={1920} height={700} style={{width:'100%'}}/> */}
-            <div className={styles.top_banner_area} style={{}}>
+            <div className={styles.top_banner_area} style={{display:"flex",flexDirection:'column',alignItems:'center'}}>
                 <img src={top_banner.descriptionimage} width={'100%'} />
                 <button onClick={() => {
                     // console.log(data.data.length);
@@ -143,7 +144,7 @@ export default function Category({ allcate, cateList, data, top_banner, middle_b
             }
             } />
         }
-
+        {!login && <ToastContainer />}
     </div>)
 }
 
