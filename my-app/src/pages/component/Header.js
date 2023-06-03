@@ -137,9 +137,7 @@ export default function Header(props) {
                             key={index + ii.toString()}
                             className={`${header.header_center_dropdown}`}
                           >
-                            <Link href={`/category/${it.id}`}>
-                              {it.categoryname}
-                            </Link>
+                            <a href={`/category/${it.id}`}>{it.categoryname}</a>
                           </div>
                         );
                       })}
