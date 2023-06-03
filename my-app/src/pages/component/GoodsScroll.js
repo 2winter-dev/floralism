@@ -67,9 +67,9 @@ export default function GoodsScoll(props) {
     //////////////console.log(page);
     fetchGoods.mutate({keyword:"",flower_category_id:props.id,listRows:props.perPage,page:page},{
       onSuccess:async(res)=>{
-        let _res=await res.json();
+        // let _res=await res.json();
         // ////////////console.log(_res);
-        props.setList(_res.data.data);
+        props.setList(res.data.data);
       },
       onError:(res)=>{
         // ////////////console.log(res);

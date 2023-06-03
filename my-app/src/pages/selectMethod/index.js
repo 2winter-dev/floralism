@@ -70,14 +70,14 @@ export default function selectMethod(props) {
     const toDelte = (item) => {
         deleteAddress.mutate({ id: item, cookie: Cookies.get('token') }, {
             onSuccess: async (res) => {
-                let _res = await res.json();
-                if (_res.code === 401) {
+                // let _res = await res.json();
+                if (res.code === 401) {
                     Cookies.remove('token');
                     location.reload();
-                } else if (_res.code === 1) {
+                } else if (res.code === 1) {
                     location.reload();
                 } else {
-                    toast.error(_res.msg);
+                    toast.error(res.msg);
                 }
             },
             onError: (res) => {
@@ -99,15 +99,15 @@ export default function selectMethod(props) {
         setAdd(id);
         setDefault.mutate({ id, cookie: Cookies.get('token') }, {
             onSuccess: async (res) => {
-                let _res = await res.json();
-                if (_res.code === 401) {
+                // let _res = await res.json();
+                if (res.code === 401) {
                     Cookies.remove('token');
                     location.reload();
-                } else if (_res.code === 1) {
+                } else if (res.code === 1) {
                     // location.reload();
                     changeDefault(id);
                 } else {
-                    toast.error(_res.msg);
+                    toast.error(res.msg);
                 }
             }
         })
@@ -146,22 +146,24 @@ export default function selectMethod(props) {
                 cookie: Cookies.get('token')
             }, {
                 onSuccess: async (res) => {
-                    let _res = await res.json();
-                    if (_res.code === 401) {
+                    // let _res = await res.json();
+                    if (res.code === 401) {
                         Cookies.remove("token");
                         location.reload();
-                    } else if (_res.code === 1) {
-                        console.log(_res);
+                    } else if (res.code === 1) {
+                        console.log(res);
                         setFlag(false);
                         if (payment === "paypal") {
-                            setUrl(_res.data.payment_info.approval_url)
+                            setUrl(res.data.payment_info.approval_url)
                         }
                         setPage(2);
                     } else {
-                        toast.error(_res.msg);
+                         setFlag(false);
+                        toast.error(res.msg);
                     }
                 },
                 onError: (res) => {
+                     setFlag(false);
                     toast.error("上傳失敗");
                 }
             })
@@ -178,9 +180,9 @@ export default function selectMethod(props) {
             <div>
                 <div style={{ display: "flex", justifyContent: 'space-around', marginLeft: '5%', marginRight: '5%' }}>
                     <div style={{ flex: 1 }}></div>
-                    <div>選擇地址</div>
+                    <div>确认订单</div>
                     <div style={{ flex: 1 }}></div>
-                    <div>選擇支付方式</div>
+                    <div>支付</div>
                     <div style={{ flex: 1 }}></div>
                     <div>支付結果</div>
                     <div style={{ flex: 1 }}></div>
@@ -252,7 +254,7 @@ export default function selectMethod(props) {
                                                             }} style={{ marginRight: 12, fontSize: 14 }} className={`iconfont`} >&#x34b2;</span>
                                                             <span onClick={(e) => {
                                                                 setAdd_vis(true);
-                                                                setAdd_type(1);
+                                                                setType(1)
                                                                 setItem(item);
                                                                 e.stopPropagation();
                                                             }} style={{ fontSize: 15 }} className={`iconfont`} >&#xe61e;</span>
@@ -355,7 +357,7 @@ export default function selectMethod(props) {
                             <div style={{ fontSize: 24, fontWeight: 700 }}>
                                 訂單創建成功，請支付
                             </div>
-                            <div style={{ textAlign: 'center', marginTop: 12, marginBottom: 12, display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', padding: 16, backgroundColor: 'rgb(255,250,240)' }}>
+                            <div className={styles.tt_layout} style={{ textAlign: 'center', marginTop: 12, marginBottom: 12, display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', padding: 16, backgroundColor: 'rgb(255,250,240)' }}>
                                 <div style={{ display: 'flex', flex: 1, alignItems: 'baseline' }}>
                                     <div>支付方式:</div>
                                     <div style={{ fontSize: 17, fontWeight: 600 }}>paypal</div>
@@ -399,7 +401,7 @@ export default function selectMethod(props) {
                 }
             </div>
         </div>
-        {!login&&<ToastContainer />}
+        {(!login||!add_vis)&&<ToastContainer />}
         <Footer />
         {
             <LoginPannel login={login} close={() => setLogin(false)} toRegister={() => {

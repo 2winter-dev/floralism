@@ -47,16 +47,16 @@ export default function ShopCar({ cateList, shopCar }) {
         }
         updateNum.mutate({ id: item.id, num: value, cookie: Cookies.get("token") }, {
             onSuccess: async (res) => {
-                let _res = await res.json();
-                if (_res.code === 401) {
+                // let _res = await res.json();
+                if (res.code === 401) {
                     Cookies.remove("token");
                     location.reload();
-                } else if (_res.code === 1) {
+                } else if (res.code === 1) {
                     let arr = sc;
                     arr[index].num = value;
                     setSc([...arr]);
                 } else {
-                    toast.error(_res.msg);
+                    toast.error(res.msg);
                 }
             },
             onError: (res) => {
@@ -111,27 +111,24 @@ export default function ShopCar({ cateList, shopCar }) {
         deleteProductionFromShopCar.mutate({ ids: selected.join(","), cookie: Cookies.get('token') }, {
             onSuccess: async (res) => {
                 // ////////////console.log(await res.text())
-                let _res = await res.json();
+                // let res = await res.json();
                 ////////////console.log(_res);
-                if (_res.code === 1) {
+                if (res.code === 1) {
                     let arr = sc;
                     selected.map((item) => {
                         arr.splice(sc.findIndex((it, index) => item === it.id), 1);
                     })
                     setSc([...arr]);
                     setSelected([]);
-                    toast.success(_res.msg);
+                    toast.success(res.msg);
 
-                } else if (_res.code === 401) {
+                } else if (res.code === 401) {
                     Cookies.remove('token');
-                } else if (!_res.code) {
+                } else if (!res.code) {
 
-                    toast.error(_res.msg);
+                    toast.error(res.msg);
                 }
-                // let _res=JSON.parse(res)
-                // ////////////console.log(_res);
-
-                // culTotalPrice();
+              
             },
             onError: (res) => {
                 toast.error("删除失败")
@@ -297,10 +294,12 @@ export default function ShopCar({ cateList, shopCar }) {
                                             </tr>
 
                                         </tbody>)
-                                    }) : <tbody style={{marginTop:24}}>
+                                    }) : <tbody>
                                         <tr >
-                                            <td rowSpan={4}>購物車爲空</td>
+                                            <td colSpan={3} rowSpan={4} style={{fontSize:18,fontWeight:'bold'}}>{Cookies.get("token")?"購物車爲空":"请先登录"}</td>
                                             </tr>
+                                            <tr></tr>
+                                            <tr></tr><tr></tr>
                                         </tbody>
                                 }
 

@@ -33,8 +33,8 @@ export default function Header(props) {
                                     {
                                         item.get_child.map((it, ii) => {
                                             return (<div key={index.toString() + ii.toString()}>
-                                                {/* <a href={`/category/${it.id}`} >{it.categoryname}</a> */}
-                                                  <Link href={`/category/${it.id}`}>{it.categoryname}</Link>
+                                                <a href={`/category/${it.id}`} >{it.categoryname}</a>
+                                                  {/* <Link href={`/category/${it.id}`}>{it.categoryname}</Link> */}
                                                 </div>)
                                         })
                                     }
@@ -54,7 +54,7 @@ export default function Header(props) {
                 </div>
             </div>
             <div className={`${header.header_right}`} style={{ marginLeft: 10 }}>
-                <div onClick={() => { Cookies.get("token") ? router.push(`/User`) : props.login() }} style={{ display: 'flex', alignItems: 'center', cursor: "pointer" }}>
+                <div onClick={() => { Cookies.get("token") ? router.push({pathname:`/User`,query:{page:"message"}}) : props.login() }} style={{ display: 'flex', alignItems: 'center', cursor: "pointer" }}>
                     <span style={{}} className={`iconfont ${header.mine_icon}`}>&#xe70e;</span>
                     {
                         Cookies.get("token") ? " 歡迎" : " 登入"
@@ -84,7 +84,8 @@ export default function Header(props) {
                                                 return;
                                             }
                                             return (<div key={index + ii.toString()} className={`${header.header_center_dropdown}`}>
-                                                <Link href={`/category/${it.id}`} >{it.categoryname}</Link>
+                                                {/* <Link href={`/category/${it.id}`} >{it.categoryname}</Link> */}
+                                                <a href={`/category/${it.id}`} >{it.categoryname}</a>
                                             </div>)
                                         })
 

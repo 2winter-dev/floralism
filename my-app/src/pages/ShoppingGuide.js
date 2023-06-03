@@ -38,7 +38,7 @@ export default function ShoppingGuide(props) {
                                         <br />
                                         WhatsApp / Facebook 訂購<br />
                                         <br />
-                                        將您欲訂購的商品、運送資料及聯絡方式，WhatsApp 至 +852 6339 6652 或傳送至「 floralism 」Facebook 專頁。<br />
+                                        將您欲訂購的商品、運送資料及聯絡方式，WhatsApp 至 +852 6581 8053 或傳送至「 floralism 」Facebook 專頁。<br />
                                         <br />
                                         網站所展示的產品款式有限，歡迎和我們討論您的需求，客製化花禮<br />
                                     </Text>
@@ -114,7 +114,7 @@ export default function ShoppingGuide(props) {
                                     <Text>
                                         禮物包裝<br />
                                         <br />
-                                        禮物盒除了能為收花者製造驚喜，也為花禮提供適當的防撞保護，因此每款 Léselle 產品都會附送一個精美禮物盒或花束手提袋。<br />
+                                        禮物盒除了能為收花者製造驚喜，也為花禮提供適當的防撞保護，因此每款 floralism 產品都會附送一個精美禮物盒或花束手提袋。<br />
 
                                         <br />
 

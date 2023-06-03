@@ -234,24 +234,25 @@ export default function ProductDetail({ cateList, product }) {
                                 // ////////////console.log(Cookies.get('token'), id, num, cardtype, cardcontent);
                                 addToCart.mutate({ cookie: Cookies.get('token'), flower_specs_id: id, num, cardtype, cardcontent: cardcontent.trim() }, {
                                     onSuccess: async (res) => {
-                                        let isSuccess = await res.json()
-                                        // ////////////console.log(isSuccess);
-                                        if (isSuccess.code) {
-                                            if (isSuccess.code.toString() === '401') {
+                                        // let res = await res.json()
+                                        // ////////////console.log(res);
+                                        console.log(res);
+                                        if (res.code) {
+                                            if (res.code.toString() === '401') {
                                                 Cookies.remove('token');
                                                 toast.error("請先登錄",{
                                                     position:"bottom-right"
                                                 });
                                                 return;
                                             }
-                                            if (isSuccess.code === 1) {
+                                            if (res.code === 1) {
                                                 Cookies.set("isAdd", true);
                                                 setIsAdd(true);
                                                 toast("已加入購物車!");
                                                 // alert("加入购物车成功");
                                             }
                                         } else {
-                                            toast.error(isSuccess.msg);
+                                            toast.error(res.msg);
                                         }
                                     },
                                     onError: (err) => {

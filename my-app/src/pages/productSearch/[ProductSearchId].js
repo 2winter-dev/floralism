@@ -41,18 +41,20 @@ export default function ProductSearch({ cateList, data,top_banner }) {
     setType(true);
     fetchGoods.mutate({ keyword: data, flower_category_id: "", listRows: 16, page: page }, {
       onSuccess: async (res) => {
-        let _res = await res.json();
-        if (_res.code === 1) {
-          setSearchResult(_res.data.data);
+        // let _res = await res.json();
+        if (res.code === 1) {
+          setSearchResult(res.data.data);
           //////////console.log(_res);
           setPage(1);
         } else {
-          toast.error(_res.msg);
+          toast.error(res.msg);
         }
       },
       onError: (res) => {
         ////////////console.log(res);
-
+        if(res instanceof Error){
+          toast.error(res.msg);
+      }else toast.error(JSON.stringify(res.msg))
       }
     })
   }

@@ -75,7 +75,7 @@ export default function Footer() {
                             <img src='/矢量智能对象-1.png' className={style.footer_Image} />
                         </div>
                         <div style={{ cursor: 'pointer' }}>
-                            <a href="https://wa.me/85263396652"><img src='/矢量智能对象.png' className={{ ...style.footer_Image, marginRight: 0 }} /></a>
+                            <a href="https://wa.me/85265818053"><img src='/矢量智能对象.png' className={{ ...style.footer_Image, marginRight: 0 }} /></a>
                         </div>
                     </div>
                 </div>

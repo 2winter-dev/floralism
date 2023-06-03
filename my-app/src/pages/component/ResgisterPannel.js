@@ -32,13 +32,13 @@ export default function RegisterPannerl(props) {
         }
         sendEmail.mutate({ email: email.trim(), type: 'register' }, {
             onSuccess: async (res) => {
-                let isSuccess = await res.json()
-                if (isSuccess.code) {
+                // let res = await res.json()
+                if (res.code) {
                     toast("發送驗證碼成功，請到填寫的郵箱内查看驗證碼");
                     setTime(60);
                     setFlag(true);
                 } else {
-                    toast.error(isSuccess.msg);
+                    toast.error(res.msg);
                 }
             },
             onError: () => toast.error("發送驗證碼失敗")
@@ -77,18 +77,18 @@ export default function RegisterPannerl(props) {
             username: username.trim(),
         }, {
             onSuccess: async (res) => {
-                let isSuccess = await res.json()
+                // let res = await res.json()
                 //////////////console.log(res);
-                if (isSuccess.code === 1) {
+                if (res.code === 1) {
                     props.close();
-                    Cookies.set('token', isSuccess.data.token, { expires: 1 });
-                    // Cookies.set('user', JSON.stringify(isSuccess.data.userinfo), { expires: 1 });
+                    Cookies.set('token', res.data.token, { expires: 1 });
+                    // Cookies.set('user', JSON.stringify(res.data.userinfo), { expires: 1 });
                     toast("注冊成功");
                     // props.hasLogin();
                     location.reload();
                     // localStorage.setItem("token",res.data.token);
                 } else {
-                    toast.error(isSuccess.msg);
+                    toast.error(res.msg);
                 }
             },
             onError: (res) => {

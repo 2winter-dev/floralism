@@ -121,6 +121,9 @@
         margin:0;
         width:100%
     }
+    .tt_layout{
+        flex-direction: column;
+    }
 }
 
 @media screen and (max-width:850px) and (min-width:414px){

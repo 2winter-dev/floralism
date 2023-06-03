@@ -5,6 +5,7 @@ import { constant } from "../constant";
 export default function SuccessPage() {
     const router = useRouter();
     const [statement,setStatement]=useState("")
+    // console.log("1");
     // const { url } = router.query;
     // url.splice("?")
     ////////////console.log(router.query.url);
@@ -13,8 +14,11 @@ export default function SuccessPage() {
         let res = router.query.url.split("?")[1];
         let _res = res.split("&")[0];
         let statement = _res.split("=")[0];
-        ////////////console.log(statement);
-        return statement;
+        console.log("====");
+        console.log(_res.split("=")[1]==="false");
+        if(_res.split("=")[1]===true){
+            return statement;
+        }else return "fail";
     }
 
     useEffect(()=>{

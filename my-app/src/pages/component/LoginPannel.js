@@ -35,19 +35,17 @@ export default function LoginPannel(props) {
     })
     const getEmailCode = () => {
         if (!email.trim()) {
-            toast("請填寫郵箱以獲取驗證碼",{
-                zIndex:99999
-            })
+            toast("請填寫郵箱以獲取驗證碼")
             return;
         }
         sendEmail.mutate({ email: email.trim(), event: 'emaillogin' }, {
             onSuccess: async (res) => {
-                let isSuccess = await res.json();
-                if (isSuccess.data) {
-                    toast("發送驗證碼成功，請到填寫的郵箱内查看驗證碼");
+                // let res = await res.json();
+                if (res.data) {
+                    // toast("發送驗證碼成功，請到填寫的郵箱内查看驗證碼");
 
                 } else {
-                    toast.error(isSuccess.msg);
+                    toast.error(res.msg);
                 }
 
             },
@@ -64,13 +62,13 @@ export default function LoginPannel(props) {
         if (!type) {
             loginByPassword.mutate({ email: email.trim(), password: code.trim() }, {
                 onSuccess: async (res) => {
-                    let isSuccess = await res.json()
+                    // let res = await res.json()
                     // //////////////console.log(await res.json());
-                    if (isSuccess.code) {
+                    if (res.code) {
                         // ////////////console.log("================");
                         // ////////////console.log();
-                        Cookies.set('token', isSuccess.data.token, { expires: 1 });
-                        // Cookies.set('user',JSON.stringify(isSuccess.data.userinfo),{expires:1});
+                        Cookies.set('token', res.data.token, { expires: 1 });
+                        // Cookies.set('user',JSON.stringify(res.data.userinfo),{expires:1});
                         // alert("登陆成功");
 
                         props.close();
@@ -79,7 +77,7 @@ export default function LoginPannel(props) {
                         //token:res.data.token;
                         //userinfo:res.data.userinfo
                     } else {
-                        toast.error(isSuccess.msg);
+                        toast.error(res.msg);
                     }
                 },
                 onError: (err) => {
@@ -90,13 +88,13 @@ export default function LoginPannel(props) {
             loginByEmail.mutate({ email: email.trim(), code: code.trim() }, {
                 onSuccess: async (res) => {
 
-                    let body = await res.json()
+                    // let body = await res.json()
                     //////////////console.log("====123====")
                     //////////////console.log(body)
 
-                    if (body.code) {
+                    if (res.code) {
                         // ////////////console.log("================");
-                        Cookies.set('token', body.data.token, { expires: 1 });
+                        Cookies.set('token', res.data.token, { expires: 1 });
                         // Cookies.set('user',JSON.stringify(body.data.userinfo),{expires:1});
                         // ////////////console.log("========");
                         // ////////////console.log(Cookies.get('token'));
@@ -109,7 +107,7 @@ export default function LoginPannel(props) {
                         //userinfo:res.data.userinfo
                         // localStorage.setItem("token",body.data.token);
                     } else {
-                        toast.error(body.msg);
+                        toast.error(res.msg);
                     }
                 },
                 onError: (err) => {

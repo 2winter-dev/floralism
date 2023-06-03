@@ -15,8 +15,12 @@ import Cookies from "js-cookie";
 import LoginPannel from "./component/LoginPannel";
 import { ToastContainer, toast } from 'react-toastify';
 export default function User(props) {
+
+
     const router = useRouter();
-    const [type, setType] = useState("message");
+
+    const {page}= router.query
+    const [type, setType] = useState(page);
     const [item, setItem] = useState({});
 
     const [username, setUsername] = useState(props.user_data?.username);
@@ -56,8 +60,13 @@ export default function User(props) {
 
 
     const delAddress = (id) => {
+        console.log(id);
         let m_list = addList;
-        m_list.splice(m_list.findIndex((it, index) => item === it.id), 1);
+        console.log(m_list);
+        console.log(m_list.findIndex((it, index) => id === it.id));
+        let res= m_list.splice(m_list.findIndex((it, index) => item === it.id), 1);
+        console.log(m_list);
+        console.log(res);
         setAddList([...m_list]);
         toast("刪除成功");
         ////////console.log(m_list);
@@ -83,14 +92,13 @@ export default function User(props) {
         let res = confirm('你想要刪除這個地址嗎')
         res && deleteAddress.mutate({ id: item, cookie: Cookies.get('token') }, {
             onSuccess: async (res) => {
-                let _res = await res.json();
-                if (_res.code === 401) {
+                if (res.code === 401) {
                     Cookies.remove('token');
                     location.reload();
-                } else if (_res.code === 1) {
+                } else if (res.code === 1) {
                     delAddress(item);
                 } else {
-                    toast(_res.msg);
+                    toast(res.msg);
                 }
             },
             onError: (res) => {
@@ -104,15 +112,20 @@ export default function User(props) {
         setAdd(id);
         setDefault.mutate({ id, cookie: Cookies.get('token') }, {
             onSuccess: async (res) => {
-                let _res = await res.json();
-                if (_res.code === 401) {
+                // let _res = await res.json();
+                if (res.code === 401) {
                     Cookies.remove('token');
                     location.reload();
-                } else if (_res.code === 1) {
+                } else if (res.code === 1) {
                     changeDefault(id);
                 } else {
-                    toast(_res.msg);
+                    toast.error(res.msg);
                 }
+            },
+            onError:(res)=>{
+                if(res instanceof Error){
+                    toast.error(res.msg);
+                }else toast.error(JSON.stringify(res.msg))
             }
         })
     }
@@ -124,17 +137,17 @@ export default function User(props) {
                 // let _res = await res.json();
                 console.log(res);
                 if (res.code === 1) {
-                    toast(res.msg)
-                 
+                    toast(res.msg)           
                     setDef_name(username)
                     setDef_Email(email)
                     setDef_Mobile(mobile)
-                    // setMobile(_res.data?.mobile);
-                    // setEmail(_res.data?.email);
+                }else if(res.code===401){
+                    location.reload();
                 }else{
-                    console.log(res.msg);
-                    toast(res.msg);
+                //    alert(res.msg);
+                toast("1")
                 }
+              
             },
             onError:(res)=>{
                 console.log(res.msg)
@@ -149,8 +162,8 @@ export default function User(props) {
     const OrderDetail = (data) => {
         fetchOrderDetail.mutate({ id: data, cookie: Cookies.get('token') }, {
             onSuccess: async (res) => {
-                let _res = await res.json();
-                if (_res.code === 1) {
+                // let _res = await res.json();
+                if (res.code === 1) {
                     ////////console.log(_res.data);
 
                     setOrderDetail(_res.data);
@@ -181,17 +194,33 @@ export default function User(props) {
                         <div style={{ marginTop: 8 }}>{def_email}</div>
                         <div style={{ marginTop: 8 }}>{def_mobile}</div>
                     </div>
-                    <div className={styles.border} onClick={() => setType('message')}>
+                    <div className={styles.border} onClick={() =>{
+                        
+                        // router.replace({pathname:'/User',query:{page:'message'}})
+                        router.replace("/User",{query:{page:'message'}},{shallow:true})
+                        setType('message');
+                }}>
                         <div className={type === 'message' ? `${styles.user_btn} ${styles.choosen}` : `${styles.user_btn}`} style={{ display: 'flex' }}>
                             <div>信息修改</div>
                         </div>
                     </div>
-                    <div className={styles.border} onClick={() => setType('address')}>
+                    <div className={styles.border} onClick={() =>{
+                       
+                        // router.replace({pathname:'/User',query:{page:'address'}})
+                        // router.replace
+                        router.replace("/User",{query:{page:'address'}},{shallow:true})
+                        // router.replace( )
+                         setType('address');
+                        }}>
                         <div className={type === 'address' ? `${styles.user_btn} ${styles.choosen}` : `${styles.user_btn}`} style={{ display: 'flex' }}>
                             <div>地址列表</div>
                         </div>
                     </div>
-                    <div className={styles.border} onClick={() => setType('order')}>
+                    <div className={styles.border} onClick={() =>{
+                        setType('order')
+                        // router.replace({pathname:'/User',query:{page:'order'}})
+                        router.replace("/User",{query:{page:'order'}},{shallow:true})
+                }}>
                         <div className={type === 'order' ? `${styles.user_btn} ${styles.choosen}` : `${styles.user_btn}`} style={{ display: 'flex' }}>
                             <div>訂單列表</div>
                         </div>
@@ -434,7 +463,7 @@ export default function User(props) {
                 </div>
             }
         </div>
-        {!login&& <ToastContainer />}
+        {(!login||!add_vis)&& <ToastContainer autoClose={false} />}
         <Footer />
         {
             <AddressPannel type={add_type} item={item} visible={add_vis} close={() => setAdd_vis(false)} />

@@ -48,7 +48,7 @@ export default function ForgetPassword(props) {
     const reset = () => {
         resetPassword.mutate({ email: email.trim(), password: password.trim(), confirmPassword: repassword.trim() }, {
             onSuccess: async (res) => {
-                // let isSuccess = await res.json()
+                // let res = await res.json()
                 if (res.code) {
                     props.toLogin();
                 } else {
@@ -64,11 +64,11 @@ export default function ForgetPassword(props) {
     const verfyCode = () => {
         verCode.mutate({ email: email.trim(), code: code.trim() }, {
             onSuccess: async (res) => {
-                let isSuccess = await res.json()
-                if (isSuccess.code) {
+                // let res = await res.json()
+                if (res.code) {
                     setType(1);
                 } else {
-                    toast.error(isSuccess.msg);
+                    toast.error(res.msg);
                 }
             },
             onError: (res) => {
