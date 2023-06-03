@@ -1,9 +1,10 @@
 import style from '@/styles/footer.module.css'
 import { constant } from '@/constant/index';
 import { useEffect, useState } from 'react';
-
+import { useRouter } from 'next/router';
+import { ToastContainer, toast } from 'react-toastify';
 export default function Footer() {
-
+    const router = useRouter();
     const fetchCate = async () => {
         let response = await fetch(
             `${constant.api_url}/api/Flowercategory/allIndex`, {
@@ -24,20 +25,20 @@ export default function Footer() {
 
     useEffect(() => {
         fetchCate().then((res) => setList(res.data)).catch((er) => {
-            console.log('cat_list error:')
-            console.log(er)
+            //console.log('cat_list error:')
+            //console.log(er)
         })
     }, [])
 
-    console.log(cateList)
+    //console.log(cateList)
 
     return (<div className={style.footer} style={{ width: '100%' }}>
         <div className={style.footer_three_column} style={{ display: 'flex', justifyContent: 'space-between' }}>
             <div className={style.footer_column} style={{ display: 'flex', flexDirection: 'column' }}>
-                <p >產品</p>
+                <p>產品</p>
                 {
                     cateList.map((item, index) => {
-                        // ////console.log(item);
+                        // //////console.log(item);
                         if (index > 5) return null;
                         return (<a key={index} href={`/category/${item.id}`}>{item.categoryname}</a>)
                     })
@@ -45,10 +46,10 @@ export default function Footer() {
             </div>
             <div className={style.footer_column} style={{ display: 'flex', flexDirection: 'column' }}>
                 <p>幫助</p>
-                <a>購物指南</a>
-                <a>訂製服務</a>
-                <a>送貨服務</a>
-                <a href='/ContactPage'>關於我們</a>
+                <a onClick={() => router.push('/ShoppingGuide')}>購物指南</a>
+                <a onClick={() => router.push('/CustomerOrder')}>訂製服務</a>
+                <a onClick={() => router.push('/Delivery')}>送貨服務</a>
+                <a onClick={() => router.push('/Aboutus')}>關於我們</a>
             </div>
             <div className={style.footer_column} style={{ display: 'flex', flexDirection: 'column' }}>
                 <p>聯絡我們</p>
@@ -102,5 +103,16 @@ export default function Footer() {
         <div style={{ width: '100%', textAlign: 'center', marginTop: 16, marginBottom: 16, fontSize: 12, whiteSpace: 'nowrap' }}>
             ©2023 floralismhk Ins All rights reserved
         </div>
+        <ToastContainer
+            autoClose={5000}
+            // position="bottom-right"
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="colored" />
     </div>)
 }

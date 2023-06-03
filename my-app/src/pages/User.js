@@ -13,6 +13,7 @@ import { useRouter } from "next/router";
 import AddressPannel from "./component/addressPannel";
 import Cookies from "js-cookie";
 import LoginPannel from "./component/LoginPannel";
+import { ToastContainer, toast } from 'react-toastify';
 export default function User(props) {
     const router = useRouter();
     const [type, setType] = useState("message");
@@ -53,17 +54,17 @@ export default function User(props) {
         let m_list = addList;
         m_list.splice(m_list.findIndex((it, index) => item === it.id), 1);
         setAddList([...m_list]);
-        alert("刪除成功");
-        //////console.log(m_list);
+        toast("刪除成功");
+        ////////console.log(m_list);
     }
 
     const changeDefault = (id) => {
         let m_list = addList;
-        ////console.log(m_list);
+        //////console.log(m_list);
         let res = m_list.map((item) => {
-            ////console.log(item);
-            ////console.log(id);
-            ////console.log(typeof item.id, typeof id);
+            //////console.log(item);
+            //////console.log(id);
+            //////console.log(typeof item.id, typeof id);
             if (item.id === id) {
                 item.is_default = true;
             } else {
@@ -84,17 +85,17 @@ export default function User(props) {
                 } else if (_res.code === 1) {
                     delAddress(item);
                 } else {
-                    alert(_res.msg);
+                    toast(_res.msg);
                 }
             },
             onError: (res) => {
-                alert("删除失败")
+                toast.error("删除失败")
             }
         })
     }
     const setPosition = (id) => {
-        // //////////console.log(id);
-        ////console.log("123");
+        // ////////////console.log(id);
+        //////console.log("123");
         setAdd(id);
         setDefault.mutate({ id, cookie: Cookies.get('token') }, {
             onSuccess: async (res) => {
@@ -105,20 +106,20 @@ export default function User(props) {
                 } else if (_res.code === 1) {
                     changeDefault(id);
                 } else {
-                    alert(_res.msg);
+                    toast(_res.msg);
                 }
             }
         })
     }
 
     const updateUserMessage = () => {
-        ////console.log(username, email, mobile);
+        //////console.log(username, email, mobile);
         updateUserMess.mutate({ username: username.trim(), email: email.trim(), mobile: mobile.trim(), cookie: Cookies.get('token') }, {
             onSuccess: async (res) => {
                 let _res = await res.json();
                 if (_res.code === 1) {
                     location.reload();
-                    ////console.log(_res);
+                    //////console.log(_res);
                     // setUsername(_res.data?.username);
                     // setMobile(_res.data?.mobile);
                     // setEmail(_res.data?.email);
@@ -132,19 +133,19 @@ export default function User(props) {
             onSuccess: async (res) => {
                 let _res = await res.json();
                 if (_res.code === 1) {
-                    //////console.log(_res.data);
+                    ////////console.log(_res.data);
 
                     setOrderDetail(_res.data);
                     setType("orderDetail");
                 }
-                //////console.log(_res);
-                // //////console.log(res);
+                ////////console.log(_res);
+                // ////////console.log(res);
             },
         })
     }
 
     useEffect(() => {
-        //////console.log(orderDetail);
+        ////////console.log(orderDetail);
     }, [orderDetail])
 
 
@@ -243,7 +244,7 @@ export default function User(props) {
                                                             <span onClick={() => setPosition(item.id)} style={{ marginRight: 12 }} className={`iconfont`}>&#xe799;</span>
                                                     }
                                                     <span onClick={(e) => {
-                                                        // //////////console.log("刪除");
+                                                        // ////////////console.log("刪除");
                                                         toDelte(item?.id);
                                                         e.stopPropagation();
                                                     }} style={{ marginRight: 12, fontSize: 14 }} className={`iconfont`} >&#x34b2;</span>
@@ -525,7 +526,7 @@ export async function getServerSideProps(context) {
         addList = await add_response.json();
         sc = await sc_res.json();
         orderList = await order_response.json();
-        //////console.log(orderList);
+        ////////console.log(orderList);
         // if (sc.code === 401) {
         //     sc.data = [];
         // }
@@ -538,7 +539,7 @@ export async function getServerSideProps(context) {
     }
 
 
-    //    //////console.log(sc);
+    //    ////////console.log(sc);
     return {
         props: {
             cateList: JSON.parse(data).data,

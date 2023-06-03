@@ -34,14 +34,16 @@ export default function RegisterPannerl(props) {
                 let isSuccess = await res.json()
                 if (isSuccess.code) {
                     alert("發送驗證碼成功，請到填寫的郵箱内查看驗證碼");
+                    setTime(60);
+                    setFlag(true);
                 } else {
                     alert(isSuccess.msg);
                 }
             },
             onError: () => alert("發送驗證碼失敗")
         })
-        setTime(60);
-        setFlag(true);
+      
+       
     }
 
     const _submit = () => {
@@ -75,7 +77,7 @@ export default function RegisterPannerl(props) {
         }, {
             onSuccess: async (res) => {
                 let isSuccess = await res.json()
-                ////////////console.log(res);
+                //////////////console.log(res);
                 if (isSuccess.code === 1) {
                     props.close();
                     Cookies.set('token', isSuccess.data.token, { expires: 1 });
@@ -89,7 +91,7 @@ export default function RegisterPannerl(props) {
                 }
             },
             onError: (res) => {
-                ////////////console.log(res);
+                //////////////console.log(res);
                 alert("注冊失敗")
             }
         })
@@ -125,7 +127,7 @@ export default function RegisterPannerl(props) {
                         <div style={{ marginTop: '2.5%', width: '100%' }}>
                             <input type='text' placeholder='郵箱' className={style.account_input} value={email} onChange={(event) => {
                                 setEmail(event.target.value)
-                                ////////////console.log(event)
+                                //////////////console.log(event)
                             }}></input>
                         </div>
                         <div style={{ marginTop: '2.5%' }}>

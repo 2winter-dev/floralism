@@ -23,7 +23,7 @@ export default function Header(props) {
                     props?.list?.length && props.list.map((item, index) => {
                         if(index>2) return null; 
                         return (<div key={item.id} className={`${header.header_center_label}`}>
-                            <div className={`${header.header_center_parent}`}>{item.categoryname}
+                            <div onClick={()=>router.push(!!item?.get_child.length&&`/category/${item.get_child[0].id}`)} className={`${header.header_center_parent}`}>{item.categoryname}
                                 {
                                     !!item.get_child?.length && <span className={`iconfont ${header.dropdown_btn}`} style={{ fontSize: 10 }}>&#xe645;</span>
                                 }
@@ -67,6 +67,7 @@ export default function Header(props) {
             <div className={`${header.dropdown}`} style={{ display: navStatus ? 'block' : "none" }}>
                 {
                     props?.list?.length && props.list.map((item, i) => {
+                        if(!item?.get_child?.length) return;
                         return (
                             <div onClick={()=>{
                                 index===i?setIndex():setIndex(i)
@@ -76,7 +77,7 @@ export default function Header(props) {
                                     {item.get_child &&
                                         item.get_child.map((it, ii) => {
                                             if(ii>3){
-                                                console.log("123");
+                                                //console.log("123");
                                                 return;
                                             }
                                             return (<div key={index + ii.toString()} className={`${header.header_center_dropdown}`}>

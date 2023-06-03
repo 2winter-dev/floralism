@@ -83,8 +83,13 @@ export default function Category({ allcate, cateList, data, top_banner, middle_b
         <div style={{ width: '100%', position: 'relative', backgroundImage: `url(${top_banner.coverimage})`, marginBottom: 0 }} className={styles.banner} >
             {/* <Image priority src="/homepage/top-banner.png" width={1920} height={700} style={{width:'100%'}}/> */}
             <div className={styles.top_banner_area} style={{}}>
-                <img src={`${constant.api_url}/uploads/20230523/0c024bf065eaa139d865a7a6af18f7dc.png`} width={'100%'} />
-                <button onClick={() => data.data.length ? router.push(`/productSearch/${data.data[0].flower_category_id}`) : router.push('/')} style={{ border: 'none', display: 'block', cursor: 'pointer' }} className={styles.banner_buttom} >點擊選購</button>
+                <img src={top_banner.descriptionimage} width={'100%'} />
+                <button onClick={() => {
+                    // console.log(data.data.length);
+                    data.data.length ?
+                        router.push(`/productSearch/${data.data[0].flower_category_id}`)
+                        : router.push('/')
+                }} style={{ border: 'none', display: 'block', cursor: 'pointer' }} className={styles.banner_buttom} >點擊選購</button>
             </div>
         </div>
         <div className={styles.goods_view} style={{ marginBottom: 32 }}>
@@ -103,7 +108,7 @@ export default function Category({ allcate, cateList, data, top_banner, middle_b
         </div>
         <div style={{ width: '100%', position: 'relative' }}>
             {
-                <img src={flag ? `${constant.api_url}/uploads/20230523/94430a50cbdf2a5a5a2d10a2af501ec3.png` : `${constant.api_url}/uploads/20230523/94430a50cbdf2a5a5a2d10a2af501ec3.png`} style={{ width: '100%', height: '100%', display: 'block' }}></img>
+                <img src={flag ? middle_banner.coverimage : middle_banner.coverimage} style={{ width: '100%', height: '100%', display: 'block' }}></img>
             }
             <div className={style.banner_desc} style={{}}>
                 <div style={{ maxHeight: 200, overflow: 'hidden', textOverflow: 'ellipsis' }}>
@@ -226,8 +231,8 @@ export async function getStaticProps(context) {
     ////console.log(JSON.parse(data).data);
     //////console.log("--------");
     //console.log(banner_list.data);
-    //console.log(banner_list.data.top_banner.web);
-    //console.log(banner_list.data.middle_banner.web);
+    // console.log(banner_list.data.top_banner.web);
+    console.log(banner_list.data.middle_banner.web);
     //////console.log(params.categoryId)
     let top_banner = banner_list.data.top_banner.web.filter((item) => {
         if (item.flower_category_ids.includes(parseInt(params.categoryId))) {
@@ -241,13 +246,14 @@ export async function getStaticProps(context) {
         }
         // //////console.log(item.flower_category_ids.includes(params.categoryId))
     })
-    //////console.log(top_banner,middle_banner);
+    console.log("======================");
+    console.log(top_banner, middle_banner);
     return {
         props: {
             allcate: allcate.data,
             cateList: JSON.parse(tt_data).data,
             data: JSON.parse(data).data,
-            top_banner: middle_banner.length ? top_banner[0] : { coverimage: `${constant.api_url}/uploads/20230523/637cfca2255479e7b2fb99f6364b11b4.png)` },
+            top_banner: top_banner.length ? top_banner[0] : { coverimage: `${constant.api_url}/uploads/20230523/637cfca2255479e7b2fb99f6364b11b4.png)`, descriptionimage: `${constant.api_url}/uploads/20230601/a0175c1d8f3f40eae16a007b632426bd.png` },
             middle_banner: middle_banner.length ? middle_banner[0] : { coverimage: `${constant.api_url}/uploads/20230523/94430a50cbdf2a5a5a2d10a2af501ec3.png` },
         },
 
