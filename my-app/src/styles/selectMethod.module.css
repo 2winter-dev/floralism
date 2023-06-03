@@ -22,7 +22,7 @@
 }
 .new_Step{
    padding: 8px 48px;
-   background-color: red;
+   background-color: #d43a43;
    letter-spacing: 1px;
    color: white;
    border-radius: 8px;
@@ -45,7 +45,7 @@
 }
 
 .wrong {
-    background-color: red;
+    background-color: #d43a43;
 }
 
 .complete {
@@ -120,6 +120,10 @@
     .media_control{
         margin:0;
         width:100%
+    }
+
+    .total_layout {
+        padding: 10% 0;
     }
 }
 

@@ -146,12 +146,14 @@ export default function selectMethod(props) {
                 cookie: Cookies.get('token')
             }, {
                 onSuccess: async (res) => {
+                   try{
                     let _res = await res.json();
+                    setFlag(!true);
                     if (_res.code === 401) {
                         Cookies.remove("token");
                         location.reload();
                     } else if (_res.code === 1) {
-                        // ////////////console.log(_res);
+                        console.log(_res);
                         setFlag(false);
                         if (payment === "paypal") {
                             setUrl(_res.data.payment_info.approval_url)
@@ -160,9 +162,16 @@ export default function selectMethod(props) {
                     } else {
                         toast.error(_res.msg);
                     }
+                   }catch(er){
+                    toast.error(er.message);
+                    setFlag(!true);
+                   }
                 },
+                
                 onError: (res) => {
+                    console.log(res)
                     toast.error("上傳失敗");
+                    setFlag(!true);
                 }
             })
         }
@@ -180,9 +189,9 @@ export default function selectMethod(props) {
                     <div style={{ flex: 1 }}></div>
                     <div>選擇地址</div>
                     <div style={{ flex: 1 }}></div>
-                    <div>選擇支付方式</div>
+                    <div>支付</div>
                     <div style={{ flex: 1 }}></div>
-                    <div>支付結果</div>
+                    <div>結果</div>
                     <div style={{ flex: 1 }}></div>
                 </div>
                 <div style={{ display: "flex", justifyContent: 'space-around', alignItems: 'center' }}>
@@ -252,7 +261,8 @@ export default function selectMethod(props) {
                                                             }} style={{ marginRight: 12, fontSize: 14 }} className={`iconfont`} >&#x34b2;</span>
                                                             <span onClick={(e) => {
                                                                 setAdd_vis(true);
-                                                                setAdd_type(1);
+                                                                // setAdd_type(1);
+                                                                setType(1);
                                                                 setItem(item);
                                                                 e.stopPropagation();
                                                             }} style={{ fontSize: 15 }} className={`iconfont`} >&#xe61e;</span>
@@ -362,7 +372,7 @@ export default function selectMethod(props) {
                                 </div>
                                 <div style={{ display: 'flex', flex: 1, alignItems: 'baseline' }}>
                                     <div>總價:</div>
-                                    <div style={{ fontSize: 17, fontWeight: 600 }}>HK$123</div>
+                                    <div style={{ fontSize: 17, fontWeight: 600 }}>HK${payment_amount}</div>
                                 </div>
                                 <div style={{ display: 'flex', flex: 1, alignItems: 'baseline' }}>
                                     <div>狀態:</div>
@@ -377,7 +387,10 @@ export default function selectMethod(props) {
                                     paddingBottom: 6,
                                     cursor: 'pointer',
                                     marginTop: 12,
-                                    // background: 'rgb(255,196,57)',
+                                    width:"50%",
+                                    color:'#fff',
+                                    margin:'10px 25%',
+                                    background: '#1e80ff',
                                     borderRadius: 4
                                 }}
                                 onClick={() => router.replace(`${url}`)}
