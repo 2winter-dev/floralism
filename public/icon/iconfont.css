@@ -1,0 +1,81 @@
+@font-face {
+  font-family: "iconfont"; /* Project id  */
+  src: url('iconfont.ttf?t=1685435775071') format('truetype');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-rubbish:before {
+  content: "\34b2";
+}
+
+.icon-left:before {
+  content: "\e628";
+}
+
+.icon-right:before {
+  content: "\e642";
+}
+
+.icon-cuowu:before {
+  content: "\e641";
+}
+
+.icon-quotation:before {
+  content: "\e67b";
+}
+
+.icon-write:before {
+  content: "\e61e";
+}
+
+.icon-checkbox:before {
+  content: "\e798";
+}
+
+.icon-checkbox-o:before {
+  content: "\e799";
+}
+
+.icon-Paypal:before {
+  content: "\ea24";
+}
+
+.icon-shop-car:before {
+  content: "\e64d";
+}
+
+.icon-search:before {
+  content: "\e82e";
+}
+
+.icon-mine:before {
+  content: "\e70e";
+}
+
+.icon-drop-down:before {
+  content: "\e645";
+}
+
+.icon-icon-test:before {
+  content: "\e62a";
+}
+
+.icon-successful:before {
+  content: "\e633";
+}
+
+.icon-arrow-down-bold:before {
+  content: "\e686";
+}
+
+.icon-icon_richeng_btn_cancel:before {
+  content: "\e618";
+}
+

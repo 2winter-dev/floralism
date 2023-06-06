@@ -1,0 +1,23 @@
+{
+  "id": "",
+  "name": "",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "9066652",
+      "name": "home",
+      "font_class": "home",
+      "unicode": "e88b",
+      "unicode_decimal": 59531
+    },
+    {
+      "icon_id": "11983524",
+      "name": "whatsapp",
+      "font_class": "whatsapp",
+      "unicode": "ea07",
+      "unicode_decimal": 59911
+    }
+  ]
+}

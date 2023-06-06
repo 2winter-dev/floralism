@@ -1,0 +1,13 @@
+.btn_list{
+  display: flex;
+  width: 100%;
+  align-items: center;
+  margin: 0 auto;   
+  justify-content: center;
+}
+
+.select{
+   /* border: 1px solid; */
+   background-color: rgba(0,0,0,0.3);
+   color:white;
+}
