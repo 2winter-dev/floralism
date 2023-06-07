@@ -25,6 +25,7 @@
     background-image: url('/背景-你可能喜歡.png');
     background-position-x: 100%;
     background-position-y: 100%;
+    border-radius: 12px;
     background-repeat: no-repeat;
 }
 

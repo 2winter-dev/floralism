@@ -113,19 +113,7 @@ export default function Home({ allcate, cateList, GoodsPage, carousel }) {
       </div>
       <main className={`${styles.main_body}`}>
         <div className={styles.goods_list}>
-          {
-           flag!==0&&<CateScroll
-              title={'【FLORALISM】 全部分類'}
-              list={category}
-              page={categoryPage}
-              type={'category'}
-              perPage={!flag ? 4 : flag === 1 ? 6 : flag === 2 && 8}
-              setPage={setCategoryPage}
-              animation
-            />
-          }
-          {
-            flag === 0 &&
+          
             <div>
               <div style={{ display: 'flex', alignItems: 'center' }}>
                 {flag !== 0 && <div className={styles.distance}></div>}
@@ -140,9 +128,6 @@ export default function Home({ allcate, cateList, GoodsPage, carousel }) {
                 }
               </div>
             </div>
-          }
-
-
         </div>
         <BodyBanner
           flag={flag}

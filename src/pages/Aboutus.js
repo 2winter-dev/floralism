@@ -102,19 +102,7 @@ export default function AboutUs({ cateList, allcate }) {
             </div>
         </div>
         <div className={styles.goods_list} style={{}}>
-        {
-           flag!==0&&<CateScroll
-              title={'【FLORALISM】 全部分類'}
-              list={category}
-              page={categoryPage}
-              type={'category'}
-              perPage={!flag ? 4 : flag === 1 ? 6 : flag === 2 && 8}
-              setPage={setCategoryPage}
-              animation
-            />
-          }
-          {
-            flag === 0 &&
+    
             <div>
               <div style={{ display: 'flex', alignItems: 'center' }}>
                 {flag !== 0 && <div className={style.distance}></div>}
@@ -129,8 +117,6 @@ export default function AboutUs({ cateList, allcate }) {
                 }
               </div>
             </div>
-          }
-
         </div>
         <div className={styles.ContactusLayout}>
             <Contactus />

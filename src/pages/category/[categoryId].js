@@ -133,19 +133,6 @@ export default function Category({ allcate, cateList, data, top_banner, middle_b
                 setPage={setCategoryPage}
             // click={() => ////////////console.log("1")}
             /> */}
-            {
-                flag !== 0 && <CateScroll
-                    title={'【FLORALISM】 全部分類'}
-                    list={category}
-                    page={categoryPage}
-                    type={'category'}
-                    perPage={!flag ? 4 : flag === 1 ? 6 : flag === 2 && 8}
-                    setPage={setCategoryPage}
-                    animation
-                />
-            }
-            {
-                flag === 0 &&
                 <div>
                     <div style={{ display: 'flex', alignItems: 'center' }}>
                         {flag !== 0 && <div className={styles.distance}></div>}
@@ -160,7 +147,6 @@ export default function Category({ allcate, cateList, data, top_banner, middle_b
                         }
                     </div>
                 </div>
-            }
         </div>
         <div className={styles.contactus}>
             <Contactus />
