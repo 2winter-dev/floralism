@@ -45,7 +45,10 @@ export default function LoginPannel(props) {
         sendEmail.mutate({ email: email.trim(), event: 'emaillogin' }, {
             onSuccess: async (res) => {
                 // let res = await res.json();
-                if (res.data) {
+                console.log(res);
+                if (res.code) {
+                    setTime(60);
+                    setFlag(true);
                     toast.success("發送驗證碼成功，請到填寫的郵箱内查看驗證碼");
                 } else {
                     toast.error(res.msg);
@@ -54,11 +57,12 @@ export default function LoginPannel(props) {
             },
             onError: (res) => {
                 //////////////console.log(res);
-                toast.error("發送驗證碼失敗");
+                if(res instanceof Error){
+                    toast.error(res.msg);
+                }else toast.error(JSON.stringify(res.msg))
             }
         })
-        setTime(60);
-        setFlag(true);
+     
     }
  
 
@@ -66,7 +70,7 @@ export default function LoginPannel(props) {
         if (!type) {
             loginByPassword.mutate({ email: email.trim(), password: code.trim() }, {
                 onSuccess: async (res) => {
-
+ 
                     if (res.code) {
 
                         Cookies.set('token', res.data.token, { expires: 1 });
@@ -76,11 +80,13 @@ export default function LoginPannel(props) {
                         location.reload();
 
                     } else {
-                        toast.error(res.msg);
+                        toast(res.msg);
                     }
                 },
                 onError: (err) => {
-                    toast.error("登陸失敗");
+                    if(res instanceof Error){
+                        toast.error(res.msg);
+                    }else toast.error(JSON.stringify(res.msg))
                 }
             })
         } else {
@@ -93,6 +99,7 @@ export default function LoginPannel(props) {
                         Cookies.set('token', res.data.token, { expires: 1 });
 
                         props.close();
+                        toast.success(res.data);
 
                         location.reload();
 
@@ -101,7 +108,9 @@ export default function LoginPannel(props) {
                     }
                 },
                 onError: (err) => {
-                    toast.error("登陸失敗");
+                    if(res instanceof Error){
+                        toast.error(res.msg);
+                    }else toast.error(JSON.stringify(res.msg))
                 }
             })
         }

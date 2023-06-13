@@ -17,8 +17,6 @@ import DynamicButton from "./component/DynamicButton";
 // import { ToastContainer, toast } from 'react-toastify';
 import toast, { Toaster } from "react-hot-toast";
 export default function User(props) {
-
-
     const router = useRouter();
 
     const { page } = router.query
@@ -43,6 +41,7 @@ export default function User(props) {
     const [orderList, setOrderList] = useState(props.orderList);
 
     const [orderDetail, setOrderDetail] = useState();
+
     const setDefault = useMutation({
         mutationKey: ['setDefault'],
         mutationFn: (data) => m_api.setDefaultAddress(data)
@@ -181,7 +180,11 @@ export default function User(props) {
     useEffect(() => {
         ////////console.log(orderDetail);
     }, [orderDetail])
-
+    if(props.code===401){
+        toast.error("请重新登陆");
+        Cookies.remove("token");
+        router.replace("/");
+    }
 
     return (<div style={{ backgroundColor: 'rgb(244,244,244)' }}>
         <DynamicComponent cateList={props.cateList} setLogin={setLogin} />
@@ -191,7 +194,7 @@ export default function User(props) {
                     {/* 头像 */}
                     <div className={styles.avatar_area} style={{ display: 'flex', alignItems: 'center', flexDirection: 'column', justifyContent: 'center', padding: 16 }}>
                         <div className={styles.avatar}>
-                            <img src={props.user_data.avatar} style={{ width: '100%' }} />
+                            <img src={props.user_data?.avatar} style={{ width: '100%' }} />
                         </div>
                         <div style={{ marginTop: 8, fontSize: 18, fontWeight: 700 }}>{def_name}</div>
                         <div style={{ marginTop: 8 }}>{def_email}</div>
@@ -359,7 +362,7 @@ export default function User(props) {
                                                             <img src={item?.product_coverimage} style={{ width: '100%' }} />
                                                         </div>
                                                         <div style={{ flex: 1 }}>
-                                                            <div className={styles.product_title} style={{ fontSize: 14, width: '100%', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                                                            <div className={styles.product_title} style={{ fontSize: 14, width: '100%', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                                                                 {item?.product_productname}
                                                             </div>
                                                             <div>✖ {item?.product_num}</div>
@@ -507,6 +510,7 @@ export async function getServerSideProps(context) {
     let res;
     let i;
     let addList, orderList;
+    let code=200;
     if (context.req.headers.cookie) {
         res = context.req.headers.cookie.split(';');
         let _res = res.filter(item => {
@@ -541,6 +545,10 @@ export async function getServerSideProps(context) {
             mode: 'cors',
         }
         )
+        if(add_response.status===401){
+           console.log("401");
+           code=401;
+        }
         const order_response = await fetch(`${constant.api_url}/api/order/index`, {
             headers: {
                 Authorization: `Bearer ${i}`,
@@ -570,6 +578,7 @@ export async function getServerSideProps(context) {
             user_data: sc.data,
             addList: addList.data,
             orderList: orderList.data,
+            code:code,
         },
     };
 }

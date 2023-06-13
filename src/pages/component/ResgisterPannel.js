@@ -35,14 +35,18 @@ export default function RegisterPannerl(props) {
             onSuccess: async (res) => {
                 // let res = await res.json()
                 if (res.code) {
-                    toast("發送驗證碼成功，請到填寫的郵箱内查看驗證碼");
+                    toast.success("發送驗證碼成功，請到填寫的郵箱内查看驗證碼");
                     setTime(60);
                     setFlag(true);
                 } else {
                     toast.error(res.msg);
                 }
             },
-            onError: () => toast.error("發送驗證碼失敗")
+            onError: (res) =>{
+                if(res instanceof Error){
+                    toast.error(res.msg);
+                }else toast.error(JSON.stringify(res.msg))
+            }
         })
 
 
@@ -84,7 +88,7 @@ export default function RegisterPannerl(props) {
                     props.close();
                     Cookies.set('token', res.data.token, { expires: 1 });
                     // Cookies.set('user', JSON.stringify(res.data.userinfo), { expires: 1 });
-                    toast("注冊成功");
+                    toast.success("注冊成功");
                     // props.hasLogin();
                     location.reload();
                     // localStorage.setItem("token",res.data.token);
@@ -94,7 +98,9 @@ export default function RegisterPannerl(props) {
             },
             onError: (res) => {
                 //////////////console.log(res);
-                toast.error("注冊失敗")
+                if(res instanceof Error){
+                    toast.error(res.msg);
+                }else toast.error(JSON.stringify(res.msg))
             }
         })
     }

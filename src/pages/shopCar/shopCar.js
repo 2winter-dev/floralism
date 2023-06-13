@@ -61,7 +61,9 @@ export default function ShopCar({ cateList, shopCar }) {
                 }
             },
             onError: (res) => {
-                toast.error("修改失敗");
+                if(res instanceof Error){
+                    toast.error(res.msg);
+                }else toast.error(JSON.stringify(res.msg))
             }
         })
     }

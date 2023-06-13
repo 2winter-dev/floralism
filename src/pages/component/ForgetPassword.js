@@ -34,10 +34,15 @@ export default function ForgetPassword(props) {
             return;
         }
         sendEmail.mutate({ email: email.trim(), event: 'resetpwd' }, {
-            onSuccess: () => {
+            onSuccess: (res) => {
                 // alert("發送驗證碼成功，請到填寫的郵箱内查看驗證碼");
-                setTime(60);
-                setFlag(true);
+                if (res.code) {
+                    toast.success(res.data)
+                    setTime(60);
+                    setFlag(true);
+                }else{
+                    toast.error(res.data);
+                }
             },
             onError: (res) => {
                 //////////////console.log(res);
@@ -68,8 +73,8 @@ export default function ForgetPassword(props) {
         verCode.mutate({ email: email.trim(), code: code.trim() }, {
             onSuccess: async (res) => {
                 // let res = await res.json()
-                if (res.code===1) {
-                   
+                if (res.code === 1) {
+
                     setType(1);
                 } else {
                     toast.error(res.msg);

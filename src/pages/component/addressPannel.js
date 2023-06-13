@@ -69,6 +69,9 @@ export default function AddressPannel(props) {
                 },
                 onError:(res)=>{
                     // ////////////console.log(res);
+                    if(res instanceof Error){
+                        toast.error(res.msg);
+                    }else toast.error(JSON.stringify(res.msg))
                 }
             })
         }
