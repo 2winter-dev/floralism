@@ -19,9 +19,10 @@ import GoodsItem from "../component/GoodsItem";
 // import { ToastContainer, toast } from 'react-toastify';
 import toast, { Toaster } from "react-hot-toast";
 
-export default function Category({ allcate, cateList, data, top_banner, middle_banner }) {
+export default function Category({ categoryId,allcate, cateList, data, top_banner, middle_banner,tiny_top_banner,tiny_middle_banner }) {
     // //////////console.log("----");
     ////////console.log(data);
+    console.log(tiny_top_banner,tiny_middle_banner);
     const router = useRouter();
     const [login, setLogin] = useState(false);
     const [register, setRegister] = useState(false);
@@ -85,10 +86,10 @@ export default function Category({ allcate, cateList, data, top_banner, middle_b
             {/* <meta title={}  /> */}
         </Head>
         <DynamicComponent cateList={cateList} setLogin={setLogin} />
-        <div style={{ width: '100%', position: 'relative', backgroundImage: `url(${top_banner.coverimage})`, marginBottom: 0 }} className={styles.banner} >
+        <div style={{ width: '100%', position: 'relative', backgroundImage: flag<2?`url(${tiny_top_banner.coverimage})`:`url(${top_banner.coverimage})`, marginBottom: 0 }} className={styles.banner} >
             {/* <Image priority src="/homepage/top-banner.png" width={1920} height={700} style={{width:'100%'}}/> */}
-            <div className={styles.top_banner_area} style={{ display: "flex", flexDirection: 'column', alignItems: 'center' }}>
-                <img src={top_banner.descriptionimage} width={'100%'} />
+            <div className={(categoryId==="9"||categoryId==="10"||categoryId==="11")?styles.spec_banner:styles.top_banner_area} style={{ display: "flex", flexDirection: 'column', alignItems: 'center' }}>
+                <img src={flag<2?tiny_top_banner.descriptionimage:top_banner.descriptionimage} width={'100%'} />
                 <button onClick={() => {
                     // console.log(data.data.length);
                     data.data.length ?
@@ -113,12 +114,12 @@ export default function Category({ allcate, cateList, data, top_banner, middle_b
         </div>
         <div style={{ width: '100%', position: 'relative' }}>
             {
-                <img src={flag ? middle_banner.coverimage : middle_banner.coverimage} style={{ width: '100%', height: '100%', display: 'block' }}></img>
+                <img src={flag<2 ? tiny_middle_banner.coverimage: middle_banner.coverimage} style={{ width: '100%', height: '100%', display: 'block' }}></img>
             }
             <div className={style.banner_desc} style={{}}>
                 <div style={{ maxHeight: 200, overflow: 'hidden', textOverflow: 'ellipsis' }}>
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                        <img src="/小短文-訂製花束.png" style={{ width: '100%' }} />
+                        <img src={flag<2 ? tiny_middle_banner.descriptionimage : middle_banner.descriptionimage} style={{ width: '100%' }} />
                     </div>
                 </div>
             </div>
@@ -255,9 +256,15 @@ export async function getStaticProps(context) {
     //////console.log("--------");
     //console.log(banner_list.data);
     // console.log(banner_list.data.top_banner.web);
-    console.log(banner_list.data.middle_banner.web);
+    // console.log(banner_list.data.middle_banner);
     //////console.log(params.categoryId)
     let top_banner = banner_list.data.top_banner.web.filter((item) => {
+        if (item.flower_category_ids.includes(parseInt(params.categoryId))) {
+            //////console.log("找到了");
+            return item;
+        }
+    })
+    let tiny_top_banner = banner_list.data.top_banner.mobile.filter((item) => {
         if (item.flower_category_ids.includes(parseInt(params.categoryId))) {
             //////console.log("找到了");
             return item;
@@ -269,15 +276,27 @@ export async function getStaticProps(context) {
         }
         // //////console.log(item.flower_category_ids.includes(params.categoryId))
     })
+    let tiny_middle_banner = banner_list.data.middle_banner.mobile.filter((item) => {
+        console.log(item.flower_category_ids);
+        if (item.flower_category_ids.includes(parseInt(params.categoryId))) {
+            //////console.log("找到了");
+            return item;
+        }
+    })
     console.log("======================");
-    console.log(top_banner, middle_banner);
+    // console.log(top_banner,middle_banner);
+    console.log(tiny_top_banner, tiny_middle_banner);
+    // console.log()
     return {
         props: {
+            categoryId:params.categoryId,
             allcate: allcate.data,
             cateList: JSON.parse(tt_data).data,
             data: JSON.parse(data).data,
             top_banner: top_banner.length ? top_banner[0] : { coverimage: `${constant.api_url}/uploads/20230523/637cfca2255479e7b2fb99f6364b11b4.png)`, descriptionimage: `${constant.api_url}/uploads/20230601/a0175c1d8f3f40eae16a007b632426bd.png` },
-            middle_banner: middle_banner.length ? middle_banner[0] : { coverimage: `${constant.api_url}/uploads/20230523/94430a50cbdf2a5a5a2d10a2af501ec3.png` },
+            tiny_top_banner: tiny_top_banner.length ? tiny_top_banner[0] : { coverimage: `https://admin.floralismhk.com/uploads/20230531/bc5d6275780e4f4a4d02711d787936dc.png`, descriptionimage: `${constant.api_url}/uploads/20230601/a0175c1d8f3f40eae16a007b632426bd.png` },
+            middle_banner: middle_banner.length ? middle_banner[0] : { coverimage: `https://admin.floralismhk.com/uploads/20230531/fd4f6b8f144b477bbe1334d250646470.png` },
+            tiny_middle_banner: tiny_middle_banner.length ? tiny_middle_banner[0] : { coverimage: `${constant.api_url}/uploads/20230523/637cfca2255479e7b2fb99f6364b11b4.png`, descriptionimage: `${constant.api_url}/uploads/20230601/a0175c1d8f3f40eae16a007b632426bd.png` },
         },
 
     };

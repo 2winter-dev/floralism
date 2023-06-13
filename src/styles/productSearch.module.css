@@ -1,25 +1,34 @@
-.banner_search{
+.banner_search {
     top: 0;
     width: 100%;
     padding: 8% 20%;
 }
-.banner_desc{
+
+.banner_desc {
     /* width: 100%; */
     margin-bottom: 5%;
 }
 
-.search_main_body{
-    padding:3rem 10% 0;
+.search_main_body {
+    padding: 3rem 10% 0;
 }
 
 @media screen and (max-width:1100px) {
-    .banner_desc{
+    .banner_desc {
         width: 100%;
     }
 }
-
 @media screen and (max-width:675px) {
-    .banner_search{
-        padding:4.5% 15%;
+    .banner_search {
+        padding: 4.5% 15%;
+        height: 100%;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
     }
+    /* .search_area{
+        margin-top: 20px;
+    } */
+    /* banner_search */
 }

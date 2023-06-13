@@ -18,7 +18,7 @@ import useThrottle from "../../hooks/useThrottle";
 import toast, { Toaster } from "react-hot-toast";
 import LoginPannel from "../component/LoginPannel";
 import DynamicButton from "../component/DynamicButton";
-export default function ProductSearch({ cateList, data, top_banner }) {
+export default function ProductSearch({ tiny_top_banner,cateList, data, top_banner }) {
   //console.log(data);
   const router = useRouter();
   // const debounce=useDebounce();
@@ -61,7 +61,7 @@ export default function ProductSearch({ cateList, data, top_banner }) {
     })
   }
   const resizeUpdate = (e) => {
-    if (e.target.innerWidth <= 1100) {
+    if (e.target.innerWidth <= 675) {
       //////////////console.log("====", e.target.innerWidth);
       setFlag(true);
     } else {
@@ -72,7 +72,7 @@ export default function ProductSearch({ cateList, data, top_banner }) {
   useEffect(() => {
     window.addEventListener("resize", resizeUpdate);
     let str;
-    window.innerWidth < 1100 ? (!flag && setFlag(true)) : (flag && setFlag(false))
+    window.innerWidth < 675 ? (!flag && setFlag(true)) : (flag && setFlag(false))
     // window.addEventListener("keypress", (e) => {
 
     //   if (e.key === "Enter") {
@@ -104,9 +104,9 @@ export default function ProductSearch({ cateList, data, top_banner }) {
   return (<div style={{ position: 'relative' }}>
     <DynamicComponent cateList={cateList} setLogin={setLogin} />
     <div style={{ width: '100%', position: 'relative' }}>
-      <img src={top_banner.coverimage} style={{ width: '100%' }} />
+      <img src={flag?tiny_top_banner.coverimage:top_banner.coverimage} style={{ width: '100%' }} />
       <div className={style.banner_search} style={{ position: 'absolute' }}>
-        <img src={top_banner.descriptionimage} className={style.banner_desc}
+        <img src={flag?tiny_top_banner.descriptionimage:top_banner.descriptionimage} className={style.banner_desc}
         />
         <div className={`${styles.search_area}`} style={{ marginBottom: 12 }}>
           <span className={`${styles.serach_icon} iconfont`} style={{ marginLeft: 8 }}>&#xe82e;</span>
@@ -245,8 +245,18 @@ export async function getStaticProps(context) {
   } catch (e) {
 
   }
+  console.log("===");
+  console.log(banner_list.data.top_banner.web);
   top_banner = banner_list.data.top_banner.web.filter((item) => {
-    if (item.flower_category_ids.includes(parseInt(params.categoryId))) {
+    console.log(item.flower_category_ids,params.ProductSearchId);
+    if (item.flower_category_ids.includes(parseInt(params.ProductSearchId))) {
+      //////console.log("找到了");
+      return item;
+    }
+  })
+  let tiny_top_banner = banner_list.data.top_banner.mobile.filter((item) => {
+    console.log(item.flower_category_ids,params.ProductSearchId);
+    if (item.flower_category_ids.includes(parseInt(params.ProductSearchId))) {
       //////console.log("找到了");
       return item;
     }
@@ -264,12 +274,14 @@ export async function getStaticProps(context) {
   const tt_data = await tt_response.text()
   const data = await response.text()
   console.log("----");
+  console.log(tiny_top_banner);
   console.log(top_banner);
   return {
     props: {
       cateList: JSON.parse(tt_data).data,
       data: JSON.parse(data).data,
       top_banner: top_banner.length ? top_banner[0] : { coverimage: `/banner-搜索背景.png`, descriptionimage: `/product-search-desc.png` },
+      tiny_top_banner:tiny_top_banner.length? tiny_top_banner[0]:{ coverimage: `/banner-搜索背景.png`, descriptionimage: `/product-search-desc.png` },
     },
 
   };
