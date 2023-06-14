@@ -17,7 +17,7 @@
 
 .banner_buttom {
   /* margin-top: 3rem;/ */
-  margin: 4rem auto 0;
+  margin: 2rem auto 0;
   padding: 0.5rem 2.5rem;
   font-size: 2rem;
   background-color: #d43a43;
@@ -126,7 +126,7 @@
   font-size: 20px;
 }
 
-@media screen and (min-width:1100px) {
+@media screen and (min-width:750px) {
   .top_banner_area {
     padding: 10%;
     width: 50%;
@@ -168,6 +168,9 @@
 
   }
 
+  .banner{
+    background-position-y:  -40px;
+  }
   .goods_list {
     /* background-color: red; */
     padding: 3rem 21%;
@@ -185,7 +188,10 @@
 
   .top_banner_area>img {
     /* width: 50% */
-    padding: 10%;
+    padding: 0 10%;
+  }
+  .spec_banner>img{
+    padding: 0 10%;
   }
 }
 
@@ -204,7 +210,8 @@
   }
 
   .search_area {
-    padding: 4px;
+    width:100%;
+    padding: 12px;
     margin-top: 32px;
     font-size: 12px;
   }

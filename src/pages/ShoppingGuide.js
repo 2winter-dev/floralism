@@ -20,6 +20,7 @@ export default function ShoppingGuide(props) {
             {/* <meta charSet='utf-8' /> */}
             <title>【花店購物指南】 | 購物指南香港 | 「Floralism」購物指南</title>
             <meta name='title' content={'【花店購物指南】 | 購物指南香港 | 「Floralism」購物指南'} />
+            <meta name="keywords" content={'花店購物指南,購物指南香港,「Floralism」購物指南'}/>
         </Head>
         <DynamicComponent cateList={props.cateList} setLogin={setLogin} />
         <div style={{ backgroundColor: 'rgb(240,240,240)' }}>
@@ -213,7 +214,7 @@ export default function ShoppingGuide(props) {
 
 export async function getStaticProps(context) {
     const { params } = context;
-    // //////////console.log(params);
+    // ////////////console.log(params);
 
     const tt_response = await fetch(
         `${constant.api_url}/api/flowercategory/index`, {

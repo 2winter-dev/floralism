@@ -22,29 +22,29 @@ export default function AboutUs({ cateList, allcate }) {
 
     const [flag, setFlag] = useState(1);
     const [category, setCategory] = useState([]);
-    // ////////console.log(allcate);
+    // //////////console.log(allcate);
     const [categoryPage, setCategoryPage] = useState(1);
 
     const resizeUpdate = (e) => {
         if (e.target.innerWidth <= 675) {
-            //////////////console.log("====", e.target.innerWidth);
+            ////////////////console.log("====", e.target.innerWidth);
             setFlag(0);
         } else if (e.target.innerWidth <= 1100) {
             setFlag(1)
         } else {
-            //////////////console.log("-----", e.target.innerWidth);
+            ////////////////console.log("-----", e.target.innerWidth);
             setFlag(2);
         }
     }
     useEffect(() => {
         window.addEventListener("resize", resizeUpdate);
         if (window.innerWidth <= 675) {
-            //////////////console.log("====", e.target.innerWidth);
+            ////////////////console.log("====", e.target.innerWidth);
             setFlag(0);
         } else if (window.innerWidth <= 1100) {
             setFlag(1)
         } else {
-            //////////////console.log("-----", e.target.innerWidth);
+            ////////////////console.log("-----", e.target.innerWidth);
             setFlag(2);
         }
         return () => {
@@ -52,9 +52,9 @@ export default function AboutUs({ cateList, allcate }) {
         }
     }, [])
     useEffect(() => {
-        ////////console.log("flag改變", flag);
+        //////////console.log("flag改變", flag);
         setCategory(spliceArr(allcate, !flag ? 4 : flag === 1 ? 6 : flag === 2 && 8, 'cat'));
-        ////////console.log(spliceArr(allcate, !flag ? 4 : flag === 1 ? 6 : flag === 2 && 8, 'cat'))
+        //////////console.log(spliceArr(allcate, !flag ? 4 : flag === 1 ? 6 : flag === 2 && 8, 'cat'))
         setCategoryPage(1);
     }, [flag])
 
@@ -70,6 +70,7 @@ export default function AboutUs({ cateList, allcate }) {
             <title>【訂花】 | 網上訂花 | 「Floralism」網上花店香港</title>
             <meta name='title' content={'【訂花】 | 網上訂花 | 「Floralism」網上花店香港'} />
             <meta name='description' content={'「Floralism」網上花店香港，網上訂花已經是最常見的訂花途徑。「Floralism」提供最方便的花束訂購系統，讓客人輕鬆地訂購花束及為他人送上美麗的花束，同時也帶來了美好的體驗。'} />
+            <meta name='keywords' content={'訂花,網上訂花,網上花店香港'} />
         </Head>
         <DynamicComponent cateList={cateList} setLogin={setLogin} />
         <div style={{ width: '100%', position: 'relative' }}>
@@ -144,7 +145,7 @@ export default function AboutUs({ cateList, allcate }) {
 
 
 export async function getStaticProps({ local }) {
-    //  //////////////console.log(constant.api_url);
+    //  ////////////////console.log(constant.api_url);
     const allcate_response = await fetch(
         `${constant.api_url}/api/Flowercategory/allIndex`, {
         mode: 'cors',

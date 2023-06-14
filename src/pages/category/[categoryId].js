@@ -19,12 +19,13 @@ import GoodsItem from "../component/GoodsItem";
 // import { ToastContainer, toast } from 'react-toastify';
 import toast, { Toaster } from "react-hot-toast";
 
-export default function Category({ categoryId,allcate, cateList, data, top_banner, middle_banner,tiny_top_banner,tiny_middle_banner }) {
-    // //////////console.log("----");
-    ////////console.log(data);
-    console.log(tiny_top_banner,tiny_middle_banner);
+export default function Category({ categoryId,allcate,meta, cateList, data, top_banner, middle_banner,tiny_top_banner,tiny_middle_banner }) {
+    // ////////////console.log("----");
+    //////////console.log(data);
+    // //console.log(tiny_top_banner,tiny_middle_banner);
     const router = useRouter();
     const [login, setLogin] = useState(false);
+    const [bannerSize,setBannerSize]=useState(false);
     const [register, setRegister] = useState(false);
     const [visible, setVisible] = useState(false);
     const [flag, setFlag] = useState(1);
@@ -40,33 +41,35 @@ export default function Category({ categoryId,allcate, cateList, data, top_banne
         } else {
             setFlag(2);
         }
+        setBannerSize(window.innerWidth<=800?true:false);
     }
     useEffect(() => {
         window.addEventListener("resize", resizeUpdate);
         if (window.innerWidth <= 675) {
-            ////////////console.log("====", e.target.innerWidth);
+            //////////////console.log("====", e.target.innerWidth);
             setFlag(0);
         } else if (window.innerWidth <= 1100) {
             setFlag(1)
         } else {
-            ////////////console.log("-----", e.target.innerWidth);
+            //////////////console.log("-----", e.target.innerWidth);
             setFlag(2);
         }
+        setBannerSize(window.innerWidth<=800?true:false);
         return () => {
             window.removeEventListener("resize", resizeUpdate);
         }
     }, [])
     useEffect(() => {
-        ////////////console.log("flag改變", flag);
+        //////////////console.log("flag改變", flag);
         setCategory(spliceArr(allcate, !flag ? 4 : flag === 1 ? 6 : flag === 2 && 8, 1));
-        ////////////console.log(spliceArr(GoodsPage,  !flag ? 4 :flag===1? 6:flag===2&&8))
+        //////////////console.log(spliceArr(GoodsPage,  !flag ? 4 :flag===1? 6:flag===2&&8))
         setGoodsList(spliceArr(data.data, !flag ? 4 : flag === 1 ? 6 : flag === 2 && 8));
         setGoodsPage(1);
         setCategoryPage(1);
     }, [flag])
 
     // const checkname = () => {
-    //     //    //////////console.log(goodsList);
+    //     //    ////////////console.log(goodsList);
     //     let res = allcate.filter((item) => {
     //         if (item.id === data.data[0].flower_category_id) {
     //             return item;
@@ -77,21 +80,25 @@ export default function Category({ categoryId,allcate, cateList, data, top_banne
     // }
 
     useEffect(() => {
-        // //////////console.log(goodsList);
+        // ////////////console.log(goodsList);
     }, [goodsList])
-    //////console.log("======");
-    //////console.log(data);
+    ////////console.log("======");
+    ////////console.log(data);
     return (<div>
         <Head>
-            {/* <meta title={}  /> */}
+            <meta title={`${meta.title}`}  />
+            <title>{"Floralism 商品分類-"+meta.title}</title>
+            <meta title={'title'} content={`${meta.title}`} />
+            {/* <meta title={'descirption'} content={`${product.flowerList[index].metadescription}`} /> */}
+            <meta title={'keywords'} content={`${meta.keyword}`} />
         </Head>
         <DynamicComponent cateList={cateList} setLogin={setLogin} />
-        <div style={{ width: '100%', position: 'relative', backgroundImage: flag<2?`url(${tiny_top_banner.coverimage})`:`url(${top_banner.coverimage})`, marginBottom: 0 }} className={styles.banner} >
+        <div style={{ width: '100%', position: 'relative', backgroundImage: bannerSize?`url(${tiny_top_banner.coverimage})`:`url(${top_banner.coverimage})`, marginBottom: 0 }} className={styles.banner} >
             {/* <Image priority src="/homepage/top-banner.png" width={1920} height={700} style={{width:'100%'}}/> */}
             <div className={(categoryId==="9"||categoryId==="10"||categoryId==="11")?styles.spec_banner:styles.top_banner_area} style={{ display: "flex", flexDirection: 'column', alignItems: 'center' }}>
-                <img src={flag<2?tiny_top_banner.descriptionimage:top_banner.descriptionimage} width={'100%'} />
+                <img src={bannerSize?tiny_top_banner.descriptionimage:top_banner.descriptionimage} width={'100%'} />
                 <button onClick={() => {
-                    // console.log(data.data.length);
+                    // //console.log(data.data.length);
                     data.data.length ?
                         router.push(`/productSearch/${data.data[0].flower_category_id}`)
                         : router.push('/')
@@ -132,7 +139,7 @@ export default function Category({ categoryId,allcate, cateList, data, top_banne
                 type={'category'}
                 perPage={!flag ? 4 : flag === 1 ? 6 : flag === 2 && 8}
                 setPage={setCategoryPage}
-            // click={() => ////////////console.log("1")}
+            // click={() => //////////////console.log("1")}
             /> */}
                 <div>
                     <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -190,7 +197,7 @@ export async function getStaticPaths() {
         res.push({ params: { categoryId: item.id.toString() } });
 
     })
-    // //////////console.log(res);
+    // ////////////console.log(res);
     // const data=await response.json()
     // TODO get product id to be array
     return {
@@ -201,7 +208,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps(context) {
     const { params } = context;
-    // //////////console.log(params);
+    // ////////////console.log(params);
 
     const response = await fetch(
         `${constant.api_url}/api/flowers/index?keyword=&flower_category_id=${params.categoryId}`, {
@@ -251,22 +258,42 @@ export async function getStaticProps(context) {
     const tt_data = await tt_response.text()
     const data = await response.text();
     const banner_list = await banner.json();
-    ////console.log("------------");
-    ////console.log(JSON.parse(data).data);
-    //////console.log("--------");
-    //console.log(banner_list.data);
-    // console.log(banner_list.data.top_banner.web);
-    // console.log(banner_list.data.middle_banner);
-    //////console.log(params.categoryId)
+    //////console.log("------------");
+    //////console.log(JSON.parse(data).data);
+    ////////console.log("--------");
+    ////console.log(banner_list.data);
+    // //console.log(banner_list.data.top_banner.web);
+    // //console.log(banner_list.data.middle_banner);
+    ////////console.log(params.categoryId)
+    
+    // let list=JSON.parse(tt_data);
+    // //console.log(list);
+    //console.log(allcate.data);
+    let res=allcate.data.filter((item,index)=>{
+        //console.log("=========");
+        //console.log(params.categoryId);
+        //console.log(item.id);
+        if(item.id.toString()===params.categoryId){
+            //console.log("找到了");
+            return item;
+        }
+    })
+    //console.log(res[0]);
+    let meta={
+        keyword:res[0]?.keyword1+','+res[0]?.keyword2+','+res[0]?.keyword3??"",
+        title:res[0].metatitle??"",
+    }
+
+
     let top_banner = banner_list.data.top_banner.web.filter((item) => {
         if (item.flower_category_ids.includes(parseInt(params.categoryId))) {
-            //////console.log("找到了");
+            ////////console.log("找到了");
             return item;
         }
     })
     let tiny_top_banner = banner_list.data.top_banner.mobile.filter((item) => {
         if (item.flower_category_ids.includes(parseInt(params.categoryId))) {
-            //////console.log("找到了");
+            ////////console.log("找到了");
             return item;
         }
     })
@@ -274,28 +301,31 @@ export async function getStaticProps(context) {
         if (item.flower_category_ids.includes(parseInt(params.categoryId))) {
             return item;
         }
-        // //////console.log(item.flower_category_ids.includes(params.categoryId))
+        // ////////console.log(item.flower_category_ids.includes(params.categoryId))
     })
     let tiny_middle_banner = banner_list.data.middle_banner.mobile.filter((item) => {
-        console.log(item.flower_category_ids);
+        //console.log(item.flower_category_ids);
         if (item.flower_category_ids.includes(parseInt(params.categoryId))) {
-            //////console.log("找到了");
+            ////////console.log("找到了");
             return item;
         }
     })
     console.log("======================");
-    // console.log(top_banner,middle_banner);
+    console.log(top_banner,middle_banner);
     console.log(tiny_top_banner, tiny_middle_banner);
-    // console.log()
+    // //console.log(JSON.parse(data).data);
+    // //console.log()
+    //console.log(meta);
     return {
         props: {
             categoryId:params.categoryId,
             allcate: allcate.data,
             cateList: JSON.parse(tt_data).data,
             data: JSON.parse(data).data,
+            meta:meta,
             top_banner: top_banner.length ? top_banner[0] : { coverimage: `${constant.api_url}/uploads/20230523/637cfca2255479e7b2fb99f6364b11b4.png)`, descriptionimage: `${constant.api_url}/uploads/20230601/a0175c1d8f3f40eae16a007b632426bd.png` },
             tiny_top_banner: tiny_top_banner.length ? tiny_top_banner[0] : { coverimage: `https://admin.floralismhk.com/uploads/20230531/bc5d6275780e4f4a4d02711d787936dc.png`, descriptionimage: `${constant.api_url}/uploads/20230601/a0175c1d8f3f40eae16a007b632426bd.png` },
-            middle_banner: middle_banner.length ? middle_banner[0] : { coverimage: `https://admin.floralismhk.com/uploads/20230531/fd4f6b8f144b477bbe1334d250646470.png` },
+            middle_banner: middle_banner.length ? middle_banner[0] : { coverimage: `https://admin.floralismhk.com/uploads/20230531/1932d9f810c34c19f49de7bb8dc47b31.png` },
             tiny_middle_banner: tiny_middle_banner.length ? tiny_middle_banner[0] : { coverimage: `${constant.api_url}/uploads/20230523/637cfca2255479e7b2fb99f6364b11b4.png`, descriptionimage: `${constant.api_url}/uploads/20230601/a0175c1d8f3f40eae16a007b632426bd.png` },
         },
 

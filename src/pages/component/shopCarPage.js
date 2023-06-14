@@ -12,6 +12,7 @@ export default function ShopCarPage() {
 
 
         <div className={style.total_page}>
+          
             <div onClick={() => {
                 props.setIsShow(false);
             }} className={

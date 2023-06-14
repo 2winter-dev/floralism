@@ -4,6 +4,7 @@ import styles from '@/styles/Home.module.css'
 import style from '@/styles/productSearch.module.css'
 import SearchInput from "../component/SearchInput";
 import GoodsItem from "../component/GoodsItem";
+import Head from "next/head";
 import { useEffect, useRef, useState } from "react";
 import { spliceArr } from "@/method";
 import { constant } from "../../constant";
@@ -18,8 +19,8 @@ import useThrottle from "../../hooks/useThrottle";
 import toast, { Toaster } from "react-hot-toast";
 import LoginPannel from "../component/LoginPannel";
 import DynamicButton from "../component/DynamicButton";
-export default function ProductSearch({ tiny_top_banner,cateList, data, top_banner }) {
-  //console.log(data);
+export default function ProductSearch({ tiny_top_banner, meta, cateList, data, top_banner }) {
+  ////console.log(data);
   const router = useRouter();
   // const debounce=useDebounce();
   const [flag, setFlag] = useState(false);
@@ -38,22 +39,22 @@ export default function ProductSearch({ tiny_top_banner,cateList, data, top_bann
   })
 
   const ToSearch = (data) => {
-    //////////console.log("點擊了");
-    // //console.log(keyword);
+    ////////////console.log("點擊了");
+    // ////console.log(keyword);
     setType(true);
     fetchGoods.mutate({ keyword: data, flower_category_id: "", listRows: 16, page: page }, {
       onSuccess: async (res) => {
         // let _res = await res.json();
         if (res.code === 1) {
           setSearchResult(res.data.data);
-          //////////console.log(_res);
+          ////////////console.log(_res);
           setPage(1);
         } else {
           toast.error(res.msg);
         }
       },
       onError: (res) => {
-        ////////////console.log(res);
+        //////////////console.log(res);
         if (res instanceof Error) {
           toast.error(res.msg);
         } else toast.error(JSON.stringify(res.msg))
@@ -62,10 +63,10 @@ export default function ProductSearch({ tiny_top_banner,cateList, data, top_bann
   }
   const resizeUpdate = (e) => {
     if (e.target.innerWidth <= 675) {
-      //////////////console.log("====", e.target.innerWidth);
+      ////////////////console.log("====", e.target.innerWidth);
       setFlag(true);
     } else {
-      //////////////console.log("-----", e.target.innerWidth);
+      ////////////////console.log("-----", e.target.innerWidth);
       setFlag(false);
     }
   }
@@ -90,23 +91,30 @@ export default function ProductSearch({ tiny_top_banner,cateList, data, top_bann
   }, [])
 
   useEffect(() => {
-    //////////////console.log("flag改變", flag);
+    ////////////////console.log("flag改變", flag);
     setPage(1);
     setGoodsList(spliceArr(data.data, 16))
     // setCategoryPage(1);
   }, [flag])
 
   useEffect(() => {
-    //////////////console.log(goodsList)
+    ////////////////console.log(goodsList)
 
   }, [])
 
   return (<div style={{ position: 'relative' }}>
+    <Head>
+      <meta title={`${meta.title}`} />
+      <title>{meta.title??"Floralism 商品分類"}</title>
+      <meta title={'title'} content={`${meta.title}`} />
+      {/* <meta title={'descirption'} content={`${product.flowerList[index].metadescription}`} /> */}
+      <meta title={'keywords'} content={`${meta.keyword}`} />
+    </Head>
     <DynamicComponent cateList={cateList} setLogin={setLogin} />
     <div style={{ width: '100%', position: 'relative' }}>
-      <img src={flag?tiny_top_banner.coverimage:top_banner.coverimage} style={{ width: '100%' }} />
+      <img src={flag ? tiny_top_banner.coverimage : top_banner.coverimage} style={{ width: '100%' }} />
       <div className={style.banner_search} style={{ position: 'absolute' }}>
-        <img src={flag?tiny_top_banner.descriptionimage:top_banner.descriptionimage} className={style.banner_desc}
+        <img src={flag ? tiny_top_banner.descriptionimage : top_banner.descriptionimage} className={style.banner_desc}
         />
         <div className={`${styles.search_area}`} style={{ marginBottom: 12 }}>
           <span className={`${styles.serach_icon} iconfont`} style={{ marginLeft: 8 }}>&#xe82e;</span>
@@ -137,7 +145,7 @@ export default function ProductSearch({ tiny_top_banner,cateList, data, top_bann
                  ButtonGroupStyle={{marginTop:6}}
                  animation
                  click={(data) => {
-                    //////////////console.log(data);
+                    ////////////////console.log(data);
                     
                   }}
                  /> */}
@@ -218,7 +226,7 @@ export async function getStaticPaths() {
 export async function getStaticProps(context) {
 
   const { params } = context;
-  // ////////////console.log(params);
+  // //////////////console.log(params);
   const response = await fetch(
     `${constant.api_url}/api/flowers/index?keyword=&flower_category_id=${params.ProductSearchId}&listRows=16`, {
     headers: {
@@ -229,6 +237,32 @@ export async function getStaticProps(context) {
     }
   }
   );
+  const allcate_response = await fetch(
+    `${constant.api_url}/api/Flowercategory/allIndex`, {
+    mode: 'cors',
+    headers: {
+      // "Authorization": `Bearer ${data.cookie}`,
+      "Content-Type": "application/json",
+      "Access-Control-Request-Method": "GET,POST",
+      "Access-Control-Request-Headers": "Content-Type",
+    }
+  }
+  );
+  const allcate = await allcate_response.json();
+  let res = allcate.data.filter((item, index) => {
+    //console.log("=========");
+    //console.log(params.categoryId);
+    //console.log(item.id);
+    if (item.id.toString() === params.categoryId) {
+      //console.log("找到了");
+      return item;
+    }
+  })
+  //console.log(res[0]);
+  let meta = {
+    keyword: res[0]?.keyword1 + ',' + res[0]?.keyword2 + ',' + res[0]?.keyword3 ?? "",
+    title: res[0]?.metatitle ?? "",
+  }
   let banner_list;
   let top_banner
   try {
@@ -245,19 +279,19 @@ export async function getStaticProps(context) {
   } catch (e) {
 
   }
-  console.log("===");
-  console.log(banner_list.data.top_banner.web);
+  //console.log("===");
+  //console.log(banner_list.data.top_banner.web);
   top_banner = banner_list.data.top_banner.web.filter((item) => {
-    console.log(item.flower_category_ids,params.ProductSearchId);
+    //console.log(item.flower_category_ids, params.ProductSearchId);
     if (item.flower_category_ids.includes(parseInt(params.ProductSearchId))) {
-      //////console.log("找到了");
+      ////////console.log("找到了");
       return item;
     }
   })
   let tiny_top_banner = banner_list.data.top_banner.mobile.filter((item) => {
-    console.log(item.flower_category_ids,params.ProductSearchId);
+    //console.log(item.flower_category_ids, params.ProductSearchId);
     if (item.flower_category_ids.includes(parseInt(params.ProductSearchId))) {
-      //////console.log("找到了");
+      ////////console.log("找到了");
       return item;
     }
   })
@@ -273,15 +307,16 @@ export async function getStaticProps(context) {
   );
   const tt_data = await tt_response.text()
   const data = await response.text()
-  console.log("----");
-  console.log(tiny_top_banner);
-  console.log(top_banner);
+  //console.log("----");
+  //console.log(tiny_top_banner);
+  //console.log(top_banner);
   return {
     props: {
       cateList: JSON.parse(tt_data).data,
       data: JSON.parse(data).data,
+      meta,
       top_banner: top_banner.length ? top_banner[0] : { coverimage: `/banner-搜索背景.png`, descriptionimage: `/product-search-desc.png` },
-      tiny_top_banner:tiny_top_banner.length? tiny_top_banner[0]:{ coverimage: `/banner-搜索背景.png`, descriptionimage: `/product-search-desc.png` },
+      tiny_top_banner: tiny_top_banner.length ? tiny_top_banner[0] : { coverimage: `/banner-搜索背景.png`, descriptionimage: `/product-search-desc.png` },
     },
 
   };

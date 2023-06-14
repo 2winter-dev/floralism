@@ -1,21 +1,21 @@
 import { useRouter } from "next/router"
 import {useState,useEffect} from 'react'
 import { constant } from "../constant";
-
+import Head from "next/head";
 export default function SuccessPage() {
     const router = useRouter();
     const [statement,setStatement]=useState("")
-    // console.log("1");
+    // //console.log("1");
     // const { url } = router.query;
     // url.splice("?")
-    ////////////console.log(router.query.url);
+    //////////////console.log(router.query.url);
     const getState = () => {
-        //////console.log(router.query.url)
+        ////////console.log(router.query.url)
         let res = router.query.url.split("?")[1];
         let _res = res.split("&")[0];
         let statement = _res.split("=")[0];
-        console.log("====");
-        console.log(_res.split("=")[1]==="false");
+        //console.log("====");
+        //console.log(_res.split("=")[1]==="false");
         if(_res.split("=")[1]===true){
             return statement;
         }else return "fail";
@@ -28,6 +28,9 @@ export default function SuccessPage() {
     },[router.query.url])
 
     return (<div style={{height:700}}>
+          <Head>
+                <meta title="結算結果"/>
+            </Head>
         {
             statement === "success" && <div style={{width:'100%',height:'100%',display:'flex',flexDirection:'column',textAlign:'center',justifyContent:'center',alignItem:'center'}}>
                 <span style={{fontSize:64,color:'green'}} className={"iconfont"}>&#xe633;</span>

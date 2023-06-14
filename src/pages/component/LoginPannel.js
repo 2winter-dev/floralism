@@ -11,7 +11,7 @@ import ForgetPassword from './ForgetPassword';
 import toast, { Toaster } from "react-hot-toast";
 
 export default function LoginPannel(props) {
-    // //////////////console.log(window.innerHeight)
+    // ////////////////console.log(window.innerHeight)
     const [type, setType] = useState(0);//0為密碼登錄，1為驗證碼登錄
     const [time, setTime] = useState(0);
     const [email, setEmail] = useState("");
@@ -45,7 +45,7 @@ export default function LoginPannel(props) {
         sendEmail.mutate({ email: email.trim(), event: 'emaillogin' }, {
             onSuccess: async (res) => {
                 // let res = await res.json();
-                console.log(res);
+                //console.log(res);
                 if (res.code) {
                     setTime(60);
                     setFlag(true);
@@ -56,7 +56,7 @@ export default function LoginPannel(props) {
 
             },
             onError: (res) => {
-                //////////////console.log(res);
+                ////////////////console.log(res);
                 if(res instanceof Error){
                     toast.error(res.msg);
                 }else toast.error(JSON.stringify(res.msg))
@@ -93,7 +93,7 @@ export default function LoginPannel(props) {
             loginByEmail.mutate({ email: email.trim(), code: code.trim() }, {
                 onSuccess: async (res) => {
 
-                    console.log(res);
+                    //console.log(res);
                     if (res.code) {
 
                         Cookies.set('token', res.data.token, { expires: 1 });
@@ -155,15 +155,15 @@ export default function LoginPannel(props) {
                         {
                             type === 0 ? <div style={{ marginTop: '1.5%' }} className={style.login_pannel}>
                                 <div style={{ fontSize: 24, letterSpacing: 1 }}>Welcome</div>
-                                <div style={{ marginTop: '0.5%' }}>你好，欢迎登陆！</div>
+                                <div style={{ marginTop: '0.5%' }}>你好，歡迎登錄!</div>
                                 <div style={{ marginTop: '5%' }}>
                                     <input type='text' placeholder='電郵/賬戶' value={email} onChange={(e) => setEmail(e.target.value.trim())} className={style.account_input}></input>
                                 </div>
                                 <div style={{ marginTop: '5%' }}>
-                                    <input type='password' placeholder='密码' value={code} onChange={(e) => setCode(e.target.value.trim())} className={style.account_input}></input>
+                                    <input type='password' placeholder='密碼' value={code} onChange={(e) => setCode(e.target.value.trim())} className={style.account_input}></input>
                                 </div>
                                 <div style={{ marginTop: '2.5%', paddingLeft: '3%' }}>
-                                    <div onClick={() => setMType("forget")} className={style.forget_password}>忘记密码？</div>
+                                    <div onClick={() => setMType("forget")} className={style.forget_password}>忘記密碼</div>
                                 </div>
                                 <div style={{ marginTop: '2.5%' }}>
                                     <input type='button' onClick={_submit} className={style.submit_button} value="登錄"></input>
@@ -177,7 +177,7 @@ export default function LoginPannel(props) {
                                 </div>
                             </div> : <div style={{ marginTop: '1.5%' }} className={style.login_pannel}>
                                 <div style={{ fontSize: 24, letterSpacing: 1 }}>Welcome</div>
-                                <div style={{ marginTop: '0.5%' }}>你好，欢迎登陆！</div>
+                                <div style={{ marginTop: '0.5%' }}>你好，歡迎登錄！</div>
                                 <div style={{ marginTop: '5%' }}>
                                     <input type='text' placeholder='電郵/賬戶' onChange={(e) => setEmail(e.target.value.trim())} value={email} className={style.account_input}></input>
                                 </div>
@@ -193,7 +193,7 @@ export default function LoginPannel(props) {
                                     </div>}
                                 </div>
                                 <div style={{ marginTop: '2.5%', paddingLeft: '3%' }}>
-                                    <div onClick={() => setMType("forget")} className={style.forget_password}>忘记密码？</div>
+                                    <div onClick={() => setMType("forget")} className={style.forget_password}>忘記密碼？</div>
                                 </div>
                                 <div style={{ marginTop: '2.5%' }}>
                                     <input type='button' onClick={_submit} className={style.submit_button} style={{ fontSize: 18 }} value="登錄"></input>

@@ -79,7 +79,7 @@ export default function Header(props) {
                                     {item.get_child &&
                                         item.get_child.map((it, ii) => {
                                             if(ii>3){
-                                                //console.log("123");
+                                                ////console.log("123");
                                                 return;
                                             }
                                             return (<div key={index + ii.toString()} className={`${header.header_center_dropdown}`}>

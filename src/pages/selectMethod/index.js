@@ -14,6 +14,7 @@ import { useMutation, useQueries } from "@tanstack/react-query";
 import dynamic from 'next/dynamic'
 import m_api from "@/m_api";
 import Cookies from "js-cookie";
+import Head from "next/head";
 import { Radio } from "@nextui-org/react";
 import { redirect } from "next/dist/server/api-utils";
 // import { ToastContainer, toast } from 'react-toastify';
@@ -22,18 +23,18 @@ import toast, { Toaster } from "react-hot-toast";
 export default function selectMethod(props) {
     const stripe = require('stripe')(props.secretKey);
     const router = useRouter();
-    // ////////////console.log("000000000");
-    // ////////////console.log(stripe);      
+    // //////////////console.log("000000000");
+    // //////////////console.log(stripe);      
     const DynamicComponentWithNoSSR = dynamic(
         () => import('./DynamicStripe'),
         { ssr: false }
     )
 
     const { deliverytype, deliverydate, cart_ids, remark, amount, payment_amount } = router.query
-    // //////console.log();
-    ////////console.log("----------");
-    ////////console.log(deliverytype);
-    // ////////////console.log(useRouter());
+    // ////////console.log();
+    //////////console.log("----------");
+    //////////console.log(deliverytype);
+    // //////////////console.log(useRouter());
     const [login, setLogin] = useState(false);
     const [register, setRegister] = useState(false);
     const [visible, setVisible] = useState(false);
@@ -96,7 +97,7 @@ export default function selectMethod(props) {
         setAddList([...m_list])
     }
     const setPosition = (id) => {
-        // ////////////console.log(id);
+        // //////////////console.log(id);
         setAdd(id);
         setDefault.mutate({ id, cookie: Cookies.get('token') }, {
             onSuccess: async (res) => {
@@ -117,7 +118,7 @@ export default function selectMethod(props) {
     useEffect(() => {
         if (props?.addList && Cookies.get("token")) {
             let res = props.addList?.data.filter((item) => {
-                // ////////////console.log(item);
+                // //////////////console.log(item);
                 if (item.is_default) {
                     return item;
                 }
@@ -129,12 +130,12 @@ export default function selectMethod(props) {
         }
     }, [])
 
-    //////console.log("1111----");
-    //////console.log(router.query?.type === "success");
+    ////////console.log("1111----");
+    ////////console.log(router.query?.type === "success");
     const ToCreateOrder = () => {
         setFlag(true);
         if (payment !== "" && add !== "") {
-            // ////////////console.log(deliverytype, deliverydate, cart_ids, remark, amount, payment_amount, add)
+            // //////////////console.log(deliverytype, deliverydate, cart_ids, remark, amount, payment_amount, add)
             createOrder.mutate({
                 deliverytype,
                 deliverydate,
@@ -150,20 +151,20 @@ export default function selectMethod(props) {
 
                     // let _res = await res.json();
                     setFlag(!true);
-                        // let _res = await res.json();
-                        if (res.code === 401) {
-                            Cookies.remove("token");
-                            location.reload();
-                        } else if (res.code === 1) {
-                            console.log(res);
-                            setFlag(false);
-                            if (payment === "paypal") {
-                                setUrl(res.data.payment_info.approval_url)
-                            }
-                            setPage(2);
-                        } else {
-                            toast.error(res.msg);
+                    // let _res = await res.json();
+                    if (res.code === 401) {
+                        Cookies.remove("token");
+                        location.reload();
+                    } else if (res.code === 1) {
+                        //console.log(res);
+                        setFlag(false);
+                        if (payment === "paypal") {
+                            setUrl(res.data.payment_info.approval_url)
                         }
+                        setPage(2);
+                    } else {
+                        toast.error(res.msg);
+                    }
 
 
                 },
@@ -178,25 +179,28 @@ export default function selectMethod(props) {
         }
     }
     useEffect(() => {
-        // ////////////console.log("==============");
-        //  ////////////console.log(createOrder.data);
+        // //////////////console.log("==============");
+        //  //////////////console.log(createOrder.data);
     }, [createOrder])
 
     return (<div>
+        <Head>
+            <meta title="Floralism訂單結算" />
+            <title>Floralism 訂單結算</title>
+        </Head>
         <DynamicComponent cateList={props.cateList} setLogin={setLogin} />
         <div className={styles.total_layout} style={{ backgroundColor: 'rgb(246,248,250)' }}>
             <div>
-                <div style={{ display: "flex", justifyContent: 'space-around', marginLeft: '5%', marginRight: '5%' }}>
+                <div style={{ display: "flex", justifyContent: 'space-around', marginLeft: '2%', marginRight: '2%' }}>
                     <div style={{ flex: 1 }}></div>
-                    <div>确认订单</div>
+                    <div>確認訂單</div>
                     <div style={{ flex: 1 }}></div>
-                    <div>支付</div>
-                    <div>支付</div>
+                    <div>前往支付</div>
                     <div style={{ flex: 1 }}></div>
-                    <div>結果</div>
+                    <div>支付結果</div>
                     <div style={{ flex: 1 }}></div>
                 </div>
-                <div style={{ display: "flex", justifyContent: 'space-around', alignItems: 'center' }}>
+                <div style={{ display: "flex", justifyContent: 'space-around', alignItems: 'center',marginTop:12 }}>
                     <div className={
                         page >= 1 ? styles.complete : styles.wrong
                     } style={{ height: 4, flex: 1 }}></div>
@@ -257,7 +261,7 @@ export default function selectMethod(props) {
                                                                     <span onClick={() => setPosition(item.id)} style={{ marginRight: 12 }} className={`iconfont`}>&#xe799;</span>
                                                             }
                                                             <span onClick={(e) => {
-                                                                // ////////////console.log("刪除");
+                                                                // //////////////console.log("刪除");
                                                                 toDelte(item.id);
                                                                 e.stopPropagation();
                                                             }} style={{ marginRight: 12, fontSize: 14 }} className={`iconfont`} >&#x34b2;</span>
@@ -415,7 +419,7 @@ export default function selectMethod(props) {
         </div>
         {/* {(!login || !add_vis) && <ToastContainer />} */}
         {!login && <Toaster
-           position="top-center"
+            position="top-center"
         />}
         <Footer />
         {
@@ -437,7 +441,7 @@ export default function selectMethod(props) {
 
 
 export async function getServerSideProps(context) {
-    //////console.log(context.query.page);
+    ////////console.log(context.query.page);
     const response = await fetch(
         `${constant.api_url}/api/flowercategory/index`, {
         mode: 'cors',
@@ -462,17 +466,17 @@ export async function getServerSideProps(context) {
     if (context.req.headers.cookie) {
         res = context.req.headers.cookie.split(';');
         let _res = res.filter(item => {
-            ////////////console.log(item.trim().split("=")[0]);
+            //////////////console.log(item.trim().split("=")[0]);
             if (item.trim().split("=")[0] === "token")
                 return item;
         })
         if (_res.length) {
             i = _res[0].trim().split("=")[1];
         } else i = null;
-        //    ////////////console.log(_res[0].trim().split("=")[1]);
+        //    //////////////console.log(_res[0].trim().split("=")[1]);
     }
     if (i) {
-        ////////////console.log("進來了");
+        //////////////console.log("進來了");
         const add_response = await fetch(
             `${constant.api_url}/api/address/index`, {
             headers: {
@@ -518,7 +522,7 @@ export async function getServerSideProps(context) {
         if (goods_list_response.status != 200) {
             goods_data = { data: [], code: 0 }
         } else goods_data = await goods_list_response.json();
-        ////////////console.log("=========");
+        //////////////console.log("=========");
 
     } else {
         add_data = { data: [], code: 401 };
@@ -529,7 +533,7 @@ export async function getServerSideProps(context) {
 
 
     if (context.query?.page !== "3") {
-        //////console.log("不为3");
+        ////////console.log("不为3");
         if (!goods_data.code) {
             return {
                 redirect: {
@@ -543,8 +547,8 @@ export async function getServerSideProps(context) {
 
 
 
-    ////////////console.log(add_data);
-    ////////console.log(s_list);
+    //////////////console.log(add_data);
+    //////////console.log(s_list);
     return {
         props: {
             cateList: data.data,
