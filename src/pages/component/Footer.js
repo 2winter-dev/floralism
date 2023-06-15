@@ -2,6 +2,7 @@ import style from '@/styles/footer.module.css'
 import { constant } from '@/constant/index';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
 import { ToastContainer, toast } from 'react-toastify';
 export default function Footer() {
     const router = useRouter();
@@ -46,10 +47,10 @@ export default function Footer() {
             </div>
             <div className={style.footer_column} style={{ display: 'flex', flexDirection: 'column' }}>
                 <p>幫助</p>
-                <a onClick={() => router.push('/ShoppingGuide')}>購物指南</a>
-                <a onClick={() => router.push('/CustomerOrder')}>訂製服務</a>
-                <a onClick={() => router.push('/Delivery')}>送貨服務</a>
-                <a onClick={() => router.push('/Aboutus')}>關於我們</a>
+                <div onClick={() => router.push('/ShoppingGuide')}>購物指南</div>
+                <div onClick={() => router.push('/CustomerOrder')}>訂製服務</div>
+                <div onClick={() => router.push('/Delivery')}>送貨服務</div>
+                <div onClick={() => router.push('/Aboutus')}>關於我們</div>
             </div>
             <div className={style.footer_column} style={{ display: 'flex', flexDirection: 'column' }}>
                 <p>聯絡我們</p>
@@ -66,16 +67,16 @@ export default function Footer() {
                     <div style={{ flex: 1, fontSize: 20 }}>FOLLOW US</div>
                     <div className={style.icon_group} style={{ flex: 1, display: 'flex', alignItems: 'center', flexWrap: 'wrap', marginTop: 16, justifyContent: 'space-between' }}>
                         <div style={{ cursor: 'pointer' }}>
-                            <a ><img src='/矢量智能对象-3.png' className={style.footer_Image} /></a>
+                            <a href="https://www.facebook.com/hkfloralism"><img alt="" src='/矢量智能对象-3.png' className={style.footer_Image} /></a>
                         </div>
                         <div style={{ cursor: 'pointer' }}>
-                            <img src='/矢量智能对象-2.png' className={style.footer_Image} />
+                            <a href="https://www.instagram.com/hkfloralism/"><img alt="" src='/矢量智能对象-2.png' className={style.footer_Image} /></a>
                         </div>
+                        {/* <div style={{ cursor: 'pointer' }}>
+                            <a href=''><img alt="" src='/矢量智能对象-1.png' className={style.footer_Image} /></a>
+                        </div> */}
                         <div style={{ cursor: 'pointer' }}>
-                            <img src='/矢量智能对象-1.png' className={style.footer_Image} />
-                        </div>
-                        <div style={{ cursor: 'pointer' }}>
-                            <a href="https://wa.me/85265818053"><img src='/矢量智能对象.png' className={{ ...style.footer_Image, marginRight: 0 }} /></a>
+                            <a href="https://wa.me/85265818053"><img alt="" src='/矢量智能对象.png' className={{ ...style.footer_Image, marginRight: 0 }} /></a>
                         </div>
                     </div>
                 </div>
@@ -86,16 +87,16 @@ export default function Footer() {
                 <div style={{ flex: 1, fontSize: 20 }}>FOLLOW US</div>
                 <div style={{ flex: 1, display: 'flex', alignItems: 'center', marginTop: 16 }}>
                     <a>
-                        <img src='/矢量智能对象-3.png' className={style.footer_Image} />
+                        <img alt="" src='/矢量智能对象-3.png' className={style.footer_Image} />
                     </a>
                     <a>
-                        <img src='/矢量智能对象-2.png' className={style.footer_Image} />
+                        <img alt="" src='/矢量智能对象-2.png' className={style.footer_Image} />
                     </a>
                     <a>
-                        <img src='/矢量智能对象-1.png' className={style.footer_Image} />
+                        <img alt="" src='/矢量智能对象-1.png' className={style.footer_Image} />
                     </a>
                     <a>
-                        <img src='/矢量智能对象.png' className={{ ...style.footer_Image, marginRight: 0 }} />
+                        <img alt="" src='/矢量智能对象.png' className={{ ...style.footer_Image, marginRight: 0 }} />
                     </a>
                 </div>
             </div>

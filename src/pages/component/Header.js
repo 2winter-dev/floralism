@@ -14,7 +14,7 @@ export default function Header(props) {
         <div className={`${header.header_layout}`}>
             <div className={`${header.logo}`}>
                 <Link href={'/'}>
-                    <img src="/logo.png" style={{}} className={header.logo_pic} />
+                    <img alt="" src="/logo.png" style={{}} className={header.logo_pic} />
                 </Link>
             </div>
             <div className={`${header.header_center}`}>

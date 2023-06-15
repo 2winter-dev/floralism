@@ -37,7 +37,7 @@ export default function ShopCarPage() {
                             <div>【FLORALISM】玫瑰/繆斯女神，卡羅拉紅玫瑰....</div>
                             <div style={{ marginTop: 10, display: 'flex' }}>
                                 <div style={{ width: '15%' }}>
-                                    <img src='/homepage/圖2.png' style={{ width: '90%', borderRadius: 8 }} />
+                                    <img alt="" src='/homepage/圖2.png' style={{ width: '90%', borderRadius: 8 }} />
                                 </div>
                                 {
                                     <div style={{ flex: 1, flexDirection: 'column' }}>
@@ -48,7 +48,7 @@ export default function ShopCarPage() {
                                             <div style={{ width: '53%' }}>
                                                 <div style={{ width: '97%', display: 'flex', alignItems: 'flex-start' }}>
                                                     <input type='checkbox' style={{ width: 15, height: 15, marginRight: 12 }} />
-                                                    <img src='/心意卡.png' style={{ width: '15%', marginRight: 12 }} />
+                                                    <img alt="" src='/心意卡.png' style={{ width: '15%', marginRight: 12 }} />
                                                     <select style={{ flex: 1, paddingLeft: 8, paddingRight: 8, paddingTop: 4, paddingBottom: 4, backgroundColor: 'rgb(224,224,224)' }}>
                                                         <option>玫瑰16支</option>
                                                         <option>禮盒包裝</option>
@@ -86,7 +86,7 @@ export default function ShopCarPage() {
                             <div>【FLORALISM】玫瑰/繆斯女神，卡羅拉紅玫瑰....</div>
                             <div style={{ marginTop: 10, display: 'flex' }}>
                                 <div style={{ width: '15%' }}>
-                                    <img src='/homepage/圖2.png' style={{ width: '90%', borderRadius: 8 }} />
+                                    <img alt="" src='/homepage/圖2.png' style={{ width: '90%', borderRadius: 8 }} />
                                 </div>
                                 {
                                     <div style={{ flex: 1, flexDirection: 'column' }}>
@@ -97,7 +97,7 @@ export default function ShopCarPage() {
                                             <div style={{ width: '53%' }}>
                                                 <div style={{ width: '97%', display: 'flex', alignItems: 'flex-start' }}>
                                                     <input type='checkbox' style={{ width: 15, height: 15, marginRight: 12 }} />
-                                                    <img src='/心意卡.png' style={{ width: '15%', marginRight: 12 }} />
+                                                    <img alt="" src='/心意卡.png' style={{ width: '15%', marginRight: 12 }} />
                                                     <select style={{ flex: 1, paddingLeft: 8, paddingRight: 8, paddingTop: 4, paddingBottom: 4, backgroundColor: 'rgb(224,224,224)' }}>
                                                         <option>玫瑰16支</option>
                                                         <option>禮盒包裝</option>

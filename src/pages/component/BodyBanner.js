@@ -6,7 +6,7 @@ export default function BodyBanner(props) {
     //////////console.log("flag为:"+props.flag);
     return (<div style={{ width: '100%', position: 'relative' }}>
         {
-            <img src={props.flag === 0 ? props.imgTiny : props.img} style={{ width: '100%', height: '100%', display: 'block' }}></img>
+            <img alt="" src={props.flag === 0 ? props.imgTiny : props.img} style={{ width: '100%', height: '100%', display: 'block' }}></img>
         }
         <div className={style.banner_desc} style={{}}>
             <div style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>

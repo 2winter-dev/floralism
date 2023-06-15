@@ -197,7 +197,7 @@ export default function User(props) {
                     {/* 头像 */}
                     <div className={styles.avatar_area} style={{ display: 'flex', alignItems: 'center', flexDirection: 'column', justifyContent: 'center', padding: 16 }}>
                         <div className={styles.avatar}>
-                            <img src={props.user_data?.avatar} style={{ width: '100%' }} />
+                            <img alt="" src={props.user_data?.avatar} style={{ width: '100%' }} />
                         </div>
                         <div style={{ marginTop: 8, fontSize: 18, fontWeight: 700 }}>{def_name}</div>
                         <div style={{ marginTop: 8 }}>{def_email}</div>
@@ -362,7 +362,7 @@ export default function User(props) {
                                                 <td className={`${styles.tr_padding} ${styles.first_column}`} >
                                                     <div style={{ display: 'flex', alignItems: 'center', wordBreak: 'break-all' }}>
                                                         <div className={styles.product_img}>
-                                                            <img src={item?.product_coverimage} style={{ width: '100%' }} />
+                                                            <img alt="" src={item?.product_coverimage} style={{ width: '100%' }} />
                                                         </div>
                                                         <div style={{ flex: 1 }}>
                                                             <div className={styles.product_title} style={{ fontSize: 14, width: '100%', overflow: 'hidden', textOverflow: 'ellipsis' }}>
@@ -431,7 +431,7 @@ export default function User(props) {
                                     orderDetail.products.map((item, index) => {
                                         return (<div style={{ display: 'flex', alignItems: 'center', marginTop: 24, wordBreak: 'break-all' }}>
                                             <div className={styles.product_img}>
-                                                <img src={item?.coverimage} style={{ width: '100%', borderRadius: 8 }} />
+                                                <img alt="" src={item?.coverimage} style={{ width: '100%', borderRadius: 8 }} />
                                             </div>
                                             <div style={{ display: 'flex', flexDirection: 'column' }}>
                                                 <div className={styles.product_title} style={{ overflow: 'hidden', textOverflow: 'ellipsis', wordWrap: 'break-word' }}>

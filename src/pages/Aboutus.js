@@ -74,12 +74,12 @@ export default function AboutUs({ cateList, allcate }) {
         </Head>
         <DynamicComponent cateList={cateList} setLogin={setLogin} />
         <div style={{ width: '100%', position: 'relative' }}>
-            <img className={styles.banner_background} src={flag === 0 ? '/banner-s-背景.png' : '/banner-背景.png'} style={{ width: '100%', display: 'block' }} />
+            <img alt="" className={styles.banner_background} src={flag === 0 ? '/banner-s-背景.png' : '/banner-背景.png'} style={{ width: '100%', display: 'block' }} />
 
             {
                 <div className={styles.description} >
                     <div className={styles.girls_contain} style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'center', flex: 1 }}>
-                        <img className={styles.girls} src={'女生.png'} style={{}} />
+                        <img alt="" className={styles.girls} src={'女生.png'} style={{}} />
                     </div>
                     <div className={styles.desc_contain} style={{ flex: 1, marginRight: '10%', marginTop: 30, position: 'relative', justifyContent: 'flex-end' }}>
                         {/* <span className="iconfont" style={{position:'absolute'}}>&#xe67b;</span>  */}

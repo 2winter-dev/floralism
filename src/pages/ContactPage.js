@@ -94,20 +94,20 @@ export default function ContactPage({ cateList, allcate }) {
                     <div className={`${style.contact_title}`} style={{ marginTop: '15%' }}>客戶熱綫</div>
                     <div className={style.contact_distance} style={{ display: 'flex', alignItems: 'center' }} >
                         <a href="tel:+85265818053" style={{ display: 'flex', alignItems: 'center' }}>
-                            <img src="/圖標-電話.png" />
+                            <img alt="" src="/圖標-電話.png" />
                             <div style={{ marginLeft: 16 }}>65818053</div>
                         </a>
 
                     </div>
                     <div className={style.contact_distance} style={{ display: 'flex', alignItems: 'center' }}>
                         <a href="mailto:info@floralismhk.com" style={{ display: 'flex', alignItems: 'center' }}>
-                            <img src="/圖標-郵件.png" />
+                            <img alt="" src="/圖標-郵件.png" />
                             <div style={{ marginLeft: 16 }}>info@floralismhk.com</div>
                         </a>
                     </div>
                 </div>
                 <div className={style.main_contain} style={{ display: "flex", alignItems: 'flex-end' }}>
-                    <img style={{ width: '100%' }} src="/contactus-background.png" />
+                    <img alt="" style={{ width: '100%' }} src="/contactus-background.png" />
 
                 </div>
             </div>

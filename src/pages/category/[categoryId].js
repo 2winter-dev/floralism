@@ -18,7 +18,7 @@ import DynamicButton from "../component/DynamicButton";
 import GoodsItem from "../component/GoodsItem";
 // import { ToastContainer, toast } from 'react-toastify';
 import toast, { Toaster } from "react-hot-toast";
-
+import Image from "next/image";
 export default function Category({ categoryId,allcate,meta, cateList, data, top_banner, middle_banner,tiny_top_banner,tiny_middle_banner }) {
     // ////////////console.log("----");
     //////////console.log(data);
@@ -96,7 +96,7 @@ export default function Category({ categoryId,allcate,meta, cateList, data, top_
         <div style={{ width: '100%', position: 'relative', backgroundImage: bannerSize?`url(${tiny_top_banner.coverimage})`:`url(${top_banner.coverimage})`, marginBottom: 0 }} className={styles.banner} >
             {/* <Image priority src="/homepage/top-banner.png" width={1920} height={700} style={{width:'100%'}}/> */}
             <div className={(categoryId==="9"||categoryId==="10"||categoryId==="11")?styles.spec_banner:styles.top_banner_area} style={{ display: "flex", flexDirection: 'column', alignItems: 'center' }}>
-                <img src={bannerSize?tiny_top_banner.descriptionimage:top_banner.descriptionimage} width={'100%'} />
+                <img alt="" src={bannerSize?tiny_top_banner.descriptionimage:top_banner.descriptionimage} width={'100%'} />
                 <button onClick={() => {
                     // //console.log(data.data.length);
                     data.data.length ?
@@ -121,12 +121,12 @@ export default function Category({ categoryId,allcate,meta, cateList, data, top_
         </div>
         <div style={{ width: '100%', position: 'relative' }}>
             {
-                <img src={flag<2 ? tiny_middle_banner.coverimage: middle_banner.coverimage} style={{ width: '100%', height: '100%', display: 'block' }}></img>
+                <img alt="" src={flag<2 ? tiny_middle_banner.coverimage: middle_banner.coverimage} style={{ width: '100%', height: '100%', display: 'block' }}></img>
             }
             <div className={style.banner_desc} style={{}}>
                 <div style={{ maxHeight: 200, overflow: 'hidden', textOverflow: 'ellipsis' }}>
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                        <img src={flag<2 ? tiny_middle_banner.descriptionimage : middle_banner.descriptionimage} style={{ width: '100%' }} />
+                        <img alt="" src={flag<2 ? tiny_middle_banner.descriptionimage : middle_banner.descriptionimage} style={{ width: '100%' }} />
                     </div>
                 </div>
             </div>
@@ -312,7 +312,7 @@ export async function getStaticProps(context) {
     })
     console.log("======================");
     console.log(top_banner,middle_banner);
-    console.log(tiny_top_banner, tiny_middle_banner);
+    // console.log(tiny_top_banner, tiny_middle_banner);
     // //console.log(JSON.parse(data).data);
     // //console.log()
     //console.log(meta);

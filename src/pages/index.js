@@ -101,12 +101,12 @@ export default function Home({ allcate, cateList, GoodsPage, carousel }) {
         <title>【買花】 | 送花 | 「Floralism」香港花店</title>
         <meta name='title' content={'【買花】 | 送花 | 「Floralism」香港花店'} />
         <meta name='description' content={'「Floralism」專業香港花店提供買花及送花服務，如鮮花、盆栽、花籃等，而且還提供網上訂購、送貨上門等一系列買花服務，讓人們能夠方便快捷地為他人表達心意。'} />
-        <meta name='keywords' content={'買花,送花,「Floralism」香港花店'} />
+        <meta name='keywords' content={'買花,送花,香港花店'} />
       </Head>
 
 
       <DynamicComponent cateList={cateList} setLogin={setLogin} />
-      <div style={{ width: '100%', position: 'relative',backgroundImage:`url(${bannerSize?"https://admin.floralismhk.com/uploads/20230531/bc5d6275780e4f4a4d02711d787936dc.png":"/homepage/top-banner.png"})` }} className={styles.banner}>
+      <div style={{ width: '100%', position: 'relative',backgroundImage:`url(${bannerSize?"/homepage/tiny-top-banner.png":"/homepage/top-banner.png"})` }} className={styles.banner}>
         {/* <Image priority src="/homepage/top-banner.png" width={1920} height={700} style={{width:'100%'}}/> */}
         <div style={{}} className={styles.top_banner_area}>
           <img src={"/homepage/banner-desc.png"} width={'100%'} />

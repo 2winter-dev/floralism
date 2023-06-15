@@ -7,8 +7,8 @@ export default function GoodsItem(props) {
             router.push(`/production/${props.item.id}`)
         }} style={{ padding: '2%', ...props.top_style }}>
             <div className={props.animation && (props.type === "category" || props.type === "carsouel") ? styles.goods_img_cover : ""} style={{ position: 'relative', ...props.imgTopStyle }}>
-                <img src={props?.item?.photoimage} style={{ width: '100%', display: 'block', ...props.imgStyle }} className={props.animation === "toLarge" ? `${styles.goods_img} ${styles.an_fangda}` : `${styles.goods_img}`} />
-                {props.item?.photoimages?.length && props.item?.photoimages[0] && <img src={props?.item?.photoimages[0]} style={{ borderRadius: 16 }} className={styles.goods_hover_img} />}
+                <img alt="" src={props?.item?.photoimage} style={{ width: '100%', display: 'block', ...props.imgStyle }} className={props.animation === "toLarge" ? `${styles.goods_img} ${styles.an_fangda}` : `${styles.goods_img}`} />
+                {props.item?.photoimages?.length && props.item?.photoimages[0] && <img alt="" src={props?.item?.photoimages[0]} style={{ borderRadius: 16 }} className={styles.goods_hover_img} />}
                 {
                     <button className={styles.buy_goods_btn}>點擊購買</button>
                 }
@@ -37,8 +37,8 @@ export default function GoodsItem(props) {
         }
     }} style={{ padding: '2%', ...props.top_style }}>
         <div className={props.type === "category" || props.type === "carsouel" ? styles.goods_img_cover : ""} style={{ position: 'relative', ...props.imgTopStyle }}>
-            <img src={props?.item?.photoimage} style={{ width: '100%', display: 'block', ...props.imgStyle }} className={props.animation === "toLarge" ? `${styles.goods_img} ${styles.an_fangda}` : `${styles.goods_img}`} />
-            {props.type !== "category" && props.type !== "carsouel" && props.item?.photoimages?.length && props.item?.photoimages[0] && <img src={props?.item?.photoimages[0]} style={{ borderRadius: 16 }} className={styles.goods_hover_img} />}
+            <img alt="" src={props?.item?.photoimage} style={{ width: '100%', display: 'block', ...props.imgStyle }} className={props.animation === "toLarge" ? `${styles.goods_img} ${styles.an_fangda}` : `${styles.goods_img}`} />
+            {props.type !== "category" && props.type !== "carsouel" && props.item?.photoimages?.length && props.item?.photoimages[0] && <img alt="" src={props?.item?.photoimages[0]} style={{ borderRadius: 16 }} className={styles.goods_hover_img} />}
             {
                 props.type === "carsouel" && <button className={styles.buy_btn}>點擊購買</button>
             }

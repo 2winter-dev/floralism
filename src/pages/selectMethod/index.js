@@ -305,12 +305,12 @@ export default function selectMethod(props) {
                                 <Radio.Group onChange={setPayment} >
                                     <div className={styles.selectPayment} style={{ padding: 8, marginTop: 8 }}>
                                         <Radio value="paypal" >
-                                            <img src="/paypal.png" style={{ height: 80, marginRight: 16, marginLeft: 16, borderRadius: 4 }} /> <span style={{ fontWeight: 700, fontSize: 16 }}>使用paypal 支付</span>
+                                            <img alt="" src="/paypal.png" style={{ height: 80, marginRight: 16, marginLeft: 16, borderRadius: 4 }} /> <span style={{ fontWeight: 700, fontSize: 16 }}>使用paypal 支付</span>
                                         </Radio>
                                     </div>
                                     {/* <div className={styles.selectPayment} style={{ padding: 8, marginTop: 8 }}>
                                                 <Radio value="stripe" >
-                                                    <img src="/stripe.png" style={{ height: 80, marginRight: 8 }} />stripe</Radio>
+                                                    <img alt="" src="/stripe.png" style={{ height: 80, marginRight: 8 }} />stripe</Radio>
                                             </div> */}
                                 </Radio.Group>
                             </div>
@@ -323,7 +323,7 @@ export default function selectMethod(props) {
                                 {
                                     props.goodsList && props.goodsList.map((item, index) =>
                                         <div key={item.id} style={{ display: 'flex', alignItems: 'center', marginTop: 24 }}>
-                                            <img src={item.coverimage} style={{ width: '30%', marginRight: 12 }} />
+                                            <img alt="" src={item.coverimage} style={{ width: '30%', marginRight: 12 }} />
                                             <div style={{ flex: 1 }}>
                                                 <div style={{ fontSize: 18, height: 40, width: '100%', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{item.productname}</div>
                                                 {/* <div style={{ fontSize: 12, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{item.cardtype ? "需要心意卡" : "無需心意卡"}</div> */}

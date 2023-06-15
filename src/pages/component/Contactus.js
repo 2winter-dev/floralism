@@ -28,7 +28,7 @@ export default function Contactus(props) {
     return (<div className={style.contact_total} style={{ display: "flex", flex: 1, backgroundColor: 'black', alignItems: 'center',...props.topStyle }}>
         <div style={{ flex: 1, padding: '5%', alignItems: 'center' }} className={style.contactus_border}>
             <div className={style.contact_img} style={{}}>
-                <img src="/訂製服務.png" width={'100%'} />
+                <img alt="" src="/訂製服務.png" width={'100%'} />
             </div>
             <div className={style.max_screen} style={{ flex: 1, flexDirection: 'column', padding: 16, alignItems: 'flex-start' }}>
                 <div style={{ color: 'white', fontSize: 16, letterSpacing: 2, width: '100%', textAlign: 'left' }}>接收最新信息和優惠</div>
@@ -63,7 +63,7 @@ export default function Contactus(props) {
         <div className={style.contact_min_border} style={{width:'100%'}}>
             <div style={{ flex: 1, padding: '5%', alignItems: 'center' }} className={style.contactus_min_border}>
                 <div className={style.contact_img} style={{}}>
-                    <img src="/訂製服務.png" width={'100%'} />
+                    <img alt="" src="/訂製服務.png" width={'100%'} />
                 </div>
             </div>
 

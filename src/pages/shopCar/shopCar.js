@@ -275,7 +275,7 @@ export default function ShopCar({ cateList, shopCar }) {
 
                                                     <div style={{ display: 'flex', alignItems: 'center', wordBreak: 'break-all' }}>
                                                         <div className={styles.product_img}>
-                                                            <img src={`${item.coverimage}`} style={{ width: '100%' }} />
+                                                            <img alt="" src={`${item.coverimage}`} style={{ width: '100%' }} />
                                                         </div>
                                                         <div style={{ flex: 1 }}>
                                                             <div className={styles.product_title} style={{ fontSize: 14, width: '100%', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', wordWrap: 'break-word' }}>
@@ -329,11 +329,11 @@ export default function ShopCar({ cateList, shopCar }) {
                             <div style={{ fontWeight: 700 }}>配送方式</div>
                             <div className={style.mediaArea_delivery} style={{ display: 'flex', justifyContent: 'space-between', marginTop: 12 }}>
                                 <div onClick={() => setType(1)} className={style.button_icon} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', backgroundColor: type === 1 ? "rgba(0,0,0,0.1)" : "white" }}>
-                                    <img src={'/本地送貨.png'} ></img>
+                                    <img alt="" src={'/本地送貨.png'} ></img>
                                     本地送貨
                                 </div>
                                 <div onClick={() => setType(2)} className={style.button_icon} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', backgroundColor: type === 2 ? "rgba(0,0,0,0.1)" : "white" }}>
-                                    <img src={'/樵店自取.png'} ></img>
+                                    <img alt="" src={'/樵店自取.png'} ></img>
                                     門店自取
                                 </div>
                             </div>

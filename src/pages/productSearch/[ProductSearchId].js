@@ -112,9 +112,9 @@ export default function ProductSearch({ tiny_top_banner, meta, cateList, data, t
     </Head>
     <DynamicComponent cateList={cateList} setLogin={setLogin} />
     <div style={{ width: '100%', position: 'relative' }}>
-      <img src={flag ? tiny_top_banner.coverimage : top_banner.coverimage} style={{ width: '100%' }} />
+      <img alt="" src={flag ? tiny_top_banner.coverimage : top_banner.coverimage} style={{ width: '100%' }} />
       <div className={style.banner_search} style={{ position: 'absolute' }}>
-        <img src={flag ? tiny_top_banner.descriptionimage : top_banner.descriptionimage} className={style.banner_desc}
+        <img alt="" src={flag ? tiny_top_banner.descriptionimage : top_banner.descriptionimage} className={style.banner_desc}
         />
         <div className={`${styles.search_area}`} style={{ marginBottom: 12 }}>
           <span className={`${styles.serach_icon} iconfont`} style={{ marginLeft: 8 }}>&#xe82e;</span>

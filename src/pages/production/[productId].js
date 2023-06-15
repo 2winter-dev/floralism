@@ -113,16 +113,16 @@ export default function ProductDetail({ cateList, product }) {
                 </div>
                 <div className={style.main_detail} style={{ width: '100%', display: "flex", marginTop: 24, marginBottom: 24 }}>
                     <div className={style.detail_left} style={{}}>
-                        <img className={style.img_show} src={Image} style={{ width: '100%', borderRadius: 20 }} />
+                        <img alt="" className={style.img_show} src={Image} style={{ width: '100%', borderRadius: 20 }} />
                         <div style={{ marginTop: 16, position: 'relative' }}>
                             <div className={style.img_picker_contain} style={{ width: '100%', position: 'relative', overflow: 'hidden' }}>
                                 <div className={style.img_picker}>
                                     <div ref={contain} style={{ width: '100%', position: 'relative', display: 'flex', justifyContent: 'center' }}>
                                         <div style={{ width: '90%', display: 'flex', alignItems: 'center' }}>
-                                            <img onClick={() => setImage(product?.flowerDetail[index].flowerimage)} key={index.toString()} src={product?.flowerDetail[index].flowerimage} style={{ width: '17%', marginRight: '3%', borderRadius: 5 }}></img>
+                                            <img alt="" onClick={() => setImage(product?.flowerDetail[index].flowerimage)} key={index.toString()} src={product?.flowerDetail[index].flowerimage} style={{ width: '17%', marginRight: '3%', borderRadius: 5 }}></img>
                                             {
                                                 product.flowerDetail[index].flowerimages.map((item, index) => {
-                                                    return <img onClick={() => setImage(item)} key={index.toString()} src={item} style={{ width: '17%', marginRight: '3%', borderRadius: 5 }}></img>
+                                                    return <img alt="" onClick={() => setImage(item)} key={index.toString()} src={item} style={{ width: '17%', marginRight: '3%', borderRadius: 5 }}></img>
                                                 })
                                             }
                                         </div>
@@ -200,10 +200,10 @@ export default function ProductDetail({ cateList, product }) {
                                     <option value={3}>不需要心意卡</option>
                                 </select>
                                 {cardtype === "1" && <textarea type={'text'} style={{ resize: 'none', paddingTop: 4, paddingBottom: 4, borderRadius: 4, marginTop: 12, width: '100%', paddingLeft: 10, paddingRight: 10 }} value={cardcontent} onInput={(e) => setCardContent(e.target.value)} placeholder="请输入心意卡内容" />}
-                                {cardtype === "0" && <img src='/心意卡.png' style={{ width: '100%', height: '100%', marginTop: 12 }} />}
+                                {cardtype === "0" && <img alt="" src='/心意卡.png' style={{ width: '100%', height: '100%', marginTop: 12 }} />}
                             </div>
                             {/* <div style={{ flex: 1, borderWidth: 2, borderColor: 'black', borderRadius: 8 }}>
-                                {cardtype === "1" && <img src='/心意卡.png' style={{ width: '100%',height:'100%' }} />}
+                                {cardtype === "1" && <img alt="" src='/心意卡.png' style={{ width: '100%',height:'100%' }} />}
                             </div> */}
 
                         </div>
