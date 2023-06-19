@@ -20,9 +20,9 @@ import GoodsItem from "../component/GoodsItem";
 import toast, { Toaster } from "react-hot-toast";
 import Image from "next/image";
 export default function Category({ categoryId,allcate,meta, cateList, data, top_banner, middle_banner,tiny_top_banner,tiny_middle_banner }) {
-    // ////////////console.log("----");
-    //////////console.log(data);
-    // //console.log(tiny_top_banner,tiny_middle_banner);
+    // //////////////console.log("----");
+    ////////////console.log(data);
+    // ////console.log(tiny_top_banner,tiny_middle_banner);
     const router = useRouter();
     const [login, setLogin] = useState(false);
     const [bannerSize,setBannerSize]=useState(false);
@@ -46,12 +46,12 @@ export default function Category({ categoryId,allcate,meta, cateList, data, top_
     useEffect(() => {
         window.addEventListener("resize", resizeUpdate);
         if (window.innerWidth <= 675) {
-            //////////////console.log("====", e.target.innerWidth);
+            ////////////////console.log("====", e.target.innerWidth);
             setFlag(0);
         } else if (window.innerWidth <= 1100) {
             setFlag(1)
         } else {
-            //////////////console.log("-----", e.target.innerWidth);
+            ////////////////console.log("-----", e.target.innerWidth);
             setFlag(2);
         }
         setBannerSize(window.innerWidth<=800?true:false);
@@ -60,16 +60,16 @@ export default function Category({ categoryId,allcate,meta, cateList, data, top_
         }
     }, [])
     useEffect(() => {
-        //////////////console.log("flag改變", flag);
+        ////////////////console.log("flag改變", flag);
         setCategory(spliceArr(allcate, !flag ? 4 : flag === 1 ? 6 : flag === 2 && 8, 1));
-        //////////////console.log(spliceArr(GoodsPage,  !flag ? 4 :flag===1? 6:flag===2&&8))
+        ////////////////console.log(spliceArr(GoodsPage,  !flag ? 4 :flag===1? 6:flag===2&&8))
         setGoodsList(spliceArr(data.data, !flag ? 4 : flag === 1 ? 6 : flag === 2 && 8));
         setGoodsPage(1);
         setCategoryPage(1);
     }, [flag])
 
     // const checkname = () => {
-    //     //    ////////////console.log(goodsList);
+    //     //    //////////////console.log(goodsList);
     //     let res = allcate.filter((item) => {
     //         if (item.id === data.data[0].flower_category_id) {
     //             return item;
@@ -80,17 +80,16 @@ export default function Category({ categoryId,allcate,meta, cateList, data, top_
     // }
 
     useEffect(() => {
-        // ////////////console.log(goodsList);
+        // //////////////console.log(goodsList);
     }, [goodsList])
-    ////////console.log("======");
-    ////////console.log(data);
+    //////////console.log("======");
+    //////////console.log(data);
     return (<div>
         <Head>
-            <meta title={`${meta.title}`}  />
-            <title>{"Floralism 商品分類-"+meta.title}</title>
-            <meta title={'title'} content={`${meta.title}`} />
-            {/* <meta title={'descirption'} content={`${product.flowerList[index].metadescription}`} /> */}
-            <meta title={'keywords'} content={`${meta.keyword}`} />
+            {/* <meta title={`${meta.title}`}  /> */}
+            <title>{`${meta.title!==""?meta.title:(data.category_name+" | 「Floralism」香港花店")}`}</title>
+            <meta name={'descirption'} content={`${meta.metadescription}`} />
+            <meta name={'keywords'} content={`${meta.title!==""?meta.title:data.category_name}`} />
         </Head>
         <DynamicComponent cateList={cateList} setLogin={setLogin} />
         <div style={{ width: '100%', position: 'relative', backgroundImage: bannerSize?`url(${tiny_top_banner.coverimage})`:`url(${top_banner.coverimage})`, marginBottom: 0 }} className={styles.banner} >
@@ -98,7 +97,7 @@ export default function Category({ categoryId,allcate,meta, cateList, data, top_
             <div className={(categoryId==="9"||categoryId==="10"||categoryId==="11")?styles.spec_banner:styles.top_banner_area} style={{ display: "flex", flexDirection: 'column', alignItems: 'center' }}>
                 <img alt="" src={bannerSize?tiny_top_banner.descriptionimage:top_banner.descriptionimage} width={'100%'} />
                 <button onClick={() => {
-                    // //console.log(data.data.length);
+                    console.log(data);
                     data.data.length ?
                         router.push(`/productSearch/${data.data[0].flower_category_id}`)
                         : router.push('/')
@@ -139,7 +138,7 @@ export default function Category({ categoryId,allcate,meta, cateList, data, top_
                 type={'category'}
                 perPage={!flag ? 4 : flag === 1 ? 6 : flag === 2 && 8}
                 setPage={setCategoryPage}
-            // click={() => //////////////console.log("1")}
+            // click={() => ////////////////console.log("1")}
             /> */}
                 <div>
                     <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -191,13 +190,14 @@ export async function getStaticPaths() {
         }
     }
     );
-    const data = await response.json()
+    const data = await response.json();
+    //console.log(data);
     let res = [];
     data.data.map((item, index) => {
         res.push({ params: { categoryId: item.id.toString() } });
 
     })
-    // ////////////console.log(res);
+    // //////////////console.log(res);
     // const data=await response.json()
     // TODO get product id to be array
     return {
@@ -208,7 +208,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps(context) {
     const { params } = context;
-    // ////////////console.log(params);
+    //console.log(params);
 
     const response = await fetch(
         `${constant.api_url}/api/flowers/index?keyword=&flower_category_id=${params.categoryId}`, {
@@ -258,42 +258,45 @@ export async function getStaticProps(context) {
     const tt_data = await tt_response.text()
     const data = await response.text();
     const banner_list = await banner.json();
-    //////console.log("------------");
-    //////console.log(JSON.parse(data).data);
-    ////////console.log("--------");
-    ////console.log(banner_list.data);
-    // //console.log(banner_list.data.top_banner.web);
-    // //console.log(banner_list.data.middle_banner);
-    ////////console.log(params.categoryId)
+    //console.log("------------");
+    ////////console.log(JSON.parse(data).data);
+    //////////console.log("--------");
+    //console.log(banner_list.data.top_banner);
+    // ////console.log(banner_list.data.top_banner.web);
+    // ////console.log(banner_list.data.middle_banner);
+    //////////console.log(params.categoryId)
     
     // let list=JSON.parse(tt_data);
-    // //console.log(list);
-    //console.log(allcate.data);
+    // ////console.log(list);
+    ////console.log(allcate.data);
     let res=allcate.data.filter((item,index)=>{
-        //console.log("=========");
-        //console.log(params.categoryId);
-        //console.log(item.id);
+        ////console.log("=========");
+        ////console.log(params.categoryId);
+        ////console.log(item.id);
         if(item.id.toString()===params.categoryId){
-            //console.log("找到了");
+            ////console.log("找到了");
             return item;
         }
     })
     //console.log(res[0]);
     let meta={
-        keyword:res[0]?.keyword1+','+res[0]?.keyword2+','+res[0]?.keyword3??"",
+        keyword:res[0].keywords,
         title:res[0].metatitle??"",
+        metadescription:res[0].metadescription??"",
     }
-
+    //console.log(meta);
 
     let top_banner = banner_list.data.top_banner.web.filter((item) => {
+        //console.log(item.flower_category_ids,params.categoryId)
         if (item.flower_category_ids.includes(parseInt(params.categoryId))) {
-            ////////console.log("找到了");
+            //////////console.log("找到了");
             return item;
         }
     })
     let tiny_top_banner = banner_list.data.top_banner.mobile.filter((item) => {
+        
         if (item.flower_category_ids.includes(parseInt(params.categoryId))) {
-            ////////console.log("找到了");
+            //////////console.log("找到了");
             return item;
         }
     })
@@ -301,21 +304,21 @@ export async function getStaticProps(context) {
         if (item.flower_category_ids.includes(parseInt(params.categoryId))) {
             return item;
         }
-        // ////////console.log(item.flower_category_ids.includes(params.categoryId))
+        // //////////console.log(item.flower_category_ids.includes(params.categoryId))
     })
     let tiny_middle_banner = banner_list.data.middle_banner.mobile.filter((item) => {
-        //console.log(item.flower_category_ids);
+        ////console.log(item.flower_category_ids);
         if (item.flower_category_ids.includes(parseInt(params.categoryId))) {
-            ////////console.log("找到了");
+            //////////console.log("找到了");
             return item;
         }
     })
-    console.log("======================");
-    console.log(top_banner,middle_banner);
-    // console.log(tiny_top_banner, tiny_middle_banner);
-    // //console.log(JSON.parse(data).data);
-    // //console.log()
-    //console.log(meta);
+    //console.log("======================");
+    //console.log(top_banner,middle_banner);
+    // //console.log(tiny_top_banner, tiny_middle_banner);
+    // ////console.log(JSON.parse(data).data);
+    // ////console.log()
+    ////console.log(meta);
     return {
         props: {
             categoryId:params.categoryId,

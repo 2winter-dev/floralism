@@ -28,7 +28,7 @@ export default function ForgetPassword(props) {
     })
 
     const getEmailCode = () => {
-        //console.log("123");
+        ////console.log("123");
         if (!email.trim()) {
             toast.error("請填寫郵箱以獲取驗證碼")
             return;
@@ -45,7 +45,7 @@ export default function ForgetPassword(props) {
                 }
             },
             onError: (res) => {
-                ////////////////console.log(res);
+                //////////////////console.log(res);
                 toast.error("發送驗證碼失敗");
             }
         })

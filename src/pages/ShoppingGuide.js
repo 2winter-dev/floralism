@@ -214,7 +214,7 @@ export default function ShoppingGuide(props) {
 
 export async function getStaticProps(context) {
     const { params } = context;
-    // ////////////console.log(params);
+    // //////////////console.log(params);
 
     const tt_response = await fetch(
         `${constant.api_url}/api/flowercategory/index`, {

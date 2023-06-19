@@ -5,10 +5,10 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 
 export default function Header(props) {
-  const router = useRouter();
-
-  const [navStatus, setNavStatus] = useState(false);
-  const [index, setIndex] = useState();
+    const router = useRouter();
+    console.log(props.list);
+    const [navStatus, setNavStatus] = useState(false);
+    const [index, setIndex] = useState();
 
     return (<div className={`${header.header_background}`}>
         <div className={`${header.header_layout}`}>
@@ -20,9 +20,9 @@ export default function Header(props) {
             <div className={`${header.header_center}`}>
                 {
                     props?.list?.length && props.list.map((item, index) => {
-                        if(index>2) return null; 
+                        if (!item?.get_child.length) return null;
                         return (<div key={item.id} className={`${header.header_center_label}`}>
-                            <div onClick={()=>router.push(!!item?.get_child.length&&`/category/${item.get_child[0].id}`)} className={`${header.header_center_parent}`}>{item.categoryname}
+                            <div onClick={() => router.push(!!item?.get_child.length && `/category/${item.get_child[0].id}`)} className={`${header.header_center_parent}`}>{item.categoryname}
                                 {
                                     !!item.get_child?.length && <span className={`iconfont ${header.dropdown_btn}`} style={{ fontSize: 10 }}>&#xe645;</span>
                                 }
@@ -31,10 +31,10 @@ export default function Header(props) {
                                 !!item.get_child?.length && <div className={`${header.header_center_dropdown}`}>
                                     {
                                         item.get_child.map((it, ii) => {
-                                            return (<div key={index.toString() + ii.toString()}>
-                                                <a href={`/category/${it.id}`} >{it.categoryname}</a>
-                                                  {/* <Link href={`/category/${it.id}`}>{it.categoryname}</Link> */}
-                                                </div>)
+                                            return (
+                                                <a key={index.toString() + ii.toString()} href={`/category/${it.id}`} >
+                                                    <div >{it.categoryname}</div>
+                                                </a>)
                                         })
                                     }
                                 </div>}
@@ -53,7 +53,7 @@ export default function Header(props) {
                 </div>
             </div>
             <div className={`${header.header_right}`} style={{ marginLeft: 10 }}>
-                <div onClick={() => { Cookies.get("token") ? router.push({pathname:`/User`,query:{page:"message"}}) : props.login() }} style={{ display: 'flex', alignItems: 'center', cursor: "pointer" }}>
+                <div onClick={() => { Cookies.get("token") ? router.push({ pathname: `/User`, query: { page: "message" } }) : props.login() }} style={{ display: 'flex', alignItems: 'center', cursor: "pointer" }}>
                     <span style={{}} className={`iconfont ${header.mine_icon}`}>&#xe70e;</span>
                     {
                         Cookies.get("token") ? " 歡迎" : " 登入"
@@ -69,23 +69,22 @@ export default function Header(props) {
             <div className={`${header.dropdown}`} style={{ display: navStatus ? 'block' : "none" }}>
                 {
                     props?.list?.length && props.list.map((item, i) => {
-                        if(!item?.get_child?.length) return;
+                        if (!item?.get_child?.length) return;
                         return (
-                            <div onClick={()=>{
-                                index===i?setIndex():setIndex(i)
+                            <div onClick={() => {
+                                index === i ? setIndex() : setIndex(i)
                             }} key={i} className={`${header.drop_item}`}>
                                 <div className={`${header.drop_label}`}>{item.categoryname}</div>
-                                <div className={index===i?`${header.show_list}`:`${header.child_list}`}>
+                                <div className={index === i ? `${header.show_list}` : `${header.child_list}`}>
                                     {item.get_child &&
                                         item.get_child.map((it, ii) => {
-                                            if(ii>3){
+                                            if (ii > 3) {
                                                 ////console.log("123");
                                                 return;
                                             }
-                                            return (<div key={index + ii.toString()} className={`${header.header_center_dropdown}`}>
-                                                {/* <Link href={`/category/${it.id}`} >{it.categoryname}</Link> */}
-                                                <a href={`/category/${it.id}`} >{it.categoryname}</a>
-                                            </div>)
+                                            return (<a key={index + ii.toString()} href={`/category/${it.id}`} ><div  className={`${header.header_center_dropdown}`}>
+                                                {it.categoryname}
+                                            </div></a>)
                                         })
 
                                     }

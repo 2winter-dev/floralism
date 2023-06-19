@@ -8,7 +8,7 @@ import Cookies from "js-cookie";
 import toast, { Toaster } from "react-hot-toast";
 
 export default function AddressPannel(props) {
-    // //////////////console.log(props);
+    // ////////////////console.log(props);
     const [username,setUsername]=useState("");
     const [address,setAddress]=useState("");
     const [mobile,setMobile]=useState("");
@@ -33,7 +33,7 @@ export default function AddressPannel(props) {
         if(!props.type){
             addAddress.mutate({username:username.trim(),address:address.trim(),mobile:mobile.trim(),cookie:Cookies.get('token')},{
                 onSuccess:async(res)=>{
-                    // //////////////console.log(res);
+                    // ////////////////console.log(res);
                     // let _res=await res.json();
                     if(res.code===401){
                         Cookies.remove("token");
@@ -46,7 +46,7 @@ export default function AddressPannel(props) {
                     }
                 },
                 onError:(res)=>{
-                    // //////////////console.log("error");
+                    // ////////////////console.log("error");
                     if(res instanceof Error){
                         toast.error(res.msg);
                     }else toast.error(JSON.stringify(res.msg))
@@ -68,7 +68,7 @@ export default function AddressPannel(props) {
                     }
                 },
                 onError:(res)=>{
-                    // //////////////console.log(res);
+                    // ////////////////console.log(res);
                     if(res instanceof Error){
                         toast.error(res.msg);
                     }else toast.error(JSON.stringify(res.msg))

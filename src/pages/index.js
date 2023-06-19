@@ -30,9 +30,9 @@ import DynamicButton from './component/DynamicButton';
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home({ allcate, cateList, GoodsPage, carousel }) {
-  // //////////////console.log("====");
+  // ////////////////console.log("====");
   const router = useRouter();
-  // //////////console.log(GoodsPage);
+  // ////////////console.log(GoodsPage);
   const [bannerSize,setBannerSize]=useState(false);
   const [flag, setFlag] = useState(1);
   const [category, setCategory] = useState([]);
@@ -46,12 +46,12 @@ export default function Home({ allcate, cateList, GoodsPage, carousel }) {
   
   const resizeUpdate = (e) => {
     if (e.target.innerWidth <= 675) {
-      ////////////////console.log("====", e.target.innerWidth);
+      //////////////////console.log("====", e.target.innerWidth);
       setFlag(0);
     } else if (e.target.innerWidth <= 1100) {
       setFlag(1)
     } else {
-      ////////////////console.log("-----", e.target.innerWidth);
+      //////////////////console.log("-----", e.target.innerWidth);
       setFlag(2);
     }
     setBannerSize(window.innerWidth<=750?true:false);
@@ -59,12 +59,12 @@ export default function Home({ allcate, cateList, GoodsPage, carousel }) {
   useEffect(() => {
     window.addEventListener("resize", resizeUpdate);
     if (window.innerWidth <= 675) {
-      ////////////////console.log("====", e.target.innerWidth);
+      //////////////////console.log("====", e.target.innerWidth);
       setFlag(0);
     } else if (window.innerWidth <= 1100) {
       setFlag(1)
     } else {
-      ////////////////console.log("-----", e.target.innerWidth);
+      //////////////////console.log("-----", e.target.innerWidth);
       setFlag(2);
     }
     setBannerSize(window.innerWidth<=750?true:false);
@@ -85,23 +85,22 @@ export default function Home({ allcate, cateList, GoodsPage, carousel }) {
 
   let MySwiper;
   useEffect(() => {
-    //////////////console.log("flag改變", flag);
+    ////////////////console.log("flag改變", flag);
     setCategory(spliceArr(allcate, !flag ? 4 : flag === 1 ? 6 : flag === 2 && 8, 'cat'));
-    ////////////////console.log(spliceArr(GoodsPage,  !flag ? 4 :flag===1? 6:flag===2&&8))
+    //////////////////console.log(spliceArr(GoodsPage,  !flag ? 4 :flag===1? 6:flag===2&&8))
     setGoodsList(spliceArr(GoodsPage.data, !flag ? 4 : flag === 1 ? 6 : flag === 2 && 8));
     setGoodsPage(1);
     setCategoryPage(1);
   }, [flag])
-  // ////////////////console.log("=======");
-  // ////////////////console.log(category[categoryPage]);
+  // //////////////////console.log("=======");
+  // //////////////////console.log(category[categoryPage]);
   return (
     <div style={{ position: 'relative' }}>
       <Head>
         {/* <meta charSet='utf-8' /> */}
-        <title>【買花】 | 送花 | 「Floralism」香港花店</title>
-        <meta name='title' content={'【買花】 | 送花 | 「Floralism」香港花店'} />
+        <title>{'【買花】 | 送花 | 「Floralism」香港花店'}</title>
         <meta name='description' content={'「Floralism」專業香港花店提供買花及送花服務，如鮮花、盆栽、花籃等，而且還提供網上訂購、送貨上門等一系列買花服務，讓人們能夠方便快捷地為他人表達心意。'} />
-        <meta name='keywords' content={'買花,送花,香港花店'} />
+        <meta name='keywords' content={'【買花】 | 送花 | 「Floralism」香港花店'} />
       </Head>
 
 
@@ -171,7 +170,7 @@ export default function Home({ allcate, cateList, GoodsPage, carousel }) {
                 <Carousel showThumbs={false} infiniteLoop showIndicators={false} preventMovementUntilSwipeScrollTolerance={true} swipeScrollTolerance={50} showStatus={false}>
                   {
                     carousel_slice().map((item, index) => {
-                      //////////////console.log(carousel_slice().length);
+                      ////////////////console.log(carousel_slice().length);
                       return (<div key={item.id + index.toString()} style={{ display: 'flex', flexWrap: 'wrap', width: '95%', margin: '0 2.5%' }}>
                         {
                           item.map((it, ii) => {
@@ -223,7 +222,7 @@ export default function Home({ allcate, cateList, GoodsPage, carousel }) {
 
 
 export async function getServerSideProps({ local }) {
-  //  ////////////////console.log(constant.api_url);
+  //  //////////////////console.log(constant.api_url);
   const response = await fetch(
     `${constant.api_url}/api/flowercategory/index`, {
     mode: 'cors',
@@ -248,8 +247,8 @@ export async function getServerSideProps({ local }) {
   )
   let allcate = await allcate_response.json();
   let data = await response.text();
-  // //////////////console.log("====================");
-  // //////////////console.log(allcate);
+  // ////////////////console.log("====================");
+  // ////////////////console.log(allcate);
   const swiper_response = await fetch(
     `${constant.api_url}/api/flowers/getTopicFlower?flower_category_id=${JSON.parse(data).data[0].id}`, {
     mode: 'cors',
@@ -261,7 +260,7 @@ export async function getServerSideProps({ local }) {
     }
   }
   )
-  //////////console.log(allcate);
+  ////////////console.log(allcate);
   const goods_response = await fetch(
     `${constant.api_url}/api/flowers/index?flower_category_id=${2}`, {
     mode: 'cors',
@@ -274,14 +273,14 @@ export async function getServerSideProps({ local }) {
   }
   )
 
-  ////////////////console.log(response);
+  //////////////////console.log(response);
 
   let swiper_data = await swiper_response.text();
   let goods_data = await goods_response.text();
-  //////////////console.log("====================");
+  ////////////////console.log("====================");
 
-  //////////////console.log(JSON.parse(goods_data).data);
-  // //////////////console.log(data);
+  ////////////////console.log(JSON.parse(goods_data).data);
+  // ////////////////console.log(data);
 
 
   return {

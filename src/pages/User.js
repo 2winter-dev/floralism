@@ -61,25 +61,25 @@ export default function User(props) {
 
 
     const delAddress = (id) => {
-        //console.log(id);
+        ////console.log(id);
         let m_list = addList;
-        //console.log(m_list);
-        //console.log(m_list.findIndex((it, index) => id === it.id));
+        ////console.log(m_list);
+        ////console.log(m_list.findIndex((it, index) => id === it.id));
         let res = m_list.splice(m_list.findIndex((it, index) => id === it.id), 1);
-        //console.log(m_list);
-        //console.log(res);
+        ////console.log(m_list);
+        ////console.log(res);
         setAddList([...m_list]);
         toast.success("刪除成功");
-        //////////console.log(m_list);
+        ////////////console.log(m_list);
     }
 
     const changeDefault = (id) => {
         let m_list = addList;
-        ////////console.log(m_list);
+        //////////console.log(m_list);
         let res = m_list.map((item) => {
-            ////////console.log(item);
-            ////////console.log(id);
-            ////////console.log(typeof item.id, typeof id);
+            //////////console.log(item);
+            //////////console.log(id);
+            //////////console.log(typeof item.id, typeof id);
             if (item.id === id) {
                 item.is_default = true;
             } else {
@@ -108,8 +108,8 @@ export default function User(props) {
         })
     }
     const setPosition = (id) => {
-        // //////////////console.log(id);
-        ////////console.log("123");
+        // ////////////////console.log(id);
+        //////////console.log("123");
         setAdd(id);
         setDefault.mutate({ id, cookie: Cookies.get('token') }, {
             onSuccess: async (res) => {
@@ -132,11 +132,11 @@ export default function User(props) {
     }
 
     const updateUserMessage = () => {
-        ////////console.log(username, email, mobile);
+        //////////console.log(username, email, mobile);
         updateUserMess.mutate({ username: username.trim(), email: email.trim(), mobile: mobile.trim(), cookie: Cookies.get('token') }, {
             onSuccess: async (res) => {
                 // let _res = await res.json();
-                //console.log(res);
+                ////console.log(res);
                 if (res.code === 1) {
                     toast.success(res.msg)
 
@@ -146,13 +146,13 @@ export default function User(props) {
                     // setMobile(_res.data?.mobile);
                     // setEmail(_res.data?.email);
                 } else {
-                    //console.log(res.msg);
+                    ////console.log(res.msg);
                     toast.error(res.msg);
                 }
 
             },
             onError: (res) => {
-                //console.log(res.msg)
+                ////console.log(res.msg)
                 if (res instanceof Error)
                     toast.error(res.message);
                 else toast.error(JSON.stringify(res.msg));
@@ -166,19 +166,19 @@ export default function User(props) {
             onSuccess: async (res) => {
                 // let _res = await res.json();
                 if (res.code === 1) {
-                    //////////console.log(_res.data);
+                    ////////////console.log(_res.data);
 
                     setOrderDetail(res.data);
                     setType("orderDetail");
                 }
-                //////////console.log(_res);
-                // //////////console.log(res);
+                ////////////console.log(_res);
+                // ////////////console.log(res);
             },
         })
     }
 
     useEffect(() => {
-        //////////console.log(orderDetail);
+        ////////////console.log(orderDetail);
     }, [orderDetail])
     if(props.code===401){
         toast.error("请重新登陆");
@@ -305,7 +305,7 @@ export default function User(props) {
                                                             <span onClick={() => setPosition(item.id)} style={{ marginRight: 12 }} className={`iconfont`}>&#xe799;</span>
                                                     }
                                                     <span onClick={(e) => {
-                                                        // //////////////console.log("刪除");
+                                                        // ////////////////console.log("刪除");
                                                         toDelte(item?.id);
                                                         e.stopPropagation();
                                                     }} style={{ marginRight: 12, fontSize: 14 }} className={`iconfont`} >&#x34b2;</span>
@@ -549,7 +549,7 @@ export async function getServerSideProps(context) {
         }
         )
         if(add_response.status===401){
-           //console.log("401");
+           ////console.log("401");
            code=401;
         }
         const order_response = await fetch(`${constant.api_url}/api/order/index`, {
@@ -574,7 +574,7 @@ export async function getServerSideProps(context) {
     }
 
 
-    //    //////////console.log(sc);
+    //    ////////////console.log(sc);
     return {
         props: {
             cateList: JSON.parse(data).data,
