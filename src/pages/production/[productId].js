@@ -95,11 +95,9 @@ export default function ProductDetail({ cateList, product }) {
         return (<Link style={{ width: '100%', justifyContent: 'center' }} href="/">商品不存在,請點擊返回</Link>)
     }
 
-
     return (<div style={{ position: 'relative' }}>
         <Head>
-            <title>Floralism 商品詳情-{product.flowerList[index].metatitle}</title>
-            <meta name={'title'} content={`${product.flowerList[index].metatitle}`} />
+            <title>{product.flowerList[index].metatitle}</title>
             <meta name={'descirption'} content={`${product.flowerList[index].metadescription}`} />
             <meta name={'keywords'} content={`${product.flowerList[index].metatitle}`} />
         </Head>
@@ -107,7 +105,7 @@ export default function ProductDetail({ cateList, product }) {
         <main className={style.total_container} style={{}}>
             <div>
                 <div style={{ marginTop: 32 }}>
-                    <Link href={'/'} style={{ cursor: 'pointer' }}>首頁</Link><span className={style.separator} style={{ cursor: 'pointer' }}>/</span><Link href={`/category/${product.flowerCategory.id}`}>{product.flowerCategory.categoryname}</Link>
+                    <Link href={'/'} style={{ cursor: 'pointer' }}>首頁</Link>{product?.flowerCategory?.id&&<span className={style.separator} style={{ cursor: 'pointer' }}>/</span>}<Link href={`/category/${product?.flowerCategory?.id}`}>{product.flowerCategory?.categoryname}</Link>
                     {/* <span className={style.separator}>/</span> */}
                     {/* <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', display: 'flex', flexWrap: 'nowrap' }}>{product.flowerDetail[index].flowername}</span> */}
                 </div>

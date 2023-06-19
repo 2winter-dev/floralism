@@ -6,7 +6,7 @@ import { useState } from "react";
 
 export default function Header(props) {
     const router = useRouter();
-    console.log(props.list);
+    // console.log(props.list);
     const [navStatus, setNavStatus] = useState(false);
     const [index, setIndex] = useState();
 
