@@ -57,7 +57,7 @@ export default function Footer() {
                 <div>九龍觀塘鴻圖道41號</div>
                 <div style={{ marginTop: 4 }}>華鴻工貿中心6樓01A室</div>
                 <div>T <a href="tel:+85265818053">+852 65818053</a></div>
-                <div>F <a href="">+852 65818053</a></div>
+                <div>F <span style={{fontSize: 14,letterSpacing:'0.05rem'}} href="">+852 65818053</span></div>
                 <div>E <a href="mailto:info@floralismhk.com">info@floralismhk.com</a></div>
                 <div>對我們的產品及服務有興趣？</div>
                 <div style={{ marginTop: 4 }}>請聯係我們</div>

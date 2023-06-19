@@ -109,7 +109,7 @@ export default function Home({ allcate, cateList, GoodsPage, carousel }) {
       <div style={{ width: '100%', position: 'relative',backgroundImage:`url(${bannerSize?"/homepage/tiny-top-banner.png":"/homepage/top-banner.png"})` }} className={styles.banner}>
         {/* <Image priority src="/homepage/top-banner.png" width={1920} height={700} style={{width:'100%'}}/> */}
         <div style={{}} className={styles.top_banner_area}>
-          <img src={"/homepage/banner-desc.png"} width={'100%'} />
+          <img alt="banner description" src={"/homepage/banner-desc.png"} width={'100%'} />
           <button onClick={() => router.push('/productSearch/2')} style={{ border: 'none', display: 'block', cursor: 'pointer' }} className={styles.banner_buttom} >點擊選購</button>
         </div>
       </div>
