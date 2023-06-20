@@ -31,6 +31,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 export default function Home({ allcate, cateList, GoodsPage, carousel }) {
   // //////////////////console.log("====");
+  // console.log(GoodsPage);
   const router = useRouter();
   // //////////////console.log(GoodsPage);
   const [bannerSize,setBannerSize]=useState(false);
@@ -144,7 +145,7 @@ export default function Home({ allcate, cateList, GoodsPage, carousel }) {
         <div className={styles.goods_view}>
           {/* <GoodsScoll /> */}
           <GoodsScoll
-            title={allcate[1].categoryname}
+            title={GoodsPage.category_name}
             list={goodsList}
             page={goodsPage}
             id={allcate[1].id}
@@ -284,7 +285,7 @@ export async function getServerSideProps({ local }) {
   //////////////////console.log(JSON.parse(goods_data).data);
   // //////////////////console.log(data);
 
-
+  console.log(JSON.parse(goods_data).data)
   return {
     props: {
       allcate: allcate.data,
