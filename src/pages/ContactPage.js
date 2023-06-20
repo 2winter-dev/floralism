@@ -18,7 +18,7 @@ import DynamicButton from "./component/DynamicButton";
 import GoodsItem from "./component/GoodsItem";
 import Head from "next/head";
 export default function ContactPage({ cateList, allcate }) {
-    //////////////////console.log(cateList)
+    ////////////////////console.log(cateList)
     // const [flag, setFlag] = useState(1);
     const [login, setLogin] = useState(false);
     const [register, setRegister] = useState(false);
@@ -27,29 +27,29 @@ export default function ContactPage({ cateList, allcate }) {
 
     const [flag, setFlag] = useState(1);
     const [category, setCategory] = useState([]);
-    // ////////////console.log(allcate);
+    // //////////////console.log(allcate);
     const [categoryPage, setCategoryPage] = useState(1);
 
     const resizeUpdate = (e) => {
         if (e.target.innerWidth <= 675) {
-            //////////////////console.log("====", e.target.innerWidth);
+            ////////////////////console.log("====", e.target.innerWidth);
             setFlag(0);
         } else if (e.target.innerWidth <= 1100) {
             setFlag(1)
         } else {
-            //////////////////console.log("-----", e.target.innerWidth);
+            ////////////////////console.log("-----", e.target.innerWidth);
             setFlag(2);
         }
     }
     useEffect(() => {
         window.addEventListener("resize", resizeUpdate);
         if (window.innerWidth <= 675) {
-            //////////////////console.log("====", e.target.innerWidth);
+            ////////////////////console.log("====", e.target.innerWidth);
             setFlag(0);
         } else if (window.innerWidth <= 1100) {
             setFlag(1)
         } else {
-            //////////////////console.log("-----", e.target.innerWidth);
+            ////////////////////console.log("-----", e.target.innerWidth);
             setFlag(2);
         }
         return () => {
@@ -60,9 +60,9 @@ export default function ContactPage({ cateList, allcate }) {
 
 
     useEffect(() => {
-        ////////////console.log("flag改變", flag);
+        //////////////console.log("flag改變", flag);
         setCategory(spliceArr(allcate, !flag ? 4 : flag === 1 ? 6 : flag === 2 && 8, 'cat'));
-        ////////////console.log(spliceArr(allcate, !flag ? 4 : flag === 1 ? 6 : flag === 2 && 8, 'cat'))
+        //////////////console.log(spliceArr(allcate, !flag ? 4 : flag === 1 ? 6 : flag === 2 && 8, 'cat'))
         setCategoryPage(1);
     }, [flag])
     useEffect(() => {
@@ -75,7 +75,8 @@ export default function ContactPage({ cateList, allcate }) {
 
     return (<div style={{ position: 'relative' }}>
         <Head>
-            <meta title={'聯係我們'}/>
+            <title>联络我们 | 「Floralism」联络我们</title>
+            <meta name="description" content="联络我们 | 「Floralism」联络我们" />
         </Head>
         <DynamicComponent cateList={cateList} setLogin={setLogin} />
         <BodyBanner
@@ -94,20 +95,20 @@ export default function ContactPage({ cateList, allcate }) {
                     <div className={`${style.contact_title}`} style={{ marginTop: '15%' }}>客戶熱綫</div>
                     <div className={style.contact_distance} style={{ display: 'flex', alignItems: 'center' }} >
                         <a href="tel:+85265818053" style={{ display: 'flex', alignItems: 'center' }}>
-                            <img alt="" src="/圖標-電話.png" />
+                            <img alt="電話" src="/圖標-電話.png" />
                             <div style={{ marginLeft: 16 }}>65818053</div>
                         </a>
 
                     </div>
                     <div className={style.contact_distance} style={{ display: 'flex', alignItems: 'center' }}>
                         <a href="mailto:info@floralismhk.com" style={{ display: 'flex', alignItems: 'center' }}>
-                            <img alt="" src="/圖標-郵件.png" />
+                            <img alt="郵箱" src="/圖標-郵件.png" />
                             <div style={{ marginLeft: 16 }}>info@floralismhk.com</div>
                         </a>
                     </div>
                 </div>
                 <div className={style.main_contain} style={{ display: "flex", alignItems: 'flex-end' }}>
-                    <img alt="" style={{ width: '100%' }} src="/contactus-background.png" />
+                    <img alt="聯係我們1" style={{ width: '100%' }} src="/contactus-background.png" />
 
                 </div>
             </div>
@@ -181,7 +182,7 @@ export async function getStaticProps(context) {
     }
     )
     let allcate = await allcate_response.json();
-    ////////////console.log(allcate);
+    //////////////console.log(allcate);
     return {
         props: {
             cateList: JSON.parse(data).data,

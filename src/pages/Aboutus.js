@@ -22,29 +22,29 @@ export default function AboutUs({ cateList, allcate }) {
 
     const [flag, setFlag] = useState(1);
     const [category, setCategory] = useState([]);
-    // ////////////console.log(allcate);
+    // //////////////console.log(allcate);
     const [categoryPage, setCategoryPage] = useState(1);
 
     const resizeUpdate = (e) => {
         if (e.target.innerWidth <= 675) {
-            //////////////////console.log("====", e.target.innerWidth);
+            ////////////////////console.log("====", e.target.innerWidth);
             setFlag(0);
         } else if (e.target.innerWidth <= 1100) {
             setFlag(1)
         } else {
-            //////////////////console.log("-----", e.target.innerWidth);
+            ////////////////////console.log("-----", e.target.innerWidth);
             setFlag(2);
         }
     }
     useEffect(() => {
         window.addEventListener("resize", resizeUpdate);
         if (window.innerWidth <= 675) {
-            //////////////////console.log("====", e.target.innerWidth);
+            ////////////////////console.log("====", e.target.innerWidth);
             setFlag(0);
         } else if (window.innerWidth <= 1100) {
             setFlag(1)
         } else {
-            //////////////////console.log("-----", e.target.innerWidth);
+            ////////////////////console.log("-----", e.target.innerWidth);
             setFlag(2);
         }
         return () => {
@@ -52,9 +52,9 @@ export default function AboutUs({ cateList, allcate }) {
         }
     }, [])
     useEffect(() => {
-        ////////////console.log("flag改變", flag);
+        //////////////console.log("flag改變", flag);
         setCategory(spliceArr(allcate, !flag ? 4 : flag === 1 ? 6 : flag === 2 && 8, 'cat'));
-        ////////////console.log(spliceArr(allcate, !flag ? 4 : flag === 1 ? 6 : flag === 2 && 8, 'cat'))
+        //////////////console.log(spliceArr(allcate, !flag ? 4 : flag === 1 ? 6 : flag === 2 && 8, 'cat'))
         setCategoryPage(1);
     }, [flag])
 
@@ -74,12 +74,12 @@ export default function AboutUs({ cateList, allcate }) {
         </Head>
         <DynamicComponent cateList={cateList} setLogin={setLogin} />
         <div style={{ width: '100%', position: 'relative' }}>
-            <img alt="" className={styles.banner_background} src={flag === 0 ? '/banner-s-背景.png' : '/banner-背景.png'} style={{ width: '100%', display: 'block' }} />
+            <img alt="關於我們頂部banner" className={styles.banner_background} src={flag === 0 ? '/banner-s-背景.png' : '/banner-背景.png'} style={{ width: '100%', display: 'block' }} />
 
             {
                 <div className={styles.description} >
                     <div className={styles.girls_contain} style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'center', flex: 1 }}>
-                        <img alt="" className={styles.girls} src={'女生.png'} style={{}} />
+                        <img alt="女生" className={styles.girls} src={'女生.png'} style={{}} />
                     </div>
                     <div className={styles.desc_contain} style={{ flex: 1, marginRight: '10%', marginTop: 30, position: 'relative', justifyContent: 'flex-end' }}>
                         {/* <span className="iconfont" style={{position:'absolute'}}>&#xe67b;</span>  */}
@@ -145,7 +145,7 @@ export default function AboutUs({ cateList, allcate }) {
 
 
 export async function getStaticProps({ local }) {
-    //  //////////////////console.log(constant.api_url);
+    //  ////////////////////console.log(constant.api_url);
     const allcate_response = await fetch(
         `${constant.api_url}/api/Flowercategory/allIndex`, {
         mode: 'cors',

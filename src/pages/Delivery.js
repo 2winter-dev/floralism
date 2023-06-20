@@ -18,7 +18,6 @@ export default function Delivery(props) {
     return (<div>
         <Head>
             <title>【花店送花服務】 | 送花服務香港 | Floralism</title>
-            <meta name='title' content={'【花店送花服務】 | 送花服務香港 | Floralism'} />
             <meta name="description" content={'「Floralism」花店送花服務為客人帶來很多便利和選擇，讓客戶可以輕鬆地為愛人、親戚、朋友或同事送上美麗的花束，表達自己的心意和祝福。'} />
             <meta name="keywords" content={'花店送花服務,送花服務香港,Floralism'}/>
         </Head>
@@ -142,7 +141,7 @@ export default function Delivery(props) {
 
 export async function getStaticProps(context) {
     const { params } = context;
-    // //////////////console.log(params);
+    // ////////////////console.log(params);
 
     const tt_response = await fetch(
         `${constant.api_url}/api/flowercategory/index`, {

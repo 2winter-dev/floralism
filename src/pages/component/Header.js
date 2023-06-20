@@ -6,7 +6,7 @@ import { useState } from "react";
 
 export default function Header(props) {
     const router = useRouter();
-    // console.log(props.list);
+    // //console.log(props.list);
     const [navStatus, setNavStatus] = useState(false);
     const [index, setIndex] = useState();
 
@@ -78,10 +78,7 @@ export default function Header(props) {
                                 <div className={index === i ? `${header.show_list}` : `${header.child_list}`}>
                                     {item.get_child &&
                                         item.get_child.map((it, ii) => {
-                                            if (ii > 3) {
-                                                ////console.log("123");
-                                                return;
-                                            }
+                                           
                                             return (<a key={index + ii.toString()} href={`/category/${it.id}`} ><div  className={`${header.header_center_dropdown}`}>
                                                 {it.categoryname}
                                             </div></a>)

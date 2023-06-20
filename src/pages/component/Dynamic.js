@@ -8,8 +8,8 @@ const DynamicLazyComponent = dynamic(
 )
 export default function DynamicComponent(props) {
     let router = useRouter();
-    return (<DynamicLazyComponent list={props.cateList} login={() => {
-        //////////console.log("123");
+    return (<DynamicLazyComponent list={props.cateList} login={() => {  
+        ////////////console.log("123");
         if (Cookies.get('token')) {
             // alert("你要退出嗎?")
         } else props.setLogin(true);

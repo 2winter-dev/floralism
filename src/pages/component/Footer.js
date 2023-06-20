@@ -26,12 +26,12 @@ export default function Footer() {
 
     useEffect(() => {
         fetchCate().then((res) => setList(res.data)).catch((er) => {
-            //////console.log('cat_list error:')
-            //////console.log(er)
+            ////////console.log('cat_list error:')
+            ////////console.log(er)
         })
     }, [])
 
-    //////console.log(cateList)
+    ////////console.log(cateList)
 
     return (<div className={style.footer} style={{ width: '100%' }}>
         <div className={style.footer_three_column} style={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -39,7 +39,7 @@ export default function Footer() {
                 <p>產品</p>
                 {
                     cateList.map((item, index) => {
-                        // //////////console.log(item);
+                        // ////////////console.log(item);
                         if (index > 5) return null;
                         return (<a key={index} href={`/category/${item.id}`}>{item.categoryname}</a>)
                     })
@@ -67,16 +67,16 @@ export default function Footer() {
                     <div style={{ flex: 1, fontSize: 20 }}>FOLLOW US</div>
                     <div className={style.icon_group} style={{ flex: 1, display: 'flex', alignItems: 'center', flexWrap: 'wrap', marginTop: 16, justifyContent: 'space-between' }}>
                         <div style={{ cursor: 'pointer' }}>
-                            <a href="https://www.facebook.com/hkfloralism"><img alt="" src='/矢量智能对象-3.png' className={style.footer_Image} /></a>
+                            <a href="https://www.facebook.com/hkfloralism"><img alt="facebook" src='/矢量智能对象-3.png' className={style.footer_Image} /></a>
                         </div>
                         <div style={{ cursor: 'pointer' }}>
-                            <a href="https://www.instagram.com/hkfloralism/"><img alt="" src='/矢量智能对象-2.png' className={style.footer_Image} /></a>
+                            <a href="https://www.instagram.com/hkfloralism/"><img alt="instagram" src='/矢量智能对象-2.png' className={style.footer_Image} /></a>
                         </div>
                         {/* <div style={{ cursor: 'pointer' }}>
                             <a href=''><img alt="" src='/矢量智能对象-1.png' className={style.footer_Image} /></a>
                         </div> */}
                         <div style={{ cursor: 'pointer' }}>
-                            <a href="https://wa.me/85265818053"><img alt="" src='/矢量智能对象.png' className={{ ...style.footer_Image, marginRight: 0 }} /></a>
+                            <a href="https://wa.me/85265818053"><img alt="whatsapp" src='/矢量智能对象.png' className={{ ...style.footer_Image, marginRight: 0 }} /></a>
                         </div>
                     </div>
                 </div>
