@@ -47,10 +47,10 @@ export default function Footer() {
             </div>
             <div className={style.footer_column} style={{ display: 'flex', flexDirection: 'column' }}>
                 <p>幫助</p>
-                <div onClick={() => router.push('/ShoppingGuide')}>購物指南</div>
-                <div onClick={() => router.push('/CustomerOrder')}>訂製服務</div>
-                <div onClick={() => router.push('/Delivery')}>送貨服務</div>
-                <div onClick={() => router.push('/Aboutus')}>關於我們</div>
+                <div style={{cursor:'pointer'}} onClick={() => router.push('/ShoppingGuide')}>購物指南</div>
+                <div style={{cursor:'pointer'}} onClick={() => router.push('/CustomerOrder')}>訂製服務</div>
+                <div style={{cursor:'pointer'}} onClick={() => router.push('/Delivery')}>送貨服務</div>
+                <div style={{cursor:'pointer'}} onClick={() => router.push('/Aboutus')}>關於我們</div>
             </div>
             <div className={style.footer_column} style={{ display: 'flex', flexDirection: 'column' }}>
                 <p>聯絡我們</p>
