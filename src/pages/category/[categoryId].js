@@ -124,7 +124,7 @@ export default function Category({ categoryId, allcate, meta, cateList, data, to
                 <img alt={flag < 2 ? (tiny_middle_banner?.alt?.length>2?tiny_middle_banner.alt[2]:"") : (middle_banner?.alt?.length>2?middle_banner.alt[2]:"")} src={flag < 2 ? tiny_middle_banner.coverimage : middle_banner.coverimage} style={{ width: '100%', height: '100%', display: 'block' }}></img>
             }
             <div className={style.banner_desc} style={{}}>
-                <div style={{ maxHeight: 200, overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                <div style={{  textOverflow: 'ellipsis' }}>
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                         <img alt={flag < 2 ? (tiny_middle_banner?.alt?.length>1?tiny_middle_banner.alt[1]:"") : (middle_banner?.alt?.length>1?middle_banner.alt[1]:"")} src={flag < 2 ? tiny_middle_banner.descriptionimage : middle_banner.descriptionimage} style={{ width: '100%' }} />
                     </div>
