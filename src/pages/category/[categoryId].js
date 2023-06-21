@@ -98,7 +98,7 @@ export default function Category({ categoryId, allcate, meta, cateList, data, to
             {/* <Image priority src="/homepage/top-banner.png" width={1920} height={700} style={{width:'100%'}}/> */}
             <div className={(categoryId === "9" || categoryId === "10" || categoryId === "11") ? styles.spec_banner : styles.top_banner_area} style={{ display: "flex", flexDirection: 'column', alignItems: 'center' }}>
                 <img alt={bannerSize ?(tiny_top_banner?.alt?.length?tiny_top_banner.alt[0]:"") : (top_banner?.alt?.length?top_banner.alt[0]:"")} src={bannerSize ? tiny_top_banner.descriptionimage : top_banner.descriptionimage} width={'100%'} />
-                <a href={`${data.data.length ? "/":"/productSearch/"+data.data[0]?.flower_category_id}`} onClick={() => {
+                <a href={`${data.data.length ? "/productSearch/"+data.data[0]?.flower_category_id:"/"}`} onClick={() => {
                     //console.log(data);
                     // data.data.length ?
                     //     router.push(`/productSearch/${data.data[0].flower_category_id}`)
