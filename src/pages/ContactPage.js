@@ -102,7 +102,11 @@ export default function ContactPage({ cateList, allcate }) {
             </div>
         </div>}
         {
+            flag===0&&  <img src={'/tiny-contact-us.png'} style={{width:'100%'}} />
+        }
+        {
             flag === 0 && <div className={style.main_layout}>
+              
                 <div className={style.main_background}>
                     <div className={style.main_contain} style={{ marginBottom: 24 }}>
                         <div className={style.contact_title}>Contact us</div>
