@@ -3,6 +3,7 @@ import { constant } from '@/constant/index';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
+import Link from 'next/link';
 import { ToastContainer, toast } from 'react-toastify';
 export default function Footer() {
     const router = useRouter();
@@ -47,10 +48,10 @@ export default function Footer() {
             </div>
             <div className={style.footer_column} style={{ display: 'flex', flexDirection: 'column' }}>
                 <p>幫助</p>
-                <div style={{cursor:'pointer'}} onClick={() => router.push('/ShoppingGuide')}>購物指南</div>
-                <div style={{cursor:'pointer'}} onClick={() => router.push('/CustomerOrder')}>訂製服務</div>
-                <div style={{cursor:'pointer'}} onClick={() => router.push('/Delivery')}>送貨服務</div>
-                <div style={{cursor:'pointer'}} onClick={() => router.push('/Aboutus')}>關於我們</div>
+                <Link href="/ShoppingGuide" style={{cursor:'pointer'}}>購物指南</Link>
+                <Link href="/CustomerOrder" style={{cursor:'pointer'}}>訂製服務</Link>
+                <Link href="/Delivery" style={{cursor:'pointer'}} >送貨服務</Link>
+                <Link href="/Aboutus" style={{cursor:'pointer'}} >關於我們</Link>
             </div>
             <div className={style.footer_column} style={{ display: 'flex', flexDirection: 'column' }}>
                 <p>聯絡我們</p>
