@@ -32,9 +32,9 @@ export default function Header(props) {
                                     {
                                         item.get_child.map((it, ii) => {
                                             return (
-                                                <Link key={index.toString() + ii.toString()} href={`/category/${it.id}`} >
+                                                <a key={index.toString() + ii.toString()} href={`/category/${it.id}`} >
                                                     <div >{it.categoryname}</div>
-                                                </Link>)
+                                                </a>)
                                         })
                                     }
                                 </div>}
@@ -79,9 +79,9 @@ export default function Header(props) {
                                     {item.get_child &&
                                         item.get_child.map((it, ii) => {
                                            
-                                            return (<Link key={index + ii.toString()} href={`/category/${it.id}`} ><div  className={`${header.header_center_dropdown}`}>
+                                            return (<a key={index + ii.toString()} href={`/category/${it.id}`} ><div  className={`${header.header_center_dropdown}`}>
                                                 {it.categoryname}
-                                            </div></Link>)
+                                            </div></a>)
                                         })
 
                                     }

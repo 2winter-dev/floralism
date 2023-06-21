@@ -27,6 +27,7 @@ import { useRouter } from 'next/router';
 // import { ToastContainer, toast } from 'react-toastify';
 import toast, { Toaster } from "react-hot-toast";
 import DynamicButton from './component/DynamicButton';
+import Link from 'next/link';
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home({ allcate, cateList, GoodsPage, carousel }) {
@@ -108,9 +109,9 @@ export default function Home({ allcate, cateList, GoodsPage, carousel }) {
       <DynamicComponent cateList={cateList} setLogin={setLogin} />
       <div style={{ width: '100%', position: 'relative',backgroundImage:`url(${bannerSize?"/homepage/tiny-top-banner.jpg":"/homepage/top-banner.jpg"})` }} className={styles.banner}>
         {/* <Image priority src="/homepage/top-banner.png" width={1920} height={700} style={{width:'100%'}}/> */}
-        <div style={{}} className={styles.top_banner_area}>
+        <div style={{display:'flex',flexDirection:'column'}} className={styles.top_banner_area}>
           <img alt="home top banner description" src={"/homepage/banner-desc.png"} width={'100%'} />
-          <button onClick={() => router.push('/productSearch/2')} style={{ border: 'none', display: 'block', cursor: 'pointer' }} className={styles.banner_buttom} >點擊選購</button>
+          <Link href='/productSearch/2' style={{ border: 'none', display: 'block', cursor: 'pointer' }} className={styles.banner_buttom} >點擊選購</Link>
         </div>
       </div>
       <div>

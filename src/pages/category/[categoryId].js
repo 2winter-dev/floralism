@@ -22,6 +22,7 @@ import Image from "next/image";
 export default function Category({ categoryId, allcate, meta, cateList, data, top_banner, middle_banner, tiny_top_banner, tiny_middle_banner }) {
     // ////////////////console.log("----");
     //////////////console.log(data);
+    console.log(data);
     //console.log(tiny_middle_banner.alt)
     // //////console.log(tiny_top_banner,tiny_middle_banner);
     const router = useRouter();
@@ -96,13 +97,13 @@ export default function Category({ categoryId, allcate, meta, cateList, data, to
         <div style={{ width: '100%', position: 'relative', backgroundImage: bannerSize ? `url(${tiny_top_banner.coverimage})` : `url(${top_banner.coverimage})`, marginBottom: 0 }} className={styles.banner} >
             {/* <Image priority src="/homepage/top-banner.png" width={1920} height={700} style={{width:'100%'}}/> */}
             <div className={(categoryId === "9" || categoryId === "10" || categoryId === "11") ? styles.spec_banner : styles.top_banner_area} style={{ display: "flex", flexDirection: 'column', alignItems: 'center' }}>
-                <img alt={bannerSize ?(tiny_top_banner?.alt.length?tiny_top_banner.alt[0]:"") : (top_banner.alt?.length?top_banner.alt[0]:"")} src={bannerSize ? tiny_top_banner.descriptionimage : top_banner.descriptionimage} width={'100%'} />
-                <button onClick={() => {
+                <img alt={bannerSize ?(tiny_top_banner?.alt?.length?tiny_top_banner.alt[0]:"") : (top_banner?.alt?.length?top_banner.alt[0]:"")} src={bannerSize ? tiny_top_banner.descriptionimage : top_banner.descriptionimage} width={'100%'} />
+                <a href={`${data.data.length ? "/":"/productSearch/"+data.data[0]?.flower_category_id}`} onClick={() => {
                     //console.log(data);
-                    data.data.length ?
-                        router.push(`/productSearch/${data.data[0].flower_category_id}`)
-                        : router.push('/')
-                }} style={{ border: 'none', display: 'block', cursor: 'pointer' }} className={styles.banner_buttom} >點擊選購</button>
+                    // data.data.length ?
+                    //     router.push(`/productSearch/${data.data[0].flower_category_id}`)
+                    //     : router.push('/')
+                }} style={{ border: 'none', display: 'block', cursor: 'pointer' }} className={styles.banner_buttom} >點擊選購</a>
             </div>
         </div>
         <div className={styles.goods_view} style={{ marginBottom: 32 }}>
@@ -315,7 +316,8 @@ export async function getStaticProps(context) {
             return item;
         }
     })
-    //console.log("======================");
+    console.log("======================");
+    console.log(data);
     //console.log(top_banner, middle_banner);
     // ////console.log(tiny_top_banner, tiny_middle_banner);
     // //////console.log(JSON.parse(data).data);

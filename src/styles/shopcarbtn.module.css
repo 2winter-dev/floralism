@@ -5,6 +5,14 @@
    border: none;
    box-shadow: -1px 1px 10px 0px rgba(0,0,0,0.2);
 }
+.button_1{
+    padding: 3px 10px;
+    border-radius: 50px;
+    display: flex;
+    background-color: white;
+    border: none;
+    box-shadow: -1px 1px 10px 0px rgba(0,0,0,0.2);
+ }
 /* .button:active{
     animation:upAndhidden 1s normal;
 } */

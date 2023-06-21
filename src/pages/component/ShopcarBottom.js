@@ -20,11 +20,11 @@ export default function ShopcarBottom(props) {
     return (
         <div style={{ bottom: 75, position: "fixed", right: '5%', zIndex: 99999 }}>
             {!props.shopCarShown && <div style={{}}>
-                <button onClick={toAddAnimation} style={{ cursor: 'pointer', position: 'relative' }} className={style.button}>
+                <Link href={'/shopCar/shopCar'} style={{ cursor: 'pointer', position: 'relative' }} className={style.button_1}>
                     {/* <div></div> */}
                     <div className={Cookies.get("isAdd") ? style.add_animation : style.common_animation} style={{ width: 8, height: 8, borderRadius: 50, backgroundColor: "red", position: 'absolute', right: 4, top: 8 }}></div>
                     <span className='iconfont' style={{ fontSize: 28 }}>&#xe64d;</span>
-                </button>
+                </Link>
 
             </div>}
             {!props.whatsappShown && <div style={{ marginTop: 24 }}>
