@@ -2,6 +2,7 @@ import Header from "./component/Header";
 import Footer from "./component/Footer";
 import styles from '@/styles/Home.module.css'
 import style from '@/styles/contactPage.module.css'
+import bstyle from '@/styles/banner.module.css'
 import Contactus from "./component/Contactus";
 import GoodsScoll from "./component/GoodsScroll";
 import { useEffect, useState } from "react";
@@ -23,7 +24,7 @@ export default function ContactPage({ cateList, allcate }) {
     const [login, setLogin] = useState(false);
     const [register, setRegister] = useState(false);
     const [visible, setVisible] = useState(false);
-    
+
 
     const [flag, setFlag] = useState(1);
     const [category, setCategory] = useState([]);
@@ -79,14 +80,39 @@ export default function ContactPage({ cateList, allcate }) {
             <meta name="description" content="聯絡我們 | 「Floralism」聯絡我們" />
         </Head>
         <DynamicComponent cateList={cateList} setLogin={setLogin} />
-        <BodyBanner
-            flag={flag}
-            imgTiny={"/contact-banner-m.png"}
-            img={"/contactus-banner.png"}
-            title={'FLORALISM | 關於我們'}
-            desc1={'在FLORALISM，我們重視花材的品質和選擇，堅持采用最新鮮，最優質的花材，注重花束的藝術性和創意性'}
-            desc2={'運用不同的創意和技巧，讓花材的形狀和質地在空間中產生獨特的視覺效果，讓每一朵花都散發出自己獨有的魅力'}
-        />
+        {flag !== 0 && <div style={{ width: '100%', position: 'relative' }}>
+            {
+                // <img alt={flag === 0 ? props.imgTiny : props.img} src={
+                //     // flag === 0 ? props.imgTiny :
+                //      props.img} style={{ width: '100%', height: '100%', display: 'block' }}></img>
+                <img alt={flag === 0 ? "聯絡我們小屏banner" : "聯絡我們大屏banner"} src={'/contact-us-banner.jpg'} style={{ width: '100%', height: '100%', display: 'block' }}></img>
+            }
+            <div className={bstyle.banner_desc} style={{}}>
+                <div className={style.total_layout} style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                    <div className={style.total_title}>
+                        <div style={{ display: 'flex' }}>
+                            <div style={{ color: 'rgb(190,137,106)', fontSize: '4vw', fontWeight: 'bold' }}>{'Contact us'}</div>
+                        </div>
+                        <div style={{ color: 'rgb(190,137,106)' }} className={bstyle.desc_layout}>
+                            <div style={{ fontSize: '1vw', lineHeight: `2.8vw`, letterSpacing: '0.1vw', fontWeight: '500' }}>{`在FLORALISM，我們重視花材的品質和選擇，堅持采用最新鮮，最優質的花材，注重花束的藝術性和創意性,運用不同的創意和技巧，讓花材的形狀和質地在空間中產生獨特的視覺效果，讓每一朵花都散發出自己獨有的魅力`}</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>}
+        {
+            flag === 0 && <div className={style.main_layout}>
+                <div className={style.main_background}>
+                    <div className={style.main_contain} style={{ marginBottom: 24 }}>
+                        <div className={style.contact_title}>Contact us</div>
+                        <div className={style.contact_distance} style={{ lineHeight: '200%', letterSpacing: 2 }}>{`在FLORALISM，我們重視花材的品質和選擇，堅持采用最新鮮，最優質的花材，注重花束的藝術性和創意性,運用不同的創意和技巧，讓花材的形狀和質地在空間中產生獨特的視覺效果，讓每一朵花都散發出自己獨有的魅力`}</div>
+                    </div>
+
+
+                </div>
+            </div>
+        }
         <div className={style.main_layout}>
             <div className={style.main_background}>
                 <div className={style.main_contain} style={{ marginBottom: 24 }}>
@@ -118,27 +144,27 @@ export default function ContactPage({ cateList, allcate }) {
 
         <div className={styles.goods_list} style={{}}>
             <div>
-              <div style={{ display: 'flex', alignItems: 'center' }}>
-                {flag !== 0 && <div className={styles.distance}></div>}
-                <div className={styles.title} style={{ whiteSpace: 'nowrap', flex: 1 }}>{'【FLORALISM】 全部分類'}</div>
-                {flag !== 0 && <div className={styles.distance}></div>}
-              </div>
-              <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-                {
-                  allcate.map((item, index) => {
-                    return <GoodsItem key={index} src={item.src} item={item} title={item.categoryname} price={item.price} type={'category'} animation={'animation'} />
-                  })
-                }
-              </div>
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                    {flag !== 0 && <div className={styles.distance}></div>}
+                    <div className={styles.title} style={{ whiteSpace: 'nowrap', flex: 1 }}>{'【FLORALISM】 全部分類'}</div>
+                    {flag !== 0 && <div className={styles.distance}></div>}
+                </div>
+                <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+                    {
+                        allcate.map((item, index) => {
+                            return <GoodsItem key={index} src={item.src} item={item} title={item.categoryname} price={item.price} type={'category'} animation={'animation'} />
+                        })
+                    }
+                </div>
             </div>
         </div>
         <div className={style.ContactusLayout}>
             <Contactus />
         </div>
         {/* {!login && <ToastContainer />} */}
-        {!login&&<DynamicButton />}
+        {!login && <DynamicButton />}
         {!login && <Toaster
-           position="top-center"
+            position="top-center"
         />}
         <Footer />
         {

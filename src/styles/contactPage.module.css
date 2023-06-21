@@ -18,7 +18,13 @@
 .main_contain {
     width: 50%;
 }
-
+.total_layout{
+    /* padding-left: 60px; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 
 .ContactusLayout {
     padding: 0 21%;
@@ -26,8 +32,11 @@
     display: flex;
     margin-top: 24px;
 }
-
+.total_title{
+    width:70%
+}
 @media screen and (max-width:1100px) {
+
     .main_background {
         flex-direction: column;
     }
