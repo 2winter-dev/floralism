@@ -75,8 +75,8 @@ export default function ContactPage({ cateList, allcate }) {
 
     return (<div style={{ position: 'relative' }}>
         <Head>
-            <title>联络我们 | 「Floralism」联络我们</title>
-            <meta name="description" content="联络我们 | 「Floralism」联络我们" />
+            <title>聯絡我們 | 「Floralism」聯絡我們</title>
+            <meta name="description" content="聯絡我們 | 「Floralism」聯絡我們" />
         </Head>
         <DynamicComponent cateList={cateList} setLogin={setLogin} />
         <BodyBanner
