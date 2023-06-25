@@ -21,7 +21,7 @@ export default function CustomerOrder(props) {
         <Head>
             <title>【訂花束】 | 訂製花束 | 「Floralism」花束訂製</title>
             <meta name="description" content={'「Floralism」花店的時尚花藝師提供花束訂製服務是為客戶提供一個高度定制化的訂花束選擇，這讓客戶可以根據自己的需求和喜好來訂製花束及設計一個獨一無二的花束。'} />
-            <meta name="keywords" content={'【訂花束】,訂製花束,「Floralism」花束訂製'}/>
+            <meta name="keywords" content={'訂花,訂製花束,花束訂製'}/>
         </Head>
         <DynamicComponent cateList={props.cateList} setLogin={setLogin} />
         <div style={{ backgroundColor: 'rgb(240,240,240)' }}>

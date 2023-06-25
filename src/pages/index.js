@@ -101,7 +101,7 @@ export default function Home({ allcate, cateList, GoodsPage, carousel }) {
       <Head>
         <title>{'【買花】 | 送花 | 「Floralism」香港花店'}</title>
         <meta name='description' content={'「Floralism」專業香港花店提供買花及送花服務，如鮮花、盆栽、花籃等，而且還提供網上訂購、送貨上門等一系列買花服務，讓人們能夠方便快捷地為他人表達心意。'} />
-        <meta name='keywords' content={'【買花】 | 送花 | 「Floralism」香港花店'} />
+        <meta name='keywords' content={'買花,送花,香港花店'} />
         <meta name="google-site-verification" content="TASYD5-Zc0N3VmsQCYv7GjkdAJN6uRcPCbBh6QCPrwg" />
       </Head>
 

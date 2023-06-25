@@ -91,7 +91,7 @@ export default function Category({ categoryId, allcate, meta, cateList, data, to
             {/* <meta title={`${meta.title}`}  /> */}
             <title>{`${meta.title !== "" ? meta.title : (data.category_name + " | 「Floralism」香港花店")}`}</title>
             <meta name={'descirption'} content={`${meta.metadescription}`} />
-            <meta name={'keywords'} content={`${meta.title !== "" ? meta.title : data.category_name}`} />
+            <meta name={'keywords'} content={`${meta.keyword}`} />
         </Head>
         <DynamicComponent cateList={cateList} setLogin={setLogin} />
         <div style={{ width: '100%', position: 'relative', backgroundImage: bannerSize ? `url(${tiny_top_banner.coverimage})` : `url(${top_banner.coverimage})`, marginBottom: 0 }} className={styles.banner} >

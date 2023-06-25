@@ -17,9 +17,9 @@ export default function Delivery(props) {
     const router=useRouter();
     return (<div>
         <Head>
-            <title>【花店送花服務】 | 送花服務香港 | Floralism</title>
+            <title>【花店送花服務】 | 送花服務香港 | Floralism 送花服務</title>
             <meta name="description" content={'「Floralism」花店送花服務為客人帶來很多便利和選擇,讓客戶可以輕鬆地為愛人、親戚、朋友或同事送上美麗的花束,表達自己的心意和祝福。'} />
-            <meta name="keywords" content={'花店送花服務,送花服務香港,Floralism'}/>
+            <meta name="keywords" content={'花店送花服務,送花服務香港,送花服務'}/>
         </Head>
         <DynamicComponent cateList={props.cateList} setLogin={setLogin} />
         <div style={{backgroundColor: 'rgb(240,240,240)'}}>
