@@ -83,7 +83,7 @@ export default function selectMethod(props) {
                 }
             },
             onError: (res) => {
-                toast.error("删除失败")
+                toast.error("刪除失敗")
             }
         })
     }

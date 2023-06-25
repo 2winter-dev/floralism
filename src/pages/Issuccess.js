@@ -29,7 +29,7 @@ export default function SuccessPage() {
 
     return (<div style={{height:700}}>
           <Head>
-                <meta title="結算結果"/>
+                <title>結果</title>
             </Head>
         {
             statement === "success" && <div style={{width:'100%',height:'100%',display:'flex',flexDirection:'column',textAlign:'center',justifyContent:'center',alignItem:'center'}}>

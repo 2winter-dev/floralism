@@ -103,7 +103,7 @@ export default function User(props) {
                 }
             },
             onError: (res) => {
-                toast.error("删除失败")
+                toast.error("刪除失敗")
             }
         })
     }
@@ -181,14 +181,14 @@ export default function User(props) {
         ////////////////console.log(orderDetail);
     }, [orderDetail])
     if(props.code===401){
-        toast.error("请重新登陆");
+        toast.error("請重新登錄");
         Cookies.remove("token");
         router.replace("/");
     }
 
     return (<div style={{ backgroundColor: 'rgb(244,244,244)' }}>
         <Head>
-            <meta title={'用戶中心'}/>
+            <title>Floralism用戶中心</title>
         </Head>
         <DynamicComponent cateList={props.cateList} setLogin={setLogin} />
         <div className={styles.main_contain} style={{ marginTop: 24, marginBottom: 46, alignItems: 'flex-start' }}>
