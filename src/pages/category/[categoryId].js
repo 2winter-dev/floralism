@@ -281,7 +281,7 @@ export async function getStaticProps(context) {
             return item;
         }
     })
-    //////console.log(res[0]);
+    // console.log(res[0]);
     let meta = {
         keyword: res[0].keywords,
         title: res[0].metatitle ?? "",

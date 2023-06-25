@@ -40,7 +40,7 @@ export default function ProductDetail({ cateList, product }) {
     const [cardcontent, setCardContent] = useState("");
     const [cardtype, setCardType] = useState(0);
     const [btnLength, setBtnLength] = useState(0);
-    const [tip,setTips]=useState(false);
+    const [tip, setTips] = useState(false);
     const addToCart = useMutation({
         mutationKey: ['addToCart'],
         mutationFn: (data) => m_api.AddToCart(data)
@@ -84,6 +84,16 @@ export default function ProductDetail({ cateList, product }) {
 
         return res;
     }
+    const select_pic = (n) => {
+        let res = [];
+
+        for (let i = 0; i < [product.flowerDetail[index].flowerimage, ...product.flowerDetail[index].flowerimages].length / 5; i++) {
+            let sli = [product.flowerDetail[index].flowerimage, ...product.flowerDetail[index].flowerimages].slice(5 * i, 5 * (i + 1));
+            res.push(sli);
+        }
+        console.log(res)
+        return res;
+    }
 
     const _submit = () => {
         addToCart.mutate({})
@@ -97,15 +107,15 @@ export default function ProductDetail({ cateList, product }) {
 
     return (<div style={{ position: 'relative' }}>
         <Head>
-            <title>{product.flowerList[index].metatitle}</title>
-            <meta name={'descirption'} content={`${product.flowerList[index].metadescription}`} />
-            <meta name={'keywords'} content={`${product.flowerList[index].metatitle}`} />
+            <title>{product.flowerDetail[index].metatitle}</title>
+            <meta name={'descirption'} content={`${product.flowerDetail[index].metadescription}`} />
+            <meta name={'keywords'} content={`${product.flowerDetail[index].keywords}`} />
         </Head>
         <DynamicComponent cateList={cateList} setLogin={setLogin} />
         <main className={style.total_container} style={{}}>
             <div>
                 <div style={{ marginTop: 32 }}>
-                    <Link href={'/'} style={{ cursor: 'pointer' }}>首頁</Link>{product?.flowerCategory?.id&&<span className={style.separator} style={{ cursor: 'pointer' }}>/</span>}<Link href={`/category/${product?.flowerCategory?.id}`}>{product.flowerCategory?.categoryname}</Link>
+                    <Link href={'/'} style={{ cursor: 'pointer' }}>首頁</Link>{product?.flowerCategory?.id && <span className={style.separator} style={{ cursor: 'pointer' }}>/</span>}<Link href={`/category/${product?.flowerCategory?.id}`}>{product.flowerCategory?.categoryname}</Link>
                     {/* <span className={style.separator}>/</span> */}
                     {/* <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', display: 'flex', flexWrap: 'nowrap' }}>{product.flowerDetail[index].flowername}</span> */}
                 </div>
@@ -117,12 +127,40 @@ export default function ProductDetail({ cateList, product }) {
                                 <div className={style.img_picker}>
                                     <div ref={contain} style={{ width: '100%', position: 'relative', display: 'flex', justifyContent: 'center' }}>
                                         <div style={{ width: '90%', display: 'flex', alignItems: 'center' }}>
-                                            <img alt={product.flowerDetail[0].flowername+0} onClick={() => setImage(product?.flowerDetail[index].flowerimage)} key={index.toString()} src={product?.flowerDetail[index].flowerimage} style={{ width: '17%', marginRight: '3%', borderRadius: 5 }}></img>
+                                            <img alt={product.flowerDetail[index].flowername + 0} onClick={() => setImage(product?.flowerDetail[index].flowerimage)} key={index.toString()} src={product?.flowerDetail[index].flowerimage} style={{ width: '17%', marginRight: '3%', borderRadius: 5 }}></img>
                                             {
                                                 product.flowerDetail[index].flowerimages.map((item, index) => {
-                                                    return <img alt={product.flowerDetail[0].flowername+index+1} onClick={() => setImage(item)} key={index.toString()} src={item} style={{ width: '17%', marginRight: '3%', borderRadius: 5 }}></img>
+                                                    return <img alt={product.flowerDetail[index].flowername + index + 1} onClick={() => setImage(item)} key={index.toString()} src={item} style={{ width: '17%', marginRight: '3%', borderRadius: 5 }}></img>
                                                 })
                                             }
+                                            {/* <div id="carouselExample" className="carousel slide">
+                                                <div className="carousel-inner">
+                                                    {
+                                                        select_pic().map((item, index) => {
+                                                           return <div key={index} onClick={()=>console.log("點擊了")} className={`carousel-item ${index===0?"active":""}`}>
+                                                                {          
+                                                                    item.map((it, idx) => {
+                                                                        console.log(it);
+                                                                        return <img alt={product.flowerDetail[index].flowername + index + 1} onClick={() =>{
+                                                                            console.log(it);
+                                                                            setImage(it);
+                                                                        }} key={idx.toString()} src={it} style={{ width: '17%', marginRight: '3%', borderRadius: 5 }}></img>
+                                                                    })
+                                                                }
+
+                                                            </div>
+                                                        })
+                                                    }
+                                                </div>
+                                                <button style={{ justifyContent: 'flex-start' }} className="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                                                    <span className={`iconfont ${style.left_button}`}>&#xe628;</span>
+                                                    <span className="visually-hidden">Previous</span>
+                                                </button>
+                                                <button style={{ justifyContent: 'flex-start' }} className="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                                                    <span  className={`iconfont ${style.right_button}`} >&#xe642;</span>
+                                                    <span className="visually-hidden">Next</span>
+                                                </button>
+                                            </div> */}
                                         </div>
 
                                     </div>
@@ -139,12 +177,10 @@ export default function ProductDetail({ cateList, product }) {
                                         contain.current.style.left = -17 + '%';
                                     }
                                 }
-                                // ////////////////////console.log("------------------");
-
                             }} style={{ fontSize: 24 }}>&#xe628;</span></div>
                             <div className={style.right_button}><span className="iconfont" onClick={() => {
                                 // ////////////////////console.log(btnLength);
-
+                                console.log(btnLength)
                                 if (product.flowerDetail[index].flowerimages.length > 5) {
                                     let l = btnLength;
                                     if (l + 1 > product.flowerDetail[index].flowerimage.length) return;
@@ -243,7 +279,7 @@ export default function ProductDetail({ cateList, product }) {
                                                 toast.error("請先登錄");
                                                 setTips(true);
                                                 setLogin(true);
-                                            
+
                                             }
                                             if (res.code === 1) {
                                                 Cookies.set("isAdd", true);
@@ -254,7 +290,7 @@ export default function ProductDetail({ cateList, product }) {
                                             toast.error(res.msg);
                                             setTips(true);
                                             setLogin(true);
-                                           
+
                                         }
                                     },
                                     onError: (err) => {
@@ -262,7 +298,7 @@ export default function ProductDetail({ cateList, product }) {
                                         if (err instanceof Error) {
                                             toast.error(err.message)
                                         }
-                                    //    toast.error(err.msg);
+                                        //    toast.error(err.msg);
                                         setTips(true);
                                         setLogin(true);
                                         // setTimeout(()=>{
@@ -317,7 +353,7 @@ export default function ProductDetail({ cateList, product }) {
         </div>
         <Footer />
         {
-            <LoginPannel login={login} close={() =>{setLogin(false);setTips(false);}} toRegister={() => {
+            <LoginPannel login={login} close={() => { setLogin(false); setTips(false); }} toRegister={() => {
                 setLogin(false);
                 setRegister(true);
             }} tips={tip} toForget={() => {
@@ -333,10 +369,10 @@ export default function ProductDetail({ cateList, product }) {
         }
         {/* {!login && <ToastContainer />} */}
         {!login && <Toaster
-           position="top-center"
+            position="top-center"
         />}
         {/**public\swiper */}
-     
+
     </div >)
 }
 
@@ -398,8 +434,8 @@ export async function getStaticProps(context) {
     );
     //////////////////////console.log(Cookies.get("token"));
     const detail = await detail_response.json();
-    
-    ////console.log(detail.data)
+
+    console.log(detail.data)
     //////console.log(data);
     return {
         props: {

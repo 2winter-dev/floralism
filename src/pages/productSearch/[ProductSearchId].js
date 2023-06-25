@@ -106,7 +106,7 @@ export default function ProductSearch({ tiny_top_banner, meta, cateList, data, t
     <Head>
     <title>{`${meta.title!==""?meta.title:(data.category_name+" | 「Floralism」香港花店")}`}</title>
       <meta name={'descirption'} content={`${meta.metadescription}`} />
-      <meta name={'keywords'} content={`${meta.title}`} />
+      <meta name={'keywords'} content={`${meta.keyword}`} />
     </Head>
     <DynamicComponent cateList={cateList} setLogin={setLogin} />
     <div style={{ width: '100%', position: 'relative' }}>
@@ -247,18 +247,19 @@ export async function getStaticProps(context) {
   }
   );
   const allcate = await allcate_response.json();
+  console.log(allcate,params);
   let res = allcate.data.filter((item, index) => {
     ////////console.log("=========");
     ////////console.log(params.categoryId);
     ////////console.log(item.id);
-    if (item.id.toString() === params.categoryId) {
+    if (item.id.toString() === params.ProductSearchId) {
       ////////console.log("找到了");
       return item;
     }
   })
-  ////////console.log(res[0]);
+  console.log(res[0]);
   let meta = {
-    keyword: res[0]?.keyword??"",
+    keyword: res[0]?.keywords??"",
     title: res[0]?.metatitle ?? "",
     metadescription:res[0]?.metadescription??"",
   }
