@@ -19,7 +19,7 @@ import DynamicButton from "./component/DynamicButton";
 import GoodsItem from "./component/GoodsItem";
 import Head from "next/head";
 export default function ContactPage({ cateList, allcate }) {
-    //////////////////////console.log(cateList)
+    ////////////////////////console.log(cateList)
     // const [flag, setFlag] = useState(1);
     const [login, setLogin] = useState(false);
     const [register, setRegister] = useState(false);
@@ -28,29 +28,29 @@ export default function ContactPage({ cateList, allcate }) {
 
     const [flag, setFlag] = useState(1);
     const [category, setCategory] = useState([]);
-    // ////////////////console.log(allcate);
+    // //////////////////console.log(allcate);
     const [categoryPage, setCategoryPage] = useState(1);
 
     const resizeUpdate = (e) => {
         if (e.target.innerWidth <= 675) {
-            //////////////////////console.log("====", e.target.innerWidth);
+            ////////////////////////console.log("====", e.target.innerWidth);
             setFlag(0);
         } else if (e.target.innerWidth <= 1100) {
             setFlag(1)
         } else {
-            //////////////////////console.log("-----", e.target.innerWidth);
+            ////////////////////////console.log("-----", e.target.innerWidth);
             setFlag(2);
         }
     }
     useEffect(() => {
         window.addEventListener("resize", resizeUpdate);
         if (window.innerWidth <= 675) {
-            //////////////////////console.log("====", e.target.innerWidth);
+            ////////////////////////console.log("====", e.target.innerWidth);
             setFlag(0);
         } else if (window.innerWidth <= 1100) {
             setFlag(1)
         } else {
-            //////////////////////console.log("-----", e.target.innerWidth);
+            ////////////////////////console.log("-----", e.target.innerWidth);
             setFlag(2);
         }
         return () => {
@@ -61,9 +61,9 @@ export default function ContactPage({ cateList, allcate }) {
 
 
     useEffect(() => {
-        ////////////////console.log("flag改變", flag);
+        //////////////////console.log("flag改變", flag);
         setCategory(spliceArr(allcate, !flag ? 4 : flag === 1 ? 6 : flag === 2 && 8, 'cat'));
-        ////////////////console.log(spliceArr(allcate, !flag ? 4 : flag === 1 ? 6 : flag === 2 && 8, 'cat'))
+        //////////////////console.log(spliceArr(allcate, !flag ? 4 : flag === 1 ? 6 : flag === 2 && 8, 'cat'))
         setCategoryPage(1);
     }, [flag])
     useEffect(() => {
@@ -212,7 +212,7 @@ export async function getStaticProps(context) {
     }
     )
     let allcate = await allcate_response.json();
-    ////////////////console.log(allcate);
+    //////////////////console.log(allcate);
     return {
         props: {
             cateList: JSON.parse(data).data,
