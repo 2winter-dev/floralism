@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>206745297456-obhvcvkb200hqj6qq3don4kmtvp2cptj.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.206745297456-obhvcvkb200hqj6qq3don4kmtvp2cptj</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>206745297456-e6mps2v5b3ng1aughh1lpuv2jtbdscij.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAh8H8j4icEwF8zR0ApHqfXA7tpDjoA3Ms</string>
+	<key>GCM_SENDER_ID</key>
+	<string>206745297456</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.imaker.yfd.DGToys</string>
+	<key>PROJECT_ID</key>
+	<string>dgtoys-23aa7</string>
+	<key>STORAGE_BUCKET</key>
+	<string>dgtoys-23aa7.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:206745297456:ios:41cdab41e9495f8f6683f5</string>
+	<key>DATABASE_URL</key>
+	<string>https://dgtoys-23aa7-default-rtdb.asia-southeast1.firebasedatabase.app</string>
+</dict>
+</plist>
