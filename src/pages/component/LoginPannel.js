@@ -80,7 +80,7 @@ export default function LoginPannel(props) {
                         location.reload();
 
                     } else {
-                        toast(res.msg);
+                        toast.error(res.msg);
                     }
                 },
                 onError: (err) => {
