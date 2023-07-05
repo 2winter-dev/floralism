@@ -37,7 +37,7 @@ export default function ForgetPassword(props) {
             onSuccess: (res) => {
                 // alert("發送驗證碼成功，請到填寫的郵箱内查看驗證碼");
                 if (res.code) {
-                    toast.success(res.data)
+                    toast.success("發送驗證碼成功，請到填寫的郵箱内查看驗證碼")
                     setTime(60);
                     setFlag(true);
                 }else{

@@ -150,7 +150,7 @@ export default function RegisterPannerl(props) {
                             </div>}
                         </div>
                         <div style={{ marginTop: '2.5%' }}>
-                            <input type='button' style={{ marginRight: 12 }} onClick={_submit} className={style.register_btn} value="建立"></input>
+                            <input type='button' style={{ marginRight: 12,cursor:'pointer' }} onClick={_submit} className={style.register_btn} value="建立"></input>
                             <a onClick={props.toLogin} className={style.to_login}>前往登錄</a>
                         </div>
 

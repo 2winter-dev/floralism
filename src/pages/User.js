@@ -6,6 +6,7 @@ import { constant } from '@/constant/index';
 import { useEffect, useState } from "react";
 import style from '@/styles/selectMethod.module.css'
 import dynamic from "next/dynamic";
+import Head from 'next/head';
 import DynamicComponent from "./component/Dynamic";
 import { useMutation } from "@tanstack/react-query";
 import m_api from "../m_api";
