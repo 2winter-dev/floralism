@@ -5,6 +5,7 @@ import Head from "next/head";
 export default function SuccessPage() {
     const router = useRouter();
     const [statement,setStatement]=useState("")
+    let i_g_l=1;
     // //////////console.log("1");
     // const { url } = router.query;
     // url.splice("?")
