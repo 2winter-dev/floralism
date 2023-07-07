@@ -211,7 +211,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps(context) {
     const { params } = context;
-    ////////console.log(params);
+    console.log(params);
 
     const response = await fetch(
         `${constant.api_url}/api/flowers/index?keyword=&flower_category_id=${params.categoryId}`, {
@@ -268,7 +268,7 @@ export async function getStaticProps(context) {
     // //////////console.log(banner_list.data.top_banner.web);
     // //////////console.log(banner_list.data.middle_banner);
     ////////////////console.log(params.categoryId)
-
+// console.log(JSON.parse(data).data.data.length);
     // let list=JSON.parse(tt_data);
     // //////////console.log(list);
     //////////console.log(allcate.data);

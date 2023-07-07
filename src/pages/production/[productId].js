@@ -436,7 +436,7 @@ export async function getStaticProps(context) {
     const detail = await detail_response.json();
 
     //console.log(detail.data)
-    ////////console.log(data);
+   console.log(detail.data);
     return {
         props: {
             cateList: JSON.parse(data).data,

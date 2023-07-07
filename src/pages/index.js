@@ -149,7 +149,7 @@ export default function Home({ allcate, cateList, GoodsPage, carousel }) {
             title={GoodsPage.category_name}
             list={goodsList}
             page={goodsPage}
-            id={allcate[1].id}
+            id={4}
             setPage={setGoodsPage}
             perPage={!flag ? 4 : flag === 1 ? 6 : flag === 2 && 8}
             maxPage={GoodsPage.last_page}
@@ -265,7 +265,7 @@ export async function getServerSideProps({ local }) {
   )
   //////////////////console.log(allcate);
   const goods_response = await fetch(
-    `${constant.api_url}/api/flowers/index?flower_category_id=${2}`, {
+    `${constant.api_url}/api/flowers/index?flower_category_id=${4}`, {
     mode: 'cors',
     headers: {
       // "Authorization": `Bearer ${data.cookie}`,
