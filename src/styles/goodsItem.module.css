@@ -52,7 +52,7 @@
 }
 .GoodsItem:hover .buy_goods_btn{
     opacity: 1;
-}
+}ƒ
 /* .goods_img_cover:hover::before{
   display: block;
   border-radius: 16px;
@@ -168,7 +168,7 @@
 @keyframes littletransition {
     from {
         background-color: white;
-        color: black
+        /* color: black */
     }
 
     to {
