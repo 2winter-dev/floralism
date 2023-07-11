@@ -353,9 +353,9 @@ export default function ShopCar({ cateList, shopCar }) {
         </main>
         <Footer />
         {/* {!login&&<ToastContainer />} */}
-        {!login && <Toaster
+        {/* {!login && <Toaster
             position="top-center"
-        />}
+        />} */}
         {
             <LoginPannel login={login} close={() => setLogin(false)} toRegister={() => {
                 setLogin(false);

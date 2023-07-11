@@ -167,9 +167,9 @@ export default function ContactPage({ cateList, allcate }) {
         </div>
         {/* {!login && <ToastContainer />} */}
         {!login && <DynamicButton />}
-        {!login && <Toaster
+        {/* {!login && <Toaster
             position="top-center"
-        />}
+        />} */}
         <Footer />
         {
             <LoginPannel login={login} close={() => setLogin(false)} toRegister={() => {

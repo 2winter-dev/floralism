@@ -418,9 +418,9 @@ export default function selectMethod(props) {
             </div>
         </div>
         {/* {(!login || !add_vis) && <ToastContainer />} */}
-        {!login && <Toaster
+        {/* {!login && <Toaster
             position="top-center"
-        />}
+        />} */}
         <Footer />
         {
             <LoginPannel login={login} close={() => setLogin(false)} toRegister={() => {

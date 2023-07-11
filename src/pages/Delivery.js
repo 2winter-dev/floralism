@@ -122,9 +122,9 @@ export default function Delivery(props) {
         <Footer />
         {/* {!login&&<ToastContainer />} */}
         {!login&&<DynamicButton />}
-        {!login && <Toaster
+        {/* {!login && <Toaster
            position="top-center"
-        />}
+        />} */}
         {
             <LoginPannel login={login} close={() => setLogin(false)} toRegister={() => {
                 setLogin(false);

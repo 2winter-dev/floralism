@@ -95,9 +95,9 @@ export default function CustomerOrder(props) {
             </div>
         </div>
         {/* {!login&&<ToastContainer />} */}
-        {!login && <Toaster
+        {/* {!login && <Toaster
            position="top-center"
-        />}
+        />} */}
         {!login&&<DynamicButton />}
         <Footer />
         {

@@ -193,9 +193,9 @@ export default function ShoppingGuide(props) {
             </div>
         </div>
         {/* {!login&&<ToastContainer />} */}
-        {!login && <Toaster
+        {/* {!login && <Toaster
            position="top-center"
-        />}
+        />} */}
         <Footer />
         {
             <LoginPannel login={login} close={() => setLogin(false)} toRegister={() => {

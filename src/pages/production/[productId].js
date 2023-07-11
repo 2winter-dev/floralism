@@ -276,8 +276,8 @@ export default function ProductDetail({ cateList, product }) {
                                         if (res.code) {
                                             if (res.code.toString() === '401') {
                                                 Cookies.remove('token');
-                                                toast.error("請先登錄");
-                                                setTips(true);
+                                                // toast.error("請先登錄");
+                                                // setTips(true);
                                                 setLogin(true);
 
                                             }
@@ -368,9 +368,9 @@ export default function ProductDetail({ cateList, product }) {
             isShow && <ShopCarPage isShow={isShow} setIsShow={setIsShow} />
         }
         {/* {!login && <ToastContainer />} */}
-        {!login && <Toaster
+        {/* {!login && <Toaster
             position="top-center"
-        />}
+        />} */}
         {/**public\swiper */}
 
     </div >)

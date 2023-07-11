@@ -142,9 +142,9 @@ export default function ForgetPassword(props) {
                     </div>
                 }
             </div>
-            {<Toaster
+            {/* {<Toaster
                 position="top-center"
-            />}
+            />} */}
         </div>
 
     )

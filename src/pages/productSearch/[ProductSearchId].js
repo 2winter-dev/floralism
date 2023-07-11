@@ -178,9 +178,9 @@ export default function ProductSearch({ tiny_top_banner, meta, cateList, data, t
     <Footer />
     {/* {!login&&<ToastContainer />} */}
     {!login && <DynamicButton />}
-    {!login && <Toaster
+    {/* {!login && <Toaster
       position="top-center"
-    />}
+    />} */}
     {
       <LoginPannel login={login} close={() => setLogin(false)} toRegister={() => {
         setLogin(false);

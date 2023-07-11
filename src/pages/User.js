@@ -489,9 +489,9 @@ export default function User(props) {
             }
             } />
         }
-        {<Toaster
+        {/* {<Toaster
             position="top-center"
-        />}
+        />} */}
     </div>)
 }
 

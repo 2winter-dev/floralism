@@ -35,7 +35,7 @@ export default function Home({ allcate, cateList, GoodsPage, carousel }) {
   // ////console.log(GoodsPage);
   const router = useRouter();
   // //////////////////console.log(GoodsPage);
-  const [bannerSize,setBannerSize]=useState(false);
+  const [bannerSize, setBannerSize] = useState(false);
   const [flag, setFlag] = useState(1);
   const [category, setCategory] = useState([]);
   const [categoryPage, setCategoryPage] = useState(1);
@@ -45,7 +45,7 @@ export default function Home({ allcate, cateList, GoodsPage, carousel }) {
   const [register, setRegister] = useState(false);
   const [visible, setVisible] = useState(false);
   const [isShow, setIsShow] = useState(false);
-  
+
   const resizeUpdate = (e) => {
     if (e.target.innerWidth <= 675) {
       ////////////////////////console.log("====", e.target.innerWidth);
@@ -56,7 +56,7 @@ export default function Home({ allcate, cateList, GoodsPage, carousel }) {
       ////////////////////////console.log("-----", e.target.innerWidth);
       setFlag(2);
     }
-    setBannerSize(window.innerWidth<=750?true:false);
+    setBannerSize(window.innerWidth <= 750 ? true : false);
   }
   useEffect(() => {
     window.addEventListener("resize", resizeUpdate);
@@ -69,7 +69,7 @@ export default function Home({ allcate, cateList, GoodsPage, carousel }) {
       ////////////////////////console.log("-----", e.target.innerWidth);
       setFlag(2);
     }
-    setBannerSize(window.innerWidth<=750?true:false);
+    setBannerSize(window.innerWidth <= 750 ? true : false);
     return () => {
       window.removeEventListener("resize", resizeUpdate);
     }
@@ -107,9 +107,9 @@ export default function Home({ allcate, cateList, GoodsPage, carousel }) {
 
 
       <DynamicComponent cateList={cateList} setLogin={setLogin} />
-      <div style={{ width: '100%', position: 'relative',backgroundImage:`url(${bannerSize?"/homepage/tiny-top-banner.jpg":"/homepage/top-banner.jpg"})` }} className={styles.banner}>
+      <div style={{ width: '100%', position: 'relative', backgroundImage: `url(${bannerSize ? "/homepage/tiny-top-banner.jpg" : "/homepage/top-banner.jpg"})` }} className={styles.banner}>
         {/* <Image priority src="/homepage/top-banner.png" width={1920} height={700} style={{width:'100%'}}/> */}
-        <div style={{display:'flex',flexDirection:'column'}} className={styles.top_banner_area}>
+        <div style={{ display: 'flex', flexDirection: 'column' }} className={styles.top_banner_area}>
           <img alt="home top banner description" src={"/homepage/banner-desc.png"} width={'100%'} />
           <Link href='/productSearch/2' style={{ border: 'none', display: 'block', cursor: 'pointer' }} className={styles.banner_buttom} >點擊選購</Link>
         </div>
@@ -119,21 +119,20 @@ export default function Home({ allcate, cateList, GoodsPage, carousel }) {
       </div>
       <main className={`${styles.main_body}`}>
         <div className={styles.goods_list}>
-          
-            <div>
-              <div style={{ display: 'flex', alignItems: 'center' }}>
-                {flag !== 0 && <div className={styles.distance}></div>}
-                <div className={styles.title} style={{ whiteSpace: 'nowrap', flex: 1 }}>{'【FLORALISM】 全部分類'}</div>
-                {flag !== 0 && <div className={styles.distance}></div>}
-              </div>
-              <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-                {
-                  allcate.map((item, index) => {
-                    return <GoodsItem key={index} src={item.src} item={item} title={item.categoryname} price={item.price} type={'category'} animation={'animation'} />
-                  })
-                }
-              </div>
+          <div>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+              {flag !== 0 && <div className={styles.distance}></div>}
+              <div className={styles.title} style={{ whiteSpace: 'nowrap', flex: 1 }}>{'【FLORALISM】 全部分類'}</div>
+              {flag !== 0 && <div className={styles.distance}></div>}
             </div>
+            <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+              {
+                allcate.map((item, index) => {
+                  return <GoodsItem key={index} src={item.src} item={item} title={item.categoryname} price={item.price} type={'category'} animation={'animation'} />
+                })
+              }
+            </div>
+          </div>
         </div>
         <BodyBanner
           flag={flag}
@@ -183,6 +182,21 @@ export default function Home({ allcate, cateList, GoodsPage, carousel }) {
                     })
                   }
                 </Carousel>
+                {/* <div class="swiper">
+
+                  <div class="swiper-wrapper">
+
+                    <div class="swiper-slide">Slide 1</div>
+                    <div class="swiper-slide">Slide 2</div>
+                    <div class="swiper-slide">Slide 3</div>
+                  </div>
+
+
+                  <div class="swiper-button-prev"></div>
+                  <div class="swiper-button-next"></div>
+
+
+                </div> */}
               </div>
             </div>
 
@@ -205,16 +219,20 @@ export default function Home({ allcate, cateList, GoodsPage, carousel }) {
         } />
       }
       {!login && <DynamicButton />}
-      {!login && <Toaster
+      {/* {!login && <Toaster
         position="top-center"
-      />}
+      />} */}
       {/* {!login && <ToastContainer />} */}
       <Script defer src="/swiper/js/idangerous.swiper.min.js" onReady={() => {
         MySwiper = new Swiper('.swiper-container', {
           loop: true,
           onInit: function (swiper) {
             swiper.swipeNext()
-          }
+          },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
         })
       }}></Script>
     </div>
