@@ -56,7 +56,7 @@ export default function Home({ allcate, cateList, GoodsPage, carousel }) {
       ////////////////////////console.log("-----", e.target.innerWidth);
       setFlag(2);
     }
-    setBannerSize(window.innerWidth <= 750 ? true : false);
+    setBannerSize(window.innerWidth <= 675 ? true : false);
   }
   useEffect(() => {
     window.addEventListener("resize", resizeUpdate);
@@ -107,7 +107,7 @@ export default function Home({ allcate, cateList, GoodsPage, carousel }) {
 
 
       <DynamicComponent cateList={cateList} setLogin={setLogin} />
-      <div style={{ width: '100%', position: 'relative', backgroundImage: `url(${bannerSize ? "/homepage/tiny-top-banner.jpg" : "/homepage/top-banner.jpg"})` }} className={styles.banner}>
+      <div style={{ width: '100%', position: 'relative',backgroundPosition:'revert',display:'flex' ,backgroundImage: `url(${bannerSize ? "/homepage/tiny-top-banner.jpg" : "/homepage/top-banner.jpg"})` }} className={styles.banner}>
         {/* <Image priority src="/homepage/top-banner.png" width={1920} height={700} style={{width:'100%'}}/> */}
         <div style={{ display: 'flex', flexDirection: 'column' }} className={styles.top_banner_area}>
           <img alt="home top banner description" src={"/homepage/banner-desc.png"} width={'100%'} />

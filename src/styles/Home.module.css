@@ -150,7 +150,11 @@
   padding: 0 15%;
   transform: translateY(-50%);
 }
-
+@media screen and (max-width:675px) {
+  .banner{
+    height:90vw;
+  }
+}
 @media screen and (max-width:1100px) {
   .goods_scroll {
     padding: 0;

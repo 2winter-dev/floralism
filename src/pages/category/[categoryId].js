@@ -56,7 +56,7 @@ export default function Category({ categoryId, allcate, meta, cateList, data, to
             //////////////////////console.log("-----", e.target.innerWidth);
             setFlag(2);
         }
-        setBannerSize(window.innerWidth <= 800 ? true : false);
+        setBannerSize(window.innerWidth <= 675 ? true : false);
         return () => {
             window.removeEventListener("resize", resizeUpdate);
         }
@@ -95,7 +95,7 @@ export default function Category({ categoryId, allcate, meta, cateList, data, to
             <meta name={'keywords'} content={`${meta.keyword}`} />
         </Head>
         <DynamicComponent cateList={cateList} setLogin={setLogin} />
-        <div style={{ width: '100%', position: 'relative',backgroundPosition:'center', backgroundImage: bannerSize ? `url(${tiny_top_banner.coverimage})` : `url(${top_banner.coverimage})`, marginBottom: 0 }} className={styles.banner} >
+        <div style={{ width: '100%',display:'flex',position: 'relative',backgroundPosition:'revert', backgroundImage: bannerSize ? `url(${tiny_top_banner.coverimage})` : `url(${top_banner.coverimage})`, marginBottom: 0 }} className={styles.banner} >
             {/* <Image priority src="/homepage/top-banner.png" width={1920} height={700} style={{width:'100%'}}/> */}
             <div className={(categoryId === "9" || categoryId === "10" || categoryId === "11") ? styles.spec_banner : styles.top_banner_area} style={{ display: "flex", flexDirection: 'column', alignItems: 'center' }}>
                 <img alt={bannerSize ?(tiny_top_banner?.alt?.length?tiny_top_banner.alt[0]:"") : (top_banner?.alt?.length?top_banner.alt[0]:"")} src={bannerSize ? tiny_top_banner.descriptionimage : top_banner.descriptionimage} style={{width:'100%'}} />
