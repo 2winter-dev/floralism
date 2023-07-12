@@ -74,6 +74,10 @@ export default function ShopCar({ cateList, shopCar }) {
             // location.reload();
         }
     }, [login])
+    useEffect(()=>{
+       Cookies.remove("isAdd");
+       console.log(Cookies.get("isAdd"))
+    },[])
     const hasLogin = () => {
         setFlag(true);
     }

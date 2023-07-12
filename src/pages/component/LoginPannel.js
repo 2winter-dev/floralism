@@ -73,7 +73,7 @@ export default function LoginPannel(props) {
  
                     if (res.code) {
 
-                        Cookies.set('token', res.data.token, { expires: 1 });
+                        Cookies.set('token', res.data.token, { expires: 2 });
 
                         props.close();
 
@@ -96,7 +96,7 @@ export default function LoginPannel(props) {
                     //////////console.log(res);
                     if (res.code) {
 
-                        Cookies.set('token', res.data.token, { expires: 1 });
+                        Cookies.set('token', res.data.token, { expires: 2 });
 
                         props.close();
                         toast.success(res.data);
