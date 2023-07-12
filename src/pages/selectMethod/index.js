@@ -123,7 +123,7 @@ export default function selectMethod(props) {
                     return item;
                 }
             })
-            setAdd(res[0].id);
+            res.length&&setAdd(res[0].id);
         } else {
             toast.error("登陸失效");
             router.replace('/');
