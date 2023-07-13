@@ -85,8 +85,8 @@ export default function AboutUs({ cateList, allcate }) {
                         {/* <span className="iconfont" style={{position:'absolute'}}>&#xe67b;</span>  */}
                         <div style={{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly' }}>
                             <div style={{ fontSize: 42, fontWeight: 700, color: "#d43a43" }}>About us</div>
-                            <div className={styles.desc1} style={{ marginTop: 10, lineHeight: '2rem' }}>在Florlism，我們重視花材的品質和選擇，堅持採用最新鮮、最優質的花材，並運用專業的技巧和創意，將它們轉化為獨特的花束和花藝作品。Florlism希望能夠運用花材的色彩、質地和形狀等特性，將它們結合在一起，創造出層次豐富、風格獨特的花藝作品。此外，我們在創作過程中也注重藝術性和創意性，運用不同的創意和技巧，讓花材的形狀和質地在空間中產生獨特的視覺效果，讓每一朵花都散發出自己獨有的魅力。</div>
-                            <div className={styles.desc2} style={{ marginTop: 10, lineHeight: '2rem' }}>在Florlism，我們也深信每一朵花都有其獨特的含義和價值。因此，我們的花藝師會仔細聆聽客戶的需求和意願，並根據不同場合和用途，設計出最適合的花藝作品，以表達客戶的情感和祝福。Florlism的花藝師擁有專業的技能和豐富的經驗，能夠將花材的美學和技術相融合，為客戶打造出高品質、獨特風格的花藝作品，讓每一朵花都能夠傳達出愛和祝福的訊息。</div>
+                            <div className={styles.desc1} style={{ marginTop: 10, lineHeight: '2rem' }}>在Floralism，我們重視花材的品質和選擇，堅持採用最新鮮、最優質的花材，並運用專業的技巧和創意，將它們轉化為獨特的花束和花藝作品。Floralism希望能夠運用花材的色彩、質地和形狀等特性，將它們結合在一起，創造出層次豐富、風格獨特的花藝作品。此外，我們在創作過程中也注重藝術性和創意性，運用不同的創意和技巧，讓花材的形狀和質地在空間中產生獨特的視覺效果，讓每一朵花都散發出自己獨有的魅力。</div>
+                            <div className={styles.desc2} style={{ marginTop: 10, lineHeight: '2rem' }}>在Floralism，我們也深信每一朵花都有其獨特的含義和價值。因此，我們的花藝師會仔細聆聽客戶的需求和意願，並根據不同場合和用途，設計出最適合的花藝作品，以表達客戶的情感和祝福。Floralism的花藝師擁有專業的技能和豐富的經驗，能夠將花材的美學和技術相融合，為客戶打造出高品質、獨特風格的花藝作品，讓每一朵花都能夠傳達出愛和祝福的訊息。</div>
                         </div>
                     </div>
                 </div>
