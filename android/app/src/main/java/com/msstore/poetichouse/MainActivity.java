@@ -1,4 +1,4 @@
-package com.imaker.yfd.goldwill;
+package com.imaker.yfd.skyman;
 
 import android.content.Intent;
 import android.content.Context;
@@ -17,7 +17,7 @@ public class MainActivity extends ReactActivity {
      */
     @Override
     protected String getMainComponentName() {
-        return "GoldWill";
+        return "skyman";
     }
 
     @Override

@@ -156,7 +156,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.imaker.yfd.goldwill"
+        applicationId "com.imaker.yfd.skyman"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 44

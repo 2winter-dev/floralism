@@ -1,42 +1,35 @@
 {
   "project_info": {
-    "project_number": "939140283027",
-    "firebase_url": "https://goldwill-2451a-default-rtdb.asia-southeast1.firebasedatabase.app",
-    "project_id": "goldwill-2451a",
-    "storage_bucket": "goldwill-2451a.appspot.com"
+    "project_number": "952048642464",
+    "firebase_url": "https://skyman-a195b-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "skyman-a195b",
+    "storage_bucket": "skyman-a195b.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:939140283027:android:5c08264f31894adbbf2b66",
+        "mobilesdk_app_id": "1:952048642464:android:f62675eab6a2a19d9cdcc5",
         "android_client_info": {
-          "package_name": "com.imaker.yfd.goldwill"
+          "package_name": "com.imaker.skyman"
         }
       },
       "oauth_client": [
         {
-          "client_id": "939140283027-j8v4jdpg8r7ehjd6103t07lhpquf2gvd.apps.googleusercontent.com",
+          "client_id": "952048642464-anbvuk34djprh2n79ub0chl3f0bh049a.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyB4uD21LcK6X1CT5WHNXqrqFl59kj6HviE"
+          "current_key": "AIzaSyAp1KcJp6x6UH0jdxCoIxHFYQAZlOC894o"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "939140283027-j8v4jdpg8r7ehjd6103t07lhpquf2gvd.apps.googleusercontent.com",
+              "client_id": "952048642464-anbvuk34djprh2n79ub0chl3f0bh049a.apps.googleusercontent.com",
               "client_type": 3
-            },
-            {
-              "client_id": "939140283027-bb320ulv8agnvc92clq8d10hmtvdk6mj.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.imaker.yfd.goldwill"
-              }
             }
           ]
         }

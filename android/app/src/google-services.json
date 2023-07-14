@@ -1,16 +1,16 @@
 {
   "project_info": {
     "project_number": "939140283027",
-    "firebase_url": "https://goldwill-2451a-default-rtdb.asia-southeast1.firebasedatabase.app",
-    "project_id": "goldwill-2451a",
-    "storage_bucket": "goldwill-2451a.appspot.com"
+    "firebase_url": "https://skyman-2451a-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "skyman-2451a",
+    "storage_bucket": "skyman-2451a.appspot.com"
   },
   "client": [
     {
       "client_info": {
         "mobilesdk_app_id": "1:939140283027:android:5c08264f31894adbbf2b66",
         "android_client_info": {
-          "package_name": "com.imaker.yfd.goldwill"
+          "package_name": "com.imaker.yfd.skyman"
         }
       },
       "oauth_client": [
@@ -35,7 +35,7 @@
               "client_id": "939140283027-bb320ulv8agnvc92clq8d10hmtvdk6mj.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.imaker.yfd.goldwill"
+                "bundle_id": "com.imaker.yfd.skyman"
               }
             }
           ]

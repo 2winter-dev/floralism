@@ -4,15 +4,15 @@
 import Images from "./Images";
 import Constants from "./Constants";
 import Icons from "./Icons";
-const hostUrl = "https://goldwilltech-hk.com/";
+const hostUrl = "https://skymanlogistics.com/";
 export default {
   /**
    * Step 1: change to your website URL and the wooCommerce API consumeKey
    */
   WooCommerce: {
     url: hostUrl,
-    consumerKey: "ck_1bd7c374f7dc9327c0e5df85777c26730f989ae9",
-    consumerSecret: "cs_a91c2eed1db22f9d1318def23841238467fdf5c4",
+    consumerKey: "ck_5dbdabbd8f65a6ac4b0592fd833461bf5added0b",
+    consumerSecret: "cs_5adc9ded64811bfb662756227db2af19ab298644",
   },
 
   /**
@@ -85,7 +85,7 @@ export default {
   intro: [
     {
       key: "page1",
-      title: "Welcome to GoldWill Technology Limited",
+      title: "Welcome to skyman Technology Limited",
       // text: "Get the hottest fashion by trend and season right on your pocket.",
       icon: "ios-basket",
       colors: ["#0FF0B3", "#036ED9"],

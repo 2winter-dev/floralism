@@ -3,6 +3,7 @@
 import { Config } from "@common";
 // import { warn } from '@app/Omni'
 import { WooWorker } from "api-ecommerce";
+import { log } from "react-native-reanimated";
 
 
 
@@ -38,6 +39,7 @@ export const actions = {
       console.error(json)
       dispatch(actions.fetchCategoriesFailure(json.message));
     } else if(Array.isArray(json)) {
+      console.log(json)
       console.log('分类获取Ok');
       dispatch(actions.fetchCategoriesSuccess(json));
 

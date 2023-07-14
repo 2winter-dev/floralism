@@ -6,11 +6,11 @@
   },
   "HorizonLayout": [
     {
-      "imageBanner": "https://goldwilltech-hk.com/wp-content/uploads/2023/06/dane-deaner-_-KLkj7on_c-unsplash-scaled.jpg",
+      "imageBanner": "https://skymantech-hk.com/wp-content/uploads/2023/06/dane-deaner-_-KLkj7on_c-unsplash-scaled.jpg",
       "layout": "bannerImage",
       "height": 160,
       "imageMode": "cover",
-      "category": 25
+      "category": 19
     },
     {
       "layout": "circleCategory"
@@ -19,7 +19,7 @@
       "name": "featureProducts",
       "image": "",
       "layout": "card",
-      "category": 26
+      "category": 21
     }
   ],
   "VerticalLayout": {

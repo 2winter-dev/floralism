@@ -1,4 +1,4 @@
-package com.imaker.yfd.goldwill;
+package com.imaker.yfd.skyman;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
