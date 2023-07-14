@@ -55,7 +55,7 @@ export default function GoodsItem(props) {
             //     location.href = `/category/${props.item.id}`
             // }
         }} style={{ padding: '2%', ...props.top_style }}>
-            <a href={`${props.type !== "category" ? "/production/" + props?.item?.id : "/category/" + props?.item?.id}`}>
+            <a href={`${props.type !== "category" ? "/production/" + props?.item?.id : "/category/" + props?.item?.categoryname}`}>
                 <div className={props.type === "category" || props.type === "carsouel" ? styles.goods_img_cover : ""} style={{ position: 'relative', ...props.imgTopStyle }}>
                     <img alt={props?.item?.alt && props?.item?.alt?.length ? props.item.alt[0] : (props?.type === "category" ? props?.item?.categoryname : props?.item?.flowername)} src={props?.item?.photoimage} style={{ width: '100%', display: 'block', ...props.imgStyle }} className={props.animation === "toLarge" ? `${styles.goods_img} ${styles.an_fangda}` : `${styles.goods_img}`} />
                     {props.type !== "category" && props.type !== "carsouel" && props.item?.photoimages?.length && props.item?.photoimages[0] && <img alt="" src={props?.item?.photoimages[0]} style={{ borderRadius: 16 }} className={styles.goods_hover_img} />}

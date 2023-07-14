@@ -6,7 +6,7 @@ import { useState } from "react";
 
 export default function Header(props) {
     const router = useRouter();
-    // //////console.log(props.list);
+    // console.log(props.list);
     const [navStatus, setNavStatus] = useState(false);
     const [index, setIndex] = useState();
 
@@ -32,7 +32,7 @@ export default function Header(props) {
                                     {
                                         item.get_child.map((it, ii) => {
                                             return (
-                                                <a key={index.toString() + ii.toString()} href={`/category/${it.id}`} >
+                                                <a key={index.toString() + ii.toString()} href={`/category/${it.categoryname}`} >
                                                     <div >{it.categoryname}</div>
                                                 </a>)
                                         })
@@ -79,7 +79,7 @@ export default function Header(props) {
                                     {item.get_child &&
                                         item.get_child.map((it, ii) => {
                                            
-                                            return (<a key={index + ii.toString()} href={`/category/${it.id}`} ><div  className={`${header.header_center_dropdown}`}>
+                                            return (<a key={index + ii.toString()} href={`/category/${it.categoryname}`} ><div  className={`${header.header_center_dropdown}`}>
                                                 {it.categoryname}
                                             </div></a>)
                                         })

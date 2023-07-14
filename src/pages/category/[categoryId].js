@@ -80,7 +80,7 @@ export default function Category({ categoryId, allcate, meta, cateList, data, to
 
     //     return res[0].categoryname;
     // }
-
+    console.log(data)
     useEffect(() => {
         console.log(bannerSize)
         // ////////////////////console.log(goodsList);
@@ -99,7 +99,7 @@ export default function Category({ categoryId, allcate, meta, cateList, data, to
             {/* <Image priority src="/homepage/top-banner.png" width={1920} height={700} style={{width:'100%'}}/> */}
             <div className={(categoryId === "9" || categoryId === "10" || categoryId === "11") ? styles.spec_banner : styles.top_banner_area} style={{ display: "flex", flexDirection: 'column', alignItems: 'center' }}>
                 <img alt={bannerSize ?(tiny_top_banner?.alt?.length?tiny_top_banner.alt[0]:"") : (top_banner?.alt?.length?top_banner.alt[0]:"")} src={bannerSize ? tiny_top_banner.descriptionimage : top_banner.descriptionimage} style={{width:'100%'}} />
-                <a href={`${data.data.length ? "/productSearch/"+data.data[0]?.flower_category_id:"/"}`} onClick={() => {
+                <a href={`${data.data.length ? "/productSearch/"+data.category_name:"/"}`} onClick={() => {
                     //////console.log(data);
                     // data.data.length ?
                     //     router.push(`/productSearch/${data.data[0].flower_category_id}`)
@@ -194,11 +194,10 @@ export async function getStaticPaths() {
     }
     );
     const data = await response.json();
-    ////////console.log(data);
+    // console.log(data);
     let res = [];
     data.data.map((item, index) => {
-        res.push({ params: { categoryId: item.id.toString() } });
-
+        res.push({ params: { categoryId: item.categoryname.toString() } });
     })
     //////console.log(res);
     // ////////////////////console.log(res);
@@ -215,7 +214,7 @@ export async function getStaticProps(context) {
     console.log(params);
 
     const response = await fetch(
-        `${constant.api_url}/api/flowers/index?keyword=&flower_category_id=${params.categoryId}`, {
+        `${constant.api_url}/api/flowers/index?keyword=&flower_category_name=${params.categoryId}`, {
         mode: 'cors',
         headers: {
             // "Authorization": `Bearer ${data.cookie}`,
@@ -225,7 +224,17 @@ export async function getStaticProps(context) {
         }
     }
     );
-
+    // const List_response = await fetch(
+    //     `${constant.api_url}/api/Flowercategory/allIndex`, {
+    //     mode: 'cors',
+    //     headers: {
+    //         // "Authorization": `Bearer ${data.cookie}`,
+    //         "Content-Type": "application/json",
+    //         "Access-Control-Request-Method": "POST",
+    //         "Access-Control-Request-Headers": "Content-Type",
+    //     }
+    // }
+    // );
     const banner = await fetch(`${constant.api_url}/api/banner/index`, {
         mode: 'cors',
         headers: {
@@ -258,11 +267,19 @@ export async function getStaticProps(context) {
         }
     }
     )
+    // let list=await List_response.json();
     let allcate = await allcate_response.json();
     const tt_data = await tt_response.text()
     const data = await response.text();
     const banner_list = await banner.json();
-    ////////console.log("------------");
+    console.log("------------");
+    console.log(data);
+    let cateId=allcate.data.filter((item,index)=>{
+        if(item.categoryname===params.categoryId){
+            return item;
+        }
+    })
+    // console.log(cateId[0]);
     //////////////console.log(JSON.parse(data).data);
     ////////////////console.log("--------");
     ////////console.log(banner_list.data.top_banner);
@@ -273,46 +290,38 @@ export async function getStaticProps(context) {
     // let list=JSON.parse(tt_data);
     // //////////console.log(list);
     //////////console.log(allcate.data);
-    let res = allcate.data.filter((item, index) => {
-        //////////console.log("=========");
-        //////////console.log(params.categoryId);
-        //////////console.log(item.id);
-        if (item.id.toString() === params.categoryId) {
-            //////////console.log("找到了");
-            return item;
-        }
-    })
-    // //console.log(res[0]);
+    // console.log(res[0]);
     let meta = {
-        keyword: res[0].keywords,
-        title: res[0].metatitle ?? "",
-        metadescription: res[0].metadescription ?? "",
+        keyword: cateId[0].keywords,
+        title: cateId[0].metatitle ?? "",
+        metadescription: cateId[0].metadescription ?? "",
     }
+
     ////////console.log(meta);
 
     let top_banner = banner_list.data.top_banner.web.filter((item) => {
-        ////////console.log(item.flower_category_ids,params.categoryId)
-        if (item.flower_category_ids.includes(parseInt(params.categoryId))) {
+        // console.log(item.flower_category_ids,cateId[0].id)
+        if (item.flower_category_ids.includes(parseInt(cateId[0].id))) {
             ////////////////console.log("找到了");
             return item;
         }
     })
     let tiny_top_banner = banner_list.data.top_banner.mobile.filter((item) => {
 
-        if (item.flower_category_ids.includes(parseInt(params.categoryId))) {
+        if (item.flower_category_ids.includes(parseInt(cateId[0].id))) {
             ////////////////console.log("找到了");
             return item;
         }
     })
     let middle_banner = banner_list.data.middle_banner.web.filter((item) => {
-        if (item.flower_category_ids.includes(parseInt(params.categoryId))) {
+        if (item.flower_category_ids.includes(parseInt(cateId[0].id))) {
             return item;
         }
         // ////////////////console.log(item.flower_category_ids.includes(params.categoryId))
     })
     let tiny_middle_banner = banner_list.data.middle_banner.mobile.filter((item) => {
         //////////console.log(item.flower_category_ids);
-        if (item.flower_category_ids.includes(parseInt(params.categoryId))) {
+        if (item.flower_category_ids.includes(parseInt(cateId[0].id))) {
             ////////////////console.log("找到了");
             return item;
         }

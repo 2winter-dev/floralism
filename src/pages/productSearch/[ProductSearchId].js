@@ -104,15 +104,15 @@ export default function ProductSearch({ tiny_top_banner, meta, cateList, data, t
 
   return (<div style={{ position: 'relative' }}>
     <Head>
-    <title>{`${meta.title!==""?meta.title:(data.category_name+" | 「Floralism」香港花店")}`}</title>
+      <title>{`${meta.title !== "" ? meta.title : (data.category_name + " | 「Floralism」香港花店")}`}</title>
       <meta name={'descirption'} content={`${meta.metadescription}`} />
       <meta name={'keywords'} content={`${meta.keyword}`} />
     </Head>
     <DynamicComponent cateList={cateList} setLogin={setLogin} />
     <div style={{ width: '100%', position: 'relative' }}>
-      <img alt={flag ? (tiny_top_banner?.alt?.length?tiny_top_banner.alt[0]:"") : (top_banner?.alt?.length?top_banner.alt[0]:"")} src={flag ? tiny_top_banner.coverimage : top_banner.coverimage} style={{ width: '100%' }} />
+      <img alt={flag ? (tiny_top_banner?.alt?.length ? tiny_top_banner.alt[0] : "") : (top_banner?.alt?.length ? top_banner.alt[0] : "")} src={flag ? tiny_top_banner.coverimage : top_banner.coverimage} style={{ width: '100%' }} />
       <div className={style.banner_search} style={{ position: 'absolute' }}>
-        <img alt={flag ? (tiny_top_banner?.alt?.length>1?tiny_top_banner.alt[1]:"") :( top_banner?.alt?.length?top_banner.alt[1]:"")} src={flag ? tiny_top_banner.descriptionimage : top_banner.descriptionimage} className={style.banner_desc}
+        <img alt={flag ? (tiny_top_banner?.alt?.length > 1 ? tiny_top_banner.alt[1] : "") : (top_banner?.alt?.length ? top_banner.alt[1] : "")} src={flag ? tiny_top_banner.descriptionimage : top_banner.descriptionimage} className={style.banner_desc}
         />
         <div className={`${styles.search_area}`} style={{ marginBottom: 12 }}>
           <span className={`${styles.serach_icon} iconfont`} style={{ marginLeft: 8 }}>&#xe82e;</span>
@@ -210,7 +210,7 @@ export async function getStaticPaths() {
   const data = await response.json()
   let res = [];
   data.data.map((item, index) => {
-    res.push({ params: { ProductSearchId: item.id.toString() } });
+    res.push({ params: { ProductSearchId: item.categoryname.toString() } });
 
   })
 
@@ -226,7 +226,7 @@ export async function getStaticProps(context) {
   const { params } = context;
   // //////////////////////console.log(params);
   const response = await fetch(
-    `${constant.api_url}/api/flowers/index?keyword=&flower_category_id=${params.ProductSearchId}&listRows=16`, {
+    `${constant.api_url}/api/flowers/index?keyword=&flower_category_name=${params.ProductSearchId}&listRows=16`, {
     headers: {
       // "Authorization": `Bearer ${data.cookie}`,
       "Content-Type": "application/json",
@@ -247,21 +247,20 @@ export async function getStaticProps(context) {
   }
   );
   const allcate = await allcate_response.json();
-  //console.log(allcate,params);
-  let res = allcate.data.filter((item, index) => {
-    //////////console.log("=========");
-    //////////console.log(params.categoryId);
-    //////////console.log(item.id);
-    if (item.id.toString() === params.ProductSearchId) {
-      //////////console.log("找到了");
+  // console.log(allcate,params)
+  ;
+  let cateId = allcate.data.filter((item, index) => {
+    console.log(item.categoryname===params.ProductSearchId);
+    if (item.categoryname === params.ProductSearchId) {
+      console.log("=====");
       return item;
     }
   })
-  //console.log(res[0]);
+  console.log(cateId);
   let meta = {
-    keyword: res[0]?.keywords??"",
-    title: res[0]?.metatitle ?? "",
-    metadescription:res[0]?.metadescription??"",
+    keyword: cateId[0]?.keywords ?? "",
+    title: cateId[0]?.metatitle ?? "",
+    metadescription: cateId[0]?.metadescription ?? "",
   }
   let banner_list;
   let top_banner
@@ -283,14 +282,14 @@ export async function getStaticProps(context) {
   //////////console.log(banner_list.data.top_banner.web);
   top_banner = banner_list.data.top_banner.web.filter((item) => {
     //////////console.log(item.flower_category_ids, params.ProductSearchId);
-    if (item.flower_category_ids.includes(parseInt(params.ProductSearchId))) {
+    if (item.flower_category_ids.includes(parseInt(cateId[0].id))) {
       ////////////////console.log("找到了");
       return item;
     }
   })
   let tiny_top_banner = banner_list.data.top_banner.mobile.filter((item) => {
     //////////console.log(item.flower_category_ids, params.ProductSearchId);
-    if (item.flower_category_ids.includes(parseInt(params.ProductSearchId))) {
+    if (item.flower_category_ids.includes(parseInt(cateId[0].id))) {
       ////////////////console.log("找到了");
       return item;
     }
