@@ -115,7 +115,7 @@ export default function ProductDetail({ cateList, product }) {
         <main className={style.total_container} style={{}}>
             <div>
                 <div style={{ marginTop: 32 }}>
-                    <Link href={'/'} style={{ cursor: 'pointer' }}>首頁</Link>{product?.flowerCategory?.id && <span className={style.separator} style={{ cursor: 'pointer' }}>/</span>}<Link href={`/category/${product?.flowerCategory?.id}`}>{product.flowerCategory?.categoryname}</Link>
+                    <Link href={'/'} style={{ cursor: 'pointer' }}>首頁</Link>{product?.flowerCategory?.id && <span className={style.separator} style={{ cursor: 'pointer' }}>/</span>}<Link href={`/category/${product?.flowerCategory?.categoryname}`}>{product.flowerCategory?.categoryname}</Link>
                     {/* <span className={style.separator}>/</span> */}
                     {/* <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', display: 'flex', flexWrap: 'nowrap' }}>{product.flowerDetail[index].flowername}</span> */}
                 </div>
