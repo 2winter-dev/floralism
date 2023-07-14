@@ -3,7 +3,7 @@ import styles from '@/styles/Home.module.css'
 
 
 export default function BodyBanner(props) {
-    //////////////////console.log("flag为:"+props.flag);
+    ////////////////////console.log("flag为:"+props.flag);
     return (<div style={{ width: '100%', position: 'relative' }}>
         {
             <img alt={props.flag === 0 ? props.imgTiny : props.img} src={

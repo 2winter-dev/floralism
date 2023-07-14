@@ -6,17 +6,17 @@ export default function SuccessPage() {
     const router = useRouter();
     const [statement,setStatement]=useState("")
     let i_g_l=2;
-    // //////////console.log("1");
+    // ////////////console.log("1");
     // const { url } = router.query;
     // url.splice("?")
-    //////////////////////console.log(router.query.url);
+    ////////////////////////console.log(router.query.url);
     const getState = () => {
-        ////////////////console.log(router.query.url)
+        //////////////////console.log(router.query.url)
         let res = router.query.url.split("?")[1];
         let _res = res.split("&")[0];
         let statement = _res.split("=")[0];
-        //////////console.log("====");
-        //////////console.log(_res.split("=")[1]==="false");
+        ////////////console.log("====");
+        ////////////console.log(_res.split("=")[1]==="false");
         if(_res.split("=")[1]===true){
             return statement;
         }else return "fail";
