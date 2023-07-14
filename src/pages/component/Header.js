@@ -22,7 +22,7 @@ export default function Header(props) {
                     props?.list?.length && props.list.map((item, index) => {
                         if (!item?.get_child.length) return null;
                         return (<div key={item.id} className={`${header.header_center_label}`}>
-                            <div onClick={() => router.push(!!item?.get_child.length && `/category/${item.get_child[0].id}`)} className={`${header.header_center_parent}`}>{item.categoryname}
+                            <div onClick={() => router.push(!!item?.get_child.length && `/category/${item.get_child[0].categoryname}`)} className={`${header.header_center_parent}`}>{item.categoryname}
                                 {
                                     !!item.get_child?.length && <span className={`iconfont ${header.dropdown_btn}`} style={{ fontSize: 10 }}>&#xe645;</span>
                                 }
