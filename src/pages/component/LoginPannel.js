@@ -11,7 +11,7 @@ import ForgetPassword from './ForgetPassword';
 import toast, { Toaster } from "react-hot-toast";
 
 export default function LoginPannel(props) {
-    // //////////////////////////console.log(window.innerHeight)
+    // ////////////////////////////console.log(window.innerHeight)
     const [type, setType] = useState(0);//0為密碼登錄，1為驗證碼登錄
     const [time, setTime] = useState(0);
     const [email, setEmail] = useState("");
@@ -45,7 +45,7 @@ export default function LoginPannel(props) {
         sendEmail.mutate({ email: email.trim(), event: 'emaillogin' }, {
             onSuccess: async (res) => {
                 // let res = await res.json();
-                ////////////console.log(res);
+                //////////////console.log(res);
                 if (res.code) {
                     setTime(60);
                     setFlag(true);
@@ -56,7 +56,7 @@ export default function LoginPannel(props) {
 
             },
             onError: (res) => {
-                //////////////////////////console.log(res);
+                ////////////////////////////console.log(res);
                 if(res instanceof Error){
                     toast.error(res.msg);
                 }else toast.error(JSON.stringify(res.msg))
@@ -93,7 +93,7 @@ export default function LoginPannel(props) {
             loginByEmail.mutate({ email: email.trim(), code: code.trim() }, {
                 onSuccess: async (res) => {
 
-                    ////////////console.log(res);
+                    //////////////console.log(res);
                     if (res.code) {
 
                         Cookies.set('token', res.data.token, { expires: 2 });

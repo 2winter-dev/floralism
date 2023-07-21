@@ -1,4 +1,6 @@
-import '../styles/globals.css'
+import '@/styles/globals.css'
+import 'bootstrap/dist/css/bootstrap.css';
+
 import { NextUIProvider } from '@nextui-org/react'
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 // import 'bootstrap/dist/css/bootstrap.css';
@@ -18,5 +20,6 @@ export default function App({ Component, pageProps }) {
         </QueryClientProvider>
       </NextUIProvider>
       {/* <Script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" /> */}
+      <Script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" />
     </>)
 }
