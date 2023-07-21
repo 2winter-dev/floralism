@@ -55,7 +55,7 @@ export default function Index({ category, cateList, top_banner, tiny_top_banner,
         <DynamicComponent cateList={cateList} setLogin={setLogin} />
         <div style={{ width: '100%', display: 'flex', position: 'relative', backgroundPosition: 'revert', backgroundImage: bannerSize ? `url(${tiny_top_banner.coverimage})` : `url(${top_banner.coverimage})`, marginBottom: 0 }} className={styles.banner} >
             {/* <Image priority src="/homepage/top-banner.png" width={1920} height={700} style={{width:'100%'}}/> */}
-            <div className={category.id === 13 ? styles.n_spec_banner : styles.top_banner_area} style={{ display: "flex", flexDirection: 'column', alignItems: 'center',margin:category.id===13&&'auto' }}>
+            <div className={category.id === 13 ? styles.n_spec_banner :category.id===23?styles.s_spec_banner: styles.top_banner_area} style={{ display: "flex", flexDirection: 'column', alignItems: 'center',margin:category.id===13&&'auto' }}>
                 {
                     <img className={category.id === 13 ?styles.n_desc_banner:styles.desc_banner} alt={bannerSize ? tiny_top_banner.descriptionimage : top_banner.descriptionimage} src={bannerSize ? tiny_top_banner.descriptionimage : top_banner.descriptionimage} style={{}} />
                 }
@@ -106,14 +106,14 @@ export default function Index({ category, cateList, top_banner, tiny_top_banner,
                             className={`col-12 col-lg-7 ${styles.textArea}`}
                             style={{ backgroundColor: category.background_color ? `#${category.background_color}` : "rgb(213, 59, 69)", display: 'flex', flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'center', padding: '4vw', color: 'white' }}
                         >
-                            <div style={{ width: 20, height: 4, backgroundColor: 'white', borderRadius: 12 }}></div>
+                            <div style={{ marginLeft:'1rem',width: 20, height: 4, backgroundColor: 'white', borderRadius: 12 }}></div>
                             <div
                                 dangerouslySetInnerHTML={{
                                     __html: category.category_description,
                                 }}
                                 style={{ margin: "0 1rem" }}
                             ></div>
-                            <div style={{ padding: '0.5vw 2vw', border: '1px solid white', marginTop: '3vw', borderRadius: 12 }}>{category.categoryname}</div>
+                            <div style={{ marginLeft:'1rem',padding: '0.5vw 2vw', border: '1px solid white', marginTop: '3vw', borderRadius: 12 }}>{category.categoryname}</div>
                         </div>
 
                     </div>

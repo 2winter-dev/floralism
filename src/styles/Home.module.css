@@ -150,6 +150,12 @@
     width: 50%;
     margin-left: 5%;
   }
+  .s_spec_banner{
+    padding: 12% 0;
+  }
+  .s_spec_banner img{
+    padding: 0 10% ;
+  }
   .n_desc_banner{
     width: 40vw;
     margin: 30% 0;
@@ -257,6 +263,9 @@
     width: 60vw;
     margin-top: 65%;
     margin-bottom: 50%;
+  }
+  .s_spec_banner{
+    padding: 25% 0;
   }
   /* .textArea{
     border-bottom-left-radius: 12px;
