@@ -104,15 +104,15 @@ export default function ProductSearch({ tiny_top_banner, meta, cateList, data, t
 
   return (<div style={{ position: 'relative' }}>
     <Head>
-      <title>{`${meta.title !== "" ? meta.title : (data.category_name + " | 「Floralism」香港花店")}`}</title>
-      <meta name={'descirption'} content={`${meta.metadescription}`} />
-      <meta name={'keywords'} content={`${meta.keyword}`} />
+      <title>{`${meta?.title !== "" ? meta?.title : (data?.category_name + " | 「Floralism」香港花店")}`}</title>
+      <meta name={'descirption'} content={`${meta?.metadescription}`} />
+      <meta name={'keywords'} content={`${meta?.keyword}`} />
     </Head>
     <DynamicComponent cateList={cateList} setLogin={setLogin} />
     <div style={{ width: '100%', position: 'relative' }}>
-      <img alt={flag ? (tiny_top_banner?.alt?.length ? tiny_top_banner.alt[0] : "") : (top_banner?.alt?.length ? top_banner.alt[0] : "")} src={flag ? tiny_top_banner.coverimage : top_banner.coverimage} style={{ width: '100%' }} />
+      <img alt={flag ? (tiny_top_banner?.alt?.length ? tiny_top_banner?.alt[0] : "") : (top_banner?.alt?.length ? top_banner.alt[0] : "")} src={flag ? tiny_top_banner?.coverimage : top_banner?.coverimage} style={{ width: '100%' }} />
       <div className={style.banner_search} style={{ position: 'absolute' }}>
-        <img alt={flag ? (tiny_top_banner?.alt?.length > 1 ? tiny_top_banner.alt[1] : "") : (top_banner?.alt?.length ? top_banner.alt[1] : "")} src={flag ? tiny_top_banner.descriptionimage : top_banner.descriptionimage} className={style.banner_desc}
+        <img alt={flag ? (tiny_top_banner?.alt?.length > 1 ? tiny_top_banner?.alt[1] : "") : (top_banner?.alt?.length ? top_banner.alt[1] : "")} src={flag ? tiny_top_banner?.descriptionimage : top_banner?.descriptionimage} className={style.banner_desc}
         />
         <div className={`${styles.search_area}`} style={{ marginBottom: 12 }}>
           <span className={`${styles.serach_icon} iconfont`} style={{ marginLeft: 8 }}>&#xe82e;</span>
@@ -150,13 +150,13 @@ export default function ProductSearch({ tiny_top_banner, meta, cateList, data, t
       {/* {
         keyword.trim()!==""? */}
       <GoodsScoll
-        title={keyword !== "" ? "搜索結果" : data.category_name}
+        title={keyword !== "" ? "搜索結果" : data?.category_name}
         list={keyword !== "" ? searchResult : goodsList}
         page={page}
         id={data?.data[0]?.flower_category_id ?? 0}
         setPage={setPage}
         perPage={16}
-        maxPage={data.last_page}
+        maxPage={data?.last_page}
         setList={setGoodsList}
         animation
         type={''}
@@ -216,7 +216,7 @@ export async function getStaticPaths() {
 
   return {
     paths: res,
-    fallback: false,
+    fallback:true,
   };
 }
 
@@ -317,6 +317,6 @@ export async function getStaticProps(context) {
       top_banner: top_banner.length ? top_banner[0] : { coverimage: `/banner-搜索背景.png`, descriptionimage: `/product-search-desc.png` },
       tiny_top_banner: tiny_top_banner.length ? tiny_top_banner[0] : { coverimage: `/banner-搜索背景.png`, descriptionimage: `/product-search-desc.png` },
     },
-
+    revalidate: 60,
   };
 }

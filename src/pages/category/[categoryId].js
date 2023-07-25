@@ -23,6 +23,7 @@ export default function Category({ categoryId, allcate, meta, cateList, data, to
     // //////////////////////////console.log("----");
     ////////////////////////console.log(data);
     //////////console.log(data);
+    console.log(categoryId);
     ////////////console.log(tiny_middle_banner.alt)
     // ////////////////console.log(tiny_top_banner,tiny_middle_banner);
     const router = useRouter();
@@ -90,16 +91,16 @@ export default function Category({ categoryId, allcate, meta, cateList, data, to
     return (<div>
         <Head>
             {/* <meta title={`${meta.title}`}  /> */}
-            <title>{`${meta.title !== "" ? meta.title : (data.category_name + " | 「Floralism」香港花店")}`}</title>
-            <meta name={'descirption'} content={`${meta.metadescription}`} />
-            <meta name={'keywords'} content={`${meta.keyword}`} />
+            <title>{`${meta?.title !== "" ? meta?.title : (data?.category_name + " | 「Floralism」香港花店")}`}</title>
+            <meta name={'descirption'} content={`${meta?.metadescription}`} />
+            <meta name={'keywords'} content={`${meta?.keyword}`} />
         </Head>
         <DynamicComponent cateList={cateList} setLogin={setLogin} />
-        <div style={{ width: '100%',display:'flex',color:'white',position: 'relative',backgroundPosition:'revert', backgroundImage: bannerSize ? `url(${tiny_top_banner.coverimage})` : `url(${top_banner.coverimage})`, marginBottom: 0 }} className={styles.banner} >
+        <div style={{ width: '100%',display:'flex',color:'white',position: 'relative',backgroundPosition:'revert', backgroundImage: bannerSize ? `url(${tiny_top_banner?.coverimage})` : `url(${top_banner?.coverimage})`, marginBottom: 0 }} className={styles.banner} >
             {/* <Image priority src="/homepage/top-banner.png" width={1920} height={700} style={{width:'100%'}}/> */}
-            <div className={(categoryId === "9" || categoryId === "10" || categoryId === "11") ? styles.spec_banner : styles.top_banner_area} style={{ display: "flex", flexDirection: 'column', alignItems: 'center' }}>
-                <img alt={bannerSize ?(tiny_top_banner?.alt?.length?tiny_top_banner.alt[0]:"") : (top_banner?.alt?.length?top_banner.alt[0]:"")} src={bannerSize ? tiny_top_banner.descriptionimage : top_banner.descriptionimage} style={{width:'100%'}} />
-                <a href={`${data.data.length ? "/productSearch/"+data.category_name:"/"}`} onClick={() => {
+            <div className={(categoryId === "9" || categoryId === "10" || categoryId === "11"||categoryId === "紀念日花束") ? styles.spec_banner : styles.top_banner_area} style={{ display: "flex", flexDirection: 'column', alignItems: 'center' }}>
+                <img alt={bannerSize ?(tiny_top_banner?.alt?.length?tiny_top_banner.alt[0]:"") : (top_banner?.alt?.length?top_banner?.alt[0]:"")} src={bannerSize ? tiny_top_banner?.descriptionimage : top_banner?.descriptionimage} style={{width:'100%'}} />
+                <a href={`${data?.data?.length ? "/productSearch/"+data?.category_name:"/"}`} onClick={() => {
                     ////////////console.log(data);
                     // data.data.length ?
                     //     router.push(`/productSearch/${data.data[0].flower_category_id}`)
@@ -109,13 +110,13 @@ export default function Category({ categoryId, allcate, meta, cateList, data, to
         </div>
         <div className={styles.goods_view} style={{ marginBottom: 32 }}>
             <GoodsScoll
-                title={data.category_name}
+                title={data?.category_name}
                 list={goodsList}
                 page={goodsPage}
                 id={data?.data[0]?.flower_category_id ?? 0}
                 setPage={setGoodsPage}
                 perPage={!flag ? 4 : flag === 1 ? 6 : flag === 2 && 8}
-                maxPage={data.last_page}
+                maxPage={data?.last_page}
                 setList={setGoodsList}
                 animation
                 type={''}
@@ -123,12 +124,12 @@ export default function Category({ categoryId, allcate, meta, cateList, data, to
         </div>
         <div style={{ width: '100%', position: 'relative' }}>
             {
-                <img alt={flag < 2 ? (tiny_middle_banner?.alt?.length>2?tiny_middle_banner.alt[2]:"") : (middle_banner?.alt?.length>2?middle_banner.alt[2]:"")} src={flag < 2 ? tiny_middle_banner.coverimage : middle_banner.coverimage} style={{ width: '100%', height: '100%', display: 'block' }}></img>
+                <img alt={flag < 2 ? (tiny_middle_banner?.alt?.length>2?tiny_middle_banner?.alt[2]:"") : (middle_banner?.alt?.length>2?middle_banner?.alt[2]:"")} src={flag < 2 ? tiny_middle_banner?.coverimage : middle_banner?.coverimage} style={{ width: '100%', height: '100%', display: 'block' }}></img>
             }
             <div className={style.banner_desc} style={{}}>
                 <div style={{  textOverflow: 'ellipsis' }}>
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                        <img alt={flag < 2 ? (tiny_middle_banner?.alt?.length>1?tiny_middle_banner.alt[1]:"") : (middle_banner?.alt?.length>1?middle_banner.alt[1]:"")} src={flag < 2 ? tiny_middle_banner.descriptionimage : middle_banner.descriptionimage} style={{ width: '100%' }} />
+                        <img alt={flag < 2 ? (tiny_middle_banner?.alt?.length>1?tiny_middle_banner.alt[1]:"") : (middle_banner?.alt?.length>1?middle_banner?.alt[1]:"")} src={flag < 2 ? tiny_middle_banner?.descriptionimage : middle_banner?.descriptionimage} style={{ width: '100%' }} />
                     </div>
                 </div>
             </div>
@@ -151,8 +152,8 @@ export default function Category({ categoryId, allcate, meta, cateList, data, to
                 </div>
                 <div style={{ display: 'flex', flexWrap: 'wrap' }}>
                     {
-                        allcate.map((item, index) => {
-                            return <GoodsItem key={index} src={item.src} item={item} title={item.categoryname} price={item.price} type={'category'} animation={'animation'} />
+                        allcate?.map((item, index) => {
+                            return <GoodsItem key={index} src={item?.src} item={item} title={item?.categoryname} price={item?.price} type={'category'} animation={'animation'} />
                         })
                     }
                 </div>
@@ -205,7 +206,7 @@ export async function getStaticPaths() {
     // TODO get product id to be array
     return {
         paths: res,
-        fallback: false,
+        fallback: true,
     };
 }
 
@@ -279,7 +280,7 @@ export async function getStaticProps(context) {
             return item;
         }
     })
-    // //////console.log(cateId[0]);
+    // console.log(cateId[0]);
     ////////////////////console.log(JSON.parse(data).data);
     //////////////////////console.log("--------");
     //////////////console.log(banner_list.data.top_banner);
@@ -292,9 +293,9 @@ export async function getStaticProps(context) {
     ////////////////console.log(allcate.data);
     // //////console.log(res[0]);
     let meta = {
-        keyword: cateId[0].keywords,
-        title: cateId[0].metatitle ?? "",
-        metadescription: cateId[0].metadescription ?? "",
+        keyword: cateId[0]?.keywords,
+        title: cateId[0]?.metatitle ?? "",
+        metadescription: cateId[0]?.metadescription ?? "",
     }
 
     //////////////console.log(meta);
@@ -347,6 +348,6 @@ export async function getStaticProps(context) {
             middle_banner: middle_banner.length ? middle_banner[0] : { coverimage: `https://admin.floralismhk.com/uploads/20230531/1932d9f810c34c19f49de7bb8dc47b31.png`,descriptionimage:`${constant.api_url}/uploads/20230531/a73467978f2b41da91b88593d370858a.png` },
             tiny_middle_banner: tiny_middle_banner.length ? tiny_middle_banner[0] : { coverimage: `${constant.api_url}/uploads/20230523/637cfca2255479e7b2fb99f6364b11b4.png`, descriptionimage: `${constant.api_url}/uploads/20230601/a0175c1d8f3f40eae16a007b632426bd.png` },
         },
-
+        revalidate: 60,
     };
 }

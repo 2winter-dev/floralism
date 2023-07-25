@@ -16,7 +16,7 @@ export default function GoodsItem(props) {
 
                 {/* <Link href={`/production/${props?.item?.id}`}> */}
                 <Link  href={`${props?.item?.id?"/production/"+props.item.id:"/"}`}  >
-                    <div className={props.animation && (props.type === "category" || props.type === "carsouel") ? styles.goods_img_cover : ""} style={{ position: 'relative', ...props.imgTopStyle }}>
+                    <div className={props?.animation && (props.type === "category" || props.type === "carsouel") ? styles.goods_img_cover : ""} style={{ position: 'relative', ...props.imgTopStyle }}>
                         {/* <div>
                    <Image alt="" src={props?.item?.photoimage} style={{ width: '100%', display: 'block', ...props.imgStyle }} fill className={props.animation === "toLarge" ? `${styles.goods_img} ${styles.an_fangda}` : `${styles.goods_img}`} />
                 </div> */}
@@ -30,7 +30,7 @@ export default function GoodsItem(props) {
                     {/* <div>{props.item.id}</div> */}
                     {props.type === "category" ?
                         <div style={{ width: '100%', marginTop: 16, display: 'flex' }}>
-                            <div style={{ ...props.style }} className={styles.goods_title}>{props.item.categoryname}</div>
+                            <div style={{ ...props.style }} className={styles.goods_title}>{props?.item?.categoryname}</div>
                         </div> :
                         props.type === "carsouel" ? <div style={{ display: 'flex', flexDirection: 'column', marginTop: 16, paddingLeft: '10%', paddingRight: '10%', alignItems: 'center' }}>
                             <div style={{ width: '100%', textOverflow: 'ellipsis', textAlign: 'center', overflow: 'hidden', whiteSpace: 'nowrap' }}>{props?.item?.flowername ?? ""}</div>

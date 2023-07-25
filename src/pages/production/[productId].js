@@ -398,7 +398,7 @@ export async function getStaticPaths() {
     // TODO get product id to be array
     return {
         paths: res,
-        fallback: false,
+        fallback: true,
     };
 }
 
@@ -442,6 +442,6 @@ export async function getStaticProps(context) {
             cateList: JSON.parse(data).data,
             product: detail.data
         },
-
+        revalidate: 60,
     };
 }
