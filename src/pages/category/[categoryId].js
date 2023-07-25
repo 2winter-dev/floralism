@@ -206,7 +206,7 @@ export async function getStaticPaths() {
     // TODO get product id to be array
     return {
         paths: res,
-        fallback: true,
+        fallback: 'blocking',
     };
 }
 
