@@ -13,7 +13,7 @@ export default {
             },
         })
         if (response.status !== 200) {
-            ////////////////////console.log(response);
+            //////////////////////console.log(response);
             if (response.status === 401) {
                 Cookies.remove("token");
                 throw new Error("请先登录");
@@ -34,7 +34,7 @@ export default {
             }
         })
         if (response.status !== 200) {
-            ////////////////////console.log(response);
+            //////////////////////console.log(response);
             if (response.status === 401) {
                 Cookies.remove("token");
                 throw new Error("请先登录");
@@ -56,7 +56,7 @@ export default {
             }
         })
         if (response.status !== 200) {
-            ////////////////////console.log(response);
+            //////////////////////console.log(response);
 
             if (response.status === 401) {
                 Cookies.remove("token");
@@ -79,7 +79,7 @@ export default {
         })
 
         if (response.status !== 200) {
-            ////////////////////console.log(response);
+            //////////////////////console.log(response);
             if (response.status === 401) {
                 Cookies.remove("token");
                 throw new Error("请先登录");
@@ -100,7 +100,7 @@ export default {
             }
         })
         if (response.status !== 200) {
-            ////////////////////console.log(response);
+            //////////////////////console.log(response);
             if (response.status === 401) {
                 Cookies.remove("token");
                 throw new Error("请先登录");
@@ -122,7 +122,7 @@ export default {
             }
         })
         if (response.status !== 200) {
-            ////////////////////console.log(response);
+            //////////////////////console.log(response);
             if (response.status === 401) {
                 Cookies.remove("token");
                 throw new Error("请先登录");
@@ -132,7 +132,7 @@ export default {
         return await response.json();
     },
     AddToCart: async (data) => {
-        ////////////////////////////////console.log(data);
+        //////////////////////////////////console.log(data);
         const response = await fetch(`${constant.api_url}/api/cart/create`, {
             body: JSON.stringify({
                 flower_specs_id: data.flower_specs_id,
@@ -150,7 +150,7 @@ export default {
             }
         })
         if (response.status !== 200) {
-            ////////////////////console.log(response);
+            //////////////////////console.log(response);
             if (response.status === 401) {
                 Cookies.remove("token");
                 throw new Error("请先登录");
@@ -160,7 +160,7 @@ export default {
         return await response.json();
     },
     changeShopCarNumber: async (data) => {
-        ////////////////////////////////console.log(data);
+        //////////////////////////////////console.log(data);
         const response = await fetch(`${constant.api_url}/api/cart/updateNum`, {
             body: JSON.stringify({
                 id: data.id,
@@ -176,7 +176,7 @@ export default {
             }
         })
         if (response.status !== 200) {
-            ////////////////////console.log(response);
+            //////////////////////console.log(response);
             if (response.status === 401) {
                 Cookies.remove("token");
                 throw new Error("请先登录");
@@ -200,7 +200,7 @@ export default {
             }
         })
         if (response.status !== 200) {
-            ////////////////////console.log(response);
+            //////////////////////console.log(response);
 
             if (response.status === 401) {
                 Cookies.remove("token");
@@ -228,7 +228,7 @@ export default {
             }
         })
         if (response.status !== 200) {
-            ////////////////////console.log(response);
+            //////////////////////console.log(response);
             if (response.status === 401) {
                 Cookies.remove("token");
                 throw new Error("请先登录");
@@ -238,7 +238,7 @@ export default {
         return await response.json();
     },
     updateAddress: async (data) => {
-        ////////////////console.log(data);
+        //////////////////console.log(data);
         const response = await fetch(`${constant.api_url}/api/address/update`, {
             body: JSON.stringify({
                 id: data.id,
@@ -256,7 +256,7 @@ export default {
             }
         })
         if (response.status !== 200) {
-            ////////////////////console.log(response);
+            //////////////////////console.log(response);
             if (response.status === 401) {
                 Cookies.remove("token");
                 throw new Error("请先登录");
@@ -280,7 +280,7 @@ export default {
             }
         })
         if (response.status !== 200) {
-            ////////////////////console.log(response);
+            //////////////////////console.log(response);
             if (response.status === 401) {
                 Cookies.remove("token");
                 throw new Error("请先登录");
@@ -290,7 +290,7 @@ export default {
         return await response.json();
     },
     createOrder: async (data) => {
-        ////////////////////////////////console.log(data);
+        //////////////////////////////////console.log(data);
         const response = await fetch(`${constant.api_url}/api/order/create`, {
             body: JSON.stringify(
                 data
@@ -305,7 +305,7 @@ export default {
             }
         })
         if (response.status !== 200) {
-            ////////////////////console.log(response);
+            //////////////////////console.log(response);
 
             if (response.status === 401) {
                 Cookies.remove("token");
@@ -333,7 +333,7 @@ export default {
         })
 
         if (response.status !== 200) {
-            ////////////////////console.log(response);
+            //////////////////////console.log(response);
             if (response.status === 401) {
                 Cookies.remove("token");
                 throw new Error("请先登录");
@@ -343,7 +343,7 @@ export default {
         return await response.json();
     },
     fetchGoods: async (data) => {
-        //////////////////////////////console.log("123");
+        ////////////////////////////////console.log("123");
         const response = await fetch(`${constant.api_url}/api/flowers/index?keyword=${data.keyword}&flower_category_name=${data.flower_category_name}&flower_category_id=${data.flower_category_id}&listRows=${data.listRows}&page=${data.page}`, {
             method: 'GET',
             headers: {
@@ -355,7 +355,7 @@ export default {
             }
         })
         if (response.status !== 200) {
-            ////////////////////console.log(response);
+            //////////////////////console.log(response);
             if (response.status === 401) {
                 Cookies.remove("token");
                 throw new Error("请先登录");
@@ -397,7 +397,7 @@ export default {
             }
         })
         if (response.status !== 200) {
-            // ////////////////////console.log(response);
+            // //////////////////////console.log(response);
             if (response.status === 401) {
                 Cookies.remove("token");
                 throw new Error("请先登录");

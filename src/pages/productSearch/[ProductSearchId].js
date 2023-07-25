@@ -20,7 +20,7 @@ import toast, { Toaster } from "react-hot-toast";
 import LoginPannel from "../component/LoginPannel";
 import DynamicButton from "../component/DynamicButton";
 export default function ProductSearch({ tiny_top_banner, meta, cateList, data, top_banner }) {
-  //////////////////console.log(data);
+  ////////////////////console.log(data);
   const router = useRouter();
   // const debounce=useDebounce();
   const [flag, setFlag] = useState(false);
@@ -39,22 +39,22 @@ export default function ProductSearch({ tiny_top_banner, meta, cateList, data, t
   })
 
   const ToSearch = (data) => {
-    //////////////////////////console.log("點擊了");
-    // //////////////////console.log(keyword);
+    ////////////////////////////console.log("點擊了");
+    // ////////////////////console.log(keyword);
     setType(true);
     fetchGoods.mutate({ keyword: data, flower_category_id: "", listRows: 16, page: page }, {
       onSuccess: async (res) => {
         // let _res = await res.json();
         if (res.code === 1) {
           setSearchResult(res.data.data);
-          //////////////////////////console.log(_res);
+          ////////////////////////////console.log(_res);
           setPage(1);
         } else {
           toast.error(res.msg);
         }
       },
       onError: (res) => {
-        ////////////////////////////console.log(res);
+        //////////////////////////////console.log(res);
         if (res instanceof Error) {
           toast.error(res.msg);
         } else toast.error(JSON.stringify(res.msg))
@@ -63,10 +63,10 @@ export default function ProductSearch({ tiny_top_banner, meta, cateList, data, t
   }
   const resizeUpdate = (e) => {
     if (e.target.innerWidth <= 675) {
-      //////////////////////////////console.log("====", e.target.innerWidth);
+      ////////////////////////////////console.log("====", e.target.innerWidth);
       setFlag(true);
     } else {
-      //////////////////////////////console.log("-----", e.target.innerWidth);
+      ////////////////////////////////console.log("-----", e.target.innerWidth);
       setFlag(false);
     }
   }
@@ -91,14 +91,14 @@ export default function ProductSearch({ tiny_top_banner, meta, cateList, data, t
   }, [])
 
   useEffect(() => {
-    //////////////////////////////console.log("flag改變", flag);
+    ////////////////////////////////console.log("flag改變", flag);
     setPage(1);
     setGoodsList(spliceArr(data.data, 16))
     // setCategoryPage(1);
   }, [flag])
 
   useEffect(() => {
-    //////////////////////////////console.log(goodsList)
+    ////////////////////////////////console.log(goodsList)
 
   }, [])
 
@@ -143,7 +143,7 @@ export default function ProductSearch({ tiny_top_banner, meta, cateList, data, t
                  ButtonGroupStyle={{marginTop:6}}
                  animation
                  click={(data) => {
-                    //////////////////////////////console.log(data);
+                    ////////////////////////////////console.log(data);
                     
                   }}
                  /> */}
@@ -224,7 +224,7 @@ export async function getStaticPaths() {
 export async function getStaticProps(context) {
 
   const { params } = context;
-  // ////////////////////////////console.log(params);
+  // //////////////////////////////console.log(params);
   const response = await fetch(
     `${constant.api_url}/api/flowers/index?keyword=&flower_category_name=${params.ProductSearchId}&listRows=16`, {
     headers: {
@@ -247,16 +247,16 @@ export async function getStaticProps(context) {
   }
   );
   const allcate = await allcate_response.json();
-  // //////console.log(allcate,params)
+  // ////////console.log(allcate,params)
   ;
   let cateId = allcate.data.filter((item, index) => {
-    //////console.log(item.categoryname===params.ProductSearchId);
+    ////////console.log(item.categoryname===params.ProductSearchId);
     if (item.categoryname === params.ProductSearchId) {
-      //////console.log("=====");
+      ////////console.log("=====");
       return item;
     }
   })
-  //////console.log(cateId);
+  ////////console.log(cateId);
   let meta = {
     keyword: cateId[0]?.keywords ?? "",
     title: cateId[0]?.metatitle ?? "",
@@ -278,19 +278,19 @@ export async function getStaticProps(context) {
   } catch (e) {
 
   }
-  ////////////////console.log("===");
-  ////////////////console.log(banner_list.data.top_banner.web);
+  //////////////////console.log("===");
+  //////////////////console.log(banner_list.data.top_banner.web);
   top_banner = banner_list.data.top_banner.web.filter((item) => {
-    ////////////////console.log(item.flower_category_ids, params.ProductSearchId);
+    //////////////////console.log(item.flower_category_ids, params.ProductSearchId);
     if (item.flower_category_ids.includes(parseInt(cateId[0].id))) {
-      //////////////////////console.log("找到了");
+      ////////////////////////console.log("找到了");
       return item;
     }
   })
   let tiny_top_banner = banner_list.data.top_banner.mobile.filter((item) => {
-    ////////////////console.log(item.flower_category_ids, params.ProductSearchId);
+    //////////////////console.log(item.flower_category_ids, params.ProductSearchId);
     if (item.flower_category_ids.includes(parseInt(cateId[0].id))) {
-      //////////////////////console.log("找到了");
+      ////////////////////////console.log("找到了");
       return item;
     }
   })
@@ -306,9 +306,9 @@ export async function getStaticProps(context) {
   );
   const tt_data = await tt_response.text()
   const data = await response.text()
-  ////////////////console.log("----");
-  ////////////////console.log(tiny_top_banner);
-  ////////////////console.log(top_banner);
+  //////////////////console.log("----");
+  //////////////////console.log(tiny_top_banner);
+  //////////////////console.log(top_banner);
   return {
     props: {
       cateList: JSON.parse(tt_data).data,

@@ -27,12 +27,12 @@ export default function Footer() {
 
     useEffect(() => {
         fetchCate().then((res) => setList(res.data)).catch((er) => {
-            //////////////////console.log('cat_list error:')
-            //////////////////console.log(er)
+            ////////////////////console.log('cat_list error:')
+            ////////////////////console.log(er)
         })
     }, [])
 
-    //////console.log(cateList)
+    ////////console.log(cateList)
 
     return (<div className={style.footer} style={{ width: '100%' }}>
         <div className={style.footer_three_column} style={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -40,7 +40,7 @@ export default function Footer() {
                 <p>產品</p>
                 {
                     cateList.map((item, index) => {
-                        //////console.log(item);
+                        ////////console.log(item);
                         if (index > 5) return null;
                         return (<a key={index} href={`/category/${item.categoryname}`}>{item.categoryname}</a>)
                     })
