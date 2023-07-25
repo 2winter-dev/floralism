@@ -104,13 +104,14 @@ export default function Index({ category, cateList, top_banner, tiny_top_banner,
                         </div>
                         <div
                             className={`col-12 col-lg-7 ${styles.textArea}`}
-                            style={{ backgroundColor: category.background_color ? `#${category.background_color}` : "rgb(213, 59, 69)", display: 'flex', flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'center', padding: '4vw', color: 'white' }}
+                            style={{ backgroundColor: category.background_color ? `${category.background_color}` : "rgb(213, 59, 69)", display: 'flex', flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'center', padding: '4vw', color: 'white' }}
                         >
                             <div style={{ marginLeft:'1rem',width: 20, height: 4, backgroundColor: 'white', borderRadius: 12 }}></div>
                             <div
                                 dangerouslySetInnerHTML={{
                                     __html: category.category_description,
                                 }}
+                                className={styles.rich_content}
                                 style={{ margin: "0 1rem" }}
                             ></div>
                             <div style={{ marginLeft:'1rem',padding: '0.5vw 2vw', border: '1px solid white', marginTop: '3vw', borderRadius: 12 }}>{category.categoryname}</div>

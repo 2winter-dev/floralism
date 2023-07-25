@@ -130,7 +130,9 @@
   /* margin: 0 2rem; */
   text-align: center;
 }
-
+.rich_content font{
+    color: #fff!important;
+}
 .distance_pic {
   width: 100%;
   background-image: url('/homepage/小段背景.png');
