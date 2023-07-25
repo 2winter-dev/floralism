@@ -317,6 +317,6 @@ export async function getStaticProps(context) {
       top_banner: top_banner.length ? top_banner[0] : { coverimage: `/banner-搜索背景.png`, descriptionimage: `/product-search-desc.png` },
       tiny_top_banner: tiny_top_banner.length ? tiny_top_banner[0] : { coverimage: `/banner-搜索背景.png`, descriptionimage: `/product-search-desc.png` },
     },
-    revalidate: 60,
+    revalidate: 1,
   };
 }

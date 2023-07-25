@@ -206,7 +206,7 @@ export async function getStaticPaths() {
     // TODO get product id to be array
     return {
         paths: res,
-        fallback: 'blocking',
+        fallback: true,
     };
 }
 
@@ -348,6 +348,6 @@ export async function getStaticProps(context) {
             middle_banner: middle_banner.length ? middle_banner[0] : { coverimage: `https://admin.floralismhk.com/uploads/20230531/1932d9f810c34c19f49de7bb8dc47b31.png`,descriptionimage:`${constant.api_url}/uploads/20230531/a73467978f2b41da91b88593d370858a.png` },
             tiny_middle_banner: tiny_middle_banner.length ? tiny_middle_banner[0] : { coverimage: `${constant.api_url}/uploads/20230523/637cfca2255479e7b2fb99f6364b11b4.png`, descriptionimage: `${constant.api_url}/uploads/20230601/a0175c1d8f3f40eae16a007b632426bd.png` },
         },
-        revalidate: 60,
+        revalidate: 1,
     };
 }
