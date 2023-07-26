@@ -96,16 +96,20 @@ export default function Category({ categoryId, allcate, meta, cateList, data, to
             <meta name={'keywords'} content={`${meta?.keyword}`} />
         </Head>
         <DynamicComponent cateList={cateList} setLogin={setLogin} />
-        <div style={{ width: '100%',display:'flex',color:'white',position: 'relative',backgroundPosition:'revert', backgroundImage: bannerSize ? `url(${tiny_top_banner?.coverimage})` : `url(${top_banner?.coverimage})`, marginBottom: 0 }} className={styles.banner} >
+        <div style={{ width: '100%', display: 'flex', color: 'white', position: 'relative', backgroundPosition: 'revert', backgroundImage: bannerSize ? `url(${tiny_top_banner?.coverimage})` : `url(${top_banner?.coverimage})`, marginBottom: 0 }} className={styles.banner} >
             {/* <Image priority src="/homepage/top-banner.png" width={1920} height={700} style={{width:'100%'}}/> */}
-            <div className={(categoryId === "9" || categoryId === "10" || categoryId === "11"||categoryId === "紀念日花束") ? styles.spec_banner : styles.top_banner_area} style={{ display: "flex", flexDirection: 'column', alignItems: 'center' }}>
-                <img alt={bannerSize ?(tiny_top_banner?.alt?.length?tiny_top_banner.alt[0]:"") : (top_banner?.alt?.length?top_banner?.alt[0]:"")} src={bannerSize ? tiny_top_banner?.descriptionimage : top_banner?.descriptionimage} style={{width:'100%'}} />
-                <a href={`${data?.data?.length ? "/productSearch/"+data?.category_name:"/"}`} onClick={() => {
-                    //////////////console.log(data);
-                    // data.data.length ?
-                    //     router.push(`/productSearch/${data.data[0].flower_category_id}`)
-                    //     : router.push('/')
-                }} style={{ border: 'none', display: 'block', cursor: 'pointer' }} className={styles.banner_buttom} >點擊選購</a>
+            <div className={(categoryId === "紀念日花束" || categoryId === "母親節花束") ? styles.spec_banner : styles.top_banner_area} style={{ display: "flex", flexDirection: 'column', alignItems: 'center' }}>
+                <div style={{display: "flex", flexDirection: 'column', alignItems: 'center',marginRight:categoryId==='母親節花束'?'20%':0,marginTop:categoryId==='母親節花束'?'5%':0}}>
+                    <img alt={bannerSize ? (tiny_top_banner?.alt?.length ? tiny_top_banner.alt[0] : "") : (top_banner?.alt?.length ? top_banner?.alt[0] : "")} src={bannerSize ? tiny_top_banner?.descriptionimage : top_banner?.descriptionimage} style={{ width: '100%' }} />
+                    <a href={`${data?.data?.length ? "/productSearch/" + data?.category_name : "/"}`} onClick={() => {
+                        //////////////console.log(data);
+                        // data.data.length ?
+                        //     router.push(`/productSearch/${data.data[0].flower_category_id}`)
+                        //     : router.push('/')
+                    }} style={{ border: 'none', display: 'block', cursor: 'pointer' }} className={styles.banner_buttom} >點擊選購</a>
+
+                </div>
+
             </div>
         </div>
         <div className={styles.goods_view} style={{ marginBottom: 32 }}>
@@ -124,12 +128,12 @@ export default function Category({ categoryId, allcate, meta, cateList, data, to
         </div>
         <div style={{ width: '100%', position: 'relative' }}>
             {
-                <img alt={flag < 2 ? (tiny_middle_banner?.alt?.length>2?tiny_middle_banner?.alt[2]:"") : (middle_banner?.alt?.length>2?middle_banner?.alt[2]:"")} src={flag < 2 ? tiny_middle_banner?.coverimage : middle_banner?.coverimage} style={{ width: '100%', height: '100%', display: 'block' }}></img>
+                <img alt={flag < 2 ? (tiny_middle_banner?.alt?.length > 2 ? tiny_middle_banner?.alt[2] : "") : (middle_banner?.alt?.length > 2 ? middle_banner?.alt[2] : "")} src={flag < 2 ? tiny_middle_banner?.coverimage : middle_banner?.coverimage} style={{ width: '100%', height: '100%', display: 'block' }}></img>
             }
             <div className={style.banner_desc} style={{}}>
-                <div style={{  textOverflow: 'ellipsis' }}>
+                <div style={{ textOverflow: 'ellipsis' }}>
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                        <img alt={flag < 2 ? (tiny_middle_banner?.alt?.length>1?tiny_middle_banner.alt[1]:"") : (middle_banner?.alt?.length>1?middle_banner?.alt[1]:"")} src={flag < 2 ? tiny_middle_banner?.descriptionimage : middle_banner?.descriptionimage} style={{ width: '100%' }} />
+                        <img alt={flag < 2 ? (tiny_middle_banner?.alt?.length > 1 ? tiny_middle_banner.alt[1] : "") : (middle_banner?.alt?.length > 1 ? middle_banner?.alt[1] : "")} src={flag < 2 ? tiny_middle_banner?.descriptionimage : middle_banner?.descriptionimage} style={{ width: '100%' }} />
                     </div>
                 </div>
             </div>
@@ -275,8 +279,8 @@ export async function getStaticProps(context) {
     const banner_list = await banner.json();
     ////////console.log("------------");
     ////////console.log(data);
-    let cateId=allcate.data.filter((item,index)=>{
-        if(item.categoryname===params.categoryId){
+    let cateId = allcate.data.filter((item, index) => {
+        if (item.categoryname === params.categoryId) {
             return item;
         }
     })
@@ -287,7 +291,7 @@ export async function getStaticProps(context) {
     // //////////////////console.log(banner_list.data.top_banner.web);
     // //////////////////console.log(banner_list.data.middle_banner);
     ////////////////////////console.log(params.categoryId)
-// ////////console.log(JSON.parse(data).data.data.length);
+    // ////////console.log(JSON.parse(data).data.data.length);
     // let list=JSON.parse(tt_data);
     // //////////////////console.log(list);
     //////////////////console.log(allcate.data);
@@ -314,6 +318,7 @@ export async function getStaticProps(context) {
             return item;
         }
     })
+    console.log(cateId[0].id);
     let middle_banner = banner_list.data.middle_banner.web.filter((item) => {
         if (item.flower_category_ids.includes(parseInt(cateId[0].id))) {
             return item;
@@ -328,8 +333,8 @@ export async function getStaticProps(context) {
         }
     })
     ////////console.log("======================");
-    
-    ////////////console.log(data);
+
+    // console.log(data);
     //////////////console.log(top_banner, middle_banner);
     ////////console.log(tiny_top_banner, tiny_middle_banner);
     ////////console.log(middle_banner,top_banner)
@@ -345,7 +350,7 @@ export async function getStaticProps(context) {
             meta: meta,
             top_banner: top_banner.length ? top_banner[0] : { coverimage: `${constant.api_url}/uploads/20230523/637cfca2255479e7b2fb99f6364b11b4.png)`, descriptionimage: `${constant.api_url}/uploads/20230601/a0175c1d8f3f40eae16a007b632426bd.png` },
             tiny_top_banner: tiny_top_banner.length ? tiny_top_banner[0] : { coverimage: `https://admin.floralismhk.com/uploads/20230531/bc5d6275780e4f4a4d02711d787936dc.png`, descriptionimage: `${constant.api_url}/uploads/20230601/a0175c1d8f3f40eae16a007b632426bd.png` },
-            middle_banner: middle_banner.length ? middle_banner[0] : { coverimage: `https://admin.floralismhk.com/uploads/20230531/1932d9f810c34c19f49de7bb8dc47b31.png`,descriptionimage:`${constant.api_url}/uploads/20230531/a73467978f2b41da91b88593d370858a.png` },
+            middle_banner: middle_banner.length ? middle_banner[0] : { coverimage: `https://admin.floralismhk.com/uploads/20230531/1932d9f810c34c19f49de7bb8dc47b31.png`, descriptionimage: `${constant.api_url}/uploads/20230531/a73467978f2b41da91b88593d370858a.png` },
             tiny_middle_banner: tiny_middle_banner.length ? tiny_middle_banner[0] : { coverimage: `${constant.api_url}/uploads/20230523/637cfca2255479e7b2fb99f6364b11b4.png`, descriptionimage: `${constant.api_url}/uploads/20230601/a0175c1d8f3f40eae16a007b632426bd.png` },
         },
         revalidate: 1,
