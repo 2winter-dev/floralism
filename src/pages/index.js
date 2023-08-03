@@ -119,8 +119,8 @@ export default function Home({ allcate, cateList, GoodsPage, carousel }) {
       </div>
       <main className={`${styles.main_body}`}>
         <div className="c1 container" >
-          <div className={`row  py-4`} style={{}}>
-            <div>
+          <div className={`row`} style={{ margin: '2.5rem 0' }}>
+            <div style={{ padding: '0 2%' }} >
               <div style={{ display: 'flex', alignItems: 'center' }}>
                 {flag !== 0 && <div className={styles.distance}></div>}
                 <div className={styles.title} style={{ whiteSpace: 'nowrap', flex: 1 }}>{'【FLORALISM】 全部分類'}</div>
@@ -209,7 +209,7 @@ export default function Home({ allcate, cateList, GoodsPage, carousel }) {
           </div>
         </div>
         <div className="c1 container" >
-          <div className={`row  py-4`} style={{ marginTop: 24,padding:'2%' }}>
+          <div className={`row  py-4`} style={{ marginTop: 24, padding: '2%' }}>
             <Contactus />
           </div>
         </div>
@@ -226,10 +226,6 @@ export default function Home({ allcate, cateList, GoodsPage, carousel }) {
         } />
       }
       {!login && <DynamicButton />}
-      {/* {!login && <Toaster
-        position="top-center"
-      />} */}
-      {/* {!login && <ToastContainer />} */}
       <Script defer src="/swiper/js/idangerous.swiper.min.js" onReady={() => {
         MySwiper = new Swiper('.swiper-container', {
           loop: true,

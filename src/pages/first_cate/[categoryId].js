@@ -12,6 +12,7 @@ import Image from "next/image";
 import BodyBanner from "../component/BodyBanner";
 export default function Index({ category, cateList, top_banner, tiny_top_banner, middle_banner, tiny_middle_banner }) {
     ////console.log(category);
+    // console.log(category.background_color);
     const [login, setLogin] = useState(false);
     const [bannerSize, setBannerSize] = useState(false);
 
@@ -46,6 +47,28 @@ export default function Index({ category, cateList, top_banner, tiny_top_banner,
             window.removeEventListener("resize", resizeUpdate);
         }
     }, [])
+    const desc=()=>{
+        console.log(category?.metadescription.split(" "));
+     console.log(category?.keywords.split(" | "));
+     let res=[];
+     let flag=false;
+     category?.metadescription.split(" ").map((item,index)=>{
+        category?.keywords.split(" | ").map((it,idx)=>{
+            if(item.includes(it)){
+               res.push(<span style={{textDecorationLine:'underline',padding:'0 4px'}}>{" "+it+" "}</span>)
+               flag=true;
+            }
+        })
+        if(!flag){
+          res.push(<span>{item}</span>)
+        }
+        flag=false;
+     })
+     return res;
+    }
+    useEffect(()=>{
+     
+    },[])
     return (<div>
         <Head>
             <title>{`${category.metatitle !== "" ? category.metatitle : (category.categoryname + " | 「Floralism」香港花店")}`}</title>
@@ -55,20 +78,31 @@ export default function Index({ category, cateList, top_banner, tiny_top_banner,
         <DynamicComponent cateList={cateList} setLogin={setLogin} />
         <div style={{ width: '100%', display: 'flex', position: 'relative', backgroundPosition: 'revert', backgroundImage: bannerSize ? `url(${tiny_top_banner.coverimage})` : `url(${top_banner.coverimage})`, marginBottom: 0 }} className={styles.banner} >
             {/* <Image priority src="/homepage/top-banner.png" width={1920} height={700} style={{width:'100%'}}/> */}
-            <div className={category.id === 13 ? styles.n_spec_banner :category.id===23?styles.s_spec_banner: styles.top_banner_area} style={{ display: "flex", flexDirection: 'column', alignItems: 'center',margin:category.id===13&&'auto' }}>
+            <div className={category.id === 13 ? styles.n_spec_banner : category.id === 23 ? styles.s_spec_banner : styles.top_banner_area} style={{ display: "flex", flexDirection: 'column', alignItems: 'center', margin: category.id === 13 ? 'auto':'0' }}>
                 {
-                    <img className={category.id === 13 ?styles.n_desc_banner:styles.desc_banner} alt={bannerSize ? tiny_top_banner.descriptionimage : top_banner.descriptionimage} src={bannerSize ? tiny_top_banner.descriptionimage : top_banner.descriptionimage} style={{}} />
+                    <img className={category.id === 13 ? styles.n_desc_banner : styles.desc_banner} alt={bannerSize ? tiny_top_banner.descriptionimage : top_banner.descriptionimage} src={bannerSize ? tiny_top_banner.descriptionimage : top_banner.descriptionimage} style={{}} />
                 }
             </div>
         </div>
+
         <main className={`${styles.main_body}`}>
             <div className="c1 container" >
-                <div className={`row py-4`} style={{ marginTop:'1.5rem' }}>
+                <div className={`row`} style={{ margin: '2.5rem 0' }}>
+                    <div style={{ padding: '0 2%' }} >
+                        <div className={styles.keywords_area} style={{ textAlign: 'center', padding: '1rem 0', color: 'rgba(255, 255, 255, 1)', letterSpacing: 0.1, textDecorationLine: 'underline', fontWeight: 'bold' }}>{`${category?.metatitle}`}</div>
+                    </div>
+                </div>
+            </div>
+            <div className="c1 container" >
+                <div className={`row `} style={{}}>
                     <div>
                         <div style={{ display: 'flex', alignItems: 'center' }}>
                             <div className={styles.distance}></div>
-                            <div className={styles.title} style={{ whiteSpace: 'nowrap', flex: 1 }}>{`【FLORALISM】 ${category.categoryname}`}</div>
+                            <div className={styles.title} style={{ whiteSpace: 'nowrap', flex: 1 }}>{category?.keywords}</div>
                             <div className={styles.distance}></div>
+                        </div>
+                        <div style={{ display: 'flex', alignItems: 'center', width: '100%',flexDirection:'row',flexWrap:'wrap',justifyContent:'center'  , textAlign: 'center', margin: '2.5rem 0',fontWeight:500 }}>
+                            {desc()}
                         </div>
                         <div style={{ display: 'flex', flexWrap: 'wrap' }}>
                             {
@@ -77,12 +111,18 @@ export default function Index({ category, cateList, top_banner, tiny_top_banner,
                                 })
                             }
                         </div>
+                        <div style={{ display: 'flex', alignItems: 'center', margin: '2.5rem 0' }}>
+                            <div className={styles.distance}></div>
+                            <div className={styles.title} style={{ whiteSpace: 'nowrap', flex: 1 }}>{category?.metatitle2}</div>
+                            <div className={styles.distance}></div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div style={{  }}>
-                <div className="c1 container" style={{ padding: '2%' }} >
-                    <div className={`row  py-4 `}>
+
+            <div style={{}}>
+                <div className="c1 container" style={{ padding: '0 2%', marginBottom: '2.5rem' }} >
+                    <div className={`row`}>
                         <div className="col-12 col-lg-5 px-0 mt-2 mt-lg-0">
                             <div
                                 className={`image_c ${styles.adapt_pic}`}
@@ -104,9 +144,9 @@ export default function Index({ category, cateList, top_banner, tiny_top_banner,
                         </div>
                         <div
                             className={`col-12 col-lg-7 ${styles.textArea}`}
-                            style={{ backgroundColor: category.background_color ? `${category.background_color}` : "rgb(213, 59, 69)", display: 'flex', flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'center', padding: '4vw', color: 'white' }}
+                            style={{ backgroundColor: category.background_color ? `#${category.background_color}` : "rgb(213, 59, 69)", display: 'flex', flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'center', padding: '4vw', color: 'white' }}
                         >
-                            <div style={{ marginLeft:'1rem',width: 20, height: 4, backgroundColor: 'white', borderRadius: 12 }}></div>
+                            <div style={{ marginLeft: '1rem', width: 20, height: 4, backgroundColor: 'white', borderRadius: 12 }}></div>
                             <div
                                 dangerouslySetInnerHTML={{
                                     __html: category.category_description,
@@ -114,7 +154,7 @@ export default function Index({ category, cateList, top_banner, tiny_top_banner,
                                 className={styles.rich_content}
                                 style={{ margin: "0 1rem" }}
                             ></div>
-                            <div style={{ marginLeft:'1rem',padding: '0.5vw 2vw', border: '1px solid white', marginTop: '3vw', borderRadius: 12 }}>{category.categoryname}</div>
+                            <div style={{ marginLeft: '1rem', padding: '0.5vw 2vw', border: '1px solid white', marginTop: '3vw', borderRadius: 12 }}>{category.categoryname}</div>
                         </div>
 
                     </div>
@@ -155,8 +195,17 @@ export default function Index({ category, cateList, top_banner, tiny_top_banner,
                     </div>
                 </div>
             </div>
-            {category.categoryname === "花束品類" ? <div className={`c1 container `} style={{ marginTop: 24, padding: '2%' }} >
-                <div className={`row  py-4 `} style={{ backgroundColor: "rgb(213, 59, 69)", padding: '4vw', color: 'white', borderRadius: 12 }}>
+            <div className="c1 container" style={{ padding: '0 2%', margin: '2.5rem auto' }} >
+                <div className={`row`}>
+                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                        <div className={styles.distance}></div>
+                        <div className={styles.title} style={{ whiteSpace: 'nowrap', flex: 1 }}>{category?.metatitle3}</div>
+                        <div className={styles.distance}></div>
+                    </div>
+                </div>
+            </div>
+            {category.categoryname === "花束品類" ? <div className={`c1 container `} style={{ marginTop: '2.5rem',marginBottom:'2.5rem', padding: '0 2%' }} >
+                <div className={`row`} style={{ backgroundColor: "rgb(213, 59, 69)", padding: '4vw', color: 'white', borderRadius: 12 }}>
                     <div style={{ width: 30, height: 4, backgroundColor: 'white', borderRadius: 12 }}></div>
                     <div className={styles.flowerDesgin} style={{ marginTop: '0.8vw', padding: 0 }}>花束品類設計</div>
                     <div style={{ display: 'flex', padding: 0, flexWrap: 'wrap', marginTop: 24 }}>
@@ -174,7 +223,7 @@ export default function Index({ category, cateList, top_banner, tiny_top_banner,
                             </div>
                         </div>
                         <div className={styles.designItem} style={{ display: 'flex', flexDirection: 'row' }}>
-                            <div className={`${styles.IconSize} py-4`} style={{ position: 'relative' }}>
+                            <div className={`${styles.IconSize}`} style={{ position: 'relative' }}>
                                 <Image fill alt="主題" src={'/主题.png.png'} style={{ marginRight: 12 }} />
                             </div>
                             <div style={{ fontSize: '0.4vw', flex: 1, marginLeft: 24 }}>
@@ -192,10 +241,10 @@ export default function Index({ category, cateList, top_banner, tiny_top_banner,
                             </div>
                             <div style={{ fontSize: '0.4vw', flex: 1, marginLeft: 24 }}>
                                 <div style={{ fontSize: '1vw', marginRight: 12 }}>
-                                花材的處理和安排 
+                                    花材的處理和安排
                                 </div>
                                 <div style={{ marginTop: '0.4vw' }}>
-                                FLORALISM花束品類設計註重對花材的處理和安排。設計師會運用不同的花藝技巧，如插花、編織等，將花材結合在一起，形成獨特的花束形狀和結構。也註重花束的色彩搭配和層次感，使作品更加美觀和有吸引力。
+                                    FLORALISM花束品類設計註重對花材的處理和安排。設計師會運用不同的花藝技巧，如插花、編織等，將花材結合在一起，形成獨特的花束形狀和結構。也註重花束的色彩搭配和層次感，使作品更加美觀和有吸引力。
                                 </div>
                             </div>
                         </div>
@@ -205,17 +254,17 @@ export default function Index({ category, cateList, top_banner, tiny_top_banner,
                             </div>
                             <div style={{ fontSize: '0.4vw', flex: 1, marginLeft: 24 }}>
                                 <div style={{ fontSize: '1vw', marginRight: 12 }}>
-                                花束的包裝和裝飾
+                                    花束的包裝和裝飾
                                 </div>
                                 <div style={{ marginTop: '0.4vw' }}>
-                                FLORALISM花束品類設計還註重對花束的包裝和裝飾。設計師會選擇合適的花束包裝材料，如紙張、布料、絲帶等，來增加花束的質感和視覺效果。設計師還可以添加一些裝飾物，如珠子、羽毛、水晶等，來增加花束的華麗感和個性化。
+                                    FLORALISM花束品類設計還註重對花束的包裝和裝飾。設計師會選擇合適的花束包裝材料，如紙張、布料、絲帶等，來增加花束的質感和視覺效果。設計師還可以添加一些裝飾物，如珠子、羽毛、水晶等，來增加花束的華麗感和個性化。
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div> : <div className={`c1 container `} style={{ marginTop: 24, padding: '2%' }} >
-                <div className={`row  py-4 `} style={{ borderRadius: 12, display: 'flex', flexWrap: 'wrap', flex: 1 }}>
+            </div> : <div className={`c1 container `} style={{ marginTop: '2.5rem',marginBottom:'2.5rem', padding: '0 2%' }} >
+                <div className={`row `} style={{ borderRadius: 12, display: 'flex', flexWrap: 'wrap', flex: 1 }}>
                     {
                         category?.slider_images?.length ? category.slider_images.map((item, index) => {
                             return (<img className={styles.bannerTwoColumn} style={{ padding: 0 }} src={item} alt={item} key={index} />)
@@ -224,32 +273,24 @@ export default function Index({ category, cateList, top_banner, tiny_top_banner,
                         })
                     }
                 </div>
-                {/* <div className={styles.bannerTwoColumn} style={{position:'relative'}}>
-                            <Image fill src={'/test1.png'} />
-                        </div>
-                        <div className={styles.bannerTwoColumn} style={{position:'relative'}}>
-                            <Image fill src={'/test2.png'} />
-                        </div>
-                        <div className={styles.bannerTwoColumn} style={{position:'relative'}}>
-                            <Image fill src={'/test3.png'} />
-                        </div>
-                        <div className={styles.bannerTwoColumn} style={{position:'relative'}}>
-                            <Image fill src={'/test4.png'} />
-                        </div> */}
-
-                {/* <img className={styles.bannerTwoColumn} style={{ padding: 0 }} src={'/test1.png'} />
-                     <img className={styles.bannerTwoColumn} style={{ padding: 0 }} src={'/test2.png'} />
-                     <img className={styles.bannerTwoColumn} style={{ padding: 0 }} src={'/test3.png'} />
-                    <img className={styles.bannerTwoColumn} style={{ padding: 0 }} src={'/test4.png'} /> */}
             </div>}
         </main>
+        <div className="c1 container" style={{ padding: '0 2%', margin: '2.5rem auto' }} >
+                <div className={`row`}>
+                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                        <div className={styles.distance}></div>
+                        <div className={styles.title} style={{ whiteSpace: 'nowrap', flex: 1 }}>{category?.metatitle4}</div>
+                        <div className={styles.distance}></div>
+                    </div>
+                </div>
+            </div>
         <div className="c1 container" >
-            <div className={`row  py-4`} style={{ marginBottom:'1.5rem', padding: '2%' }}>
+            <div className={`row  py-4`} style={{ marginBottom: '1.5rem', padding: '2%' }}>
                 <Contactus />
             </div>
         </div>
-        <div style={{paddingTop:'1.5rem'}}>
-        <Footer />
+        <div style={{ paddingTop: '1.5rem' }}>
+            <Footer />
 
         </div>
         {

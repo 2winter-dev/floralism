@@ -9,6 +9,27 @@ export default function GoodsScoll(props) {
   const [goodsList, setGoodsList] = useState(
     props.list
   );
+  console.log(props.meta_desc);
+  //metadescription
+  const desc = () => {
+    console.log( props?.cate_desc?.metadescription.split(" "));
+    console.log( props?.cate_desc?.keywords.split("，"));
+    let res = [];
+    let flag = false;
+    props?.cate_desc?.metadescription.split(" ").map((item, index) => {
+      props?.cate_desc?.keywords.split("，").map((it, idx) => {
+        if(item.includes(it)){
+          res.push(<span style={{textDecorationLine:'underline',padding:'0 4px'}}>{" "+it+" "}</span>)
+          flag=true;
+       }
+      })
+      if (!flag) {
+        res.push(<span>{item}</span>)
+      }
+      flag = false;
+    })
+    return res;
+  }
   // ////////////////////////console.log("===============");
   // ////////////////////////console.log(props.list);
   // //////////////////////////console.log(props.maxPage);
@@ -24,13 +45,13 @@ export default function GoodsScoll(props) {
   const setBtn = () => {
     switch (props.page) {
       case 1: {
-        if(props.maxPage===3){
-          return [1,2,3];
+        if (props.maxPage === 3) {
+          return [1, 2, 3];
         }
-        if(props.maxPage===2){
-          return [1,2];
+        if (props.maxPage === 2) {
+          return [1, 2];
         }
-        if(props.maxPage===1){
+        if (props.maxPage === 1) {
           return [];
         }
       }
@@ -38,11 +59,11 @@ export default function GoodsScoll(props) {
         if (props.maxPage === 3) {
           //////////////////////////console.log("是3");
           return ([1, 2, 3]);
-        } else if(props.maxPage===2){
+        } else if (props.maxPage === 2) {
           //////////////////////////console.log("是2");
           return ([1, 2])
-        }else{
-          return ([1,2,3,4]);
+        } else {
+          return ([1, 2, 3, 4]);
         }
       }
       // case props.list.length-props.page=2:([props.list.length]];
@@ -58,20 +79,20 @@ export default function GoodsScoll(props) {
 
   // },[])
   // 大页面为8，小页面为4，当大页面切换至小页面时。
-  const fetchGoods=useMutation({
-     mutationKey:['PageFetchGoods',props.perPage],
-     mutationFn:(data)=>m_api.fetchGoods(data) 
+  const fetchGoods = useMutation({
+    mutationKey: ['PageFetchGoods', props.perPage],
+    mutationFn: (data) => m_api.fetchGoods(data)
   })
-  const toFetchGoods=(page)=>{
+  const toFetchGoods = (page) => {
     ////////////////////////////////console.log("====");
     ////////////////////////////////console.log(page);
-    fetchGoods.mutate({keyword:"",flower_category_name:props.id,listRows:props.perPage,page:page},{
-      onSuccess:async(res)=>{
+    fetchGoods.mutate({ keyword: "", flower_category_name: props.id, listRows: props.perPage, page: page }, {
+      onSuccess: async (res) => {
         // let _res=await res.json();
         // //////////////////////////////console.log(_res);
         props.setList(res.data.data);
       },
-      onError:(res)=>{
+      onError: (res) => {
         // //////////////////////////////console.log(res);
         toast.error("獲取失敗");
       }
@@ -80,26 +101,29 @@ export default function GoodsScoll(props) {
   }
 
 
-  return (<div style={{...props.top_style}}>
+  return (<div style={{ ...props.top_style }}>
     {/* 標題 */}
     <div style={{ display: 'flex', alignItems: 'center' }}>
       <div className={styles.distance}></div>
-      <div className={styles.title}>{props.title}</div>
+      <div className={styles.title}>{props?.meta_desc?.metatitle}</div>
       <div className={styles.distance}></div>
     </div>
+    {props.page_type==="category"&&<div style={{ display: 'flex', alignItems: 'center', width: '100%', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', textAlign: 'center', margin: '2.5rem 0', fontWeight: 500 }}>
+      {desc()}
+    </div>}
     <section>
-        <div style={{ display: 'flex', flexWrap: 'wrap',  marginTop: 14 }}>
-          {
-            !!props?.list?.length ? props.list.map((item, index) => {
-              ////////////////////////console.log(item);
-              return <GoodsItem top_style={{marginTop:12}} key={index} src={item.src} item={item} title={item.categoryname} price={item.price} type={props.type} animation={props.animation} />
-            }):<div style={{width:'100%',textAlign:'center'}}>商品列表為空</div>
-          }
-          {/* <GoodsItem src="/homepage/圖1.png" title={'綠色'} type={'category'} /> */}
-        </div>
+      <div style={{ display: 'flex', flexWrap: 'wrap', marginTop: 14 }}>
+        {
+          !!props?.list?.length ? props.list.map((item, index) => {
+            ////////////////////////console.log(item);
+            return <GoodsItem top_style={{ marginTop: 12 }} key={index} src={item.src} item={item} title={item.categoryname} price={item.price} type={props.type} animation={props.animation} />
+          }) : <div style={{ width: '100%', textAlign: 'center' }}>商品列表為空</div>
+        }
+        {/* <GoodsItem src="/homepage/圖1.png" title={'綠色'} type={'category'} /> */}
+      </div>
     </section>
     <div className={G_styles.btn_list}>
-      {props.maxPage>1 &&<div style={{ display: 'flex',...props.ButtonGroupStyle }}>
+      {props.maxPage > 1 && <div style={{ display: 'flex', ...props.ButtonGroupStyle }}>
         {
           props.page > 3 && <div>....</div>
         }
@@ -119,6 +143,11 @@ export default function GoodsScoll(props) {
         }
       </div>}
     </div>
+    {props.page_type==="category"&&<div style={{ display: 'flex', alignItems: 'center' }}>
+      <div className={styles.distance}></div>
+      <div className={styles.title}>{props?.meta_desc?.metatitle2}</div>
+      <div className={styles.distance}></div>
+    </div>}
   </div>)
 
 }

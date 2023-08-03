@@ -7,6 +7,10 @@
   background-size: 100%;
   background-repeat: no-repeat;
 }
+.keywords_area{
+  width:100%;
+  background: linear-gradient(to right,rgba(213, 59, 69, 1),rgba(255, 134, 122, 0));
+}
 .textArea li,.textArea ul{
   margin: 0;
   list-style:disc!important;
@@ -113,10 +117,15 @@
 .distance {
   flex: 1;
   height: 1px;
-  margin: 0 5%;
+  margin: 0 1%;
   border-bottom: 1px dashed #d43a43;
 }
-
+div>.distance:first-child{
+  margin-right: 3%;
+}
+div>.distance:nth-child(3){
+  margin-left: 3%;
+}
 .goods_scroll {
   margin-top: 1rem;
 }
@@ -234,7 +243,7 @@
   }
   .top_banner_area{
     padding-top: 12%;
-    padding-bottom: 25%;
+    padding-bottom: 9%;
   }
   .top_banner_area>img {
     width: 60%;
