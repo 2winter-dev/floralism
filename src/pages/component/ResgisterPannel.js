@@ -83,7 +83,7 @@ export default function RegisterPannerl(props) {
         }, {
             onSuccess: async (res) => {
                 // let res = await res.json()
-                ////////////////////////////////console.log(res);
+                //////////////////////////////////console.log(res);
                 if (res.code === 1) {
                     props.close();
                     Cookies.set('token', res.data.token, { expires: 1 });
@@ -97,7 +97,7 @@ export default function RegisterPannerl(props) {
                 }
             },
             onError: (res) => {
-                ////////////////////////////////console.log(res);
+                //////////////////////////////////console.log(res);
                 if(res instanceof Error){
                     toast.error(res.msg);
                 }else toast.error(JSON.stringify(res.msg))
@@ -135,7 +135,7 @@ export default function RegisterPannerl(props) {
                         <div style={{ marginTop: '2.5%', width: '100%' }}>
                             <input type='text' placeholder='郵箱' className={style.account_input} value={email} onChange={(event) => {
                                 setEmail(event.target.value)
-                                ////////////////////////////////console.log(event)
+                                //////////////////////////////////console.log(event)
                             }}></input>
                         </div>
                         <div style={{ marginTop: '2.5%' }}>

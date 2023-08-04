@@ -5,7 +5,7 @@ import Link from 'next/link';
 export default function GoodsItem(props) {
     let router = useRouter();
     // if (props.type !== "category" && props.type !== "carsouel"){
-    //     //////////////console.log(props.item);
+    //     ////////////////console.log(props.item);
     // }
     if (props.type !== "category" && props.type !== "carsouel") {
         return (
@@ -44,7 +44,7 @@ export default function GoodsItem(props) {
             </div>
         )
     }
-    // props.type !== "category"&&////////////////////////console.log(props.item,props.type)
+    // props.type !== "category"&&//////////////////////////console.log(props.item,props.type)
     return (
 
 

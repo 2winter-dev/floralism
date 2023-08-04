@@ -22,29 +22,29 @@ export default function AboutUs({ cateList, allcate }) {
 
     const [flag, setFlag] = useState(1);
     const [category, setCategory] = useState([]);
-    // //////////////////////////console.log(allcate);
+    // ////////////////////////////console.log(allcate);
     const [categoryPage, setCategoryPage] = useState(1);
 
     const resizeUpdate = (e) => {
         if (e.target.innerWidth <= 675) {
-            ////////////////////////////////console.log("====", e.target.innerWidth);
+            //////////////////////////////////console.log("====", e.target.innerWidth);
             setFlag(0);
         } else if (e.target.innerWidth <= 1100) {
             setFlag(1)
         } else {
-            ////////////////////////////////console.log("-----", e.target.innerWidth);
+            //////////////////////////////////console.log("-----", e.target.innerWidth);
             setFlag(2);
         }
     }
     useEffect(() => {
         window.addEventListener("resize", resizeUpdate);
         if (window.innerWidth <= 675) {
-            ////////////////////////////////console.log("====", e.target.innerWidth);
+            //////////////////////////////////console.log("====", e.target.innerWidth);
             setFlag(0);
         } else if (window.innerWidth <= 1100) {
             setFlag(1)
         } else {
-            ////////////////////////////////console.log("-----", e.target.innerWidth);
+            //////////////////////////////////console.log("-----", e.target.innerWidth);
             setFlag(2);
         }
         return () => {
@@ -52,9 +52,9 @@ export default function AboutUs({ cateList, allcate }) {
         }
     }, [])
     useEffect(() => {
-        //////////////////////////console.log("flag改變", flag);
+        ////////////////////////////console.log("flag改變", flag);
         setCategory(spliceArr(allcate, !flag ? 4 : flag === 1 ? 6 : flag === 2 && 8, 'cat'));
-        //////////////////////////console.log(spliceArr(allcate, !flag ? 4 : flag === 1 ? 6 : flag === 2 && 8, 'cat'))
+        ////////////////////////////console.log(spliceArr(allcate, !flag ? 4 : flag === 1 ? 6 : flag === 2 && 8, 'cat'))
         setCategoryPage(1);
     }, [flag])
 
@@ -94,6 +94,7 @@ export default function AboutUs({ cateList, allcate }) {
 
 
         </div>
+
         <div className={styles.desc_small_contain} style={{ flex: 1, padding: '5%', position: 'relative', justifyContent: 'flex-end' }}>
             {/* <span className="iconfont" style={{position:'absolute'}}>&#xe67b;</span>  */}
             <div>
@@ -102,29 +103,46 @@ export default function AboutUs({ cateList, allcate }) {
                 <div className={styles.desc2} style={{ marginTop: 10, fontSize: 13, lineHeight: '2rem' }}>在Florlism，我們也深信每一朵花都有其獨特的含義和價值。因此，我們的花藝師會仔細聆聽客戶的需求和意願，並根據不同場合和用途，設計出最適合的花藝作品，以表達客戶的情感和祝福。Florlism的花藝師擁有專業的技能和豐富的經驗，能夠將花材的美學和技術相融合，為客戶打造出高品質、獨特風格的花藝作品，讓每一朵花都能夠傳達出愛和祝福的訊息。</div>
             </div>
         </div>
-        <div className={styles.goods_list} style={{}}>
-    
-            <div>
-              <div style={{ display: 'flex', alignItems: 'center' }}>
-                {flag !== 0 && <div className={style.distance}></div>}
-                <div className={style.title} style={{ whiteSpace: 'nowrap', flex: 1 }}>{'【FLORALISM】 全部分類'}</div>
-                {flag !== 0 && <div className={style.distance}></div>}
-              </div>
-              <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-                {
-                  allcate.map((item, index) => {
-                    return <GoodsItem key={index} src={item.src} item={item} title={item.categoryname} price={item.price} type={'category'} animation={'animation'} />
-                  })
-                }
-              </div>
+        <div className="c1 container" >
+            <div className={`row`} style={{ margin: '2.5rem 0' }}>
+                <div style={{ padding: '0 2%' }} >
+                    <div className={style.keywords_area} style={{ textAlign: 'center', padding: '1rem 0', color: 'rgba(255, 255, 255, 1)', letterSpacing: 0.1, textDecorationLine: 'underline', fontWeight: 'bold' }}>{' 【訂花】 | 網上訂花 | 「Floralism」網上花店香港'}</div>
+                </div>
             </div>
         </div>
-        <div className={styles.ContactusLayout}>
-            <Contactus />
-
+        <div className="c1 container" >
+            <div className={`row`} style={{ margin: '2.5rem 0' }}>
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                    {flag !== 0 && <div className={style.distance}></div>}
+                    <div className={style.title} style={{ whiteSpace: 'nowrap', flex: 1 }}>{' 訂花 | 網上訂花 | 網上花店香港'}</div>
+                    {flag !== 0 && <div className={style.distance}></div>}
+                </div>
+                <div style={{margin:'2.5rem 0',textAlign:'center'}}>
+                    <div>「Floralism」<span style={{textDecorationLine:'underline',fontWeight:'bold'}}>網上花店香港</span> ， <span style={{textDecorationLine:'underline',fontWeight:'bold'}}>網上訂花</span> 已經是最常見的 <span style={{textDecorationLine:'underline',fontWeight:'bold'}}>訂花</span> 途徑。</div>「Floralism 」提供最方便的花束訂購系統，讓客人輕鬆地訂購花束及為他人送上美麗的花束，同時也帶來 了美好的體驗。
+                </div>
+                <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+                    {
+                        allcate.map((item, index) => {
+                            return <GoodsItem key={index} src={item.src} item={item} title={item.categoryname} price={item.price} type={'category'} animation={'animation'} />
+                        })
+                    }
+                </div>
+            </div>
+        </div>
+        <div className="c1 container" >
+            <div className={`row`} style={{display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+                <div className={style.distance}></div>
+                <div className={style.title} style={{ whiteSpace: 'nowrap', flex: 1 }}>{'網上花店｜訂製服務'}</div>
+                <div className={style.distance}></div>
+            </div>
+        </div>
+        <div className="c1 container"  >
+            <div className={`row`} style={{ margin: '2.5rem 0' }}>
+                <Contactus />
+            </div>
         </div>
         {/* {!login&&<ToastContainer />} */}
-        {!login&&<DynamicButton />}
+        {!login && <DynamicButton />}
         {/* {!login && <Toaster
            position="top-center"
         />} */}
@@ -145,7 +163,7 @@ export default function AboutUs({ cateList, allcate }) {
 
 
 export async function getStaticProps({ local }) {
-    //  ////////////////////////////////console.log(constant.api_url);
+    //  //////////////////////////////////console.log(constant.api_url);
     const allcate_response = await fetch(
         `${constant.api_url}/api/Flowercategory/allIndex`, {
         mode: 'cors',

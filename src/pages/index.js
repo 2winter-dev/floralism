@@ -31,10 +31,10 @@ import Link from 'next/link';
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home({ allcate, cateList, GoodsPage, carousel }) {
-  // //////////////////////////////console.log("====");
-  // ////////////console.log(GoodsPage);
+  // ////////////////////////////////console.log("====");
+  // //////////////console.log(GoodsPage);
   const router = useRouter();
-  // //////////////////////////console.log(GoodsPage);
+  // ////////////////////////////console.log(GoodsPage);
   const [bannerSize, setBannerSize] = useState(false);
   const [flag, setFlag] = useState(1);
   const [category, setCategory] = useState([]);
@@ -45,15 +45,15 @@ export default function Home({ allcate, cateList, GoodsPage, carousel }) {
   const [register, setRegister] = useState(false);
   const [visible, setVisible] = useState(false);
   const [isShow, setIsShow] = useState(false);
-  // //////console.log(GoodsPage)
+  // ////////console.log(GoodsPage)
   const resizeUpdate = (e) => {
     if (e.target.innerWidth <= 750) {
-      ////////////////////////////////console.log("====", e.target.innerWidth);
+      //////////////////////////////////console.log("====", e.target.innerWidth);
       setFlag(0);
     } else if (e.target.innerWidth <= 1100) {
       setFlag(1)
     } else {
-      ////////////////////////////////console.log("-----", e.target.innerWidth);
+      //////////////////////////////////console.log("-----", e.target.innerWidth);
       setFlag(2);
     }
     setBannerSize(window.innerWidth <= 750 ? true : false);
@@ -61,12 +61,12 @@ export default function Home({ allcate, cateList, GoodsPage, carousel }) {
   useEffect(() => {
     window.addEventListener("resize", resizeUpdate);
     if (window.innerWidth <= 750) {
-      ////////////////////////////////console.log("====", e.target.innerWidth);
+      //////////////////////////////////console.log("====", e.target.innerWidth);
       setFlag(0);
     } else if (window.innerWidth <= 1100) {
       setFlag(1)
     } else {
-      ////////////////////////////////console.log("-----", e.target.innerWidth);
+      //////////////////////////////////console.log("-----", e.target.innerWidth);
       setFlag(2);
     }
     setBannerSize(window.innerWidth <= 750 ? true : false);
@@ -87,15 +87,15 @@ export default function Home({ allcate, cateList, GoodsPage, carousel }) {
 
   let MySwiper;
   useEffect(() => {
-    //////////////////////////////console.log("flag改變", flag);
+    ////////////////////////////////console.log("flag改變", flag);
     setCategory(spliceArr(allcate, !flag ? 4 : flag === 1 ? 6 : flag === 2 && 8, 'cat'));
-    ////////////////////////////////console.log(spliceArr(GoodsPage,  !flag ? 4 :flag===1? 6:flag===2&&8))
+    //////////////////////////////////console.log(spliceArr(GoodsPage,  !flag ? 4 :flag===1? 6:flag===2&&8))
     setGoodsList(spliceArr(GoodsPage.data, !flag ? 4 : flag === 1 ? 6 : flag === 2 && 8));
     setGoodsPage(1);
     setCategoryPage(1);
   }, [flag])
-  // ////////////////////////////////console.log("=======");
-  // ////////////////////////////////console.log(category[categoryPage]);
+  // //////////////////////////////////console.log("=======");
+  // //////////////////////////////////console.log(category[categoryPage]);
   return (
     <div style={{ position: 'relative' }}>
       <Head>
@@ -111,11 +111,18 @@ export default function Home({ allcate, cateList, GoodsPage, carousel }) {
         {/* <Image priority src="/homepage/top-banner.png" width={1920} height={700} style={{width:'100%'}}/> */}
         <div style={{ display: 'flex', flexDirection: 'column', color: 'white' }} className={styles.top_banner_area}>
           <img alt="home top banner description" src={"/homepage/banner-desc.png"} width={'100%'} />
-          <Link href='/productSearch/2' style={{ border: 'none', display: 'block', cursor: 'pointer' }} className={styles.banner_buttom} >點擊選購</Link>
+          <Link href='/productSearch/花籃' style={{ border: 'none', display: 'block', cursor: 'pointer' }} className={styles.banner_buttom} >點擊選購</Link>
         </div>
       </div>
       <div>
 
+      </div>
+      <div className="c1 container" >
+        <div className={`row`} style={{ margin: '2.5rem 0' }}>
+          <div style={{ padding: '0 2%' }} >
+            <div className={styles.keywords_area} style={{ textAlign: 'center', padding: '1rem 0', color: 'rgba(255, 255, 255, 1)', letterSpacing: 0.1, textDecorationLine: 'underline', fontWeight: 'bold' }}>{'【買花】 | 送花 | 「Floralism」香港花店'}</div>
+          </div>
+        </div>
       </div>
       <main className={`${styles.main_body}`}>
         <div className="c1 container" >
@@ -123,8 +130,12 @@ export default function Home({ allcate, cateList, GoodsPage, carousel }) {
             <div style={{ padding: '0 2%' }} >
               <div style={{ display: 'flex', alignItems: 'center' }}>
                 {flag !== 0 && <div className={styles.distance}></div>}
-                <div className={styles.title} style={{ whiteSpace: 'nowrap', flex: 1 }}>{'【FLORALISM】 全部分類'}</div>
+                <div className={styles.title} style={{ whiteSpace: 'nowrap', flex: 1 }}>{'買花 | 送花 | 香港花店'}</div>
                 {flag !== 0 && <div className={styles.distance}></div>}
+              </div>
+              <div style={{margin:'2.5rem 0',textAlign:'center'}}>
+               <div>「Floralism」專業香港花店提供 <span style={{textDecorationLine:'underline',fontWeight:'bold'}}>買花</span> 及 <span style={{textDecorationLine:'underline',fontWeight:'bold'}}>送花</span> 服務，如鮮花、盆栽、花籃等，而 且還提供網上訂購、送貨上門等一系列買花服務，</div>
+               讓人們能夠方便快捷地為他人表達心意。
               </div>
               <div style={{ display: 'flex', flexWrap: 'wrap' }}>
                 {
@@ -158,6 +169,7 @@ export default function Home({ allcate, cateList, GoodsPage, carousel }) {
               setList={setGoodsList}
               type={''}
               animation
+              cate_desc={{ keywords: '買花｜推薦商品' }}
             />
           </div>
         </div>
@@ -176,7 +188,7 @@ export default function Home({ allcate, cateList, GoodsPage, carousel }) {
                   <Carousel showThumbs={false} infiniteLoop showIndicators={false} preventMovementUntilSwipeScrollTolerance={true} swipeScrollTolerance={50} showStatus={false}>
                     {
                       carousel_slice().map((item, index) => {
-                        //////////////////////////////console.log(carousel_slice().length);
+                        ////////////////////////////////console.log(carousel_slice().length);
                         return (<div key={item.id + index.toString()} style={{ display: 'flex', flexWrap: 'wrap', width: '95%', margin: '0 2.5%' }}>
                           {
                             item.map((it, ii) => {
@@ -209,7 +221,14 @@ export default function Home({ allcate, cateList, GoodsPage, carousel }) {
           </div>
         </div>
         <div className="c1 container" >
-          <div className={`row  py-4`} style={{ marginTop: 24, padding: '2%' }}>
+          <div className={`row  py-4`} style={{ display:'flex',flexDirection:'row',alignItems:'center' }}>
+            <div className={styles.distance}></div>
+            <div className={styles.title} style={{ whiteSpace: 'nowrap', flex: 1 }}>{'買花｜送花｜訂製服務'}</div>
+            <div className={styles.distance}></div>
+          </div>
+        </div>
+        <div className="c1 container" style={{marginBottom:'2.5rem'}} >
+          <div className={`row `} style={{  }}>
             <Contactus />
           </div>
         </div>
@@ -245,7 +264,7 @@ export default function Home({ allcate, cateList, GoodsPage, carousel }) {
 
 
 export async function getServerSideProps({ local }) {
-  //  ////////////////////////////////console.log(constant.api_url);
+  //  //////////////////////////////////console.log(constant.api_url);
   const response = await fetch(
     `${constant.api_url}/api/flowercategory/index`, {
     mode: 'cors',
@@ -257,7 +276,7 @@ export async function getServerSideProps({ local }) {
     }
   }
   );
-  // //////////////console.log(await response.text())
+  // ////////////////console.log(await response.text())
   const allcate_response = await fetch(
     `${constant.api_url}/api/Flowercategory/allIndex`, {
     mode: 'cors',
@@ -271,8 +290,8 @@ export async function getServerSideProps({ local }) {
   )
   let allcate = await allcate_response.json();
   let data = await response.text();
-  // //////////////////////////////console.log("====================");
-  // //////////////////////////////console.log(allcate);
+  // ////////////////////////////////console.log("====================");
+  // ////////////////////////////////console.log(allcate);
   const swiper_response = await fetch(
     `${constant.api_url}/api/flowers/getTopicFlower?flower_category_id=${JSON.parse(data).data[0].id}`, {
     mode: 'cors',
@@ -284,7 +303,7 @@ export async function getServerSideProps({ local }) {
     }
   }
   )
-  //////////////////////////console.log(allcate);
+  ////////////////////////////console.log(allcate);
 
   const goods_response = await fetch(
     `${constant.api_url}/api/flowers/index?keyword=&flower_category_name=${'花籃'}`, {
@@ -297,17 +316,17 @@ export async function getServerSideProps({ local }) {
     }
   }
   );
-  ////////////////////////////////console.log(response);
+  //////////////////////////////////console.log(response);
 
   let swiper_data = await swiper_response.text();
   let goods_data = await goods_response.text();
-  //////////////////////////////console.log("====================");
-  // //////////////console.log(JSON.parse(goods_data).data);
-  // //////////////console.log(JSON.parse(swiper_data).data)
-  //////////////////////////////console.log(JSON.parse(goods_data).data);
-  // //////////////////////////////console.log(data);
+  //console.log("====================");
+  //console.log(JSON.parse(goods_data).data);
+  // ////////////////console.log(JSON.parse(swiper_data).data)
+  ////////////////////////////////console.log(JSON.parse(goods_data).data);
+  // ////////////////////////////////console.log(data);
 
-  // //////console.log(JSON.parse(goods_data).data)                                           
+  // ////////console.log(JSON.parse(goods_data).data)                                           
   return {
     props: {
       allcate: allcate.data,

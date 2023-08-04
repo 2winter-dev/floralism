@@ -34,9 +34,9 @@ export default function Footer() {
         })
     }, [])
     useEffect(() => {
-        //    console.log(cateList);
+        //    //console.log(cateList);
     }, [cateList])
-    ////////console.log(cateList)
+    //////////console.log(cateList)
 
     return (<div className={style.footer} style={{ width: '100%' }}>
 
@@ -46,7 +46,7 @@ export default function Footer() {
                 cateList.map((item, index) => {
                     let res = item.keywords1.split(' | ');
                     return res.map((it, idx) => { 
-                        // console.log(it);
+                        // //console.log(it);
                         if(index===cateList.length-1&&idx===res.length-1){
                             return (<Link style={{ color: 'white',fontSize:13 }}  href={`${item.flower_category_id===0? '/first_cate/'+item?.categoryname:'/category/'+item?.categoryname}`} key={idx}>{it}</Link>)
                         }

@@ -320,6 +320,11 @@ div>.distance:nth-child(3){
     border-radius: 12px;
   } 
 }
+@media screen and (max-width:600px) {
+   .textArea{
+    border-radius: 0px;
+   }
+}
 @media screen and (min-width:992px) {
   .textArea{
     border-top-right-radius: 12px;

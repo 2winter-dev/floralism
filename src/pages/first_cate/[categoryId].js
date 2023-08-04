@@ -11,8 +11,8 @@ import LoginPannel from "../component/LoginPannel";
 import Image from "next/image";
 import BodyBanner from "../component/BodyBanner";
 export default function Index({ category, cateList, top_banner, tiny_top_banner, middle_banner, tiny_middle_banner }) {
-    ////console.log(category);
-    // console.log(category.background_color);
+    //////console.log(category);
+    //console.log(category.background_color);
     const [login, setLogin] = useState(false);
     const [bannerSize, setBannerSize] = useState(false);
 
@@ -20,12 +20,12 @@ export default function Index({ category, cateList, top_banner, tiny_top_banner,
     const [register, setRegister] = useState(false);
     const resizeUpdate = (e) => {
         if (e.target.innerWidth <= 750) {
-            ////////////////////////////////console.log("====", e.target.innerWidth);
+            //////////////////////////////////console.log("====", e.target.innerWidth);
             setFlag(0);
         } else if (e.target.innerWidth <= 1100) {
             setFlag(1)
         } else {
-            ////////////////////////////////console.log("-----", e.target.innerWidth);
+            //////////////////////////////////console.log("-----", e.target.innerWidth);
             setFlag(2);
         }
         setBannerSize(window.innerWidth <= 750 ? true : false);
@@ -34,12 +34,12 @@ export default function Index({ category, cateList, top_banner, tiny_top_banner,
     useEffect(() => {
         window.addEventListener("resize", resizeUpdate);
         if (window.innerWidth <= 750) {
-            ////////////////////////////////console.log("====", e.target.innerWidth);
+            //////////////////////////////////console.log("====", e.target.innerWidth);
             setFlag(0);
         } else if (window.innerWidth <= 1100) {
             setFlag(1)
         } else {
-            ////////////////////////////////console.log("-----", e.target.innerWidth);
+            //////////////////////////////////console.log("-----", e.target.innerWidth);
             setFlag(2);
         }
         setBannerSize(window.innerWidth <= 750 ? true : false);
@@ -47,28 +47,28 @@ export default function Index({ category, cateList, top_banner, tiny_top_banner,
             window.removeEventListener("resize", resizeUpdate);
         }
     }, [])
-    const desc=()=>{
-        console.log(category?.metadescription.split(" "));
-     console.log(category?.keywords.split(" | "));
-     let res=[];
-     let flag=false;
-     category?.metadescription.split(" ").map((item,index)=>{
-        category?.keywords.split(" | ").map((it,idx)=>{
-            if(item.includes(it)){
-               res.push(<span style={{textDecorationLine:'underline',padding:'0 4px'}}>{" "+it+" "}</span>)
-               flag=true;
+    const desc = () => {
+        //console.log(category?.metadescription.split(" "));
+        //console.log(category?.keywords.split(" | "));
+        let res = [];
+        let flag = false;
+        category?.metadescription.split(" ").map((item, index) => {
+            category?.keywords.split(" | ").map((it, idx) => {
+                if (item.includes(it)) {
+                    res.push(<span style={{ textDecorationLine: 'underline', padding: '0 4px' }}>{" " + it + " "}</span>)
+                    flag = true;
+                }
+            })
+            if (!flag) {
+                res.push(<span>{item}</span>)
             }
+            flag = false;
         })
-        if(!flag){
-          res.push(<span>{item}</span>)
-        }
-        flag=false;
-     })
-     return res;
+        return res;
     }
-    useEffect(()=>{
-     
-    },[])
+    useEffect(() => {
+
+    }, [])
     return (<div>
         <Head>
             <title>{`${category.metatitle !== "" ? category.metatitle : (category.categoryname + " | 「Floralism」香港花店")}`}</title>
@@ -78,7 +78,7 @@ export default function Index({ category, cateList, top_banner, tiny_top_banner,
         <DynamicComponent cateList={cateList} setLogin={setLogin} />
         <div style={{ width: '100%', display: 'flex', position: 'relative', backgroundPosition: 'revert', backgroundImage: bannerSize ? `url(${tiny_top_banner.coverimage})` : `url(${top_banner.coverimage})`, marginBottom: 0 }} className={styles.banner} >
             {/* <Image priority src="/homepage/top-banner.png" width={1920} height={700} style={{width:'100%'}}/> */}
-            <div className={category.id === 13 ? styles.n_spec_banner : category.id === 23 ? styles.s_spec_banner : styles.top_banner_area} style={{ display: "flex", flexDirection: 'column', alignItems: 'center', margin: category.id === 13 ? 'auto':'0' }}>
+            <div className={category.id === 13 ? styles.n_spec_banner : category.id === 23 ? styles.s_spec_banner : styles.top_banner_area} style={{ display: "flex", flexDirection: 'column', alignItems: 'center', margin: category.id === 13 ? 'auto' : '0' }}>
                 {
                     <img className={category.id === 13 ? styles.n_desc_banner : styles.desc_banner} alt={bannerSize ? tiny_top_banner.descriptionimage : top_banner.descriptionimage} src={bannerSize ? tiny_top_banner.descriptionimage : top_banner.descriptionimage} style={{}} />
                 }
@@ -101,7 +101,7 @@ export default function Index({ category, cateList, top_banner, tiny_top_banner,
                             <div className={styles.title} style={{ whiteSpace: 'nowrap', flex: 1 }}>{category?.keywords}</div>
                             <div className={styles.distance}></div>
                         </div>
-                        <div style={{ display: 'flex', alignItems: 'center', width: '100%',flexDirection:'row',flexWrap:'wrap',justifyContent:'center'  , textAlign: 'center', margin: '2.5rem 0',fontWeight:500 }}>
+                        <div style={{ display: 'flex', alignItems: 'center', width: '100%', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', textAlign: 'center', margin: '2.5rem 0', fontWeight: 500 }}>
                             {desc()}
                         </div>
                         <div style={{ display: 'flex', flexWrap: 'wrap' }}>
@@ -111,76 +111,54 @@ export default function Index({ category, cateList, top_banner, tiny_top_banner,
                                 })
                             }
                         </div>
-                        <div style={{ display: 'flex', alignItems: 'center', margin: '2.5rem 0' }}>
+                        {category?.metatitle2!==""&&<div style={{ display: 'flex', alignItems: 'center', margin: '2.5rem 0' }}>
                             <div className={styles.distance}></div>
                             <div className={styles.title} style={{ whiteSpace: 'nowrap', flex: 1 }}>{category?.metatitle2}</div>
                             <div className={styles.distance}></div>
-                        </div>
+                        </div>}
                     </div>
                 </div>
             </div>
 
-            <div style={{}}>
-                <div className="c1 container" style={{ padding: '0 2%', marginBottom: '2.5rem' }} >
-                    <div className={`row`}>
-                        <div className="col-12 col-lg-5 px-0 mt-2 mt-lg-0">
-                            <div
-                                className={`image_c ${styles.adapt_pic}`}
-                                style={{ width: '100%', height: '100%', position: 'relative' }}
-                            >
-                                <Image
-                                    className={styles.image_border}
-                                    src={category.cover_image !== "https://admin.floralismhk.com" ? category.cover_image : "/default-f-cate.png"}
-                                    fill
-                                    style={{
-                                        width: "100%",
-                                        height: "100%",
-                                        objectFit: "cover",
-                                        opacity: 1,
-                                        objectPosition: "top"
-                                    }}
-                                />
-                            </div>
-                        </div>
+
+            <div className="c1 container" style={{ padding: '0 2%', marginBottom: '2.5rem' }} >
+                <div className={`row`}>
+                    <div className="col-12 col-lg-5 px-0 mt-2 mt-lg-0">
                         <div
-                            className={`col-12 col-lg-7 ${styles.textArea}`}
-                            style={{ backgroundColor: category.background_color ? `#${category.background_color}` : "rgb(213, 59, 69)", display: 'flex', flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'center', padding: '4vw', color: 'white' }}
+                            className={`image_c ${styles.adapt_pic}`}
+                            style={{ width: '100%', height: '100%', position: 'relative' }}
                         >
-                            <div style={{ marginLeft: '1rem', width: 20, height: 4, backgroundColor: 'white', borderRadius: 12 }}></div>
-                            <div
-                                dangerouslySetInnerHTML={{
-                                    __html: category.category_description,
+                            <Image
+                                className={styles.image_border}
+                                src={category.cover_image !== "https://admin.floralismhk.com" ? category.cover_image : "/default-f-cate.png"}
+                                fill
+                                style={{
+                                    width: "100%",
+                                    height: "100%",
+                                    objectFit: "cover",
+                                    opacity: 1,
+                                    objectPosition: "top"
                                 }}
-                                className={styles.rich_content}
-                                style={{ margin: "0 1rem" }}
-                            ></div>
-                            <div style={{ marginLeft: '1rem', padding: '0.5vw 2vw', border: '1px solid white', marginTop: '3vw', borderRadius: 12 }}>{category.categoryname}</div>
+                            />
                         </div>
-
                     </div>
+                    <div
+                        className={`col-12 col-lg-7 ${styles.textArea}`}
+                        style={{ backgroundColor: category.background_color ? `#${category.background_color}` : "rgb(213, 59, 69)", display: 'flex', flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'center', padding: '4vw', color: 'white' }}
+                    >
+                        <div style={{ marginLeft: '1rem', width: 20, height: 4, backgroundColor: 'white', borderRadius: 12 }}></div>
+                        <div
+                            dangerouslySetInnerHTML={{
+                                __html: category.category_description,
+                            }}
+                            className={styles.rich_content}
+                            style={{ margin: "0 1rem" }}
+                        ></div>
+                        <div style={{ marginLeft: '1rem', padding: '0.5vw 2vw', border: '1px solid white', marginTop: '3vw', borderRadius: 12 }}>{category.categoryname}</div>
+                    </div>
+
                 </div>
             </div>
-
-            {/* <div className={styles.padLayout} style={{ width: '100%', display: 'flex', marginBottom: 24 }}>
-                <div className={styles.adapt_pic} style={{display:'flex',justifyContent:'flex',backgroundImage:'linear-gradient(#f1e3dc,#f1e8e0)'}}>
-                    <img style={{width:'100%',objectFit:'contain',objectPosition:'bottom'}}  alt={`${category.categoryname}插圖`} src="/default-f-cate.png" />
-                </div>
-               
-                <div className={styles.textArea} style={{ flex: 1, backgroundColor: 'rgb(213, 59, 69)', color: "white", display: 'flex', alignItems: 'flex-start', flexDirection: 'column', justifyContent: 'center' }}>
-                
-                    <div style={{ width: 20, height: 4, backgroundColor: 'white', borderRadius: 12 }}></div>
-                    <div style={{ marginTop: '0.8vw' }}>怎麽樣選擇花束品類?</div>
-                    <ul style={{ flex: 1, marginTop: '1.25vw', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-                        <li style={{}}>根據送花的場合，選擇相應的花束品類。例如，玫瑰花束通常用於表達愛意或浪漫場合，而百合花束則常用於祝賀或慶祝場合。</li>
-                        <li style={{}}>考慮收件人的個人喜好和偏好，選擇相應的花束品類。</li>
-                        <li style={{}}>每種花朵都有自己的花語，可以根據花語來選擇花束品類。</li>
-                        <li style={{}}>考慮當前的季節，選擇季節性的花束品類，確保花束中的花朵新鮮且容易獲得。</li>
-                        <li style={{}}>根據自己的預算，選擇適合的花束品類。</li>
-                        <li style={{}}>最重要的是，選擇花束品類時要考慮到收件人的喜好和場合，並選擇一個能夠表達你的心意的花束。</li>
-                    </ul>
-                    <div style={{ padding: '0.5vw 2vw', border: '1px solid white', marginTop: '3vw', borderRadius: 12 }}>花束品類</div>
-                </div>
-            </div>  */}
             <div style={{ width: '100%', position: 'relative', marginTop: 24 }}>
                 {
                     <img alt={flag === 0 ? tiny_middle_banner.coverimage : middle_banner.coverimage} src={
@@ -204,7 +182,7 @@ export default function Index({ category, cateList, top_banner, tiny_top_banner,
                     </div>
                 </div>
             </div>
-            {category.categoryname === "花束品類" ? <div className={`c1 container `} style={{ marginTop: '2.5rem',marginBottom:'2.5rem', padding: '0 2%' }} >
+            {category.categoryname === "花束品類" ? <div className={`c1 container `} style={{ marginTop: '2.5rem', marginBottom: '2.5rem', padding: '0 2%' }} >
                 <div className={`row`} style={{ backgroundColor: "rgb(213, 59, 69)", padding: '4vw', color: 'white', borderRadius: 12 }}>
                     <div style={{ width: 30, height: 4, backgroundColor: 'white', borderRadius: 12 }}></div>
                     <div className={styles.flowerDesgin} style={{ marginTop: '0.8vw', padding: 0 }}>花束品類設計</div>
@@ -263,27 +241,27 @@ export default function Index({ category, cateList, top_banner, tiny_top_banner,
                         </div>
                     </div>
                 </div>
-            </div> : <div className={`c1 container `} style={{ marginTop: '2.5rem',marginBottom:'2.5rem', padding: '0 2%' }} >
-                <div className={`row `} style={{ borderRadius: 12, display: 'flex', flexWrap: 'wrap', flex: 1 }}>
+            </div> : <div className={`c1 container `} style={{ marginTop: '2.5rem', marginBottom: '2.5rem', padding: '0 2%' }} >
+                <div className={``} style={{ borderRadius: 12, display: 'flex', flexWrap: 'wrap', flex: 1, width: 'inherit' }}>
                     {
                         category?.slider_images?.length ? category.slider_images.map((item, index) => {
-                            return (<img className={styles.bannerTwoColumn} style={{ padding: 0 }} src={item} alt={item} key={index} />)
+                            return (<img className={styles.bannerTwoColumn} style={{ objectFit: 'cover' }} src={item} alt={item} key={index} />)
                         }) : ['/test1.png', '/test2.png', '/test3.png', '/test4.png'].map((item, index) => {
-                            return (<img className={styles.bannerTwoColumn} style={{ padding: 0 }} src={item} alt={item} key={index} />)
+                            return (<img className={styles.bannerTwoColumn} style={{ objectFit: 'cover' }} src={item} alt={item} key={index} />)
                         })
                     }
                 </div>
             </div>}
         </main>
-        <div className="c1 container" style={{ padding: '0 2%', margin: '2.5rem auto' }} >
-                <div className={`row`}>
-                    <div style={{ display: 'flex', alignItems: 'center' }}>
-                        <div className={styles.distance}></div>
-                        <div className={styles.title} style={{ whiteSpace: 'nowrap', flex: 1 }}>{category?.metatitle4}</div>
-                        <div className={styles.distance}></div>
-                    </div>
+        {category?.metatitle4&&<div className="c1 container" style={{ padding: '0 2%', margin: '2.5rem auto' }} >
+            <div className={`row`}>
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <div className={styles.distance}></div>
+                    <div className={styles.title} style={{ whiteSpace: 'nowrap', flex: 1 }}>{category?.metatitle4}</div>
+                    <div className={styles.distance}></div>
                 </div>
             </div>
+        </div>}
         <div className="c1 container" >
             <div className={`row  py-4`} style={{ marginBottom: '1.5rem', padding: '2%' }}>
                 <Contactus />
@@ -321,7 +299,7 @@ export async function getStaticPaths() {
     }
     );
     let data = await response.json();
-    // //////console.log(data.data);
+    // ////////console.log(data.data);
     let arr = [];
     if (data.data.length > 0) {
         data.data.map((item, index) => {
@@ -371,18 +349,18 @@ export async function getStaticProps(context) {
     let data = await response.json();
     let tt_data = await tt_response.json();
     const banner_list = await banner.json();
-    // //////console.log("=================");
-    // //////console.log(banner_list.data.middle_banner.web,banner_list.data.top_banner.web);
+    // ////////console.log("=================");
+    // ////////console.log(banner_list.data.middle_banner.web,banner_list.data.top_banner.web);
     //data.id
 
     let item = data.data.filter((item, index) => {
-        // //////console.log(item,params.categoryId);
+        // ////////console.log(item,params.categoryId);
         if (item.categoryname === params.categoryId) {
             return item;
         }
     })
-    //////console.log("=================");
-    //////console.log(item[0].id);
+    ////////console.log("=================");
+    ////////console.log(item[0].id);
     let top_banner = banner_list.data.top_banner.web.filter((it) => {
         if (it.flower_category_ids.includes(parseInt(item[0].id))) {
             return item;
@@ -393,7 +371,7 @@ export async function getStaticProps(context) {
         if (it.flower_category_ids.includes(parseInt(item[0].id))) {
             return it;
         }
-        // //////console.log(item[0]);
+        // ////////console.log(item[0]);
     })
     let middle_banner = banner_list.data.middle_banner.web.filter((it) => {
         if (it.flower_category_ids.includes(parseInt(item[0].id))) {
