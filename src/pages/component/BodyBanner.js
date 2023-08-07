@@ -16,14 +16,14 @@ export default function BodyBanner(props) {
                     {
                         <div className={styles.distance} style={{ borderBottomWidth: 1, borderBottomColor: 'white',flex:1 }}></div>
                     }
-                    <div className={styles.title} style={{ color: "white",fontSize:'1.25vw', marginRight: 16, marginLeft: 16 }}>{props.title}</div>
+                    <div className={styles.title} style={{ color: "white",fontSize:'1.5rem', marginRight: 16, marginLeft: 16 }}>{props.title}</div>
                     {
                         <div className={styles.distance} style={{ borderBottomWidth: 1, borderBottomColor: 'white',flex:1 }}></div>
                     }
                 </div>
                 <div style={{width:'100%',display:'flex',justifyContent:'center',alignItems:'center',flexDirection:'column',marginTop:'2%'}} className={style.desc_layout}>
-                    <div style={{fontSize:'1.25vw',textAlign:'center'}}>{props.desc1}</div>
-                    <div style={{fontSize:'1.25vw',marginTop: '1%',textAlign:'center' }}>{props.desc2}</div>
+                    <div style={{fontSize:'1.1vw',textAlign:'center',letterSpacing:0.2}}>{props.desc1}</div>
+                    <div style={{fontSize:'1.1vw',marginTop: '1%',textAlign:'center' }}>{props.desc2}</div>
                 </div>
             </div>
         </div>

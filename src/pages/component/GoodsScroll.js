@@ -18,10 +18,10 @@ export default function GoodsScoll(props) {
     let flag = false;
     props?.cate_desc?.metadescription.split(" ").map((item, index) => {
       props?.cate_desc?.keywords.split("，").map((it, idx) => {
-        if(item.includes(it)){
-          res.push(<span style={{textDecorationLine:'underline',padding:'0 4px'}}>{" "+it+" "}</span>)
-          flag=true;
-       }
+        if (item.includes(it)) {
+          res.push(<span style={{ textDecorationLine: 'underline', padding: '0 4px' }}>{" " + it + " "}</span>)
+          flag = true;
+        }
       })
       if (!flag) {
         res.push(<span>{item}</span>)
@@ -106,10 +106,16 @@ export default function GoodsScoll(props) {
     <div style={{ display: 'flex', alignItems: 'center' }}>
       <div className={styles.distance}></div>
       <div className={styles.title}>{props?.cate_desc?.keywords}</div>
-      <div className={styles.distance}></div> 
+      <div className={styles.distance}></div>
     </div>
-    {props.page_type==="category"&&<div style={{ display: 'flex', alignItems: 'center', width: '100%', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', textAlign: 'center', margin: '2.5rem 0', fontWeight: 500 }}>
-      {desc()}
+    {props.page_type === "category" && <div style={{ display: 'flex', alignItems: 'center', width: '100%', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', textAlign: 'center', margin: '2.5rem 0'}}>
+      <div
+        dangerouslySetInnerHTML={{
+          __html: props?.cate_desc?.metadescription,
+        }}
+        className={styles.rich_content}
+        style={{ margin: "0 1rem" }}
+      ></div>
     </div>}
     <section>
       <div style={{ display: 'flex', flexWrap: 'wrap', marginTop: 14 }}>
@@ -143,7 +149,7 @@ export default function GoodsScoll(props) {
         }
       </div>}
     </div>
-    {props.page_type==="category"&&props?.cate_desc?.metatitle2!==""&&<div style={{ display: 'flex', alignItems: 'center',margin:'2.5rem 0' }}>
+    {props.page_type === "category" && props?.cate_desc?.metatitle2 !== "" && <div style={{ display: 'flex', alignItems: 'center', margin: '2.5rem 0' }}>
       <div className={styles.distance}></div>
       <div className={styles.title}>{props?.cate_desc?.metatitle2}</div>
       <div className={styles.distance}></div>

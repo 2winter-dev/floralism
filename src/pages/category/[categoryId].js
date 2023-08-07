@@ -10,6 +10,7 @@ import style from '@/styles/banner.module.css'
 import { useState, useEffect } from "react";
 import { spliceArr } from "@/method";
 import GoodsScoll from "../component/GoodsScroll";
+import BodyBanner from "../component/BodyBanner";
 import DynamicComponent from "../component/Dynamic";
 import Head from "next/head";
 import CateScroll from "../component/cateScroll";
@@ -141,7 +142,7 @@ export default function Category({ categoryId, meta_desc, allcate, cate_desc, me
                 </div>
             </div>
         </div>
-        <div style={{ width: '100%', position: 'relative' }}>
+        {/* <div style={{ width: '100%', position: 'relative' }}>
             {
                 <img alt={flag < 2 ? (tiny_middle_banner?.alt?.length > 2 ? tiny_middle_banner?.alt[2] : "") : (middle_banner?.alt?.length > 2 ? middle_banner?.alt[2] : "")} src={flag < 2 ? tiny_middle_banner?.coverimage : middle_banner?.coverimage} style={{ width: '100%', height: '100%', display: 'block' }}></img>
             }
@@ -152,7 +153,15 @@ export default function Category({ categoryId, meta_desc, allcate, cate_desc, me
                     </div>
                 </div>
             </div>
-        </div>
+        </div> */}
+        <BodyBanner
+          flag={flag}
+          imgTiny={tiny_middle_banner?.coverimage}
+          img={middle_banner?.coverimage}
+          title={`【FLORALISM】 ${categoryId}寓意`}
+          desc1={cate_desc.metadescription2}
+        //   desc2={}
+        />
         <div className="c1 container" >
             <div className={`row`} style={{ margin: '2.5rem 0' }}>
                 <div style={{ padding: '0 2%' }} >
@@ -369,6 +378,7 @@ export async function getStaticProps(context) {
     // //////////////////////console.log(JSON.parse(data).data);
     // //////////////////////console.log()
     //////////////////////console.log(meta);
+    console.log(cateId[0]);
     return {
         props: {
             categoryId: params.categoryId,

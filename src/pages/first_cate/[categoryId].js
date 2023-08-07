@@ -101,8 +101,14 @@ export default function Index({ category, cateList, top_banner, tiny_top_banner,
                             <div className={styles.title} style={{ whiteSpace: 'nowrap', flex: 1 }}>{category?.keywords}</div>
                             <div className={styles.distance}></div>
                         </div>
-                        <div style={{ display: 'flex', alignItems: 'center', width: '100%', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', textAlign: 'center', margin: '2.5rem 0', fontWeight: 500 }}>
-                            {desc()}
+                        <div style={{ display: 'flex', alignItems: 'center', width: '100%', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', textAlign: 'center', margin: '2.5rem 0'}}>
+                        <div
+                            dangerouslySetInnerHTML={{
+                                __html:  category?.metadescription,
+                            }}
+                            className={styles.rich_content}
+                            style={{ margin: "0 1rem" }}
+                        ></div>
                         </div>
                         <div style={{ display: 'flex', flexWrap: 'wrap' }}>
                             {
@@ -383,7 +389,7 @@ export async function getStaticProps(context) {
             return it;
         }
     })
-
+   
     return {
         props: {
             category: item.length && item[0],
