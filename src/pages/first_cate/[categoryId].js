@@ -11,8 +11,8 @@ import LoginPannel from "../component/LoginPannel";
 import Image from "next/image";
 import BodyBanner from "../component/BodyBanner";
 export default function Index({ category, cateList, top_banner, tiny_top_banner, middle_banner, tiny_middle_banner }) {
-    //////console.log(category);
-    //console.log(category.background_color);
+    ////////console.log(category);
+    ////console.log(category.background_color);
     const [login, setLogin] = useState(false);
     const [bannerSize, setBannerSize] = useState(false);
 
@@ -20,12 +20,12 @@ export default function Index({ category, cateList, top_banner, tiny_top_banner,
     const [register, setRegister] = useState(false);
     const resizeUpdate = (e) => {
         if (e.target.innerWidth <= 750) {
-            //////////////////////////////////console.log("====", e.target.innerWidth);
+            ////////////////////////////////////console.log("====", e.target.innerWidth);
             setFlag(0);
         } else if (e.target.innerWidth <= 1100) {
             setFlag(1)
         } else {
-            //////////////////////////////////console.log("-----", e.target.innerWidth);
+            ////////////////////////////////////console.log("-----", e.target.innerWidth);
             setFlag(2);
         }
         setBannerSize(window.innerWidth <= 750 ? true : false);
@@ -34,12 +34,12 @@ export default function Index({ category, cateList, top_banner, tiny_top_banner,
     useEffect(() => {
         window.addEventListener("resize", resizeUpdate);
         if (window.innerWidth <= 750) {
-            //////////////////////////////////console.log("====", e.target.innerWidth);
+            ////////////////////////////////////console.log("====", e.target.innerWidth);
             setFlag(0);
         } else if (window.innerWidth <= 1100) {
             setFlag(1)
         } else {
-            //////////////////////////////////console.log("-----", e.target.innerWidth);
+            ////////////////////////////////////console.log("-----", e.target.innerWidth);
             setFlag(2);
         }
         setBannerSize(window.innerWidth <= 750 ? true : false);
@@ -48,8 +48,8 @@ export default function Index({ category, cateList, top_banner, tiny_top_banner,
         }
     }, [])
     const desc = () => {
-        //console.log(category?.metadescription.split(" "));
-        //console.log(category?.keywords.split(" | "));
+        ////console.log(category?.metadescription.split(" "));
+        ////console.log(category?.keywords.split(" | "));
         let res = [];
         let flag = false;
         category?.metadescription.split(" ").map((item, index) => {
@@ -305,7 +305,7 @@ export async function getStaticPaths() {
     }
     );
     let data = await response.json();
-    // ////////console.log(data.data);
+    // //////////console.log(data.data);
     let arr = [];
     if (data.data.length > 0) {
         data.data.map((item, index) => {
@@ -355,18 +355,18 @@ export async function getStaticProps(context) {
     let data = await response.json();
     let tt_data = await tt_response.json();
     const banner_list = await banner.json();
-    // ////////console.log("=================");
-    // ////////console.log(banner_list.data.middle_banner.web,banner_list.data.top_banner.web);
+    // //////////console.log("=================");
+    // //////////console.log(banner_list.data.middle_banner.web,banner_list.data.top_banner.web);
     //data.id
 
     let item = data.data.filter((item, index) => {
-        // ////////console.log(item,params.categoryId);
+        // //////////console.log(item,params.categoryId);
         if (item.categoryname === params.categoryId) {
             return item;
         }
     })
-    ////////console.log("=================");
-    ////////console.log(item[0].id);
+    //////////console.log("=================");
+    //////////console.log(item[0].id);
     let top_banner = banner_list.data.top_banner.web.filter((it) => {
         if (it.flower_category_ids.includes(parseInt(item[0].id))) {
             return item;
@@ -377,7 +377,7 @@ export async function getStaticProps(context) {
         if (it.flower_category_ids.includes(parseInt(item[0].id))) {
             return it;
         }
-        // ////////console.log(item[0]);
+        // //////////console.log(item[0]);
     })
     let middle_banner = banner_list.data.middle_banner.web.filter((it) => {
         if (it.flower_category_ids.includes(parseInt(item[0].id))) {

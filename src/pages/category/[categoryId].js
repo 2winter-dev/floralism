@@ -21,13 +21,13 @@ import GoodsItem from "../component/GoodsItem";
 import toast, { Toaster } from "react-hot-toast";
 import Image from "next/image";
 export default function Category({ categoryId, meta_desc, allcate, cate_desc, meta, cateList, data, top_banner, middle_banner, tiny_top_banner, tiny_middle_banner }) {
-    // ////////////////////////////////console.log("----");
-    //////////////////////////////console.log(data);
-    ////console.log(data);
-    ////console.log(cateList);
-    //////console.log(categoryId);
-    //////////////////console.log(tiny_middle_banner.alt)
-    // //////////////////////console.log(tiny_top_banner,tiny_middle_banner);
+    // //////////////////////////////////console.log("----");
+    ////////////////////////////////console.log(data);
+    //////console.log(data);
+    //////console.log(cateList);
+    ////////console.log(categoryId);
+    ////////////////////console.log(tiny_middle_banner.alt)
+    // ////////////////////////console.log(tiny_top_banner,tiny_middle_banner);
     const router = useRouter();
     const [login, setLogin] = useState(false);
     const [bannerSize, setBannerSize] = useState(false);
@@ -48,16 +48,16 @@ export default function Category({ categoryId, meta_desc, allcate, cate_desc, me
         }
         setBannerSize(window.innerWidth <= 800 ? true : false);
     }
-//console.log(cate_desc);
+////console.log(cate_desc);
     useEffect(() => {
         window.addEventListener("resize", resizeUpdate);
         if (window.innerWidth <= 675) {
-            //////////////////////////////////console.log("====", e.target.innerWidth);
+            ////////////////////////////////////console.log("====", e.target.innerWidth);
             setFlag(0);
         } else if (window.innerWidth <= 1100) {
             setFlag(1)
         } else {
-            //////////////////////////////////console.log("-----", e.target.innerWidth);
+            ////////////////////////////////////console.log("-----", e.target.innerWidth);
             setFlag(2);
         }
         setBannerSize(window.innerWidth <= 675 ? true : false);
@@ -66,16 +66,16 @@ export default function Category({ categoryId, meta_desc, allcate, cate_desc, me
         }
     }, [])
     useEffect(() => {
-        //////////////////////////////////console.log("flag改變", flag);
+        ////////////////////////////////////console.log("flag改變", flag);
         setCategory(spliceArr(allcate, !flag ? 4 : flag === 1 ? 6 : flag === 2 && 8, 1));
-        //////////////////////////////////console.log(spliceArr(GoodsPage,  !flag ? 4 :flag===1? 6:flag===2&&8))
+        ////////////////////////////////////console.log(spliceArr(GoodsPage,  !flag ? 4 :flag===1? 6:flag===2&&8))
         setGoodsList(spliceArr(data.data, !flag ? 4 : flag === 1 ? 6 : flag === 2 && 8));
         setGoodsPage(1);
         setCategoryPage(1);
     }, [flag])
 
     // const checkname = () => {
-    //     //    ////////////////////////////////console.log(goodsList);
+    //     //    //////////////////////////////////console.log(goodsList);
     //     let res = allcate.filter((item) => {
     //         if (item.id === data.data[0].flower_category_id) {
     //             return item;
@@ -84,13 +84,13 @@ export default function Category({ categoryId, meta_desc, allcate, cate_desc, me
 
     //     return res[0].categoryname;
     // }
-    ////////////console.log(data)
+    //////////////console.log(data)
     useEffect(() => {
-        ////////////console.log(bannerSize)
-        // ////////////////////////////////console.log(goodsList);
+        //////////////console.log(bannerSize)
+        // //////////////////////////////////console.log(goodsList);
     }, [bannerSize])
-    ////////////////////////////console.log("======");
-    ////////////////////////////console.log(data);
+    //////////////////////////////console.log("======");
+    //////////////////////////////console.log(data);
     return (<div>
         <Head>
             {/* <meta title={`${meta.title}`}  /> */}
@@ -105,7 +105,7 @@ export default function Category({ categoryId, meta_desc, allcate, cate_desc, me
                 <div style={{ display: "flex", flexDirection: 'column', alignItems: 'center', marginRight: categoryId === '母親節花束' ? '20%' : 0, marginTop: categoryId === '母親節花束' ? '5%' : 0 }}>
                     <img alt={bannerSize ? (tiny_top_banner?.alt?.length ? tiny_top_banner.alt[0] : "") : (top_banner?.alt?.length ? top_banner?.alt[0] : "")} src={bannerSize ? tiny_top_banner?.descriptionimage : top_banner?.descriptionimage} style={{ width: '100%' }} />
                     <a href={`${data?.data?.length ? "/productSearch/" + data?.category_name : "/"}`} onClick={() => {
-                        //////////////////console.log(data);
+                        ////////////////////console.log(data);
                         // data.data.length ?
                         //     router.push(`/productSearch/${data.data[0].flower_category_id}`)
                         //     : router.push('/')
@@ -159,7 +159,7 @@ export default function Category({ categoryId, meta_desc, allcate, cate_desc, me
           imgTiny={tiny_middle_banner?.coverimage}
           img={middle_banner?.coverimage}
           title={`【FLORALISM】 ${categoryId}寓意`}
-          desc1={cate_desc.metadescription2}
+          desc1={cate_desc?.metadescription2}
         //   desc2={}
         />
         <div className="c1 container" >
@@ -225,13 +225,13 @@ export async function getStaticPaths() {
     }
     );
     const data = await response.json();
-    // ////////////console.log(data);
+    // //////////////console.log(data);
     let res = [];
     data.data.map((item, index) => {
         res.push({ params: { categoryId: item.categoryname.toString() } });
     })
-    //////////////////console.log(res);
-    // ////////////////////////////////console.log(res);
+    ////////////////////console.log(res);
+    // //////////////////////////////////console.log(res);
     // const data=await response.json()
     // TODO get product id to be array
     return {
@@ -242,7 +242,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps(context) {
     const { params } = context;
-    ////////////console.log(params);
+    //////////////console.log(params);
 
     const response = await fetch(
         `${constant.api_url}/api/flowers/index?keyword=&flower_category_name=${params.categoryId}`, {
@@ -309,76 +309,76 @@ export async function getStaticProps(context) {
             return item;
         }
     })
-    //console.log("0----0")
-    //console.log(cateId);
-    // //console.log(JSON.parse(tt_data).data[0].get_child)
+    ////console.log("0----0")
+    ////console.log(cateId);
+    // ////console.log(JSON.parse(tt_data).data[0].get_child)
     let meta_desc = JSON.parse(tt_data).data.filter((item, index) => {
-        //console.log(item.categoryname, params.categoryId);
+        ////console.log(item.categoryname, params.categoryId);
         if (item.categoryname === params.categoryId) {
             return item;
         }
     })
-    //console.log("-------");
-    //console.log(meta_desc);
-    // ////console.log("========");
-    // ////console.log(cateId[0]);
-    //////////////////////////console.log(JSON.parse(data).data);
-    ////////////////////////////console.log("--------");
-    ////////////////////console.log(banner_list.data.top_banner);
-    // //////////////////////console.log(banner_list.data.top_banner.web);
-    // //////////////////////console.log(banner_list.data.middle_banner);
-    ////////////////////////////console.log(params.categoryId)
-    // ////////////console.log(JSON.parse(data).data.data.length);
+    ////console.log("-------");
+    ////console.log(meta_desc);
+    // //////console.log("========");
+    // //////console.log(cateId[0]);
+    ////////////////////////////console.log(JSON.parse(data).data);
+    //////////////////////////////console.log("--------");
+    //////////////////////console.log(banner_list.data.top_banner);
+    // ////////////////////////console.log(banner_list.data.top_banner.web);
+    // ////////////////////////console.log(banner_list.data.middle_banner);
+    //////////////////////////////console.log(params.categoryId)
+    // //////////////console.log(JSON.parse(data).data.data.length);
     // let list=JSON.parse(tt_data);
-    // //////////////////////console.log(list);
-    //////////////////////console.log(allcate.data);
-    // ////////////console.log(res[0]);
+    // ////////////////////////console.log(list);
+    ////////////////////////console.log(allcate.data);
+    // //////////////console.log(res[0]);
     let meta = {
         keyword: cateId[0]?.keywords,
         title: cateId[0]?.metatitle ?? "",
         metadescription: cateId[0]?.metadescription ?? "",
     }
 
-    ////////////////////console.log(meta);
+    //////////////////////console.log(meta);
 
     let top_banner = banner_list.data.top_banner.web.filter((item) => {
-        // ////////////console.log(item.flower_category_ids,cateId[0].id)
+        // //////////////console.log(item.flower_category_ids,cateId[0].id)
         if (item.flower_category_ids.includes(parseInt(cateId[0].id))) {
-            ////////////////////////////console.log("找到了");
+            //////////////////////////////console.log("找到了");
             return item;
         }
     })
     let tiny_top_banner = banner_list.data.top_banner.mobile.filter((item) => {
 
         if (item.flower_category_ids.includes(parseInt(cateId[0].id))) {
-            ////////////////////////////console.log("找到了");
+            //////////////////////////////console.log("找到了");
             return item;
         }
     })
-    // ////console.log(cateId[0].id);
+    // //////console.log(cateId[0].id);
     let middle_banner = banner_list.data.middle_banner.web.filter((item) => {
         if (item.flower_category_ids.includes(parseInt(cateId[0].id))) {
             return item;
         }
-        // ////////////////////////////console.log(item.flower_category_ids.includes(params.categoryId))
+        // //////////////////////////////console.log(item.flower_category_ids.includes(params.categoryId))
     })
     let tiny_middle_banner = banner_list.data.middle_banner.mobile.filter((item) => {
-        //////////////////////console.log(item.flower_category_ids);
+        ////////////////////////console.log(item.flower_category_ids);
         if (item.flower_category_ids.includes(parseInt(cateId[0].id))) {
-            ////////////////////////////console.log("找到了");
+            //////////////////////////////console.log("找到了");
             return item;
         }
     })
-    ////////////console.log("======================");
+    //////////////console.log("======================");
 
-    // ////console.log(data);
-    //////////////////console.log(top_banner, middle_banner);
-    ////////////console.log(tiny_top_banner, tiny_middle_banner);
-    ////////////console.log(middle_banner,top_banner)
-    // //////////////////////console.log(JSON.parse(data).data);
-    // //////////////////////console.log()
-    //////////////////////console.log(meta);
-    console.log(cateId[0]);
+    // //////console.log(data);
+    ////////////////////console.log(top_banner, middle_banner);
+    //////////////console.log(tiny_top_banner, tiny_middle_banner);
+    //////////////console.log(middle_banner,top_banner)
+    // ////////////////////////console.log(JSON.parse(data).data);
+    // ////////////////////////console.log()
+    ////////////////////////console.log(meta);
+    //console.log(cateId[0]);
     return {
         props: {
             categoryId: params.categoryId,
