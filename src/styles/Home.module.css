@@ -11,6 +11,11 @@
   width:100%;
   background: linear-gradient(to right,rgba(213, 59, 69, 1),rgba(255, 134, 122, 0));
 }
+.right_banner{
+  width:50%;
+  margin-left: auto;
+  margin-right: 13%;
+}
 .textArea li,.textArea ul{
   margin: 0;
   list-style:disc!important;
