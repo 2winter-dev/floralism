@@ -140,7 +140,7 @@ div>.distance:nth-child(3){
   text-align: center;
 }
 .rich_content font{
-    color: #fff!important;
+    color: black!important;
 }
 .distance_pic {
   width: 100%;
@@ -183,6 +183,7 @@ div>.distance:nth-child(3){
     width: 50%;
     display: flex;
     margin: auto;
+    background-position: 100%;
   }
   .padLayout{
     padding: 0 15%;
