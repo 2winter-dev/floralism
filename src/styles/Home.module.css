@@ -302,7 +302,9 @@ div>.distance:nth-child(3){
     /* background-image: url("/homepage/分類背景.png"); */
     background-size: 100% 100%;
   }
-
+  .title{
+    padding: 0 10%;
+  }
   .banner_buttom {
     margin: 8px;
     margin-top: 20px;
@@ -384,6 +386,9 @@ div>.distance:nth-child(3){
   .designItem{
     width:100%;
     margin-bottom: 12px;
+  }
+  .distance{
+    display: none;
   }
   .IconSize{
     width: 15vw;

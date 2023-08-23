@@ -98,7 +98,7 @@ export default function Index({ category, cateList, top_banner, tiny_top_banner,
                     <div>
                         <div style={{ display: 'flex', alignItems: 'center' }}>
                             <div className={styles.distance}></div>
-                            <div className={styles.title} style={{ whiteSpace: 'nowrap', flex: 1 }}>{category?.keywords}</div>
+                            <div className={styles.title} style={{ wordBreak:'break-all' , flex: 1 }}>{category?.keywords}</div>
                             <div className={styles.distance}></div>
                         </div>
                         <div style={{ display: 'flex', alignItems: 'center', width: '100%', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', textAlign: 'center', margin: '2.5rem 0'}}>

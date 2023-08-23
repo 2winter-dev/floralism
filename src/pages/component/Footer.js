@@ -59,7 +59,7 @@ export default function Footer() {
                                     })
                                 }
                             </div>
-                            <div style={{ display: 'flex', flexDirection: 'row', marginTop: 12 }}>
+                            <div style={{ display: 'flex', flexDirection: 'row', marginTop: 12,flexWrap:'wrap',alignItems:'center',justifyContent:'center' }}>
                                 <Link href="/ShoppingGuide" style={{ cursor: 'pointer', marginRight: 12 }}>購物指南</Link>
                                 <Link href="/CustomerOrder" style={{ cursor: 'pointer', marginRight: 12 }}>訂製服務</Link>
                                 <Link href="/Delivery" style={{ cursor: 'pointer', marginRight: 12 }} >送貨服務</Link>

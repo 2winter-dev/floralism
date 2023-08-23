@@ -99,11 +99,11 @@ export default function Category({ categoryId, meta_desc, allcate, cate_desc, me
             <meta name={'keywords'} content={`${meta?.keyword}`} />
         </Head>
         <DynamicComponent cateList={cateList} setLogin={setLogin} />
-        <div style={{ width: '100%', display: 'flex', color: 'white', position: 'relative', backgroundPosition: 'revert',backgroundSize:'100% 100%',padding:categoryId==="畢業花束"?'11% 0':'5% 0', backgroundImage: bannerSize ? `url(${tiny_top_banner?.coverimage})` : `url(${top_banner?.coverimage})`, marginBottom: 0 }} className={styles.banner} >
+        <div style={{ width: '100%', display: 'flex', color: 'white', position: 'relative', backgroundPosition: 'top',padding:categoryId==="畢業花束"?'11% 0':'5% 0', backgroundImage: bannerSize ? `url(${tiny_top_banner?.coverimage})` : `url(${top_banner?.coverimage})`, marginBottom: 0 }} className={styles.banner} >
             {/* <Image priority src="/homepage/top-banner.png" width={1920} height={700} style={{width:'100%'}}/> */}
             <div className={(categoryId === "紀念日花束" || categoryId === "母親節花束") ||categoryId==="生日花束" ? styles.spec_banner :categoryId==="畢業花束"? styles.right_banner:styles.top_banner_area} style={{ display: "flex", flexDirection: 'column', alignItems: 'center' }}>
                 <div style={{ display: "flex", flexDirection: 'column', alignItems: 'center', marginRight: categoryId === '母親節花束' ? '20%' : 0, marginTop: categoryId === '母親節花束' ? '5%' : 0 }}>
-                    <img alt={bannerSize ? (tiny_top_banner?.alt?.length ? tiny_top_banner.alt[0] : "") : (top_banner?.alt?.length ? top_banner?.alt[0] : "")} src={bannerSize ? tiny_top_banner?.descriptionimage : top_banner?.descriptionimage} style={{ width: '100%' }} />
+                    <img className={styles.title} alt={bannerSize ? (tiny_top_banner?.alt?.length ? tiny_top_banner.alt[0] : "") : (top_banner?.alt?.length ? top_banner?.alt[0] : "")} src={bannerSize ? tiny_top_banner?.descriptionimage : top_banner?.descriptionimage} style={{ width: '100%' }} />
                     <a href={`${data?.data?.length ? "/productSearch/" + data?.category_name : "/"}`} onClick={() => {
                         ////////////////////console.log(data);
                         // data.data.length ?
@@ -167,7 +167,7 @@ export default function Category({ categoryId, meta_desc, allcate, cate_desc, me
                 <div style={{ padding: '0 2%' }} >
                     <div style={{ display: 'flex', alignItems: 'center' }}>
                         {flag !== 0 && <div className={styles.distance}></div>}
-                        <div className={styles.title} style={{ whiteSpace: 'nowrap', flex: 1 }}>{'【FLORALISM】 全部分類'}</div>
+                        <div className={styles.title} style={{ wordBreak:'break-all', flex: 1 }}>{'【FLORALISM】 全部分類'}</div>
                         {flag !== 0 && <div className={styles.distance}></div>}
                     </div>
                     <div style={{ display: 'flex', flexWrap: 'wrap' }}>
