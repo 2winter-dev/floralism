@@ -95,7 +95,7 @@ export default function Category({ categoryId, meta_desc, allcate, cate_desc, me
         <Head>
             {/* <meta title={`${meta.title}`}  /> */}
             <title>{`${meta?.title !== "" ? meta?.title : (data?.category_name + " | 「Floralism」香港花店")}`}</title>
-            <meta name={'descirption'} content={`${meta?.metadescription}`} />
+            <meta name={'description'} content={`${meta?.metadescription}`} />
             <meta name={'keywords'} content={`${meta?.keyword}`} />
         </Head>
         <DynamicComponent cateList={cateList} setLogin={setLogin} />

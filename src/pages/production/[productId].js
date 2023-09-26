@@ -108,7 +108,7 @@ export default function ProductDetail({ cateList, product }) {
     return (<div style={{ position: 'relative' }}>
         <Head>
             <title>{product.flowerDetail[index].metatitle}</title>
-            <meta name={'descirption'} content={`${product.flowerDetail[index].metadescription}`} />
+            <meta name={'description'} content={`${product.flowerDetail[index].metadescription}`} />
             <meta name={'keywords'} content={`${product.flowerDetail[index].keywords}`} />
         </Head>
         <DynamicComponent cateList={cateList} setLogin={setLogin} />

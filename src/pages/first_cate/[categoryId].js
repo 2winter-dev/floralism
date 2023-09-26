@@ -72,7 +72,7 @@ export default function Index({ category, cateList, top_banner, tiny_top_banner,
     return (<div>
         <Head>
             <title>{`${category.metatitle !== "" ? category.metatitle : (category.categoryname + " | 「Floralism」香港花店")}`}</title>
-            <meta name={'descirption'} content={`${category.metadescription}`} />
+            <meta name={'description'} content={`${category.metadescription}`} />
             <meta name={'keywords'} content={`${category.keywords}`} />
         </Head>
         <DynamicComponent cateList={cateList} setLogin={setLogin} />
