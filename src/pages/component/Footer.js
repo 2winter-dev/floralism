@@ -45,7 +45,7 @@ export default function Footer() {
                     <div className={`row `} style={{ padding: '0 10%' }}>
 
                         <div style={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-                            <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', textAlign: 'center', justifyContent: 'center' }}>
+                            <div className={'bottom_cate_list'} style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', textAlign: 'center', justifyContent: 'center' }}>
                                 {
                                     cateList.map((item, index) => {
                                         let res = item.keywords1.split(' | ');
