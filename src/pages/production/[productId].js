@@ -25,7 +25,7 @@ import DynamicButton from "../component/DynamicButton";
 // import { Toast } from "react-toastify/dist/components";
 export default function ProductDetail({ cateList, product }) {
 
-    // //////////////////////////////////console.log(product);
+    console.log(product);
     const [index, setIndex] = useState(0);
     const [login, setLogin] = useState(false);
     const [register, setRegister] = useState(false);
@@ -226,8 +226,8 @@ export default function ProductDetail({ cateList, product }) {
                             <div className={style.type_selector} style={{ marginRight: 12 }}>
                                 <select className={style.selector} value={cardtype} onChange={(event) => {
                                     setCardType(event.target.value);
-                                    //////////////////////////////console.log(event.target.value);
-                                }} style={{ borderRadius: 8, paddingLeft: 10, paddingTop: 4, paddingBottom: 4, paddingRight: 10 }} >
+                                   console.log(event.target.value);
+                                }} style={{ borderRadius: 8, paddingLeft: 10, paddingTop: 4, paddingBottom: 4, paddingRight: 10, backgroundColor: 'white' }} >
                                     <option value={0}>默認心意卡</option>
                                     <option value={1}>店家代寫心意卡</option>
                                     <option value={2}>留空，自己寫</option>
@@ -256,57 +256,64 @@ export default function ProductDetail({ cateList, product }) {
                                         setNum(num - 1);
                                     }
                                 }} className={style.decrease} style={{ cursor: 'pointer' }}>-</button>
-                                <input type="text" className={style.product_number} style={{ borderRadius: 0 }} contentEditable={false} value={num} onChange={() => {
+                                <input type="text" className={style.product_number} style={{ borderRadius: 0 }} disabled={true} contentEditable={false} value={num} onChange={() => {
                                 }} />
                                 <button onClick={() => {
-                                    setNum(num + 1);
+                                    
+                                    // if(num)
+                                    let shopcar=JSON.parse(localStorage.getItem("shopcar"));
+                                    let res=shopcar.filter((item,idx)=>{
+                                        console.log(item.flower_id)
+                                        if(item.flower_id===product.flowerDetail[index].flower_id&&item.id===product.flowerDetail[index].id){
+                                          return item;
+                                        }
+                                    })
+                                    if(res.length){
+                                        console.log(res);
+                                        if(res[0].number+num+1>res[0].totalcount){
+                                            toast.error("大於庫存數量");
+                                        }else{
+                                            setNum(num + 1);
+                                        }
+                                    }else{
+                                        if(num+1>product.flowerDetail[index].totalcount){
+                                            toast.error("大於庫存數量");
+                                        }else setNum(num+1);
+                                        
+                                    }
+                                  
                                 }} className={style.increase} style={{ cursor: 'pointer' }}>+</button>
                             </div>
                         </div>
 
                         <div style={{ marginTop: 24 }}>
                             <button onClick={() => {
-                                ////////////////////////////console.log("1");
-                                // //////////////////////////////////console.log(Cookies.get('token'), id, num, cardtype, cardcontent);
-                                addToCart.mutate({ cookie: Cookies.get('token'), flower_specs_id: id, num, cardtype, cardcontent: cardcontent.trim() }, {
-                                    onSuccess: async (res) => {
-                                        // let res = await res.json()
-                                        // //////////////////////////////////console.log(res);
-                                        //////////////////////console.log(res);
-                                        if (res.code) {
-                                            if (res.code.toString() === '401') {
-                                                Cookies.remove('token');
-                                                // toast.error("請先登錄");
-                                                // setTips(true);
-                                                setLogin(true);
+                                let flag = false;
+                                let res;
+                                let number;
+                                if (localStorage.getItem("shopcar")) {
+                                    res = JSON.parse(localStorage.getItem("shopcar"));
+                                } else {
+                                    res = [];
+                                }
 
-                                            }
-                                            if (res.code === 1) {
-                                                Cookies.set("isAdd", true);
-                                                setIsAdd(true);
-                                                toast.success("已加入購物車!");
-                                            }
-                                        } else {
-                                            toast.error(res.msg);
-                                            setTips(true);
-                                            setLogin(true);
-
-                                        }
-                                    },
-                                    onError: (err) => {
-                                        //////////////////////console.log(err);
-                                        if (err instanceof Error) {
-                                            toast.error(err.message)
-                                        }
-                                        //    toast.error(err.msg);
-                                        setTips(true);
-                                        setLogin(true);
-                                        // setTimeout(()=>{
-                                        //     setTips(false);
-                                        // },2000);
+                                for (let i of res) {
+                                    if (i.id === product?.flowerDetail[index].id && i.flower_id === product?.flowerDetail[index].flower_id) {
+                                        console.log("相同");
+                                        // console.log()
+                                        flag = true;
+                                        i.number += num;
+                                        number=i.number;
+                                        console.log(i.number + num);
                                     }
-                                })
+                                }
+                                if (flag) {
+                                    localStorage.setItem("shopcar", JSON.stringify(res));
+                                } else {
+                                    localStorage.setItem("shopcar", JSON.stringify([...res, { ...product?.flowerDetail[index], number: num, isSelected: false,flower_category_id:product?.flowerCategory?.id,cardtype,cardcontent }]));
+                                }
 
+                                console.log(res);
 
                             }} className={style.buy_btn} style={{ cursor: 'pointer' }}>點擊購買</button>
                         </div>
@@ -436,7 +443,7 @@ export async function getStaticProps(context) {
     const detail = await detail_response.json();
 
     //////////////console.log(detail.data)
-   ////////////console.log(detail.data);
+    ////////////console.log(detail.data);
     return {
         props: {
             cateList: JSON.parse(data).data,

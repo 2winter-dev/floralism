@@ -424,5 +424,23 @@ export default {
         }
         let _data = await response.json();
         return _data;
+    },
+    addOrder:async (data)=>{
+        console.log(data);
+        const response=await fetch(`${constant.api_url}/api/order/createOrderForClient`,{
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {
+                "Authorization": `Bearer ${data.cookie}`,
+                "Content-Type": "application/json",
+                "Access-Control-Request-Method": "GET,POST",
+                "Access-Control-Request-Headers": "Content-Type",
+            }
+        })
+        if (response.status !== 200) {
+            throw new Error("Network connect fail");
+        }
+        let _data = await response.json();
+        return _data;
     }
 }

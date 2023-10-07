@@ -17,22 +17,21 @@ import Router from 'next/router';
 // import { ToastContainer, toast } from 'react-toastify';
 import toast, { Toaster } from "react-hot-toast";
 export default function ShopCar({ cateList, shopCar }) {
-    // //////////////////////////////////console.log(Cookies.get('token'));
-    // //////////////////////////////////console.log("============");
-    // //////////////////////////////////console.log(shopCar.data);
     const [selected, setSelected] = useState([]);
+
     const [selAll, setSelAll] = useState(false);
     const [sc, setSc] = useState(shopCar.data);
     const [login, setLogin] = useState(false);
     const [register, setRegister] = useState(false);
     const [visible, setVisible] = useState(false);
+    const [goodsList, setGoodsList] = useState([])
     const [total_money, setTotal_money] = useState(0);
     const [total_num, setTotal_num] = useState(0);
     const [textArea, setTextArea] = useState("");
     const [type, setType] = useState(1);
     const [flag, setFlag] = useState(false);
     const [date, setDate] = useState("");
-
+    console.log(goodsList);
     // if (shopCar.code === 401) {
     //    Cookies.remove('token');
     // }
@@ -41,47 +40,37 @@ export default function ShopCar({ cateList, shopCar }) {
         mutationKey: ['updateNumber'],
     })
 
+
+
+
     const ToUpdate = (item, index, value) => {
-        //////////////////////////////console.log(value);
-        if (value <= 0) {
-            toast.error("不能少於1");
+        console.log(item, index, value);
+        const res = goodsList;
+        if (value === 0) {
+            toast.error("商品數量不得為0")
             return;
         }
-        updateNum.mutate({ id: item.id, num: value, cookie: Cookies.get("token") }, {
-            onSuccess: async (res) => {
-                // let _res = await res.json();
-                if (res.code === 401) {
-                    Cookies.remove("token");
-                    location.reload();
-                } else if (res.code === 1) {
-                    let arr = sc;
-                    arr[index].num = value;
-                    setSc([...arr]);
-                } else {
-                    toast.error(res.msg);
-                }
-            },
-            onError: (res) => {
-                if (res instanceof Error) {
-                    toast.error(res.msg);
-                } else toast.error(JSON.stringify(res.msg))
-            }
-        })
+        if (value >res[index].totalcount){
+            toast.error("購買數量大於庫存數量");
+            return;
+        }
+        res[index].number = value;
+        console.log(res);
+        setGoodsList([...res]);
+        localStorage.setItem("shopcar", JSON.stringify(res));
     }
 
     useEffect(() => {
-        if (Cookies.get('token')) {
-            // location.reload();
-        }
-    }, [login])
-    useEffect(()=>{
-       Cookies.remove("isAdd");
-       ////////////console.log(Cookies.get("isAdd"))
-    },[])
+        console.log(localStorage.getItem("shopcar") ?? [])
+        setGoodsList(JSON.parse(localStorage.getItem("shopcar")) ?? [])
+    }, [])
+    useEffect(() => {
+        Cookies.remove("isAdd");
+        ////////////console.log(Cookies.get("isAdd"))
+    }, [])
     const hasLogin = () => {
         setFlag(true);
     }
-
     useEffect(() => {
         if (flag) {
             location.reload();
@@ -92,89 +81,54 @@ export default function ShopCar({ cateList, shopCar }) {
         mutationKey: ['deleteProductionFromShopCar']
     })
 
+
     const changeStatus = (data) => {
-        let arr = selected;
-        let money = total_money;
-        let res = selected.findIndex((item, index) => item === data.id);
-        if (res === -1) {
-            //////////////////////////////////console.log("未被选中，选中");
-            setSelected([...arr, data.id]);
-            money += data.num * data.price;
-            if (arr.length + 1 === sc.length) {
-                setSelAll(true);
-            }
-        } else {
-            //////////////////////////////////console.log("已被选中，取消,位置:" + res);
-            let _res = arr.splice(res, 1)
-            //////////////////////////////////console.log(_res, arr);
-            money -= data.num * data.price;
-            setSelected([...arr]);
-            setSelAll(false);
-        }
-        //////////////////////////////////console.log(arr.length, sc.length);
-        // culTotalPrice();
+        const res = goodsList;
+        res[data].isSelected = !res[data].isSelected;
+        console.log(res);
+        setGoodsList([...res]);
+        localStorage.setItem("shopcar", JSON.stringify(res));
     }
     const deleteProduct = () => {
-        //////////////////////////////////console.log(selected);
-        deleteProductionFromShopCar.mutate({ ids: selected.join(","), cookie: Cookies.get('token') }, {
-            onSuccess: async (res) => {
-                // //////////////////////////////////console.log(await res.text())
-                // let res = await res.json();
-                //////////////////////////////////console.log(_res);
-                if (res.code === 1) {
-                    let arr = sc;
-                    selected.map((item) => {
-                        arr.splice(sc.findIndex((it, index) => item === it.id), 1);
-                    })
-                    setSc([...arr]);
-                    setSelected([]);
-                    toast.success(res.msg);
-
-                } else if (res.code === 401) {
-                    Cookies.remove('token');
-                } else if (!res.code) {
-
-                    toast.error(res.msg);
-                }
-
-            },
-            onError: (res) => {
-                toast.error("刪除失敗")
+        let res = goodsList.filter((item, index) => {
+            if (!item.isSelected) {
+                return item;
             }
         })
-
+        console.log(res);
+        setGoodsList(res);
+        localStorage.setItem("shopcar", JSON.stringify(res));
     }
     const selectedAll = () => {
         if (selAll) {
+            console.log("true to false")
             setSelAll(false);
-            setSelected([]);
 
-        } else {
-            let m = 0;
-            let res = sc.map((item, index) => {
-                m += item.num * item.price;
-                return item.id;
-            })
-
-            setSelAll(true);
-            setSelected([...res]);
         }
+        let res = goodsList;
+        for (let i of res) {
+            i.isSelected = !i.isSelected;
+        }
+        console.log(res);
+        setGoodsList([...res]);
+        localStorage.setItem("shopcar", JSON.stringify(res));
     }
     useEffect(() => {
-        let money = 0;
-        let num = 0;
-        sc.map((item, index) => {
-            if (selected.findIndex((it, index) => it === item.id) != -1) {
-                money += parseFloat((item?.num * item?.price).toFixed(2));
-                //////////////////////////////console.log(money)
-                num += parseInt(item.num);
+        console.log("变了");
+        let price = 0;
+        let isAllSelected = true;
+        goodsList.map((item, index) => {
+            if (item.isSelected) {
+                price += parseFloat(item.price) * item.number
+            } else {
+                isAllSelected = false;
             }
         })
-        !sc.length && setSelAll(false);
-        setTotal_money(money.toFixed(2));
-        setTotal_num(num);
+        setTotal_money(price.toFixed(2));
+        setSelAll(isAllSelected);
+        console.log(price);
         //  //////////////////////////////////console.log(money);
-    }, [sc, selected])
+    }, [goodsList])
 
     const limitTime = () => {
         let date = new Date();
@@ -187,39 +141,40 @@ export default function ShopCar({ cateList, shopCar }) {
     }
 
     const toCreateOrder = () => {
-        if (selected.length) {
-            if (date !== "") {
-                // Cookies.set("shopCar",);
-                let res = selected.map((item, index) => {
-                    //////////////////////////////////console.log(item);
-                    return sc.filter((it, index) => {
-                        //////////////////////////////////console.log(it);
-                        if (it.id === item) {
-                            return item;
+
+        if (date !== "") {
+            let res = goodsList.filter((item, index) => {
+                if (item.isSelected) {
+                    return item;
+                }
+            })
+            console.log(res);
+            if (res.length) {
+                console.log("選擇了商品")
+                if (Cookies.get("token")) {
+                    console.log("已登錄");
+                    Router.replace({
+                        pathname: '/selectMethod',
+                        query: {
+                            // cart_ids: selected.join(','),
+                            amount: total_money,
+                            payment_amount: total_money,
+                            // goodsList:JSON.stringify(res),
+                            deliverydate: date,
+                            deliverytype: type,
+                            remark: textArea
                         }
                     })
-                })
-                // //////////////////////////////////console.log();
-                // Cookies.set("shopCar",JSON.stringify(res.flat(1)));
-                Router.replace({
-                    pathname: '/selectMethod',
-                    query: {
-                        cart_ids: selected.join(','),
-                        amount: total_money,
-                        payment_amount: total_money,
-                        deliverydate: date,
-                        deliverytype: type,
-                        remark: textArea
-                    }
-                })
+                }else{
+                    toast.error("請先登錄");
+                }
             } else {
-                toast.error("請選擇時間")
+                toast.error("未選擇商品");
             }
 
         } else {
-            toast.error("請選擇商品");
+            toast.error("請選擇時間");
         }
-
     }
 
     return <div>
@@ -253,7 +208,8 @@ export default function ShopCar({ cateList, shopCar }) {
                                     </tr>
                                 </thead>
                                 {
-                                    sc.length ? sc.map((item, index) => {
+                                    goodsList.length ? goodsList.map((item, index) => {
+                                        console.log(item.isSelected);
                                         return (<tbody key={index}>
 
                                             <tr className={styles.tr_padding} style={{ height: 20 }}>
@@ -263,7 +219,7 @@ export default function ShopCar({ cateList, shopCar }) {
                                                 <td className={`${styles.tr_padding} ${styles.order_desc}`} colSpan={4} >
                                                     <div style={{ display: 'flex' }}>
                                                         <div>
-                                                            {item?.flower_category_name}
+                                                            {item?.flowername}
                                                         </div>
                                                         <div style={{ marginLeft: 12 }}>
                                                             {item?.flower_specs_name}
@@ -273,23 +229,23 @@ export default function ShopCar({ cateList, shopCar }) {
                                             </tr>
                                             <tr>
                                                 <td style={{ fontSize: 14 }} className={`${styles.tr_padding} ${styles.first_column}`}>
-                                                    <input type='checkbox' onClick={() => changeStatus(item)} onChange={() => null} checked={selected.some((it, ii) => it === item.id)} style={{ width: 15, height: 15, marginRight: 12 }} />
+                                                    <input type='checkbox' onClick={() => changeStatus(index)} onChange={() => null} checked={item.isSelected} style={{ width: 15, height: 15, marginRight: 12 }} />
                                                 </td>
                                                 <td className={`${styles.tr_padding} ${styles.first_column}`} >
 
                                                     <div style={{ display: 'flex', alignItems: 'center', wordBreak: 'break-all' }}>
                                                         <div className={styles.product_img}>
-                                                            <img alt="" src={`${item.coverimage}`} style={{ width: '100%' }} />
+                                                            <img alt="" src={`${item.flowerimage}`} style={{ width: '100%' }} />
                                                         </div>
                                                         <div style={{ flex: 1 }}>
-                                                            <div className={styles.product_title} style={{ fontSize: 14, width: '100%', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', wordWrap: 'break-word' }}>
-                                                                {item?.productname}
+                                                            <div className={styles.product_title} style={{ fontSize: 14, width: '100%', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                                                                {item?.flowername}
                                                             </div>
                                                             {/* <div>×</div> */}
-                                                            <div style={{ display: 'flex', alignItems: 'center', textAlign: 'center', width: 60 }}>
-                                                                <div onClick={(e) => ToUpdate(item, index, item.num - 1)} style={{ flex: 1, border: "1px solid black", borderRight: 'none', borderTopLeftRadius: 4, cursor: 'pointer', borderBottomLeftRadius: 4 }}>-</div>
-                                                                <span style={{ border: "1px solid black", fontSize: 16, width: '40%' }}>{item.num}</span>
-                                                                <div onClick={(e) => ToUpdate(item, index, item.num + 1)} style={{ flex: 1, border: "1px solid black", borderLeft: 'none', borderTopRightRadius: 4, cursor: 'pointer', borderBottomRightRadius: 4 }}>+</div>
+                                                            <div style={{ display: 'flex', alignItems: 'center', textAlign: 'center', width: 80 }}>
+                                                                <div onClick={(e) => ToUpdate(item, index, item.number - 1)} style={{ width:15, border: "1px solid black", borderRight: 'none', borderTopLeftRadius: 4, cursor: 'pointer', borderBottomLeftRadius: 4 }}>-</div>
+                                                                <span style={{ border: "1px solid black", fontSize: 16,padding:'0 4px'}}>{item.number}</span>
+                                                                <div onClick={(e) => ToUpdate(item, index, item.number + 1)} style={{ width:15, border: "1px solid black", borderLeft: 'none', borderTopRightRadius: 4, cursor: 'pointer', borderBottomRightRadius: 4 }}>+</div>
                                                             </div>
                                                             {/* <input type={'number'} style={{ width: 40, textAlign: 'center' }} onChange={(e) => ToUpdate(item, index, e.target.value)} value={item.num} /> */}
                                                         </div>
@@ -307,7 +263,7 @@ export default function ShopCar({ cateList, shopCar }) {
                                         </tbody>)
                                     }) : <tbody>
                                         <tr >
-                                            <td colSpan={3} rowSpan={4} style={{ fontSize: 18, fontWeight: 'bold' }}>{Cookies.get("token") ? "購物車爲空" : "请先登录"}</td>
+                                            <td colSpan={3} rowSpan={4} style={{ fontSize: 18, fontWeight: 'bold' }}>{"購物車爲空"}</td>
                                         </tr>
                                         <tr></tr>
                                         <tr></tr><tr></tr>
@@ -325,8 +281,7 @@ export default function ShopCar({ cateList, shopCar }) {
                     <div className={style.left_area} style={{ flexDirection: 'column', display: 'flex', alignItems: 'flex-start' }}>
                         <div style={{ display: 'flex', flexDirection: 'column', flex: 1, width: '100%' }}>
                             <div style={{ fontWeight: 700 }}>訂單備注:</div>
-                            <textarea onInput={(e) => setTextArea(e.target.value)} style={{ width: '100%', resize: 'none', paddingLeft: 10, height: 100, borderRadius: 8, marginTop: 12 }} placeholder='給賣家備注的信息'>
-
+                            <textarea onInput={(e) => setTextArea(e.target.value)} style={{ width: '100%', resize: 'none', paddingLeft: 10, paddingRight: 10, height: 100, backgroundColor: 'white', borderRadius: 8, marginTop: 12 }} placeholder='給賣家備注的信息'>
                             </textarea>
                         </div>
                         <div style={{ flex: 1, marginTop: 16, width: '100%' }}>

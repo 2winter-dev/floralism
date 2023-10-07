@@ -99,7 +99,7 @@ export default function Category({ categoryId, meta_desc, allcate, cate_desc, me
             <meta name={'keywords'} content={`${meta?.keyword}`} />
         </Head>
         <DynamicComponent cateList={cateList} setLogin={setLogin} />
-        <div style={{ width: '100%', display: 'flex', color: 'white', position: 'relative', backgroundPosition: 'top',padding:categoryId==="畢業花束"?'11% 0':'5% 0', backgroundImage: bannerSize ? `url(${tiny_top_banner?.coverimage})` : `url(${top_banner?.coverimage})`, marginBottom: 0 }} className={styles.banner} >
+        <div style={{ width: '100%', display: 'flex', color: 'white', position: 'relative', backgroundPosition: 'top',padding:categoryId==="畢業花束"?'11% 0':'5% 0',backgroundSize:'cover', backgroundImage: bannerSize ? `url(${tiny_top_banner?.coverimage})` : `url(${top_banner?.coverimage})`, marginBottom: 0 }} className={styles.banner} >
             {/* <Image priority src="/homepage/top-banner.png" width={1920} height={700} style={{width:'100%'}}/> */}
             <div className={(categoryId === "紀念日花束" || categoryId === "母親節花束") ||categoryId==="生日花束" ? styles.spec_banner :categoryId==="畢業花束"? styles.right_banner:styles.top_banner_area} style={{ display: "flex", flexDirection: 'column', alignItems: 'center' }}>
                 <div style={{ display: "flex", flexDirection: 'column', alignItems: 'center', marginRight: categoryId === '母親節花束' ? '20%' : 0, marginTop: categoryId === '母親節花束' ? '5%' : 0 }}>

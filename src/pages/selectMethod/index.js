@@ -40,7 +40,7 @@ export default function selectMethod(props) {
     const [visible, setVisible] = useState(false);
     const [shopMess, setShopMess] = useState(props.shopList[0])
     const [addList, setAddList] = useState(props.addList.data)
-
+    const [store, setStore] = useState(-1);
     const [flag, setFlag] = useState(false);
     const [page, setPage] = useState(Number(props.page) ?? 1);//第一頁:選擇地址，第二頁選擇支付方式，第三頁結果。
     const [process, setProcess] = useState(1);//0尚未進行，1進行中，2完成
@@ -51,6 +51,7 @@ export default function selectMethod(props) {
     const [payment, setPayment] = useState("");
     const [add, setAdd] = useState("");
     const [url, setUrl] = useState("");
+    const [goodsList, setGoodsList] = useState([]);
 
 
     const [order, setOrder] = useState({});
@@ -64,11 +65,18 @@ export default function selectMethod(props) {
         mutationKey: ['CreateOrder'],
         mutationFn: (data) => m_api.createOrder(data)
     })
+    const NewCreatOrder = useMutation({
+        mutationFn: ['NewCreatOrder'],
+        mutationFn: (data) => m_api.addOrder(data)
+    })
     const deleteAddress = useMutation({
         mutationFn: (data) => m_api.deleteAddress(data),
         mutationKey: ['deleteAddress'],
     })
-
+    const addOrder = useMutation({
+        mutationFn: (data) => m_api.addOrder(data),
+        mutationKey: ['addOrder'],
+    })
     const toDelte = (item) => {
         deleteAddress.mutate({ id: item, cookie: Cookies.get('token') }, {
             onSuccess: async (res) => {
@@ -123,66 +131,114 @@ export default function selectMethod(props) {
                     return item;
                 }
             })
-            res.length&&setAdd(res[0].id);
+            res.length && setAdd(res[0].id);
         } else {
             toast.error("登陸失效");
             router.replace('/');
         }
     }, [])
-
-    ////////////////////////////console.log("1111----");
-    ////////////////////////////console.log(router.query?.type === "success");
     const ToCreateOrder = () => {
         setFlag(true);
-        if (payment !== "" && add !== "") {
-            // //////////////////////////////////console.log(deliverytype, deliverydate, cart_ids, remark, amount, payment_amount, add)
-            createOrder.mutate({
-                deliverytype,
-                deliverydate,
-                cart_ids,
-                remark,
-                amount,
-                payment_amount,
-                address_id: add,
-                payment_type: payment,
-                cookie: Cookies.get('token')
-            }, {
-                onSuccess: async (res) => {
-
-                    // let _res = await res.json();
-                    setFlag(!true);
-                    // let _res = await res.json();
-                    if (res.code === 401) {
-                        Cookies.remove("token");
-                        location.reload();
-                    } else if (res.code === 1) {
-                        //////////////////////console.log(res);
-                        setFlag(false);
-                        if (payment === "paypal") {
-                            setUrl(res.data.payment_info.approval_url)
-                        }
-                        setPage(2);
-                    } else {
-                        toast.error(res.msg);
-                    }
-
-
-                },
-
-                onError: (res) => {
-                    setFlag(false);
-                    toast.error("上傳失敗");
-                    setFlag(!true);
+        let shopcar = JSON.parse(localStorage.getItem("shopcar")) ?? [];
+        let res = [];
+        if (shopcar.length) {
+            shopcar.map((item, index) => {
+                if (item.isSelected) {
+                    res.push({
+                        flower_id: item.flower_id,
+                        flower_specs_id: item.id,
+                        flower_category_id: item.flower_category_id,
+                        productname: item.flowername,
+                        coverimage: item.flowerimage,
+                        price: item.price,
+                        num: item.number,
+                        cardtype: item.cardtype,
+                        cardcontent: item.cardcontent,
+                    })
                 }
-
             })
         }
-    }
-    useEffect(() => {
-        // //////////////////////////////////console.log("==============");
-        //  //////////////////////////////////console.log(createOrder.data);
-    }, [createOrder])
+        // let formData = new FormData();
+        // formData.append("deliverytype", deliverytype);
+        // formData.append("deliverydate", deliverydate)
+        // formData.append("remark", remark);
+        // formData.append("amount", amount)
+        // formData.append("store_id", deliverytype?.toString() === "1" ? "" : props.shopList[store].id);
+        // formData.append("payment_amount", payment_amount)
+        // formData.append("address_id", add);
+        // formData.append("payment_type", payment)
+        // formData.append("flowers",JSON.stringify(res))
+        // console.log(formData.get("flowers"));
+        if (payment !== "" && add !== "") {
+            NewCreatOrder.mutate(
+                {
+                    deliverytype,
+                    deliverydate,
+                    remark,
+                    amount,
+                    store_id: deliverytype?.toString() === "1" ? null : props.shopList[store].id,
+                    payment_amount,
+                    address_id: add,
+                    payment_type: payment,
+                    cookie: Cookies.get('token'),
+                    flowers: JSON.stringify(res)
+                }
+                , {
+                    onSuccess: async (res) => {
 
+                        // let _res = await res.json();
+                        setFlag(!true);
+                        // let _res = await res.json();
+                        if (res.code === 401) {
+                            Cookies.remove("token");
+                            location.reload();
+                        } else if (res.code === 1) {
+                            //////////////////////console.log(res);
+                            setFlag(false);
+                            if (payment === "paypal") {
+                                setUrl(res.data.payment_info.approval_url)
+                            }
+                            let i=shopcar.filter((item,index)=>{
+                                if(!item.isSelected){
+                                    return item;
+                                }
+                            })
+                            localStorage.setItem("shopcar",i);
+                            setPage(2);
+                        } else {
+                            toast.error(res.msg);
+                        }
+
+
+                    },
+
+                    onError: (res) => {
+                        setFlag(false);
+                        toast.error("上傳失敗");
+                        // setFlag(!true);
+                    }
+
+                })
+        } else {
+            setFlag(false);
+        }
+
+    }
+
+    useEffect(() => {
+        console.log(localStorage.getItem("shopcar") ?? [])
+        let arr = JSON.parse(localStorage.getItem("shopcar"));
+        let res = [];
+        if (arr.length) {
+            res = arr.filter((item, index) => {
+                if (item.isSelected) {
+                    return item;
+                }
+            })
+        }
+        setGoodsList(res ?? [])
+    }, [])
+    console.log(props.shopList);
     return (<div>
         <Head>
             <meta title="Floralism訂單結算" />
@@ -200,7 +256,7 @@ export default function selectMethod(props) {
                     <div>支付結果</div>
                     <div style={{ flex: 1 }}></div>
                 </div>
-                <div style={{ display: "flex", justifyContent: 'space-around', alignItems: 'center',marginTop:12 }}>
+                <div style={{ display: "flex", justifyContent: 'space-around', alignItems: 'center', marginTop: 12 }}>
                     <div className={
                         page >= 1 ? styles.complete : styles.wrong
                     } style={{ height: 4, flex: 1 }}></div>
@@ -282,7 +338,7 @@ export default function selectMethod(props) {
                                     <div className={styles.title_area} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
                                         <div className={styles.title} >選擇門店地址</div>
                                     </div>
-                                    <Radio.Group>
+                                    <Radio.Group onChange={setStore}>
                                         <div style={{ marginTop: 12, height: 200, overflow: 'auto' }}>
                                             {
                                                 props.shopList.map(item => {
@@ -321,14 +377,14 @@ export default function selectMethod(props) {
                             </div>
                             <div className={styles.title_area}>
                                 {
-                                    props.goodsList && props.goodsList.map((item, index) =>
+                                    goodsList && goodsList.map((item, index) =>
                                         <div key={item.id} style={{ display: 'flex', alignItems: 'center', marginTop: 24 }}>
-                                            <img alt="" src={item.coverimage} style={{ width: '30%', marginRight: 12 }} />
-                                            <div style={{ flex: 1 }}>
-                                                <div style={{ fontSize: 18, height: 40, width: '100%', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{item.productname}</div>
+                                            <img alt="" src={item.flowerimage} style={{ width: '30%', marginRight: 12 }} />
+                                            <div style={{ width: '70%' }}>
+                                                <div style={{ fontSize: 14, width: '90%', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{item.flowername}</div>
                                                 {/* <div style={{ fontSize: 12, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{item.cardtype ? "需要心意卡" : "無需心意卡"}</div> */}
-                                                <div style={{ fontSize: 12 }}>${item.price}</div>
-                                                <div>×{item.num}</div>
+                                                <div style={{ fontSize: 12, marginTop: 8 }}>${item.price}</div>
+                                                <div>×{item.number}</div>
                                             </div>
                                             {/* <div style={{ textAlign: 'right' }}>
                                                 <div style={{ fontSize: 12 }}>${item.price}</div>
@@ -532,7 +588,7 @@ export async function getServerSideProps(context) {
 
 
 
-    if (context.query?.page !== "3") {
+    if (context.query?.page >= "3") {
         ////////////////////////////console.log("不为3");
         if (!goods_data.code) {
             return {
@@ -554,10 +610,11 @@ export async function getServerSideProps(context) {
             cateList: data.data,
             // cateList: [],
             addList: add_data,
-            goodsList: goods_data.data,
+            // goodsList: context.query?.goodsList,
             publishableKey: `${process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY}`,
             secretKey: `${process.env.STRIPE_SECRET_KEY}`,
-            shopList: s_list?.data ?? [],
+            shopList: s_list?.data?.length ? s_list?.data : [
+            ],
             page: context.query?.page ?? 1,
         },
     };

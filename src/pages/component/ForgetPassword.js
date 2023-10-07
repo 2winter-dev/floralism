@@ -41,7 +41,7 @@ export default function ForgetPassword(props) {
                     setTime(60);
                     setFlag(true);
                 }else{
-                    toast.error(res.data);
+                    toast.error(res.msg);
                 }
             },
             onError: (res) => {

@@ -112,7 +112,10 @@
     padding: 8px;
 }
 .product_img{
-    flex:0 0 60px;
+    /* flex:0 0 60px;
+     */
+     width:60px;
+     height:60px;
     margin-right: 10px;
 }
 .choosen{
