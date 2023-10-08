@@ -261,7 +261,8 @@ export default function ProductDetail({ cateList, product }) {
                                 <button onClick={() => {
                                     
                                     // if(num)
-                                    let shopcar=JSON.parse(localStorage.getItem("shopcar"));
+                                    let shopcar=JSON.parse(localStorage.getItem("shopcar"))??[];
+       
                                     let res=shopcar.filter((item,idx)=>{
                                         console.log(item.flower_id)
                                         if(item.flower_id===product.flowerDetail[index].flower_id&&item.id===product.flowerDetail[index].id){

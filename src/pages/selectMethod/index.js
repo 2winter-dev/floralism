@@ -35,6 +35,8 @@ export default function selectMethod(props) {
     //////////////////////////////console.log("----------");
     //////////////////////////////console.log(deliverytype);
     // //////////////////////////////////console.log(useRouter());
+    // const navigation=useNavigation();
+    
     const [login, setLogin] = useState(false);
     const [register, setRegister] = useState(false);
     const [visible, setVisible] = useState(false);
@@ -227,7 +229,7 @@ export default function selectMethod(props) {
 
     useEffect(() => {
         console.log(localStorage.getItem("shopcar") ?? [])
-        let arr = JSON.parse(localStorage.getItem("shopcar"));
+        let arr = JSON.parse(localStorage.getItem("shopcar"))?? [];
         let res = [];
         if (arr.length) {
             res = arr.filter((item, index) => {
@@ -235,6 +237,9 @@ export default function selectMethod(props) {
                     return item;
                 }
             })
+        }
+        if(!res.length){
+            router.replace('/shopcar/shopcar');
         }
         setGoodsList(res ?? [])
     }, [])
