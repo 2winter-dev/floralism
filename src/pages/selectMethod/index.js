@@ -203,7 +203,7 @@ export default function selectMethod(props) {
                                     return item;
                                 }
                             })
-                            localStorage.setItem("shopcar",i);
+                            localStorage.setItem("shopcar",JSON.stringify(i));
                             setPage(2);
                         } else {
                             toast.error(res.msg);
