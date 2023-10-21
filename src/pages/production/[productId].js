@@ -308,12 +308,13 @@ export default function ProductDetail({ cateList, product }) {
                                         console.log(i.number + num);
                                     }
                                 }
+                        
                                 if (flag) {
                                     localStorage.setItem("shopcar", JSON.stringify(res));
                                 } else {
                                     localStorage.setItem("shopcar", JSON.stringify([...res, { ...product?.flowerDetail[index], number: num, isSelected: false,flower_category_id:product?.flowerCategory?.id,cardtype,cardcontent }]));
                                 }
-
+                                toast.show("添加成功")
                                 console.log(res);
 
                             }} className={style.buy_btn} style={{ cursor: 'pointer' }}>點擊購買</button>
