@@ -116,15 +116,19 @@ export default function ShopCar({ cateList, shopCar }) {
     useEffect(() => {
         console.log("变了");
         let price = 0;
+        let num=0;
         let isAllSelected = true;
         goodsList.map((item, index) => {
             if (item.isSelected) {
                 price += parseFloat(item.price) * item.number
+                num += parseInt(item.number)
             } else {
                 isAllSelected = false;
             }
         })
+        console.log(num)
         setTotal_money(price.toFixed(2));
+        setTotal_num(num??0);
         setSelAll(isAllSelected);
         console.log(price);
         //  //////////////////////////////////console.log(money);
