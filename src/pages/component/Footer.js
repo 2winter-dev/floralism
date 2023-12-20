@@ -98,7 +98,7 @@ export default function Footer() {
                                 <a href="https://www.facebook.com/hkfloralism"><img alt="facebook" src='/WechatIMG388.png' className={style.footer_Image} /></a>
                             </div>
                             <div style={{ cursor: 'pointer' }}>
-                                <a  href="https://wa.me/85265818053" ><img alt="instagram" src='/WechatIMG387.png' className={style.footer_Image} /></a>
+                                <a  href="https://wa.me/message/SMEZEORM6UYZD1" ><img alt="instagram" src='/WechatIMG387.png' className={style.footer_Image} /></a>
                             </div>
                             <div style={{ cursor: 'pointer' }}>
                                 <a href="https://www.instagram.com/hkfloralism/"><img alt="whatsapp" src='/WechatIMG386.png' className={{ ...style.footer_Image, marginRight: 0 }} /></a>

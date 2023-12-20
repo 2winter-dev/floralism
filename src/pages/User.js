@@ -513,6 +513,7 @@ export async function getServerSideProps(context) {
     let sc;
     let res;
     let i;
+    console.log(i)
     let addList, orderList;
     let code=200;
     if (context.req.headers.cookie) {
@@ -525,6 +526,8 @@ export async function getServerSideProps(context) {
             i = _res[0].trim().split("=")[1];
         } else i = null;
     }
+    console.log("---");
+    console.log(i)
     if (i) {
         let sc_res = await fetch(
             `${constant.api_url}/api/user/index`,
