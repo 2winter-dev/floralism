@@ -312,7 +312,7 @@ export default function ProductDetail({ cateList, product }) {
                                 if (flag) {
                                     localStorage.setItem("shopcar", JSON.stringify(res));
                                 } else {
-                                    localStorage.setItem("shopcar", JSON.stringify([...res, { ...product?.flowerDetail[index], number: num, isSelected: false,flower_category_id:product?.flowerCategory?.id,cardtype,cardcontent }]));
+                                    localStorage.setItem("shopcar", JSON.stringify([...res, { ...product?.flowerDetail[index], number: num, isSelected: true,flower_category_id:product?.flowerCategory?.id,cardtype,cardcontent }]));
                                 }
                                 toast.success("添加成功")
                                 console.log(res);
