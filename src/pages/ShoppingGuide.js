@@ -40,7 +40,7 @@ export default function ShoppingGuide(props) {
                                         <br />
                                         WhatsApp / Facebook 訂購<br />
                                         <br />
-                                        將您欲訂購的商品、運送資料及聯絡方式，WhatsApp 至 +852 6581 8053 或傳送至「 floralism 」Facebook 專頁。<br />
+                                        將您欲訂購的商品、運送資料及聯絡方式，WhatsApp 至 +852 5305 7561 或傳送至「 floralism 」Facebook 專頁。<br />
                                         <br />
                                         網站所展示的產品款式有限，歡迎和我們討論您的需求，客製化花禮<br />
                                     </Text>

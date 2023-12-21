@@ -124,9 +124,9 @@ export default function ContactPage({ cateList, allcate }) {
                     <div className={style.contact_distance} style={{ lineHeight: '200%', letterSpacing: 2 }}>如果你有任何花藝需求或疑問，歡迎聯係我們的專業花藝師團隊，我們會仔細聆聽您的需求，並根據不同場合和用途，提供最適合的花藝設計方案，您可以通過以下方式聯係我們</div>
                     <div className={`${style.contact_title}`} style={{ marginTop: '15%' }}>客戶熱綫</div>
                     <div className={style.contact_distance} style={{ display: 'flex', alignItems: 'center' }} >
-                        <a href="tel:+85265818053" style={{ display: 'flex', alignItems: 'center' }}>
+                        <a href="tel:+85253057561" style={{ display: 'flex', alignItems: 'center' }}>
                             <img alt="電話" src="/圖標-電話.png" />
-                            <div style={{ marginLeft: 16 }}>65818053</div>
+                            <div style={{ marginLeft: 16 }}>+852 5305 7561</div>
                         </a>
 
                     </div>
