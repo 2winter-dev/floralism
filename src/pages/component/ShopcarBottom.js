@@ -14,7 +14,7 @@ export default function ShopcarBottom(props) {
         // location.href='/shopCar/shopCar'
     }
     const toWhats = () => {
-        router.push('https://wa.me/85265818053');
+        router.push('https://wa.me/message/SMEZEORM6UYZD1');
     }
 
     return (
