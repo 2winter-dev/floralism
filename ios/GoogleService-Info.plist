@@ -3,21 +3,23 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>952048642464-f76q4vcg1is8btct4eqjhduadldj5rdl.apps.googleusercontent.com</string>
+	<string>479858731031-6s0k2aio4sl1tj7s2orcim39t6plj44k.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.952048642464-f76q4vcg1is8btct4eqjhduadldj5rdl</string>
+	<string>com.googleusercontent.apps.479858731031-6s0k2aio4sl1tj7s2orcim39t6plj44k</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>479858731031-2soovei5mosb8o606r4tucfo8uite56f.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
-	<string>AIzaSyDS85oYAOpgfd6yh22d9pCwIm8OZiT_sTg</string>
+	<string>AIzaSyCSBm37OR-DeLtJGyIr1pLfzXnx2tCfZuk</string>
 	<key>GCM_SENDER_ID</key>
-	<string>952048642464</string>
+	<string>479858731031</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.imaker.skyman</string>
+	<string>com.imaker.yfd.nunchaku</string>
 	<key>PROJECT_ID</key>
-	<string>skyman-a195b</string>
+	<string>nunchaku-e56ee</string>
 	<key>STORAGE_BUCKET</key>
-	<string>skyman-a195b.appspot.com</string>
+	<string>nunchaku-e56ee.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,8 +31,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:952048642464:ios:5faa60f3865163e89cdcc5</string>
+	<string>1:479858731031:ios:068423c4666cd59b679452</string>
 	<key>DATABASE_URL</key>
-	<string>https://skyman-a195b-default-rtdb.asia-southeast1.firebasedatabase.app</string>
+	<string>https://nunchaku-e56ee-default-rtdb.asia-southeast1.firebasedatabase.app</string>
 </dict>
 </plist>

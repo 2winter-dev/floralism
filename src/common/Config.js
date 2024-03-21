@@ -4,15 +4,15 @@
 import Images from "./Images";
 import Constants from "./Constants";
 import Icons from "./Icons";
-const hostUrl = "https://skymanlogistics.com/";
+const hostUrl = "https://nunchaku-hkshop.com/";
 export default {
   /**
    * Step 1: change to your website URL and the wooCommerce API consumeKey
    */
   WooCommerce: {
     url: hostUrl,
-    consumerKey: "ck_5dbdabbd8f65a6ac4b0592fd833461bf5added0b",
-    consumerSecret: "cs_5adc9ded64811bfb662756227db2af19ab298644",
+    consumerKey: "ck_d34a5353875284a1c4c846e87c81166fabc8822e",
+    consumerSecret: "cs_7c346b1a2ca9ae1e9216c8f079e6fd988d7046be",
   },
 
   /**
@@ -85,7 +85,7 @@ export default {
   intro: [
     {
       key: "page1",
-      title: "Welcome to skyman Technology Limited",
+      title: "Welcome to Nunchaku",
       // text: "Get the hottest fashion by trend and season right on your pocket.",
       icon: "ios-basket",
       colors: ["#0FF0B3", "#036ED9"],

@@ -1,41 +1,57 @@
 {
   "project_info": {
-    "project_number": "939140283027",
-    "firebase_url": "https://skyman-2451a-default-rtdb.asia-southeast1.firebasedatabase.app",
-    "project_id": "skyman-2451a",
-    "storage_bucket": "skyman-2451a.appspot.com"
+    "project_number": "479858731031",
+    "firebase_url": "https://nunchaku-e56ee-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "nunchaku-e56ee",
+    "storage_bucket": "nunchaku-e56ee.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:939140283027:android:5c08264f31894adbbf2b66",
+        "mobilesdk_app_id": "1:479858731031:android:8533ee774d086e3f679452",
         "android_client_info": {
-          "package_name": "com.imaker.yfd.skyman"
+          "package_name": "com.imaker.nunchaku"
         }
       },
       "oauth_client": [
         {
-          "client_id": "939140283027-j8v4jdpg8r7ehjd6103t07lhpquf2gvd.apps.googleusercontent.com",
+          "client_id": "479858731031-2soovei5mosb8o606r4tucfo8uite56f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.imaker.nunchaku",
+            "certificate_hash": "76e86beed52cc788304ed732739602c8629c85c5"
+          }
+        },
+        {
+          "client_id": "479858731031-vr3m1976np7m2r9qhiev4ulvut3084jm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.imaker.nunchaku",
+            "certificate_hash": "d0fdbdcf09478a756003c5b7ccd58680383af056"
+          }
+        },
+        {
+          "client_id": "479858731031-gu2na9fkfov55ins3fk6b9aes81ma9vf.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyB4uD21LcK6X1CT5WHNXqrqFl59kj6HviE"
+          "current_key": "AIzaSyCh1BoAFmbaQCEDUBm38YhsEnZrNq6qYfU"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "939140283027-j8v4jdpg8r7ehjd6103t07lhpquf2gvd.apps.googleusercontent.com",
+              "client_id": "479858731031-gu2na9fkfov55ins3fk6b9aes81ma9vf.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "939140283027-bb320ulv8agnvc92clq8d10hmtvdk6mj.apps.googleusercontent.com",
+              "client_id": "479858731031-6o2kd2ameaqnnsk51fa4l90hv6psicfb.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.imaker.yfd.skyman"
+                "bundle_id": "com.imaker.nunchaku"
               }
             }
           ]

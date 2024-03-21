@@ -27,11 +27,11 @@ export default class ReduxWrapper extends Component {
   async componentDidMount() {
     // const notification = await getNotification();
 
-    if (notification) {
+    // if (notification) {
       // OneSignal.removeEventListener("opened", this.onOpened);
       // OneSignal.addEventListener("received", this.onReceived);
       // OneSignal.addEventListener("ids", this.onIds);
-    }
+    // }
     // eslint-disable-next-line no-console
     console.disableYellowBox = true;
 
@@ -40,11 +40,11 @@ export default class ReduxWrapper extends Component {
   async componentWillUnmount() {
     // const notification = await getNotification();
 
-    if (notification) {
+    // if (notification) {
       // OneSignal.removeEventListener("opened", this.onOpened);
       // OneSignal.removeEventListener("received", this.onReceived);
       // OneSignal.removeEventListener("ids", this.onIds);
-    }
+    // }
   }
 
   onReceived = (notification) => {

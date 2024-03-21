@@ -156,10 +156,10 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.imaker.yfd.skyman"
+        applicationId "com.imaker.nunchaku"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 44
+        versionCode 67
         versionName "4.4.7"
         multiDexEnabled true
     }

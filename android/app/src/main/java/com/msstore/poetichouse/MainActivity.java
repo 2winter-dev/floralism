@@ -1,4 +1,4 @@
-package com.imaker.yfd.skyman;
+package com.imaker.nunchaku;
 
 import android.content.Intent;
 import android.content.Context;
@@ -17,7 +17,7 @@ public class MainActivity extends ReactActivity {
      */
     @Override
     protected String getMainComponentName() {
-        return "skyman";
+        return "Nunchaku";
     }
 
     @Override

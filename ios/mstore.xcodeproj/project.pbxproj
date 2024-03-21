@@ -12,39 +12,18 @@
 		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		17F183D422E981BC00A1728F /* NotificationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 17F183D322E981BC00A1728F /* NotificationService.m */; };
-		17F183D822E981BC00A1728F /* OneSignalNotificationServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 17F183D022E981BC00A1728F /* OneSignalNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		17F183DD22E9825C00A1728F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17F183DC22E9825C00A1728F /* UIKit.framework */; };
-		17F183DF22E9826600A1728F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17F183DE22E9826600A1728F /* SystemConfiguration.framework */; };
 		17F183E522E99BE100A1728F /* Baloo-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 17F183E322E99BE100A1728F /* Baloo-Regular.ttf */; };
 		17F183E622E99BE100A1728F /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 17F183E422E99BE100A1728F /* OpenSans-Regular.ttf */; };
 		185356842876677C008D4ED8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 185356832876677C008D4ED8 /* GoogleService-Info.plist */; };
 		185356852876677C008D4ED8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 185356832876677C008D4ED8 /* GoogleService-Info.plist */; };
 		185356862876677C008D4ED8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 185356832876677C008D4ED8 /* GoogleService-Info.plist */; };
 		185356872876677C008D4ED8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 185356832876677C008D4ED8 /* GoogleService-Info.plist */; };
-		185356882876677C008D4ED8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 185356832876677C008D4ED8 /* GoogleService-Info.plist */; };
-		2463A75107CE47489CF352D5 /* FontAwesome5_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E58972F9A7BC46219F1228DC /* FontAwesome5_Brands.ttf */; };
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* mstoreTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* mstoreTests.m */; };
 		2F5C68FB0361C9BBCA7DE354 /* libPods-mstore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E8E3A8C6CE4EFC46CA6F221 /* libPods-mstore.a */; };
-		3132B45C0246400DB82DC815 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 85C800EE4D004D72A91C62BD /* Entypo.ttf */; };
-		34622DB8EABC442F8A86FF47 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FC9F8304DDFB4463B6582E2D /* Ionicons.ttf */; };
-		45EB17CBDDC245458C3CEBC7 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7F948BC19D5443EF942BFA7C /* Zocial.ttf */; };
-		4773AC433C6C4A9483014947 /* Fontisto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3F44EB3E7AC84453B1CA930B /* Fontisto.ttf */; };
 		4FDB35F324544B5E004C3C08 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDB35F224544B5E004C3C08 /* File.swift */; };
-		6C5115120FC74CDA99ADEC83 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F67F4B3402D04C0091A169EA /* Foundation.ttf */; };
-		703A550E7BB548ADA7A5A0FE /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BCBAB9EDD455496CA8FB565C /* MaterialCommunityIcons.ttf */; };
-		91A4391446AE4DEFA6871030 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D9BE689D21A24B0BB0B1CDED /* MaterialIcons.ttf */; };
-		956B3E0A204A4AECBA925347 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C1FDA1E490634F2F8C396904 /* FontAwesome.ttf */; };
-		99FA4C6832A745AF99535E86 /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1DBC963B5F1F49A581E149E9 /* FontAwesome5_Regular.ttf */; };
-		ACBB251923CD448FB0367D40 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 70B32A8EAD124CF2975B91E2 /* Octicons.ttf */; };
-		BC0B7F1F62634378B11ED76B /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A7E50337B6BF4272BEBDC30B /* SimpleLineIcons.ttf */; };
-		D50804D3ABF7467BB5D8054B /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E2193CAD53BE4815A0F7D4DD /* AntDesign.ttf */; };
-		DD031F3C40C541ED9C2D6E04 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2F7C7FC881154C96A4C5AEAE /* EvilIcons.ttf */; };
-		E032A98733484D96979DEBC9 /* FontAwesome5_Solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 16A42B62F0AF44BEA6696BB6 /* FontAwesome5_Solid.ttf */; };
-		F629FAFE7BEA47CE9F5713C1 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9BD4D3645DA546F7A319A6B6 /* Feather.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,13 +33,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
 			remoteInfo = mstore;
-		};
-		17F183D622E981BC00A1728F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 17F183CF22E981BC00A1728F;
-			remoteInfo = OneSignalNotificationServiceExtension;
 		};
 		2D02E4911E0B4A5D006451C7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -74,19 +46,17 @@
 /* Begin PBXCopyFilesBuildPhase section */
 		17F183CB22E980F900A1728F /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 8;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				17F183D822E981BC00A1728F /* OneSignalNotificationServiceExtension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
-			runOnlyForDeploymentPostprocessing = 0;
+			runOnlyForDeploymentPostprocessing = 1;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
 		00E356EE1AD99517003FC87E /* mstoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = mstoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* mstoreTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = mstoreTests.m; sourceTree = "<group>"; };
@@ -102,7 +72,6 @@
 		17F183C122E980F900A1728F /* NotificationService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationService.h; sourceTree = "<group>"; };
 		17F183C222E980F900A1728F /* NotificationService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotificationService.m; sourceTree = "<group>"; };
 		17F183C422E980F900A1728F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		17F183D022E981BC00A1728F /* OneSignalNotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = OneSignalNotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		17F183D222E981BC00A1728F /* NotificationService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationService.h; sourceTree = "<group>"; };
 		17F183D322E981BC00A1728F /* NotificationService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotificationService.m; sourceTree = "<group>"; };
 		17F183D522E981BC00A1728F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -153,15 +122,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		17F183CD22E981BC00A1728F /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				17F183DF22E9826600A1728F /* SystemConfiguration.framework in Frameworks */,
-				17F183DD22E9825C00A1728F /* UIKit.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		2D02E4781E0B4A5D006451C7 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -200,7 +160,6 @@
 			isa = PBXGroup;
 			children = (
 				17F183BA22E980A000A1728F /* mstore.entitlements */,
-				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -311,7 +270,6 @@
 				00E356EE1AD99517003FC87E /* mstoreTests.xctest */,
 				2D02E47B1E0B4A5D006451C7 /* mstore-tvOS.app */,
 				2D02E4901E0B4A5D006451C7 /* mstore-tvOSTests.xctest */,
-				17F183D022E981BC00A1728F /* OneSignalNotificationServiceExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -364,29 +322,11 @@
 			buildRules = (
 			);
 			dependencies = (
-				17F183D722E981BC00A1728F /* PBXTargetDependency */,
 			);
 			name = mstore;
 			productName = mstore;
 			productReference = 13B07F961A680F5B00A75B9A /* mstore.app */;
 			productType = "com.apple.product-type.application";
-		};
-		17F183CF22E981BC00A1728F /* OneSignalNotificationServiceExtension */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 17F183D922E981BD00A1728F /* Build configuration list for PBXNativeTarget "OneSignalNotificationServiceExtension" */;
-			buildPhases = (
-				17F183CC22E981BC00A1728F /* Sources */,
-				17F183CD22E981BC00A1728F /* Frameworks */,
-				17F183CE22E981BC00A1728F /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = OneSignalNotificationServiceExtension;
-			productName = OneSignalNotificationServiceExtension;
-			productReference = 17F183D022E981BC00A1728F /* OneSignalNotificationServiceExtension.appex */;
-			productType = "com.apple.product-type.app-extension";
 		};
 		2D02E47A1E0B4A5D006451C7 /* mstore-tvOS */ = {
 			isa = PBXNativeTarget;
@@ -440,7 +380,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = D4M794DH8Y;
+						DevelopmentTeam = BUS2C5U9TR;
 						LastSwiftMigration = 1140;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -451,11 +391,6 @@
 								enabled = 1;
 							};
 						};
-					};
-					17F183CF22E981BC00A1728F = {
-						CreatedOnToolsVersion = 10.2;
-						DevelopmentTeam = D4M794DH8Y;
-						ProvisioningStyle = Automatic;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -488,7 +423,6 @@
 				00E356ED1AD99517003FC87E /* mstoreTests */,
 				2D02E47A1E0B4A5D006451C7 /* mstore-tvOS */,
 				2D02E48F1E0B4A5D006451C7 /* mstore-tvOSTests */,
-				17F183CF22E981BC00A1728F /* OneSignalNotificationServiceExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -510,31 +444,7 @@
 				17F183E522E99BE100A1728F /* Baloo-Regular.ttf in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
-				D50804D3ABF7467BB5D8054B /* AntDesign.ttf in Resources */,
-				3132B45C0246400DB82DC815 /* Entypo.ttf in Resources */,
-				DD031F3C40C541ED9C2D6E04 /* EvilIcons.ttf in Resources */,
-				F629FAFE7BEA47CE9F5713C1 /* Feather.ttf in Resources */,
-				956B3E0A204A4AECBA925347 /* FontAwesome.ttf in Resources */,
-				2463A75107CE47489CF352D5 /* FontAwesome5_Brands.ttf in Resources */,
-				99FA4C6832A745AF99535E86 /* FontAwesome5_Regular.ttf in Resources */,
-				E032A98733484D96979DEBC9 /* FontAwesome5_Solid.ttf in Resources */,
-				4773AC433C6C4A9483014947 /* Fontisto.ttf in Resources */,
-				6C5115120FC74CDA99ADEC83 /* Foundation.ttf in Resources */,
-				34622DB8EABC442F8A86FF47 /* Ionicons.ttf in Resources */,
-				703A550E7BB548ADA7A5A0FE /* MaterialCommunityIcons.ttf in Resources */,
-				91A4391446AE4DEFA6871030 /* MaterialIcons.ttf in Resources */,
-				ACBB251923CD448FB0367D40 /* Octicons.ttf in Resources */,
-				BC0B7F1F62634378B11ED76B /* SimpleLineIcons.ttf in Resources */,
-				45EB17CBDDC245458C3CEBC7 /* Zocial.ttf in Resources */,
 				185356842876677C008D4ED8 /* GoogleService-Info.plist in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		17F183CE22E981BC00A1728F /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				185356882876677C008D4ED8 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -768,14 +678,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		17F183CC22E981BC00A1728F /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				17F183D422E981BC00A1728F /* NotificationService.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		2D02E4771E0B4A5D006451C7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -800,11 +702,6 @@
 			isa = PBXTargetDependency;
 			target = 13B07F861A680F5B00A75B9A /* mstore */;
 			targetProxy = 00E356F41AD99517003FC87E /* PBXContainerItemProxy */;
-		};
-		17F183D722E981BC00A1728F /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 17F183CF22E981BC00A1728F /* OneSignalNotificationServiceExtension */;
-			targetProxy = 17F183D622E981BC00A1728F /* PBXContainerItemProxy */;
 		};
 		2D02E4921E0B4A5D006451C7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -889,9 +786,9 @@
 				CODE_SIGN_ENTITLEMENTS = mstore/mstore.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 15;
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = D4M794DH8Y;
+				DEVELOPMENT_TEAM = BUS2C5U9TR;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -911,7 +808,8 @@
 					"~/Documents/FacebookSDK",
 				);
 				INFOPLIST_FILE = mstore/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				INFOPLIST_KEY_CFBundleDisplayName = Nunchaku;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -965,7 +863,7 @@
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/yoga\"",
 					"${PODS_CONFIGURATION_BUILD_DIR}/AppAuth",
 				);
-				MARKETING_VERSION = 4.4.3;
+				MARKETING_VERSION = 4.4.10;
 				OTHER_CFLAGS = (
 					"$(inherited)",
 					"-DFB_SONARKIT_ENABLED=1",
@@ -975,7 +873,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.inspireui.poetic.house;
+				PRODUCT_BUNDLE_IDENTIFIER = com.imaker.yfd.nunchaku;
 				PRODUCT_NAME = mstore;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "mstore-Bridging-Header.h";
@@ -995,8 +893,8 @@
 				CODE_SIGN_ENTITLEMENTS = mstore/mstore.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
-				DEVELOPMENT_TEAM = D4M794DH8Y;
+				CURRENT_PROJECT_VERSION = 15;
+				DEVELOPMENT_TEAM = BUS2C5U9TR;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1016,7 +914,8 @@
 					"~/Documents/FacebookSDK",
 				);
 				INFOPLIST_FILE = mstore/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				INFOPLIST_KEY_CFBundleDisplayName = Nunchaku;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1070,7 +969,7 @@
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/yoga\"",
 					"${PODS_CONFIGURATION_BUILD_DIR}/AppAuth",
 				);
-				MARKETING_VERSION = 4.4.3;
+				MARKETING_VERSION = 4.4.10;
 				OTHER_CFLAGS = (
 					"$(inherited)",
 					"-DFB_SONARKIT_ENABLED=1",
@@ -1080,80 +979,12 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.inspireui.poetic.house;
+				PRODUCT_BUNDLE_IDENTIFIER = com.imaker.yfd.nunchaku;
 				PRODUCT_NAME = mstore;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "mstore-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
-			};
-			name = Release;
-		};
-		17F183DA22E981BD00A1728F /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = D4M794DH8Y;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				HEADER_SEARCH_PATHS = "$(SRCROOT)/../node_modules/react-native-onesignal/ios/**";
-				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 4.4.2;
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				MTL_FAST_MATH = YES;
-				OTHER_CFLAGS = (
-					"$(inherited)",
-					"-DFB_SONARKIT_ENABLED=1",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.inspireui.poetic.house.OneSignalNotificationServiceExtension;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		17F183DB22E981BD00A1728F /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 6;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = D4M794DH8Y;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				HEADER_SEARCH_PATHS = "$(SRCROOT)/../node_modules/react-native-onesignal/ios/**";
-				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 4.4.2;
-				MTL_FAST_MATH = YES;
-				OTHER_CFLAGS = (
-					"$(inherited)",
-					"-DFB_SONARKIT_ENABLED=1",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.inspireui.poetic.house.OneSignalNotificationServiceExtension;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -1403,15 +1234,6 @@
 			buildConfigurations = (
 				13B07F941A680F5B00A75B9A /* Debug */,
 				13B07F951A680F5B00A75B9A /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		17F183D922E981BD00A1728F /* Build configuration list for PBXNativeTarget "OneSignalNotificationServiceExtension" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				17F183DA22E981BD00A1728F /* Debug */,
-				17F183DB22E981BD00A1728F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

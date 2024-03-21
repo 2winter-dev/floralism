@@ -1,30 +1,28 @@
 {
-  "WooCommerce": {
-    "url": "https://mstore.io",
-    "consumerKey": "ck_b7594bc4391db4b56c635fe6da1072a53ca4535a",
-    "consumerSecret": "cs_980b9edb120e15bd2a8b668cacc734f7eca0ba40"
-  },
   "HorizonLayout": [
-    {
-      "imageBanner": "https://skymantech-hk.com/wp-content/uploads/2023/06/dane-deaner-_-KLkj7on_c-unsplash-scaled.jpg",
-      "layout": "bannerImage",
-      "height": 160,
-      "imageMode": "cover",
-      "category": 19
-    },
     {
       "layout": "circleCategory"
     },
+
+
     {
-      "name": "featureProducts",
+      "name": "視頻教程",
+      "layout": "news",
+      "url": "https://www.hknunchaku.com/basic-nunchaku-tutorial",
+      "bg": "https://static.wixstatic.com/media/69f6aa_d3076de336cf482d9b118af1f2a9c65e~mv2.jpg/v1/fill/w_606,h_440,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/%E6%A3%8D%E9%81%93.jpg"
+    },
+    {
+      "name": "RoseCrown",
       "image": "",
-      "layout": "card",
+      "layout": "threeColumn",
       "category": 21
+    },
+    {
+      "name": "WR",
+      "image": "",
+      "layout": "twoColumn",
+      "category": 20
     }
   ],
-  "VerticalLayout": {
-    "name": "Recents",
-    "layout": "threeColumn"
-  },
-  "MainColor": "#FF5722"
+  "MainColor": "#000000"
 }

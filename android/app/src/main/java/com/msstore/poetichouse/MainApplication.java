@@ -1,4 +1,4 @@
-package com.imaker.yfd.skyman;
+package com.imaker.nunchaku;
 
 import android.app.Application;
 

@@ -1,35 +1,61 @@
 {
   "project_info": {
-    "project_number": "952048642464",
-    "firebase_url": "https://skyman-a195b-default-rtdb.asia-southeast1.firebasedatabase.app",
-    "project_id": "skyman-a195b",
-    "storage_bucket": "skyman-a195b.appspot.com"
+    "project_number": "479858731031",
+    "firebase_url": "https://nunchaku-e56ee-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "nunchaku-e56ee",
+    "storage_bucket": "nunchaku-e56ee.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:952048642464:android:f62675eab6a2a19d9cdcc5",
+        "mobilesdk_app_id": "1:479858731031:android:8533ee774d086e3f679452",
         "android_client_info": {
-          "package_name": "com.imaker.skyman"
+          "package_name": "com.imaker.nunchaku"
+          
         }
       },
       "oauth_client": [
         {
-          "client_id": "952048642464-anbvuk34djprh2n79ub0chl3f0bh049a.apps.googleusercontent.com",
-          "client_type": 3
+          "client_id": "479858731031-6dhp571kmpsefao8i6ep75iru7tfoibn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.imaker.nunchaku"
+          }
+        },  
+        {
+          "client_id": "479858731031-6o2kd2ameaqnnsk51fa4l90hv6psicfb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.imaker.nunchaku"
+          }
+        },
+        {
+          "client_id": "479858731031-2soovei5mosb8o606r4tucfo8uite56f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.imaker.nunchaku",
+            "certificate_hash": "fd33649d6ee03a1aea31c7be21948ebcbbd06484"
+          }
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAp1KcJp6x6UH0jdxCoIxHFYQAZlOC894o"
+          "current_key": "AIzaSyCh1BoAFmbaQCEDUBm38YhsEnZrNq6qYfU"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "952048642464-anbvuk34djprh2n79ub0chl3f0bh049a.apps.googleusercontent.com",
+              "client_id": "479858731031-gu2na9fkfov55ins3fk6b9aes81ma9vf.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "479858731031-6o2kd2ameaqnnsk51fa4l90hv6psicfb.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.imaker.nunchaku"
+              }
             }
           ]
         }
