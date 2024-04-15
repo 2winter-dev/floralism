@@ -126,7 +126,6 @@
     },
     {
       "extent" : "full-screen",
-      "filename" : "Default-Landscape~ipad.png",
       "idiom" : "ipad",
       "minimum-system-version" : "7.0",
       "orientation" : "landscape",
@@ -170,9 +169,15 @@
     },
     {
       "extent" : "full-screen",
-      "filename" : "Default-Portrait~ipad 1.png",
       "idiom" : "ipad",
       "orientation" : "portrait",
+      "scale" : "1x"
+    },
+    {
+      "extent" : "full-screen",
+      "filename" : "Default-Landscape~ipad.png",
+      "idiom" : "ipad",
+      "orientation" : "landscape",
       "scale" : "1x"
     },
     {

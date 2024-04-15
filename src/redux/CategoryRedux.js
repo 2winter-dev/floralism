@@ -30,6 +30,8 @@ export const actions = {
     console.log('开始获取分类数据...')
     dispatch({ type: types.FETCH_CATEGORIES_PENDING });
     const json = await WooWorker.getCategories();
+    console.log("----------獲取結果：");
+    console.log(json)
     if (json instanceof Error) {
       console.error('分类获取失败:网络链接失败');
       console.error(json);

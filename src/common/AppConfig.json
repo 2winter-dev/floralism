@@ -15,14 +15,9 @@
       "name": "RoseCrown",
       "image": "",
       "layout": "threeColumn",
-      "category": 21
-    },
-    {
-      "name": "WR",
-      "image": "",
-      "layout": "twoColumn",
-      "category": 20
+      "category": 22
     }
+
   ],
   "MainColor": "#000000"
 }

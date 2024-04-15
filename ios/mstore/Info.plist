@@ -7,7 +7,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>Nunchaku</string>
+	<string>Vincent</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -52,7 +52,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.479858731031-6s0k2aio4sl1tj7s2orcim39t6plj44k</string>
+				<string>com.googleusercontent.apps.442603993617-fokove167mlsarl18v9t102fgpnri0lg</string>
 			</array>
 		</dict>
 	</array>

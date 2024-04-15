@@ -342,7 +342,7 @@ export default new LocalizedStrings({
 
     UserProfile: "User Profile",
     LoadMore: "Load More",
-    RoseCrown: 'Nunchaku',
+    RoseCrown: 'Vincent',
     WR: 'nunchuck jewelry',
     RegisterErr: "Please login first",
     MemberErr: "You are not a member, please register as a member first",

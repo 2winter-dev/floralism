@@ -808,7 +808,7 @@
 					"~/Documents/FacebookSDK",
 				);
 				INFOPLIST_FILE = mstore/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = Nunchaku;
+				INFOPLIST_KEY_CFBundleDisplayName = Vincent;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
@@ -873,7 +873,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.imaker.yfd.nunchaku;
+				PRODUCT_BUNDLE_IDENTIFIER = com.im.phone.Vincent;
 				PRODUCT_NAME = mstore;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -917,7 +917,7 @@
 					"~/Documents/FacebookSDK",
 				);
 				INFOPLIST_FILE = mstore/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = Nunchaku;
+				INFOPLIST_KEY_CFBundleDisplayName = Vincent;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
@@ -982,7 +982,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.imaker.yfd.nunchaku;
+				PRODUCT_BUNDLE_IDENTIFIER = com.im.phone.Vincent;
 				PRODUCT_NAME = mstore;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

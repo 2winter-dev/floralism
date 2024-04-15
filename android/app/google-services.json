@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:479858731031:android:8533ee774d086e3f679452",
         "android_client_info": {
-          "package_name": "com.imaker.nunchaku"
+          "package_name": "com.im.phone.Vincent"
           
         }
       },
@@ -19,21 +19,21 @@
           "client_id": "479858731031-6dhp571kmpsefao8i6ep75iru7tfoibn.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.imaker.nunchaku"
+            "package_name": "com.im.phone.Vincent"
           }
         },  
         {
           "client_id": "479858731031-6o2kd2ameaqnnsk51fa4l90hv6psicfb.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.imaker.nunchaku"
+            "package_name": "com.im.phone.Vincent"
           }
         },
         {
           "client_id": "479858731031-2soovei5mosb8o606r4tucfo8uite56f.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.imaker.nunchaku",
+            "package_name": "com.im.phone.Vincent",
             "certificate_hash": "fd33649d6ee03a1aea31c7be21948ebcbbd06484"
           }
         }
@@ -54,7 +54,7 @@
               "client_id": "479858731031-6o2kd2ameaqnnsk51fa4l90hv6psicfb.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.imaker.nunchaku"
+                "bundle_id": "com.im.phone.Vincent"
               }
             }
           ]

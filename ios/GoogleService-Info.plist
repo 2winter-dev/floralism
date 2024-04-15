@@ -3,23 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>479858731031-6s0k2aio4sl1tj7s2orcim39t6plj44k.apps.googleusercontent.com</string>
+	<string>442603993617-fokove167mlsarl18v9t102fgpnri0lg.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.479858731031-6s0k2aio4sl1tj7s2orcim39t6plj44k</string>
-	<key>ANDROID_CLIENT_ID</key>
-	<string>479858731031-2soovei5mosb8o606r4tucfo8uite56f.apps.googleusercontent.com</string>
+	<string>com.googleusercontent.apps.442603993617-fokove167mlsarl18v9t102fgpnri0lg</string>
 	<key>API_KEY</key>
-	<string>AIzaSyCSBm37OR-DeLtJGyIr1pLfzXnx2tCfZuk</string>
+	<string>AIzaSyA6DinAh4lr9LZlkP5aHxOhk879omgQI0E</string>
 	<key>GCM_SENDER_ID</key>
-	<string>479858731031</string>
+	<string>442603993617</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.imaker.yfd.nunchaku</string>
+	<string>com.im.phone.Vincent</string>
 	<key>PROJECT_ID</key>
-	<string>nunchaku-e56ee</string>
+	<string>vincent-50699</string>
 	<key>STORAGE_BUCKET</key>
-	<string>nunchaku-e56ee.appspot.com</string>
+	<string>vincent-50699.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -31,8 +29,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:479858731031:ios:068423c4666cd59b679452</string>
+	<string>1:442603993617:ios:091e92f1edbbefe5bacfb0</string>
 	<key>DATABASE_URL</key>
-	<string>https://nunchaku-e56ee-default-rtdb.asia-southeast1.firebasedatabase.app</string>
+	<string>https://vincent-50699-default-rtdb.asia-southeast1.firebasedatabase.app</string>
 </dict>
 </plist>
