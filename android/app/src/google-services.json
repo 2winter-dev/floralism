@@ -1,57 +1,57 @@
 {
   "project_info": {
-    "project_number": "479858731031",
-    "firebase_url": "https://nunchaku-e56ee-default-rtdb.asia-southeast1.firebasedatabase.app",
-    "project_id": "nunchaku-e56ee",
-    "storage_bucket": "nunchaku-e56ee.appspot.com"
+    "project_number": "738358533049",
+    "firebase_url": "https://kiduiteams-default-rtdb.firebaseio.com",
+    "project_id": "kiduiteams",
+    "storage_bucket": "kiduiteams.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:479858731031:android:8533ee774d086e3f679452",
+        "mobilesdk_app_id": "1:738358533049:android:0664b716bb124a1ddaf468",
         "android_client_info": {
-          "package_name": "com.im.phone.Vincent"
+          "package_name": "com.kiduItem"
         }
       },
       "oauth_client": [
         {
-          "client_id": "479858731031-2soovei5mosb8o606r4tucfo8uite56f.apps.googleusercontent.com",
+          "client_id": "738358533049-03qldurj7vqhqohgiu2jdnjo7kv4tv5k.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.im.phone.Vincent",
-            "certificate_hash": "76e86beed52cc788304ed732739602c8629c85c5"
-          }
-        },
-        {
-          "client_id": "479858731031-vr3m1976np7m2r9qhiev4ulvut3084jm.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.im.phone.Vincent",
+            "package_name": "com.kiduItem",
             "certificate_hash": "d0fdbdcf09478a756003c5b7ccd58680383af056"
           }
         },
         {
-          "client_id": "479858731031-gu2na9fkfov55ins3fk6b9aes81ma9vf.apps.googleusercontent.com",
+          "client_id": "738358533049-o298bjn63sge6jstj2qt8mdq0joeq87r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kiduItem",
+            "certificate_hash": "fd33649d6ee03a1aea31c7be21948ebcbbd06484"
+          }
+        },
+        {
+          "client_id": "738358533049-440hfobdhs0rpo0mtdr08199aroeohmb.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCh1BoAFmbaQCEDUBm38YhsEnZrNq6qYfU"
+          "current_key": "AIzaSyBGq_s03doMwogTptvKck6HmPvDVLs692Y"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "479858731031-gu2na9fkfov55ins3fk6b9aes81ma9vf.apps.googleusercontent.com",
+              "client_id": "738358533049-440hfobdhs0rpo0mtdr08199aroeohmb.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "479858731031-6o2kd2ameaqnnsk51fa4l90hv6psicfb.apps.googleusercontent.com",
+              "client_id": "738358533049-ve9gutksn7n9natd41hot1ce1t8rq2as.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.im.phone.Vincent"
+                "bundle_id": "com.imaker.yfd.kidulteam"
               }
             }
           ]

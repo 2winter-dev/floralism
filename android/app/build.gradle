@@ -156,10 +156,10 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.im.phone.Vincent"
+        applicationId "com.kiduItem"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 67
+        versionCode 80
         versionName "4.4.7"
         multiDexEnabled true
     }

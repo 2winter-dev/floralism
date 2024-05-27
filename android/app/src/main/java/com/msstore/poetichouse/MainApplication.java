@@ -1,4 +1,4 @@
-package com.imaker.Vincent;
+package com.Kidulteam;
 
 import android.app.Application;
 

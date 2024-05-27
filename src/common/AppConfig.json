@@ -1,23 +1,30 @@
 {
-  "HorizonLayout": [
-    {
-      "layout": "circleCategory"
+    "WooCommerce": {
+        "url": "https://mstore.io",
+        "consumerKey": "ck_b7594bc4391db4b56c635fe6da1072a53ca4535a",
+        "consumerSecret": "cs_980b9edb120e15bd2a8b668cacc734f7eca0ba40"
     },
-
-
-    {
-      "name": "視頻教程",
-      "layout": "news",
-      "url": "https://www.hknunchaku.com/basic-nunchaku-tutorial",
-      "bg": "https://static.wixstatic.com/media/69f6aa_d3076de336cf482d9b118af1f2a9c65e~mv2.jpg/v1/fill/w_606,h_440,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/%E6%A3%8D%E9%81%93.jpg"
+    "HorizonLayout": [
+        {
+            "imageBanner": "https://Kidulteam-hk.com/wp-content/uploads/2024/02/微信截图_20240228142830.jpg",
+            "layout": "bannerImage",
+            "height": 160,
+            "imageMode": "cover",
+            "category": 88
+        },
+        {
+            "layout": "circleCategory"
+        },
+        {
+            "name": "featureProducts",
+            "image": "",
+            "layout": "card",
+            "category": 75
+        }
+    ],
+    "VerticalLayout": {
+        "name": "Recents",
+        "layout": "threeColumn"
     },
-    {
-      "name": "RoseCrown",
-      "image": "",
-      "layout": "threeColumn",
-      "category": 22
-    }
-
-  ],
-  "MainColor": "#000000"
+    "MainColor": "#FF5722"
 }

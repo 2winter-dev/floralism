@@ -4,18 +4,17 @@
 import Images from "./Images";
 import Constants from "./Constants";
 import Icons from "./Icons";
-const hostUrl = "https://vincentfortune.com/";
+const hostUrl = "https://kingsleymall.com/";
 export default {
     /**
      * Step 1: change to your website URL and the wooCommerce API consumeKey
      */
     WooCommerce: {
          url: hostUrl,
-        consumerKey:"ck_e7974b2c56d5d235b3b3c7eba2a08571f60c00e7",
-        consumerSecret:"cs_dc168672770a50fe61bee65faaf8580de75a0f04",
+        consumerKey:"ck_71ae9df68518dfa239b8ade35f8c739053f13863",
+        consumerSecret:"cs_a3346843c1b7c581876a7034b8b53632d49db960",
     },
 
-    
     /**
      Step 2: Setting Product Images
      - ProductSize: Explode the guide from: update the product display size: https://mstore.gitbooks.io/mstore-manual/content/chapter5.html
@@ -86,7 +85,7 @@ export default {
     intro: [
         {
             key: "page1",
-            title: "Welcome to Vincent!",
+            title: "Welcome to Kidulteam!",
             // text: "Get the hottest fashion by trend and season right on your pocket.",
             icon: "ios-basket",
             colors: ["#0FF0B3", "#036ED9"],

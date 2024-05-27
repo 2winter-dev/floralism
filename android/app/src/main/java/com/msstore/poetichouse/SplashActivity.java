@@ -1,4 +1,4 @@
-package com.imaker.Vincent;
+package com.Kidulteam;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;

@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.imaker.Vincent">
+    package="com.Kidulteam">
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
@@ -50,7 +50,7 @@
                 <!-- Must match `DefaultReturnUrl#value`. -->
                 <data
                     android:host="payment_return_url"
-                    android:path="/com.msstore.Vincent"
+                    android:path="/com.msstore.poetichouse"
                     android:scheme="stripesdk" />
             </intent-filter>
         </activity>
