@@ -159,7 +159,7 @@ android {
         applicationId "com.kiduItem"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 80
+        versionCode 82
         versionName "4.4.7"
         multiDexEnabled true
     }

@@ -6,20 +6,20 @@
     },
     "HorizonLayout": [
         {
-            "imageBanner": "https://Kidulteam-hk.com/wp-content/uploads/2024/02/微信截图_20240228142830.jpg",
+            "imageBanner": "https://kingsleymall.com/wp-content/uploads/2021/02/Rolleat_1200x400.jpg",
             "layout": "bannerImage",
             "height": 160,
             "imageMode": "cover",
-            "category": 88
+            "category": 78
         },
         {
             "layout": "circleCategory"
         },
         {
-            "name": "featureProducts",
+            "name": "Grab'n'go",
             "image": "",
             "layout": "card",
-            "category": 75
+            "category": 78
         }
     ],
     "VerticalLayout": {
