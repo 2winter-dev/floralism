@@ -4,15 +4,15 @@
 import Images from "./Images";
 import Constants from "./Constants";
 import Icons from "./Icons";
-const hostUrl = "https://kingsleymall.com/";
+const hostUrl = "https://groovyboom-hk.com/";
 export default {
     /**
      * Step 1: change to your website URL and the wooCommerce API consumeKey
      */
     WooCommerce: {
          url: hostUrl,
-        consumerKey:"ck_71ae9df68518dfa239b8ade35f8c739053f13863",
-        consumerSecret:"cs_a3346843c1b7c581876a7034b8b53632d49db960",
+        consumerKey:"ck_27e0c92939bcf32c9e43e1ef138bfe62489c960c",
+        consumerSecret:"cs_6957f1ae3c7015e3b3fc9fbf59e69b4c686b5853",
     },
 
     /**
@@ -85,7 +85,7 @@ export default {
     intro: [
         {
             key: "page1",
-            title: "Welcome to Kidulteam!",
+            title: "Welcome to GroovyBoom!",
             // text: "Get the hottest fashion by trend and season right on your pocket.",
             icon: "ios-basket",
             colors: ["#0FF0B3", "#036ED9"],

@@ -6,25 +6,20 @@
     },
     "HorizonLayout": [
         {
-            "imageBanner": "https://kingsleymall.com/wp-content/uploads/2021/02/Rolleat_1200x400.jpg",
+            "imageBanner": "https://groovyboom-hk.com/wp-content/uploads/2024/05/2-2.png",
             "layout": "bannerImage",
             "height": 160,
             "imageMode": "cover",
-            "category": 78
+            "category": 15
         },
         {
             "layout": "circleCategory"
         },
         {
-            "name": "Grab'n'go",
+            "name": "groovyboom",
             "image": "",
             "layout": "card",
-            "category": 78
+            "category": 15
         }
-    ],
-    "VerticalLayout": {
-        "name": "Recents",
-        "layout": "threeColumn"
-    },
-    "MainColor": "#FF5722"
+    ]
 }

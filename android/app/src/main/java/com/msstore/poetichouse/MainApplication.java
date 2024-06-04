@@ -1,4 +1,4 @@
-package com.Kidulteam;
+package com.GroovyBoom;
 
 import android.app.Application;
 

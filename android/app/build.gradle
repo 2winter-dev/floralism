@@ -156,10 +156,10 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.kiduItem"
+        applicationId "com.imk.apps.groovyboom"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 82
+        versionCode 84
         versionName "4.4.7"
         multiDexEnabled true
     }

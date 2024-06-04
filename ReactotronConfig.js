@@ -8,7 +8,7 @@ const host = NativeModules.SourceCode.scriptURL.split("://")[1].split(":")[0];
 
 console.disableYellowBox = true;
 
-Reactotron.configure({ name: "Kidulteam", host });
+Reactotron.configure({ name: "GroovyBoom", host });
 
 // eslint-disable-next-line react-hooks/rules-of-hooks
 Reactotron.useReactNative({

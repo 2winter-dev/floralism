@@ -1,57 +1,32 @@
 {
   "project_info": {
-    "project_number": "738358533049",
-    "firebase_url": "https://kiduiteams-default-rtdb.firebaseio.com",
-    "project_id": "kiduiteams",
-    "storage_bucket": "kiduiteams.appspot.com"
+    "project_number": "496806452197",
+    "firebase_url": "https://groovyboom-dad7a-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "groovyboom-dad7a",
+    "storage_bucket": "groovyboom-dad7a.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:738358533049:android:0664b716bb124a1ddaf468",
+        "mobilesdk_app_id": "1:496806452197:android:2048ff787b43a1f720ed0c",
         "android_client_info": {
-          "package_name": "com.kiduItem"
+          "package_name": "com.imk.apps.groovyboom"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "738358533049-03qldurj7vqhqohgiu2jdnjo7kv4tv5k.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.kiduItem",
-            "certificate_hash": "d0fdbdcf09478a756003c5b7ccd58680383af056"
-          }
-        },
-        {
-          "client_id": "738358533049-o298bjn63sge6jstj2qt8mdq0joeq87r.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.kiduItem",
-            "certificate_hash": "fd33649d6ee03a1aea31c7be21948ebcbbd06484"
-          }
-        },
-        {
-          "client_id": "738358533049-440hfobdhs0rpo0mtdr08199aroeohmb.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBGq_s03doMwogTptvKck6HmPvDVLs692Y"
+          "current_key": "AIzaSyChKoyvMc0I2471ZhsA9v1731S9VdqTAho"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "738358533049-440hfobdhs0rpo0mtdr08199aroeohmb.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "738358533049-ve9gutksn7n9natd41hot1ce1t8rq2as.apps.googleusercontent.com",
+              "client_id": "496806452197-5lrkunjlk2l80ct0lli7j8hgoe0leuc9.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.imaker.yfd.kidulteam"
+                "bundle_id": "com.imk.apps.groovyboom"
               }
             }
           ]
