@@ -6,20 +6,20 @@
     },
     "HorizonLayout": [
         {
-            "imageBanner": "https://groovyboom-hk.com/wp-content/uploads/2024/05/2-2.png",
+            "imageBanner": "https://tyranttyrehk.com/wp-content/uploads/2022/11/main-01-1.jpg",
             "layout": "bannerImage",
             "height": 160,
             "imageMode": "cover",
-            "category": 15
+            "category": 20
         },
         {
             "layout": "circleCategory"
         },
         {
-            "name": "groovyboom",
+            "name": "LunTai",
             "image": "",
             "layout": "card",
-            "category": 15
+            "category": 18
         }
     ]
 }

@@ -1,35 +1,27 @@
 {
   "project_info": {
-    "project_number": "496806452197",
-    "firebase_url": "https://groovyboom-dad7a-default-rtdb.asia-southeast1.firebasedatabase.app",
-    "project_id": "groovyboom-dad7a",
-    "storage_bucket": "groovyboom-dad7a.appspot.com"
+    "project_number": "63255519770",
+    "firebase_url": "https://tyrant-type-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "tyrant-type",
+    "storage_bucket": "tyrant-type.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:496806452197:android:2048ff787b43a1f720ed0c",
+        "mobilesdk_app_id": "1:63255519770:android:7a4b748cc6e5bdbd7167a3",
         "android_client_info": {
-          "package_name": "com.imk.apps.groovyboom"
+          "package_name": "com.im.phone.LunTai"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyChKoyvMc0I2471ZhsA9v1731S9VdqTAho"
+          "current_key": "AIzaSyBLQ9dRdHCboyj3w4d1wffuMowMgrGvwjM"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "496806452197-5lrkunjlk2l80ct0lli7j8hgoe0leuc9.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.imk.apps.groovyboom"
-              }
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }

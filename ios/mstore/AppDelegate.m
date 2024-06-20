@@ -33,7 +33,7 @@
 {
   RCTBridge *bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:launchOptions];
   RCTRootView *rootView = [[RCTRootView alloc] initWithBridge:bridge
-                                                   moduleName:@"GroovyBoom"
+                                                   moduleName:@"LunTai"
                                             initialProperties:nil];
   
   // flipper tool

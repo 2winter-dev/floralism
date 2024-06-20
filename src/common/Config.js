@@ -4,16 +4,16 @@
 import Images from "./Images";
 import Constants from "./Constants";
 import Icons from "./Icons";
-const hostUrl = "https://groovyboom-hk.com/";
+const hostUrl = "https://tyranttyrehk.com/";
 export default {
     /**
      * Step 1: change to your website URL and the wooCommerce API consumeKey
      */
     WooCommerce: {
-         url: hostUrl,
-        consumerKey:"ck_27e0c92939bcf32c9e43e1ef138bfe62489c960c",
-        consumerSecret:"cs_6957f1ae3c7015e3b3fc9fbf59e69b4c686b5853",
-    },
+        url: hostUrl,
+       consumerKey:"ck_d99e79ba6581e19e5a45aa24cfa00cbc420a2b71",
+       consumerSecret:"cs_f81d0043ae1d941b7d6fa15a490c69120a013bc9",
+   },
 
     /**
      Step 2: Setting Product Images
@@ -85,7 +85,7 @@ export default {
     intro: [
         {
             key: "page1",
-            title: "Welcome to GroovyBoom!",
+            title: "Welcome to Tyrant Type!",
             // text: "Get the hottest fashion by trend and season right on your pocket.",
             icon: "ios-basket",
             colors: ["#0FF0B3", "#036ED9"],
@@ -143,19 +143,19 @@ export default {
                 routeName: "Home",
                 icon: Icons.MaterialCommunityIcons.Home,
             },
-            {
-                text: "News",
-                routeName: "NewsScreen",
-                icon: Icons.MaterialCommunityIcons.News,
-            },
-            {
-                text: "contactus",
-                routeName: "CustomPage",
-                params: {
-                     url: `${hostUrl}/contactus/`
-                },
-                icon: Icons.MaterialCommunityIcons.Pin,
-            },
+            // {
+            //     text: "News",
+            //     routeName: "NewsScreen",
+            //     icon: Icons.MaterialCommunityIcons.News,
+            // },
+            // {
+            //     text: "contactus",
+            //     routeName: "CustomPage",
+            //     params: {
+            //          url: `${hostUrl}/contactus/`
+            //     },
+            //     icon: Icons.MaterialCommunityIcons.Pin,
+            // },
             // {
             //     text: "About",
             //     routeName: "CustomPage",
@@ -200,28 +200,28 @@ export default {
         {
             label: "DarkTheme",
         },
-        {
-            label: "contactus",
-            routeName: "Contactus",
-            params: {
-                id: 10941,
-                title: "联络我们",
-            },
-        },
+        // {
+        //     label: "contactus",
+        //     routeName: "Contactus",
+        //     params: {
+        //         id: 10941,
+        //         title: "联络我们",
+        //     },
+        // },
         {
             label: "Privacy",
             routeName: "CustomPage",
             params: {
-               url: `${hostUrl}/privacy`,
+               url: `${hostUrl}/privacy-policy`,
             },
         },
-        {
-            label: "termCondition",
-            routeName: "CustomPage",
-            params: {
-               url: `${hostUrl}/refund_returns/`,
-            },
-        },
+        // {
+        //     label: "termCondition",
+        //     routeName: "CustomPage",
+        //     params: {
+        //        url: `${hostUrl}/refund_returns/`,
+        //     },
+        // },
         {
             label: "About",
             routeName: "CustomPage",
