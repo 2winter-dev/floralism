@@ -1,27 +1,52 @@
 {
   "project_info": {
-    "project_number": "63255519770",
-    "firebase_url": "https://tyrant-type-default-rtdb.asia-southeast1.firebasedatabase.app",
-    "project_id": "tyrant-type",
-    "storage_bucket": "tyrant-type.appspot.com"
+    "project_number": "776606114039",
+    "firebase_url": "https://hkkafook-307dd-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "hkkafook-307dd",
+    "storage_bucket": "hkkafook-307dd.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:63255519770:android:7a4b748cc6e5bdbd7167a3",
+        "mobilesdk_app_id": "1:776606114039:android:65ec4f41f6e9072d1c33f2",
         "android_client_info": {
-          "package_name": "com.im.phone.LunTai"
+          "package_name": "com.imaker.yfd.Hkkafook"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "776606114039-p81iiuncciuhjmttm2en3728breipq2o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.imaker.yfd.Hkkafook",
+            "certificate_hash": "e5e09be380e400ee646bad62b8064102b153751a"
+          }
+        },
+        {
+          "client_id": "776606114039-sbg1mqb3tdjdlc1e0be03t90hobsbjgl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
-          "current_key": "AIzaSyBLQ9dRdHCboyj3w4d1wffuMowMgrGvwjM"
+          "current_key": "AIzaSyCgHcKNPhbN_dXBU-aFF8AogeBhtLTbRvs"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "776606114039-sbg1mqb3tdjdlc1e0be03t90hobsbjgl.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "776606114039-b93895tfapb9c04ck5pov734pmv2jgbt.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.imaker.yfd.Hkkafook"
+              }
+            }
+          ]
         }
       }
     }

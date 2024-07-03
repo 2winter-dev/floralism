@@ -34,7 +34,7 @@ import StepIndicator from "./StepIndicator";
 import Accordion from "./Accordion";
 import Drawer from "./Drawer";
 import ProductRelated from "./ProductRelated";
-import AdMob from "./AdMob";
+
 import ImageCache from "./ImageCache";
 import AnimatedHeader from "./AnimatedHeader";
 import AppIntro from "./AppIntro";
@@ -109,7 +109,7 @@ export {
   ProductRelated,
   HorizonLayout,
   HorizonList,
-  AdMob,
+
   ImageCache,
   AnimatedHeader,
   AppIntro,

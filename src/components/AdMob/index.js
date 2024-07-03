@@ -10,9 +10,9 @@ import styles from "./styles";
 const Admob = ({ style }) => {
   const bannerRef = useRef(null);
 
-  if (!Config.showAdmobAds) {
-    return <View />;
-  }
+  // if (!Config.showAdmobAds) {
+  //   return <View />;
+  // }
 
   return (
     <View style={[styles.body, style]}>

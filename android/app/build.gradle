@@ -156,10 +156,10 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.im.phone.LunTai"
+        applicationId "com.imaker.yfd.Hkkafook"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 89
+        versionCode 102
         versionName "4.4.7"
         multiDexEnabled true
     }
@@ -240,10 +240,10 @@ dependencies {
     // implementation ('com.onesignal:OneSignal:3.10.5') {
     //     exclude group: 'com.google.android.gms'
     // }
-    implementation 'com.google.android.gms:play-services-ads:20.6.0'
+  
     implementation "com.google.firebase:firebase-auth:17.0.0"
     implementation 'androidx.multidex:multidex:2.0.1'
-    implementation ('com.google.android.gms:play-services-ads:16.+') { force = true; }
+
     implementation fileTree(dir: "libs", include: ["*.jar"])
     // implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
     // implementation "com.facebook.react:react-native:+"  // From node_modules
