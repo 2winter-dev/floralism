@@ -1,0 +1,37 @@
+/* .hidden{
+    opacity: 0;
+}
+
+
+.shown{
+   opacity:1; 
+} */
+.hidden_anim {
+    max-height: 0;
+    transition: all 2s cubic-bezier(0.25, 1.0, 0.25, 1.0);
+}
+
+.show_anim {
+    max-height: 300px;
+    overflow: hidden;
+    transition: all 2s cubic-bezier(0.25, 1.0, 0.25, 1.0);
+}
+
+.collapse-css-transition {
+    transition: height 280ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.totalLayout{
+   padding: 0 21% 2rem;
+}
+
+@media screen and (max-width:1100px) {
+    .totalLayout{
+        padding: 0 15% 2rem;
+    } 
+}
+
+@media screen and (max-width:675px) {
+    .totalLayout{
+        padding: 0 0 2rem;
+    }
+}

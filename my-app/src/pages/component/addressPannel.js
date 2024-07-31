@@ -4,8 +4,9 @@ import { useEffect, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import m_api from "@/m_api";
 import Cookies from "js-cookie";
+import { ToastContainer, toast } from 'react-toastify';
 export default function AddressPannel(props) {
-    // //////console.log(props);
+    // ////////////console.log(props);
     const [username,setUsername]=useState("");
     const [address,setAddress]=useState("");
     const [mobile,setMobile]=useState("");
@@ -30,38 +31,42 @@ export default function AddressPannel(props) {
         if(!props.type){
             addAddress.mutate({username:username.trim(),address:address.trim(),mobile:mobile.trim(),cookie:Cookies.get('token')},{
                 onSuccess:async(res)=>{
-                    // //////console.log(res);
-                    let _res=await res.json();
-                    if(_res.code===401){
+                    // ////////////console.log(res);
+                    // let _res=await res.json();
+                    if(res.code===401){
                         Cookies.remove("token");
                         location.reload();
-                    }else if(_res.code===1){
-                        alert(_res.msg);
+                    }else if(res.code===1){
+                        // toast(res.msg);
                         location.reload()
                     }else{
-                        alert(_res.msg);
+                        toast(res.msg);
                     }
                 },
                 onError:(res)=>{
-                    // //////console.log("error");
+                    // ////////////console.log("error");
+                    if(res instanceof Error){
+                        toast.error(res.msg);
+                    }else toast.error(JSON.stringify(res.msg))
+
                 }
             })
         }else{
             updateAddress.mutate({id,username:username.trim(),address:address.trim(),mobile:mobile.trim(),cookie:Cookies.get('token')},{
                 onSuccess:async(res)=>{
-                    let _res=await res.json();
-                    if(_res.code===401){
+                    // let _res=await res.json();
+                    if(res.code===401){
                         Cookies.remove("token");
                         location.reload();
-                    }else if(_res.code===1){
-                        alert(_res.msg);
+                    }else if(res.code===1){
+                        // toast(res.msg);
                         location.reload();
                     }else{
-                        alert(_res.msg);
+                        toast(res.msg);
                     }
                 },
                 onError:(res)=>{
-                    // //////console.log(res);
+                    // ////////////console.log(res);
                 }
             })
         }
@@ -103,5 +108,6 @@ export default function AddressPannel(props) {
                 </div>
             </div>
         </Modal.Body>
+        <ToastContainer />
     </Modal>)
 }

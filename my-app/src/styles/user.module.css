@@ -85,14 +85,20 @@
         max-width: 540px;
     }
 } */
+.total_contain{
+    width:300px;
+}
+.right_contain{
+    width: 72.5%;
+}
 .submit_btn{
     width: 80px;
     text-align: center;
     color: white;
     border-radius: 8px;
     margin-top: 24px;
-    margin-left: auto;
-    padding: 0.3rem 0.6rem;
+    /* margin-left: auto; */
+    padding: 0.3rem 1rem;
     background-color: #d43a43;
 }
 .addAddress_btn{
@@ -129,6 +135,7 @@
 .check_btn{
     padding: 2px 8px ;
     border: 1px solid rgba(0,0,0,0.4);
+    border-radius: 4px;
 }
 .product_title{
     height: 34px;
@@ -152,4 +159,38 @@
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
+}
+
+.message_contain{
+    width: 300px;
+    display: flex;
+    justify-content: space-between;
+}
+
+@media screen and (max-width:1100px) {
+    .main_contain{
+        flex-direction: column;
+    }
+    .total_contain{
+        width:100%
+    }
+    .left_contain{
+        width:100%
+    }
+    .right_contain{
+        width:100%;
+        margin-top: 12px;
+    }
+    .message_contain{
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+    }
+    .product_img{
+        margin: 0;
+    }
+
+    .main_contain{
+        margin :0 ;
+    }
 }

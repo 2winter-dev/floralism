@@ -13,20 +13,30 @@ import { useRouter } from "next/router";
 import AddressPannel from "./component/addressPannel";
 import Cookies from "js-cookie";
 import LoginPannel from "./component/LoginPannel";
+import { ToastContainer, toast } from 'react-toastify';
 export default function User(props) {
-    const router=useRouter();
-    const [type, setType] = useState("message");
+
+
+    const router = useRouter();
+
+    const {page}= router.query
+    const [type, setType] = useState(page);
     const [item, setItem] = useState({});
 
     const [username, setUsername] = useState(props.user_data?.username);
     const [email, setEmail] = useState(props.user_data?.email);
     const [mobile, setMobile] = useState(props.user_data?.mobile);
 
+       const [def_name, setDef_name] = useState(props.user_data?.username);
+    const [def_email, setDef_Email] = useState(props.user_data?.email);
+    const [def_mobile, setDef_Mobile] = useState(props.user_data?.mobile);
+
+
     const [addList, setAddList] = useState(props.addList);
     const [add, setAdd] = useState();
     const [add_type, setAdd_type] = useState();
     const [add_vis, setAdd_vis] = useState(false);
-    const [login,setLogin]=useState(false);
+    const [login, setLogin] = useState(false);
 
     const [orderList, setOrderList] = useState(props.orderList);
 
@@ -50,23 +60,28 @@ export default function User(props) {
 
 
     const delAddress = (id) => {
+        console.log(id);
         let m_list = addList;
-        m_list.splice(m_list.findIndex((it, index) => item === it.id), 1);
+        console.log(m_list);
+        console.log(m_list.findIndex((it, index) => id === it.id));
+        let res= m_list.splice(m_list.findIndex((it, index) => id === it.id), 1);
+        console.log(m_list);
+        console.log(res);
         setAddList([...m_list]);
-        alert("刪除成功");
-        //console.log(m_list);
+        toast("刪除成功");
+        ////////console.log(m_list);
     }
 
     const changeDefault = (id) => {
         let m_list = addList;
-        console.log(m_list);
+        //////console.log(m_list);
         let res = m_list.map((item) => {
-            console.log(item);
-            console.log(id);
-            console.log(typeof item.id,typeof id);
+            //////console.log(item);
+            //////console.log(id);
+            //////console.log(typeof item.id, typeof id);
             if (item.id === id) {
                 item.is_default = true;
-            } else{
+            } else {
                 item.is_default = false;
             }
         })
@@ -77,52 +92,70 @@ export default function User(props) {
         let res = confirm('你想要刪除這個地址嗎')
         res && deleteAddress.mutate({ id: item, cookie: Cookies.get('token') }, {
             onSuccess: async (res) => {
-                let _res = await res.json();
-                if (_res.code === 401) {
+                if (res.code === 401) {
                     Cookies.remove('token');
                     location.reload();
-                } else if (_res.code === 1) {
+                } else if (res.code === 1) {
                     delAddress(item);
                 } else {
-                    alert(_res.msg);
+                    toast(res.msg);
                 }
             },
             onError: (res) => {
-                alert("删除失败")
+                toast.error("删除失败")
             }
         })
     }
     const setPosition = (id) => {
-        // //////console.log(id);
-        console.log("123");
+        // ////////////console.log(id);
+        //////console.log("123");
         setAdd(id);
         setDefault.mutate({ id, cookie: Cookies.get('token') }, {
             onSuccess: async (res) => {
-                let _res = await res.json();
-                if (_res.code === 401) {
+                // let _res = await res.json();
+                if (res.code === 401) {
                     Cookies.remove('token');
                     location.reload();
-                } else if (_res.code === 1) {
+                } else if (res.code === 1) {
                     changeDefault(id);
                 } else {
-                    alert(_res.msg);
+                    toast.error(res.msg);
                 }
+            },
+            onError:(res)=>{
+                if(res instanceof Error){
+                    toast.error(res.msg);
+                }else toast.error(JSON.stringify(res.msg))
             }
         })
     }
 
     const updateUserMessage = () => {
-        console.log(username,email,mobile);
+        //////console.log(username, email, mobile);
         updateUserMess.mutate({ username: username.trim(), email: email.trim(), mobile: mobile.trim(), cookie: Cookies.get('token') }, {
             onSuccess: async (res) => {
-                let _res = await res.json();
-                if (_res.code === 1) {
-                    location.reload();
-                    console.log(_res);
-                    // setUsername(_res.data?.username);
+                // let _res = await res.json();
+                console.log(res);
+                if (res.code === 1) {
+                    toast(res.msg)
+                 
+                    setDef_name(username)
+                    setDef_Email(email)
+                    setDef_Mobile(mobile)
                     // setMobile(_res.data?.mobile);
                     // setEmail(_res.data?.email);
+                }else{
+                    console.log(res.msg);
+                    toast(res.msg);
                 }
+              
+            },
+            onError:(res)=>{
+                console.log(res.msg)
+                if(res instanceof Error)
+                toast.error(res.message);
+                else toast.error(JSON.stringify(res.msg));
+                // location.reload();
             }
         })
     }
@@ -130,26 +163,26 @@ export default function User(props) {
     const OrderDetail = (data) => {
         fetchOrderDetail.mutate({ id: data, cookie: Cookies.get('token') }, {
             onSuccess: async (res) => {
-                let _res = await res.json();
-                if (_res.code === 1) {
-                    //console.log(_res.data);
+                // let _res = await res.json();
+                if (res.code === 1) {
+                    ////////console.log(_res.data);
 
                     setOrderDetail(_res.data);
                     setType("orderDetail");
                 }
-                //console.log(_res);
-                // //console.log(res);
+                ////////console.log(_res);
+                // ////////console.log(res);
             },
         })
     }
 
     useEffect(() => {
-        //console.log(orderDetail);
+        ////////console.log(orderDetail);
     }, [orderDetail])
 
 
     return (<div style={{ backgroundColor: 'rgb(244,244,244)' }}>
-         <DynamicComponent cateList={cateList} setLogin={setLogin} />
+         <DynamicComponent cateList={props.cateList} setLogin={setLogin} />
         <div className={styles.main_contain} style={{ marginTop: 24, marginBottom: 46, alignItems: 'flex-start' }}>
             <div className={styles.left_contain}>
                 <div className={styles.left_totalPannel}>
@@ -158,32 +191,53 @@ export default function User(props) {
                         <div className={styles.avatar}>
                             <img src={props.user_data.avatar} style={{ width: '100%' }} />
                         </div>
-                        <div style={{ marginTop: 8, fontSize: 18, fontWeight: 700 }}>{username}</div>
-                        <div style={{ marginTop: 8 }}>{email}</div>
-                        <div style={{ marginTop: 8 }}>{mobile}</div>
+                        <div style={{ marginTop: 8, fontSize: 18, fontWeight: 700 }}>{def_name}</div>
+                        <div style={{ marginTop: 8 }}>{def_email}</div>
+                        <div style={{ marginTop: 8 }}>{def_mobile}</div>
                     </div>
-                    <div className={styles.border} onClick={() => setType('message')}>
+                    <div className={styles.border} onClick={() =>{
+                        
+                        // router.replace({pathname:'/User',query:{page:'message'}})
+                        router.replace("/User",{query:{page:'message'}},{shallow:true})
+                        setType('message');
+                }}>
                         <div className={type === 'message' ? `${styles.user_btn} ${styles.choosen}` : `${styles.user_btn}`} style={{ display: 'flex' }}>
                             <div>信息修改</div>
                         </div>
                     </div>
-                    <div className={styles.border} onClick={() => setType('address')}>
+                    <div className={styles.border} onClick={() =>{
+                       
+                        // router.replace({pathname:'/User',query:{page:'address'}})
+                        // router.replace
+                        router.replace("/User",{query:{page:'address'}},{shallow:true})
+                        // router.replace( )
+                         setType('address');
+                        }}>
                         <div className={type === 'address' ? `${styles.user_btn} ${styles.choosen}` : `${styles.user_btn}`} style={{ display: 'flex' }}>
                             <div>地址列表</div>
                         </div>
                     </div>
-                    <div className={styles.border} onClick={() => setType('order')}>
+                    <div className={styles.border} onClick={() =>{
+                        setType('order')
+                        // router.replace({pathname:'/User',query:{page:'order'}})
+                        router.replace("/User",{query:{page:'order'}},{shallow:true})
+                }}>
                         <div className={type === 'order' ? `${styles.user_btn} ${styles.choosen}` : `${styles.user_btn}`} style={{ display: 'flex' }}>
                             <div>訂單列表</div>
                         </div>
                     </div>
-                    <div className={styles.border} onClick={() =>{
-                        let res=confirm("你確定要退出登陸嗎?");
-                        if(res){
+                    <div className={styles.border} onClick={() => router.push('/shopCar/shopCar')}>
+                        <div className={`${styles.user_btn}`} style={{ display: 'flex' }}>
+                            <div>前往購物車</div>
+                        </div>
+                    </div>
+                    <div className={styles.border} onClick={() => {
+                        let res = confirm("你確定要退出登陸嗎?");
+                        if (res) {
                             Cookies.remove("token");
                             router.replace("/");
                         }
-                      
+
                     }}>
                         <div className={`${styles.user_btn}`} style={{ display: 'flex' }}>
                             <div>退出登錄</div>
@@ -194,19 +248,22 @@ export default function User(props) {
             {
                 type !== "orderDetail" && <div className={styles.right_contain}>
                     {
-                        type === "message" && <div style={{ display: 'flex', alignItems: 'flex-start', flexDirection: 'column', minHeight: 500 }}>
+                        type === "message" && <div style={{ display: 'flex',width:'100%', alignItems: 'flex-start', flexDirection: 'column', minHeight: 500 }}>
                             <h5 className={styles.right_contain_title}>信息修改</h5>
-                            <div style={{ marginTop: 12, display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-                                <div style={{ marginTop: 24 }}>
-                                    username <input onInput={(e) =>setUsername(e.target.value)} value={username} style={{ marginLeft: 12, borderRadius: 4, outline: 'none', paddingLeft: 4, paddingTop: 4, paddingBottom: 4 }} type="text" />
+                            <div className={styles.total_contain}  style={{ marginTop: 12, display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+                                <div className={styles.message_contain} style={{ marginTop: 24 }}>
+                                    username <input onInput={(e) =>setUsername(e.target.value)} value={username} style={{ borderRadius: 4, outline: 'none', paddingLeft: 4, paddingTop: 4, paddingBottom: 4 }} type="text" />
                                 </div>
-                                <div style={{ marginTop: 24 }}>
-                                    email<input onInput={(e) => setEmail(e.target.value)} value={email} style={{ marginLeft: 46, borderRadius: 4, outline: 'none', paddingLeft: 4, paddingTop: 4, paddingBottom: 4 }} type="text" />
+                                <div className={styles.message_contain} style={{ marginTop: 24 }}>
+                                    email<input onInput={(e) => setEmail(e.target.value)} value={email} style={{  borderRadius: 4, outline: 'none', paddingLeft: 4, paddingTop: 4, paddingBottom: 4 }} type="text" />
                                 </div>
-                                <div style={{ marginTop: 24 }}>
-                                    mobile<input onInput={(e) => setMobile(e.target.value)} value={mobile} style={{ marginLeft: 36, borderRadius: 4, outline: 'none', paddingLeft: 4, paddingTop: 4, paddingBottom: 4 }} type="text" />
+                                <div className={styles.message_contain} style={{ marginTop: 24 }}>
+                                    mobile<input onInput={(e) => setMobile(e.target.value)} value={mobile} style={{  borderRadius: 4, outline: 'none', paddingLeft: 4, paddingTop: 4, paddingBottom: 4 }} type="text" />
                                 </div>
+                                <div style={{display:'flex',justifyContent:'center',width:'100%',alignItems:'center'}}>
+
                                 <div className={styles.submit_btn} onClick={updateUserMessage} style={{ cursor: 'pointer' }}>submit</div>
+                                </div>
                             </div>
                         </div>
                     }
@@ -219,10 +276,10 @@ export default function User(props) {
                                     setAdd_type(0);
                                 }} className={styles.addAddress_btn} style={{ marginRight: 14 }}>+ 添加地址</div>
                             </h5>
-                            <div style={{ display: 'flex', width: '100%' }}>
+                            <div style={{ display: 'flex',flexWrap:'wrap', width: '100%' }}>
                                 {
                                     addList.length ? addList.map((item, index) => {
-                                        return <div key={item.id} className={style.addressItem} style={{ padding: 14,marginRight:10,marginTop:10 }}>
+                                        return <div key={item.id} className={style.addressItem} style={{ padding: 14, marginRight: 10, marginTop: 10 }}>
                                             {/* <div className={item.is_default ? style.check : style.uncheck} style={{ width: '10%' }}>
                                     </div> */}
                                             <div onClick={() => setPosition(item.id)} className={style.addressItemDetail} style={{ paddingLeft: 4, flex: 1 }}>
@@ -240,7 +297,7 @@ export default function User(props) {
                                                             <span onClick={() => setPosition(item.id)} style={{ marginRight: 12 }} className={`iconfont`}>&#xe799;</span>
                                                     }
                                                     <span onClick={(e) => {
-                                                        // //////console.log("刪除");
+                                                        // ////////////console.log("刪除");
                                                         toDelte(item?.id);
                                                         e.stopPropagation();
                                                     }} style={{ marginRight: 12, fontSize: 14 }} className={`iconfont`} >&#x34b2;</span>
@@ -264,9 +321,9 @@ export default function User(props) {
                         </div>
                     }
                     {
-                        type === "order" && <div style={{ display: 'flex', alignItems: 'flex-start', flexDirection: 'column', minHeight: 500 }}>
+                        type === "order" && <div style={{ display: 'flex',overflow:'auto', alignItems: 'flex-start', flexDirection: 'column', minHeight: 500 }}>
                             <h5 className={styles.right_contain_title}>訂單列表</h5>
-                            <table style={{ width: '100%', marginTop: 24, textAlign: 'left' }}>
+                            <table style={{ width: '100%',minWidth:440, marginTop: 24, textAlign: 'left' }}>
                                 <thead>
                                     <tr style={{ backgroundColor: 'rgb(245,245,245)' }}>
                                         <th className={styles.tr_padding}>訂單詳情</th>
@@ -300,7 +357,7 @@ export default function User(props) {
                                                             <img src={item?.product_coverimage} style={{ width: '100%' }} />
                                                         </div>
                                                         <div style={{ flex: 1 }}>
-                                                            <div className={styles.product_title} style={{ fontSize: 14, width: '100%', overflow: 'hidden', textOverflow: 'ellipsis', wordWrap: 'break-word' }}>
+                                                            <div className={styles.product_title} style={{ fontSize: 14, width: '100%', overflow: 'hidden', textOverflow: 'ellipsis',whiteSpace:'nowrap' }}>
                                                                 {item?.product_productname}
                                                             </div>
                                                             <div>✖ {item?.product_num}</div>
@@ -318,7 +375,7 @@ export default function User(props) {
                                                         <div onClick={() => {
                                                             // setType("OrderDetail");
                                                             OrderDetail(item?.id);
-                                                        }} className={styles.check_btn}>{item?.payment_status ? null : 'check'}</div>
+                                                        }} className={styles.check_btn}>{'查看訂單'}</div>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -334,9 +391,9 @@ export default function User(props) {
                 </div>
             }
             {
-                type === "orderDetail" && <div style={{ backgroundColor: 'transparent', width: '72.5%' }} >
-                    <div className={styles.order_detail_area}>
-                        <div style={{ display: 'flex', alignItems: 'flex-start', flexDirection: 'column' }}>
+                type === "orderDetail" && <div className={styles.right_contain} style={{ backgroundColor: 'transparent' }} >
+                    <div className={styles.order_detail_area} style={{overflow:'auto'}}>
+                        <div style={{ minWidth:630,display: 'flex', alignItems: 'flex-start', flexDirection: 'column' }}>
                             <h5 className={styles.right_contain_title}>訂單詳情</h5>
                             <table style={{ marginTop: 24, width: '100%', backgroundColor: 'rgb(248,249,250)', padding: 8, textAlign: 'left' }}>
                                 <thead>
@@ -358,17 +415,6 @@ export default function User(props) {
                             </table>
                         </div>
                     </div>
-                    {/* <div className={styles.order_detail_area} style={{ marginTop: 24 }}>
-                        <div style={{ display: 'flex', alignItems: 'flex-start', flexDirection: 'column', marginTop: 12 }}>
-                            <h5 className={styles.right_contain_title}>訂單信息</h5>
-                            <div>
-                                <div>訂單地址:{ }</div>
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                            </div>
-                        </div>
-                    </div> */}
                     <div className={styles.order_detail_area} style={{ marginTop: 24 }}>
                         <div style={{ display: 'flex', alignItems: 'flex-start', flexDirection: 'column' }}>
                             <h5 className={styles.right_contain_title}>訂單商品列表</h5>
@@ -415,31 +461,10 @@ export default function User(props) {
                             </div>
                         </div>
                     </div>
-                    {/* <div className={styles.order_detail_area} style={{ marginTop: 24 }}>
-                        <div style={{ display: 'flex', alignItems: 'flex-start', flexDirection: 'column' }}>
-                            <h5 className={styles.right_contain_title}>訂單狀態</h5>
-                        </div>
-                        <div style={{ width: '100%' }}>
-                            <table style={{ width: '100%' }}>
-                                <thead>
-                                    <tr>
-                                        <th>
-
-                                        </th>
-                                        <th>
-
-                                        </th>
-                                        <th>
-
-                                        </th>
-                                    </tr>
-                                </thead>
-                            </table>
-                        </div>
-                    </div> */}
                 </div>
             }
         </div>
+        {(!login||!add_vis)&& <ToastContainer autoClose={false} />}
         <Footer />
         {
             <AddressPannel type={add_type} item={item} visible={add_vis} close={() => setAdd_vis(false)} />
@@ -522,20 +547,17 @@ export async function getServerSideProps(context) {
         addList = await add_response.json();
         sc = await sc_res.json();
         orderList = await order_response.json();
-        //console.log(orderList);
-        // if (sc.code === 401) {
-        //     sc.data = [];
-        // }
-        // if(addList.code===401){
-
-        // }
     } else {
-        sc = { data: [], code: 401 };
-        addList = { data: [], code: 401 };
+        return {
+            redirect: {
+                permanent: false,
+                destination: '/',
+            }
+        }
     }
 
 
-    //    //console.log(sc);
+    //    ////////console.log(sc);
     return {
         props: {
             cateList: JSON.parse(data).data,

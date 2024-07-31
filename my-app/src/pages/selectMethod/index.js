@@ -16,23 +16,23 @@ import m_api from "@/m_api";
 import Cookies from "js-cookie";
 import { Radio } from "@nextui-org/react";
 import { redirect } from "next/dist/server/api-utils";
-
+import { ToastContainer, toast } from 'react-toastify';
 
 export default function selectMethod(props) {
     const stripe = require('stripe')(props.secretKey);
     const router = useRouter();
-    // //////console.log("000000000");
-    // //////console.log(stripe);      
+    // ////////////console.log("000000000");
+    // ////////////console.log(stripe);      
     const DynamicComponentWithNoSSR = dynamic(
         () => import('./DynamicStripe'),
         { ssr: false }
     )
 
-    const { deliverytype, deliverydate, cart_ids, remark, amount, payment_amount } = useRouter().query
-
-    //console.log("----------");
-    //console.log(deliverytype);
-    // //////console.log(useRouter());
+    const { deliverytype, deliverydate, cart_ids, remark, amount, payment_amount } = router.query
+    // //////console.log();
+    ////////console.log("----------");
+    ////////console.log(deliverytype);
+    // ////////////console.log(useRouter());
     const [login, setLogin] = useState(false);
     const [register, setRegister] = useState(false);
     const [visible, setVisible] = useState(false);
@@ -40,7 +40,7 @@ export default function selectMethod(props) {
     const [addList, setAddList] = useState(props.addList.data)
 
     const [flag, setFlag] = useState(false);
-    const [page, setPage] = useState(1);//第一頁:選擇地址，第二頁選擇支付方式，第三頁結果。
+    const [page, setPage] = useState(Number(props.page) ?? 1);//第一頁:選擇地址，第二頁選擇支付方式，第三頁結果。
     const [process, setProcess] = useState(1);//0尚未進行，1進行中，2完成
 
     const [type, setType] = useState(0);
@@ -70,18 +70,18 @@ export default function selectMethod(props) {
     const toDelte = (item) => {
         deleteAddress.mutate({ id: item, cookie: Cookies.get('token') }, {
             onSuccess: async (res) => {
-                let _res = await res.json();
-                if (_res.code === 401) {
+                // let _res = await res.json();
+                if (res.code === 401) {
                     Cookies.remove('token');
                     location.reload();
-                } else if (_res.code === 1) {
+                } else if (res.code === 1) {
                     location.reload();
                 } else {
-                    alert(_res.msg);
+                    toast.error(res.msg);
                 }
             },
             onError: (res) => {
-                alert("删除失败")
+                toast.error("删除失败")
             }
         })
     }
@@ -95,19 +95,19 @@ export default function selectMethod(props) {
         setAddList([...m_list])
     }
     const setPosition = (id) => {
-        // //////console.log(id);
+        // ////////////console.log(id);
         setAdd(id);
         setDefault.mutate({ id, cookie: Cookies.get('token') }, {
             onSuccess: async (res) => {
-                let _res = await res.json();
-                if (_res.code === 401) {
+                // let _res = await res.json();
+                if (res.code === 401) {
                     Cookies.remove('token');
                     location.reload();
-                } else if (_res.code === 1) {
+                } else if (res.code === 1) {
                     // location.reload();
                     changeDefault(id);
                 } else {
-                    alert(_res.msg);
+                    toast.error(res.msg);
                 }
             }
         })
@@ -116,24 +116,24 @@ export default function selectMethod(props) {
     useEffect(() => {
         if (props?.addList && Cookies.get("token")) {
             let res = props.addList?.data.filter((item) => {
-                // //////console.log(item);
+                // ////////////console.log(item);
                 if (item.is_default) {
                     return item;
                 }
             })
             setAdd(res[0].id);
         } else {
-            alert("登陸失效");
+            toast.error("登陸失效");
             router.replace('/');
         }
     }, [])
 
-
-
+    //////console.log("1111----");
+    //////console.log(router.query?.type === "success");
     const ToCreateOrder = () => {
         setFlag(true);
         if (payment !== "" && add !== "") {
-            // //////console.log(deliverytype, deliverydate, cart_ids, remark, amount, payment_amount, add)
+            // ////////////console.log(deliverytype, deliverydate, cart_ids, remark, amount, payment_amount, add)
             createOrder.mutate({
                 deliverytype,
                 deliverydate,
@@ -146,30 +146,39 @@ export default function selectMethod(props) {
                 cookie: Cookies.get('token')
             }, {
                 onSuccess: async (res) => {
-                    let _res = await res.json();
-                    if (_res.code === 401) {
-                        Cookies.remove("token");
-                        location.reload();
-                    } else if (_res.code === 1) {
-                        // //////console.log(_res);
-                        setFlag(false);
-                        if (payment === "paypal") {
-                            setUrl(_res.data.payment_info.approval_url)
+
+                    // let _res = await res.json();
+                    setFlag(!true);
+                        // let _res = await res.json();
+                        if (res.code === 401) {
+                            Cookies.remove("token");
+                            location.reload();
+                        } else if (res.code === 1) {
+                            console.log(res);
+                            setFlag(false);
+                            if (payment === "paypal") {
+                                setUrl(res.data.payment_info.approval_url)
+                            }
+                            setPage(2);
+                        } else {
+                            toast.error(res.msg);
                         }
-                        setPage(2);
-                    } else {
-                        alert(_res.msg);
-                    }
+
+
                 },
+
                 onError: (res) => {
-                    alert("上傳失敗");
+                    setFlag(false);
+                    toast.error("上傳失敗");
+                    setFlag(!true);
                 }
+
             })
         }
     }
     useEffect(() => {
-        // //////console.log("==============");
-        //  //////console.log(createOrder.data);
+        // ////////////console.log("==============");
+        //  ////////////console.log(createOrder.data);
     }, [createOrder])
 
     return (<div>
@@ -178,11 +187,12 @@ export default function selectMethod(props) {
             <div>
                 <div style={{ display: "flex", justifyContent: 'space-around', marginLeft: '5%', marginRight: '5%' }}>
                     <div style={{ flex: 1 }}></div>
-                    <div>選擇地址</div>
+                    <div>确认订单</div>
                     <div style={{ flex: 1 }}></div>
-                    <div>選擇支付方式</div>
+                    <div>支付</div>
+                    <div>支付</div>
                     <div style={{ flex: 1 }}></div>
-                    <div>支付結果</div>
+                    <div>結果</div>
                     <div style={{ flex: 1 }}></div>
                 </div>
                 <div style={{ display: "flex", justifyContent: 'space-around', alignItems: 'center' }}>
@@ -202,18 +212,18 @@ export default function selectMethod(props) {
                         page >= 3 ? styles.complete : styles.wrong
                     } style={{ height: 4, flex: 1 }}></div>
                     <div className={
-                        page >= 4 ? styles.complete : styles.wrong
-                    } style={{ width: 20, height: 20, borderRadius: 50, backgroundColor: 'red' }}></div>
+                        page >= 3 ? styles.complete : styles.wrong
+                    } style={{ width: 20, height: 20, borderRadius: 50 }}></div>
                     <div className={
-                        page >= 4 ? styles.complete : styles.wrong
-                    } style={{ height: 4, flex: 1, background: 'red' }}></div>
+                        page >= 3 ? styles.complete : styles.wrong
+                    } style={{ height: 4, flex: 1 }}></div>
                 </div>
-            </div> 
+            </div>
             <div style={{ marginTop: 24 }}>
                 {
                     page === 1 &&
                     <div className={styles.column_control} style={{ display: 'flex', alignItems: 'flex-start' }}>
-                        <div style={{ flex: 1, marginRight: 12, backgroundColor: 'white', padding: '3%', borderRadius: 8, marginRight: 12 }}>
+                        <div className={styles.media_control} style={{ flex: 1, backgroundColor: 'white', padding: '3%', borderRadius: 8 }}>
                             {
                                 deliverytype?.toString() === "1" ? <div>
                                     <div className={styles.title_area} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
@@ -246,13 +256,13 @@ export default function selectMethod(props) {
                                                                     <span onClick={() => setPosition(item.id)} style={{ marginRight: 12 }} className={`iconfont`}>&#xe799;</span>
                                                             }
                                                             <span onClick={(e) => {
-                                                                // //////console.log("刪除");
+                                                                // ////////////console.log("刪除");
                                                                 toDelte(item.id);
                                                                 e.stopPropagation();
                                                             }} style={{ marginRight: 12, fontSize: 14 }} className={`iconfont`} >&#x34b2;</span>
                                                             <span onClick={(e) => {
                                                                 setAdd_vis(true);
-                                                                setAdd_type(1);
+                                                                setType(1)
                                                                 setItem(item);
                                                                 e.stopPropagation();
                                                             }} style={{ fontSize: 15 }} className={`iconfont`} >&#xe61e;</span>
@@ -311,12 +321,14 @@ export default function selectMethod(props) {
                                             <img src={item.coverimage} style={{ width: '30%', marginRight: 12 }} />
                                             <div style={{ flex: 1 }}>
                                                 <div style={{ fontSize: 18, height: 40, width: '100%', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{item.productname}</div>
-                                                <div style={{ fontSize: 12, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{item.cardtype ? "需要心意卡" : "無需心意卡"}</div>
-                                            </div>
-                                            <div style={{ textAlign: 'right' }}>
+                                                {/* <div style={{ fontSize: 12, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{item.cardtype ? "需要心意卡" : "無需心意卡"}</div> */}
                                                 <div style={{ fontSize: 12 }}>${item.price}</div>
                                                 <div>×{item.num}</div>
                                             </div>
+                                            {/* <div style={{ textAlign: 'right' }}>
+                                                <div style={{ fontSize: 12 }}>${item.price}</div>
+                                                <div>×{item.num}</div>
+                                            </div> */}
                                         </div>
                                     )
                                 }
@@ -339,7 +351,7 @@ export default function selectMethod(props) {
                                 </div>
                             </div>
                             <div style={{ display: 'flex', marginTop: 12, alignItems: 'center', justifyContent: 'center' }}>
-                                {flag ? <div className={styles.new_Step} >確認訂單</div> : <div onClick={() => ToCreateOrder()} className={styles.new_Step}>確認訂單</div>}
+                                {flag ? <div className={styles.new_Step} style={{ backgroundColor: 'rgba(0,0,0,0.4)' }} >確認訂單</div> : <div onClick={() => ToCreateOrder()} className={styles.new_Step}>確認訂單</div>}
                             </div>
                         </div>
                     </div>
@@ -353,14 +365,14 @@ export default function selectMethod(props) {
                             <div style={{ fontSize: 24, fontWeight: 700 }}>
                                 訂單創建成功，請支付
                             </div>
-                            <div style={{ textAlign: 'center', marginTop: 12, marginBottom: 12, display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', padding: 16, backgroundColor: 'rgb(255,250,240)' }}>
+                            <div className={styles.tt_layout} style={{ textAlign: 'center', marginTop: 12, marginBottom: 12, display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', padding: 16, backgroundColor: 'rgb(255,250,240)' }}>
                                 <div style={{ display: 'flex', flex: 1, alignItems: 'baseline' }}>
                                     <div>支付方式:</div>
                                     <div style={{ fontSize: 17, fontWeight: 600 }}>paypal</div>
                                 </div>
                                 <div style={{ display: 'flex', flex: 1, alignItems: 'baseline' }}>
                                     <div>總價:</div>
-                                    <div style={{ fontSize: 17, fontWeight: 600 }}>HK$123</div>
+                                    <div style={{ fontSize: 17, fontWeight: 600 }}>HK${payment_amount}</div>
                                 </div>
                                 <div style={{ display: 'flex', flex: 1, alignItems: 'baseline' }}>
                                     <div>狀態:</div>
@@ -375,7 +387,10 @@ export default function selectMethod(props) {
                                     paddingBottom: 6,
                                     cursor: 'pointer',
                                     marginTop: 12,
-                                    // background: 'rgb(255,196,57)',
+                                    width: "50%",
+                                    color: '#fff',
+                                    margin: '10px 25%',
+                                    background: '#1e80ff',
                                     borderRadius: 4
                                 }}
                                 onClick={() => router.replace(`${url}`)}
@@ -385,11 +400,19 @@ export default function selectMethod(props) {
                         </div>)
                 }
                 {
-                    page === 3 && (success&&<div>付款成功</div>)
+                    page === 3 && (<div style={{ width: '100%', height: 200, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>{
+                        router.query?.type === "success" ? <div style={{ marginTop: 24, fontSize: 28, fontWeight: 600 }}>付款成功</div>
+                            :
+                            router.query?.type === "fail" ? <div style={{ marginTop: 24, fontSize: 28, fontWeight: 600 }}>付款失敗</div>
+                                : <div style={{ marginTop: 24, fontSize: 28, fontWeight: 600 }}>用戶取消支付</div>
+                    }
+                        <div style={{ marginTop: 24, cursor: 'pointer' }} onClick={() => router.replace("/")}>返回首頁</div>
+                    </div>
+                    )
                 }
             </div>
         </div>
-
+        {(!login || !add_vis) && <ToastContainer />}
         <Footer />
         {
             <LoginPannel login={login} close={() => setLogin(false)} toRegister={() => {
@@ -410,7 +433,7 @@ export default function selectMethod(props) {
 
 
 export async function getServerSideProps(context) {
-    console.log(context.query.page);
+    //////console.log(context.query.page);
     const response = await fetch(
         `${constant.api_url}/api/flowercategory/index`, {
         mode: 'cors',
@@ -435,17 +458,17 @@ export async function getServerSideProps(context) {
     if (context.req.headers.cookie) {
         res = context.req.headers.cookie.split(';');
         let _res = res.filter(item => {
-            //////console.log(item.trim().split("=")[0]);
+            ////////////console.log(item.trim().split("=")[0]);
             if (item.trim().split("=")[0] === "token")
                 return item;
         })
         if (_res.length) {
             i = _res[0].trim().split("=")[1];
         } else i = null;
-        //    //////console.log(_res[0].trim().split("=")[1]);
+        //    ////////////console.log(_res[0].trim().split("=")[1]);
     }
     if (i) {
-        //////console.log("進來了");
+        ////////////console.log("進來了");
         const add_response = await fetch(
             `${constant.api_url}/api/address/index`, {
             headers: {
@@ -457,6 +480,7 @@ export async function getServerSideProps(context) {
             mode: 'cors',
         }
         )
+
 
         const goods_list_response = await fetch(
             `${constant.api_url}/api/cart/detail?ids=${context.query.cart_ids}`, {
@@ -480,21 +504,28 @@ export async function getServerSideProps(context) {
                 },
                 mode: 'cors',
             })
-            s_list = await shopList.json();
+            if (shopList.status !== 200) {
+                s_list = { data: [], code: 0 }
+            } else s_list = await shopList.json();
         }
+        if (add_response.status !== 200) {
+            add_data = { data: [], code: 0 };
+        } else add_data = await add_response.json();
+        if (goods_list_response.status != 200) {
+            goods_data = { data: [], code: 0 }
+        } else goods_data = await goods_list_response.json();
+        ////////////console.log("=========");
 
-        goods_data = await goods_list_response.json();
-        //////console.log("=========");
-        add_data = await add_response.json();
     } else {
         add_data = { data: [], code: 401 };
         goods_data = { data: [], code: 401 };
         s_list = { data: [], code: 401 };
     }
-    //////console.log(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
-    // console.log(goods_data);
-    // if (context.query.page !== "3") {
-        console.log("不为3");
+
+
+
+    if (context.query?.page !== "3") {
+        //////console.log("不为3");
         if (!goods_data.code) {
             return {
                 redirect: {
@@ -503,13 +534,13 @@ export async function getServerSideProps(context) {
                 }
             }
         }
-    // }
+    }
 
 
 
 
-    //////console.log(add_data);
-    //console.log(s_list);
+    ////////////console.log(add_data);
+    ////////console.log(s_list);
     return {
         props: {
             cateList: data.data,
@@ -519,6 +550,7 @@ export async function getServerSideProps(context) {
             publishableKey: `${process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY}`,
             secretKey: `${process.env.STRIPE_SECRET_KEY}`,
             shopList: s_list?.data ?? [],
+            page: context.query?.page ?? 1,
         },
     };
 }

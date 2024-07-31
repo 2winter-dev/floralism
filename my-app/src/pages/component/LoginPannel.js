@@ -1,5 +1,5 @@
 import style from '@/styles/login.module.css'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Modal } from "@nextui-org/react";
 import { useMutation } from '@tanstack/react-query';
 import m_api from '@/m_api';
@@ -7,8 +7,9 @@ import Cookies from 'js-cookie';
 import { useBearStore } from '@/zustand';
 import RegisterPannerl from './ResgisterPannel';
 import ForgetPassword from './ForgetPassword';
+import {ToastContainer, toast} from 'react-toastify'
 export default function LoginPannel(props) {
-    // ////////console.log(window.innerHeight)
+    // //////////////console.log(window.innerHeight)
     const [type, setType] = useState(0);//0為密碼登錄，1為驗證碼登錄
     const [time, setTime] = useState(0);
     const [email, setEmail] = useState("");
@@ -34,23 +35,23 @@ export default function LoginPannel(props) {
     })
     const getEmailCode = () => {
         if (!email.trim()) {
-            alert("請填寫郵箱以獲取驗證碼")
+            toast("請填寫郵箱以獲取驗證碼")
             return;
         }
         sendEmail.mutate({ email: email.trim(), event: 'emaillogin' }, {
             onSuccess: async (res) => {
-                let isSuccess = await res.json();
-                if (isSuccess.data) {
-                    alert("發送驗證碼成功，請到填寫的郵箱内查看驗證碼");
+                // let res = await res.json();
+                if (res.data) {
+                    // toast("發送驗證碼成功，請到填寫的郵箱内查看驗證碼");
 
                 } else {
-                    alert(isSuccess.msg);
+                    toast.error(res.msg);
                 }
 
             },
             onError: (res) => {
-                ////////console.log(res);
-                alert("發送驗證碼失敗");
+                //////////////console.log(res);
+                toast.error("發送驗證碼失敗");
             }
         })
         setTime(60);
@@ -61,13 +62,13 @@ export default function LoginPannel(props) {
         if (!type) {
             loginByPassword.mutate({ email: email.trim(), password: code.trim() }, {
                 onSuccess: async (res) => {
-                    let isSuccess = await res.json()
-                    // ////////console.log(await res.json());
-                    if (isSuccess.code) {
-                        // //////console.log("================");
-                        // //////console.log();
-                        Cookies.set('token', isSuccess.data.token, { expires: 1 });
-                        // Cookies.set('user',JSON.stringify(isSuccess.data.userinfo),{expires:1});
+                    // let res = await res.json()
+                    // //////////////console.log(await res.json());
+                    if (res.code) {
+                        // ////////////console.log("================");
+                        // ////////////console.log();
+                        Cookies.set('token', res.data.token, { expires: 1 });
+                        // Cookies.set('user',JSON.stringify(res.data.userinfo),{expires:1});
                         // alert("登陆成功");
 
                         props.close();
@@ -76,29 +77,29 @@ export default function LoginPannel(props) {
                         //token:res.data.token;
                         //userinfo:res.data.userinfo
                     } else {
-                        alert(isSuccess.msg);
+                        toast.error(res.msg);
                     }
                 },
                 onError: (err) => {
-                    alert("登陸失敗");
+                    toast.error("登陸失敗");
                 }
             })
         } else {
             loginByEmail.mutate({ email: email.trim(), code: code.trim() }, {
                 onSuccess: async (res) => {
 
-                    let body = await res.json()
-                    ////////console.log("====123====")
-                    ////////console.log(body)
-
-                    if (body.code) {
-                        // //////console.log("================");
-                        Cookies.set('token', body.data.token, { expires: 1 });
+                    // let body = await res.json()
+                    //////////////console.log("====123====")
+                    //////////////console.log(body)
+                    console.log(res);
+                    if (res.code) {
+                        // ////////////console.log("================");
+                        Cookies.set('token', res.data.token, { expires: 1 });
                         // Cookies.set('user',JSON.stringify(body.data.userinfo),{expires:1});
-                        // //////console.log("========");
-                        // //////console.log(Cookies.get('token'));
+                        // ////////////console.log("========");
+                        // ////////////console.log(Cookies.get('token'));
 
-                        // alert("登陸成功");
+                        
                         props.close();
                         // props.hasLogin();
                         location.reload();
@@ -106,11 +107,11 @@ export default function LoginPannel(props) {
                         //userinfo:res.data.userinfo
                         // localStorage.setItem("token",body.data.token);
                     } else {
-                        alert(body.msg);
+                        toast.error(res.msg);
                     }
                 },
                 onError: (err) => {
-                    alert("登陸失敗");
+                    toast.error("登陸失敗");
                 }
             })
         }
@@ -124,14 +125,25 @@ export default function LoginPannel(props) {
         }, 1000)
     }
 
+
+
+
+    const clientW = useState(1200)
+
+    useEffect(() => {
+        clientW[1](window.innerWidth);
+    }, [])
+
+
     return (<Modal
         open={props.login}
-        onClose={() => { props.close(); setType(0);setMType("login") }}
-        className={mtype==="register"?style.register_layout :mtype==="forget"? style.login_layout :style.login_layout}
+        onClose={() => { props.close(); setType(0); setMType("login") }}
+        className={mtype === "register" ? style.register_layout : mtype === "forget" ? style.login_layout : style.login_layout}
         // style={{width:'70%'}}
-        width={'70%'}
-        // style={{width:window.innerWidth*0.7,height:window.innerHeight*0.6}}
-        blur
+        width={clientW[0] > 1100 ? '50%' : '90%'}
+        css={{zIndex:100}}
+    // style={{width:window.innerWidth*0.7,height:window.innerHeight*0.6}}
+    // blur
     // css={{width:}}
     >
         {
@@ -152,7 +164,7 @@ export default function LoginPannel(props) {
                                     <input type='password' placeholder='密码' value={code} onChange={(e) => setCode(e.target.value.trim())} className={style.account_input}></input>
                                 </div>
                                 <div style={{ marginTop: '2.5%', paddingLeft: '3%' }}>
-                                    <div onClick={()=>setMType("forget")} className={style.forget_password}>忘记密码？</div>
+                                    <div onClick={() => setMType("forget")} className={style.forget_password}>忘记密码？</div>
                                 </div>
                                 <div style={{ marginTop: '2.5%' }}>
                                     <input type='button' onClick={_submit} className={style.submit_button} value="登錄"></input>
@@ -182,7 +194,7 @@ export default function LoginPannel(props) {
                                     </div>}
                                 </div>
                                 <div style={{ marginTop: '2.5%', paddingLeft: '3%' }}>
-                                    <div onClick={()=>setMType("forget")} className={style.forget_password}>忘记密码？</div>
+                                    <div onClick={() => setMType("forget")} className={style.forget_password}>忘记密码？</div>
                                 </div>
                                 <div style={{ marginTop: '2.5%' }}>
                                     <input type='button' onClick={_submit} className={style.submit_button} style={{ fontSize: 18 }} value="登錄"></input>
@@ -202,14 +214,23 @@ export default function LoginPannel(props) {
         }
         {
             mtype === "register" && <Modal.Body>
-                <RegisterPannerl toLogin={()=>setMType("login")} />
+                <RegisterPannerl close={() => {
+                    props.close();
+                    setType(0);
+                    setMType("login");
+                }} toLogin={() => setMType("login")} />
             </Modal.Body>
         }
         {
-            mtype === "forget" &&<Modal.Body>
-              <ForgetPassword  toLogin={()=>setMType("login")} />
-        </Modal.Body>
+            mtype === "forget" && <Modal.Body>
+                <ForgetPassword close={() => {
+                    props.close();
+                    setType(0);
+                    setMType("login");
+                }} toLogin={() => setMType("login")} />
+            </Modal.Body>
         }
+        <ToastContainer />
     </Modal>)
 
 }

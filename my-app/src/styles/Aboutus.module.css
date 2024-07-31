@@ -1,16 +1,21 @@
-.ContactusLayout,.Total_Layout{
+.ContactusLayout,
+.Total_Layout {
     padding: 0 21%;
     margin-bottom: 24px;
-    display:flex;
+    display: flex;
     margin-top: 24px;
 }
-.desc1,.desc2{
-    font-size: 0.8rem;
+
+.desc1,
+.desc2 {
+    font-size: 0.9rem;
 }
-.description{
+
+.description {
     position: absolute;
     top: 0;
     left: 0;
+    overflow-y: scroll;
     width: 100%;
     display: flex;
     justify-content: flex-end;
@@ -18,47 +23,55 @@
     bottom: 0;
     height: 100%;
 }
-.desc_contain{
+
+.desc_contain {
     display: flex;
 }
-.banner_background{
-   width:100%;
-   display: block;
+
+.banner_background {
+    width: 100%;
+    display: block;
 }
-.girls_contain{
-    
-}
-.desc_small_contain{
+
+.girls_contain {}
+
+.desc_small_contain {
     display: none;
 }
-.girls{
+
+.girls {
     /* position: absolute; */
     /* z-index: 1; */
     /* left: 10%; */
     height: 80%;
     /* bottom: 0; */
 }
-.goods_list{
+
+.goods_list {
     /* background-color: #f1f1f1; */
     padding: 24px 21%;
     margin: 48px 0 24px 0;
 }
 
 @media screen and (max-width:667px) {
-    .goods_list{
-        padding:24px 10%
-    }
-    .ContactusLayout{
-        padding:0;
+    .goods_list {
+        padding: 24px 10%
     }
 
-    .desc_contain{
+    .ContactusLayout {
+        padding: 0;
+        margin: 0;
+    }
+
+    .desc_contain {
         display: none;
         /* flex-direction: column; */
     }
-     
 
-    .desc_small_contain{
+
+    .desc_small_contain {
         display: block;
     }
+
+
 }

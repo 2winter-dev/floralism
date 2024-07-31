@@ -11,48 +11,54 @@ import { constant } from "@/constant/index";
 import CateScroll from './component/cateScroll';
 import LoginPannel from "./component/LoginPannel";
 import DynamicComponent from './component/Dynamic';
+import { ToastContainer, toast } from 'react-toastify';
+import { useMutation } from "@tanstack/react-query";
 export default function ContactPage({ cateList, allcate }) {
-    ////////console.log(cateList)
+    //////////////console.log(cateList)
     // const [flag, setFlag] = useState(1);
     const [login, setLogin] = useState(false);
     const [register, setRegister] = useState(false);
     const [visible, setVisible] = useState(false);
 
+
     const [flag, setFlag] = useState(1);
     const [category, setCategory] = useState([]);
-    // //console.log(allcate);
+    // ////////console.log(allcate);
     const [categoryPage, setCategoryPage] = useState(1);
 
     const resizeUpdate = (e) => {
         if (e.target.innerWidth <= 675) {
-            ////////console.log("====", e.target.innerWidth);
+            //////////////console.log("====", e.target.innerWidth);
             setFlag(0);
         } else if (e.target.innerWidth <= 1100) {
             setFlag(1)
         } else {
-            ////////console.log("-----", e.target.innerWidth);
+            //////////////console.log("-----", e.target.innerWidth);
             setFlag(2);
         }
     }
     useEffect(() => {
         window.addEventListener("resize", resizeUpdate);
         if (window.innerWidth <= 675) {
-            ////////console.log("====", e.target.innerWidth);
+            //////////////console.log("====", e.target.innerWidth);
             setFlag(0);
         } else if (window.innerWidth <= 1100) {
             setFlag(1)
         } else {
-            ////////console.log("-----", e.target.innerWidth);
+            //////////////console.log("-----", e.target.innerWidth);
             setFlag(2);
         }
         return () => {
             window.removeEventListener("resize", resizeUpdate);
         }
     }, [])
+
+
+
     useEffect(() => {
-        //console.log("flag改變", flag);
+        ////////console.log("flag改變", flag);
         setCategory(spliceArr(allcate, !flag ? 4 : flag === 1 ? 6 : flag === 2 && 8, 'cat'));
-        //console.log(spliceArr(allcate, !flag ? 4 : flag === 1 ? 6 : flag === 2 && 8, 'cat'))
+        ////////console.log(spliceArr(allcate, !flag ? 4 : flag === 1 ? 6 : flag === 2 && 8, 'cat'))
         setCategoryPage(1);
     }, [flag])
     useEffect(() => {
@@ -79,13 +85,18 @@ export default function ContactPage({ cateList, allcate }) {
                     <div className={style.contact_title}>歡迎查詢</div>
                     <div className={style.contact_distance} style={{ lineHeight: '200%', letterSpacing: 2 }}>如果你有任何花藝需求或疑問，歡迎聯係我們的專業花藝師團隊，我們會仔細聆聽您的需求，並根據不同場合和用途，提供最適合的花藝設計方案，您可以通過以下方式聯係我們</div>
                     <div className={`${style.contact_title}`} style={{ marginTop: '15%' }}>客戶熱綫</div>
-                    <div className={style.contact_distance} style={{ display: 'flex', alignItems: 'center' }}>
-                        <img src="/圖標-電話.png" />
-                        <div style={{ marginLeft: 16 }}>65818053</div>
+                    <div className={style.contact_distance} style={{ display: 'flex', alignItems: 'center' }} >
+                        <a href="tel:+85265818053" style={{ display: 'flex', alignItems: 'center' }}>
+                            <img src="/圖標-電話.png" />
+                            <div style={{ marginLeft: 16 }}>65818053</div>
+                        </a>
+
                     </div>
                     <div className={style.contact_distance} style={{ display: 'flex', alignItems: 'center' }}>
-                        <img src="/圖標-郵件.png" />
-                        <div style={{ marginLeft: 16 }}>info@floralismhk.com</div>
+                        <a href="mailto:info@floralismhk.com" style={{ display: 'flex', alignItems: 'center' }}>
+                            <img src="/圖標-郵件.png" />
+                            <div style={{ marginLeft: 16 }}>info@floralismhk.com</div>
+                        </a>
                     </div>
                 </div>
                 <div className={style.main_contain} style={{ display: "flex", alignItems: 'flex-end' }}>
@@ -93,12 +104,13 @@ export default function ContactPage({ cateList, allcate }) {
 
                 </div>
             </div>
-            <Contactus topStyle={{ marginTop: 48 }} />
+
 
         </div>
-        <div className={styles.goods_list} style={{ paddingLeft: '15%', paddingRight: '15%' }}>
+
+        <div className={styles.goods_list} style={{}}>
             <CateScroll
-                title={'【FLORALISM】 全部分类'}
+                title={'【FLORALISM】 全部分類'}
                 list={category}
                 page={categoryPage}
                 type={'category'}
@@ -107,6 +119,10 @@ export default function ContactPage({ cateList, allcate }) {
                 animation
             />
         </div>
+        <div className={style.ContactusLayout}>
+            <Contactus />
+        </div>
+        {!login && <ToastContainer />}
         <Footer />
         {
             <LoginPannel login={login} close={() => setLogin(false)} toRegister={() => {
@@ -149,11 +165,12 @@ export async function getStaticProps(context) {
     }
     )
     let allcate = await allcate_response.json();
-    //console.log(allcate);
+    ////////console.log(allcate);
     return {
         props: {
             cateList: JSON.parse(data).data,
             allcate: allcate.data,
         },
+
     };
 }

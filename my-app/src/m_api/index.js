@@ -1,6 +1,8 @@
 import { constant } from "@/constant/index"
+import Cookies from "js-cookie"
 export default {
-    sendEmail: (data) => fetch(`${constant.api_url}/api/ems/send`, {
+    sendEmail: async(data) =>{
+        const response=await fetch(`${constant.api_url}/api/ems/send`, {
         body: JSON.stringify(data),
         method: 'POST',
         mode: 'cors',
@@ -9,8 +11,22 @@ export default {
             "Access-Control-Request-Method": "POST",
             "Access-Control-Request-Headers": "Content-Type",
         },
-    }),
-    register: (data) => fetch(`${constant.api_url}/api/user/registerByEmail`, {
+    })
+    if (response.status !== 200) {
+        console.log(response);
+        if (response.status === 500) {
+            throw new Error("An error occurred")
+        }
+        if (response.status === 401) {
+            Cookies.remove("token");
+            throw new Error("请先登录");
+        }
+        throw new Error("An error occurred");
+    }
+    return await response.json();
+   },
+    register: async(data) =>{
+        const response=await fetch(`${constant.api_url}/api/user/registerByEmail`, {
         body: JSON.stringify(data),
         method: 'POST',
         mode: 'cors',
@@ -19,8 +35,22 @@ export default {
             "Access-Control-Request-Method": "POST",
             "Access-Control-Request-Headers": "Content-Type",
         }
-    }),
-    loginByCode: (data) => fetch(`${constant.api_url}/api/user/loginByCode`, {
+    })
+    if (response.status !== 200) {
+        console.log(response);
+        if (response.status === 500) {
+            throw new Error("An error occurred")
+        }
+        if (response.status === 401) {
+            Cookies.remove("token");
+            throw new Error("请先登录");
+        }
+    }
+    return await response.json();
+},
+    loginByCode: async(data) =>{
+        
+        const response=await fetch(`${constant.api_url}/api/user/loginByCode`, {
         body: JSON.stringify(data),
         method: 'POST',
         mode: 'cors',
@@ -29,8 +59,21 @@ export default {
             "Access-Control-Request-Method": "POST",
             "Access-Control-Request-Headers": "Content-Type",
         }
-    }),
-    loginByPassword: (data) => fetch(`${constant.api_url}/api/user/passwordLogin`, {
+    })
+    if (response.status !== 200) {
+        console.log(response);
+        if (response.status === 500) {
+            throw new Error("An error occurred")
+        }
+        if (response.status === 401) {
+            Cookies.remove("token");
+            throw new Error("请先登录");
+        }
+    }
+    return await response.json();
+},
+    loginByPassword: async(data) =>{
+        const response=await fetch(`${constant.api_url}/api/user/passwordLogin/`, {
         body: JSON.stringify(data),
         method: 'POST',
         mode: 'cors',
@@ -39,8 +82,22 @@ export default {
             "Access-Control-Request-Method": "POST",
             "Access-Control-Request-Headers": "Content-Type",
         }
-    }),
-    verifyCode: (data) => fetch(`${constant.api_url}/api/user/verifyCode`, {
+    })
+
+    if (response.status !== 200) {
+        console.log(response);
+        if (response.status === 500) {
+            throw new Error("An error occurred")
+        }
+        if (response.status === 401) {
+            Cookies.remove("token");
+            throw new Error("请先登录");
+        }
+    }
+    return await response.json();
+  },
+    verifyCode: async(data) =>{
+       const response=await fetch(`${constant.api_url}/api/user/verifyCode`, {
         body: JSON.stringify(data),
         method: 'POST',
         mode: 'cors',
@@ -49,20 +106,46 @@ export default {
             "Access-Control-Request-Method": "POST",
             "Access-Control-Request-Headers": "Content-Type",
         }
-    }),
-    resetPassword: (data) => fetch(`${constant.api_url}/api/user/resetPassword`, {
-        body: JSON.stringify(data),
-        method: 'POST',
-        mode: 'cors',
-        headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Request-Method": "POST",
-            "Access-Control-Request-Headers": "Content-Type",
+    })
+    if (response.status !== 200) {
+        console.log(response);
+        if (response.status === 500) {
+            throw new Error("An error occurred")
         }
-    }),
-    AddToCart: (data) => {
-        //////console.log(data);
-        return fetch(`${constant.api_url}/api/cart/create`, {
+        if (response.status === 401) {
+            Cookies.remove("token");
+            throw new Error("请先登录");
+        }
+    }
+    return await response.json();
+},
+    resetPassword: async (data) => {
+
+        const response = await fetch(`${constant.api_url}/api/user/resetPassword`, {
+            body: JSON.stringify(data),
+            method: 'POST',
+            mode: 'cors',
+            headers: {
+                "Content-Type": "application/json",
+                "Access-Control-Request-Method": "POST",
+                "Access-Control-Request-Headers": "Content-Type",
+            }
+        })
+        if (response.status !== 200) {
+            console.log(response);
+            if (response.status === 500) {
+                throw new Error("An error occurred")
+            }
+            if (response.status === 401) {
+                Cookies.remove("token");
+                throw new Error("请先登录");
+            }
+        }
+        return await response.json();
+    },
+    AddToCart: async(data) => {
+        ////////////console.log(data);
+        const response = await fetch(`${constant.api_url}/api/cart/create`, {
             body: JSON.stringify({
                 flower_specs_id: data.flower_specs_id,
                 num: data.num,
@@ -78,10 +161,21 @@ export default {
                 "Access-Control-Request-Headers": "Content-Type",
             }
         })
+        if (response.status !== 200) {
+            console.log(response);
+            if (response.status === 500) {
+                throw new Error("An error occurred")
+            }
+            if (response.status === 401) {
+                Cookies.remove("token");
+                throw new Error("请先登录");
+            }
+        }
+        return await response.json();
     },
-    changeShopCarNumber: (data) => {
-        //////console.log(data);
-        return fetch(`${constant.api_url}/api/cart/updateNum`, {
+    changeShopCarNumber: async(data) => {
+        ////////////console.log(data);
+        const response=await fetch(`${constant.api_url}/api/cart/updateNum`, {
             body: JSON.stringify({
                 id: data.id,
                 num: data.num,
@@ -95,8 +189,20 @@ export default {
                 "Access-Control-Request-Headers": "Content-Type",
             }
         })
+        if (response.status !== 200) {
+            console.log(response);
+            if (response.status === 500) {
+                throw new Error("An error occurred")
+            }
+            if (response.status === 401) {
+                Cookies.remove("token");
+                throw new Error("请先登录");
+            }
+        }
+        return await response.json();
     },
-    deleteProductionFromShopCar: (data) => fetch(`${constant.api_url}/api/cart/delete`, {
+    deleteProductionFromShopCar: async(data) =>{
+        const response=await fetch(`${constant.api_url}/api/cart/delete`, {
         body: JSON.stringify({
             ids: data.ids,
         }),
@@ -108,8 +214,21 @@ export default {
             "Access-Control-Request-Method": "POST",
             "Access-Control-Request-Headers": "Content-Type",
         }
-    }),
-    addAddress: (data) => fetch(`${constant.api_url}/api/address/create`, {
+    })
+    if (response.status !== 200) {
+        console.log(response);
+        if (response.status === 500) {
+            throw new Error("An error occurred")
+        }
+        if (response.status === 401) {
+            Cookies.remove("token");
+            throw new Error("请先登录");
+        }
+    }
+    return await response.json();
+   },
+    addAddress: async(data) =>{
+        const response=await fetch(`${constant.api_url}/api/address/create`, {
         body: JSON.stringify({
             mobile: data.mobile,
             name: data.username,
@@ -123,39 +242,78 @@ export default {
             "Access-Control-Request-Method": "POST",
             "Access-Control-Request-Headers": "Content-Type",
         }
-    }),
-    updateAddress: (data) => fetch(`${constant.api_url}/api/address/update`, {
-        body: JSON.stringify({
-            id: data.id,
-            mobile: data.mobile,
-            name: data.username,
-            location: data.position,
-        }),
-        method: 'POST',
-        mode: 'cors',
-        headers: {
-            "Authorization": `Bearer ${data.cookie}`,
-            "Content-Type": "application/json",
-            "Access-Control-Request-Method": "POST",
-            "Access-Control-Request-Headers": "Content-Type",
+    })
+    if (response.status !== 200) {
+        console.log(response);
+        if (response.status === 500) {
+            throw new Error("An error occurred")
         }
-    }),
-    setDefaultAddress: (data) => fetch(`${constant.api_url}/api/address/setDefault`, {
-        body: JSON.stringify({
-            id: data.id,
-        }),
-        method: 'POST',
-        mode: 'cors',
-        headers: {
-            "Authorization": `Bearer ${data.cookie}`,
-            "Content-Type": "application/json",
-            "Access-Control-Request-Method": "POST",
-            "Access-Control-Request-Headers": "Content-Type",
+        if (response.status === 401) {
+            Cookies.remove("token");
+            throw new Error("请先登录");
         }
-    }),
-    createOrder: (data) => {
-        //////console.log(data);
-        return fetch(`${constant.api_url}/api/order/create`, {
+    }
+    return await response.json();
+},
+    updateAddress: async(data) => {
+
+        const response =await fetch(`${constant.api_url}/api/address/update`, {
+            body: JSON.stringify({
+                id: data.id,
+                mobile: data.mobile,
+                name: data.username,
+                location: data.position,
+            }),
+            method: 'POST',
+            mode: 'cors',
+            headers: {
+                "Authorization": `Bearer ${data.cookie}`,
+                "Content-Type": "application/json",
+                "Access-Control-Request-Method": "POST",
+                "Access-Control-Request-Headers": "Content-Type",
+            }
+        })
+        if (response.status !== 200) {
+            console.log(response);
+            if (response.status === 500) {
+                throw new Error("An error occurred")
+            }
+            if (response.status === 401) {
+                Cookies.remove("token");
+                throw new Error("请先登录");
+            }
+        }
+        return await response.json();
+    },
+    setDefaultAddress: async (data) => {
+        const response=await fetch(`${constant.api_url}/api/address/setDefault`, {
+            body: JSON.stringify({
+                id: data.id,
+            }),
+            method: 'POST',
+            mode: 'cors',
+            headers: {
+                "Authorization": `Bearer ${data.cookie}`,
+                "Content-Type": "application/json",
+                "Access-Control-Request-Method": "POST",
+                "Access-Control-Request-Headers": "Content-Type",
+            }
+        })
+        if (response.status !== 200) {
+            console.log(response);
+            if (response.status === 500) {
+                throw new Error("An error occurred")
+            }
+            if (response.status === 401) {
+                Cookies.remove("token");
+                throw new Error("请先登录");
+            }
+        }
+        return await response.json();
+    },
+    createOrder: async (data) => {
+        ////////////console.log(data);
+        const response =await fetch(`${constant.api_url}/api/order/create`, {
             body: JSON.stringify(
                 data
             ),
@@ -168,23 +326,50 @@ export default {
                 "Access-Control-Request-Headers": "Content-Type",
             }
         })
-    },
-    deleteAddress: (data) => fetch(`${constant.api_url}/api/address/delete`, {
-        body: JSON.stringify({
-            id: data.id,
-        }),
-        method: 'POST',
-        mode: 'cors',
-        headers: {
-            "Authorization": `Bearer ${data.cookie}`,
-            "Content-Type": "application/json",
-            "Access-Control-Request-Method": "POST",
-            "Access-Control-Request-Headers": "Content-Type",
+        if (response.status !== 200) {
+            console.log(response);
+            if (response.status === 500) {
+                throw new Error("An error occurred")
+            }
+            if (response.status === 401) {
+                Cookies.remove("token");
+                throw new Error("请先登录");
+            }
         }
-    }),
-    fetchGoods: (data) => {
-        ////console.log("123");
-        return fetch(`${constant.api_url}/api/flowers/index?keyword=${data.keyword}&flower_category_id=${data.flower_category_id}&listRows=${data.listRows}&page=${data.page}`, {
+        return await response.json();
+    },
+    deleteAddress: async (data) => {
+
+        const response =await fetch(`${constant.api_url}/api/address/delete`, {
+            body: JSON.stringify({
+                id: data.id,
+            }),
+            method: 'POST',
+            mode: 'cors',
+            headers: {
+                "Authorization": `Bearer ${data.cookie}`,
+                "Content-Type": "application/json",
+                "Access-Control-Request-Method": "POST",
+                "Access-Control-Request-Headers": "Content-Type",
+            }
+
+        })
+
+        if (response.status !== 200) {
+            console.log(response);
+            if (response.status === 500) {
+                throw new Error("An error occurred")
+            }
+            if (response.status === 401) {
+                Cookies.remove("token");
+                throw new Error("请先登录");
+            }
+        }
+        return await response.json();
+    },
+    fetchGoods: async (data) => {
+        //////////console.log("123");
+        const response =await fetch(`${constant.api_url}/api/flowers/index?keyword=${data.keyword}&flower_category_id=${data.flower_category_id}&listRows=${data.listRows}&page=${data.page}`, {
             method: 'GET',
             headers: {
                 "Authorization": `Bearer ${data.cookie}`,
@@ -194,9 +379,20 @@ export default {
                 // "Access-Control-Request-Credentials":"true",
             }
         })
+        if (response.status !== 200) {
+            console.log(response);
+            if (response.status === 500) {
+                throw new Error("An error occurred")
+            }
+            if (response.status === 401) {
+                Cookies.remove("token");
+                throw new Error("请先登录");
+            }
+        }
+        return await response.json();
     },
-    fetchOrderDetail: async(data) => {
-        return await fetch(`${constant.api_url}/api/order/detail?order_id=${data.id}`, {
+    fetchOrderDetail: async (data) => {
+        const response = await fetch(`${constant.api_url}/api/order/detail?order_id=${data.id}`, {
             method: 'GET',
             headers: {
                 "Authorization": `Bearer ${data.cookie}`,
@@ -206,11 +402,22 @@ export default {
                 // "Access-Control-Request-Credentials":"true",
             }
         })
+        if (response.status !== 200) {
+            console.log(response);
+            if (response.status === 500) {
+                throw new Error("An error occurred")
+            }
+            if (response.status === 401) {
+                Cookies.remove("token");
+                throw new Error("请先登录");
+            }
+        }
+        return await response.json();
     },
-    updateUserMessage:async(data)=>{
-        return await fetch(`${constant.api_url}/api/User/changeUserInfo`,{
-            method:'POST',
-            body:JSON.stringify(data),
+    updateUserMessage: async (data) => {
+        const response = await fetch(`${constant.api_url}/api/User/changeUserInfo`, {
+            method: 'POST',
+            body: JSON.stringify(data),
             headers: {
                 "Authorization": `Bearer ${data.cookie}`,
                 "Content-Type": "application/json",
@@ -219,5 +426,35 @@ export default {
                 // "Access-Control-Request-Credentials":"true",
             }
         })
+        if (response.status !== 200) {
+            console.log(response);
+            if (response.status === 500) {
+                throw new Error("An error occurred")
+            }
+            if (response.status === 401) {
+                Cookies.remove("token");
+                throw new Error("请先登录");
+            }
+        }
+        return await response.json();
+    },
+
+    description: async (data) => {
+        const response = await fetch(`${constant.api_url}/api/User/subscribe`, {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {
+                "Authorization": `Bearer ${data.cookie}`,
+                "Content-Type": "application/json",
+                "Access-Control-Request-Method": "GET,POST",
+                "Access-Control-Request-Headers": "Content-Type",
+                // "Access-Control-Request-Credentials":"true",
+            }
+        })
+        if (response.status !== 200) {
+            throw new Error("Network connect fail");
+        }
+        let _data = await response.json();
+        return _data;
     }
 }

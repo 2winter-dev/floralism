@@ -2,6 +2,7 @@ import style from '@/styles/login.module.css'
 import { useState } from 'react';
 import { Modal } from "@nextui-org/react";
 import { useMutation } from '@tanstack/react-query';
+import { ToastContainer, toast } from 'react-toastify';
 import m_api from '@/m_api';
 export default function ForgetPassword(props) {
     const [type, setType] = useState(0);
@@ -27,35 +28,35 @@ export default function ForgetPassword(props) {
 
     const getEmailCode = () => {
         if (!email.trim()) {
-            alert("請填寫郵箱以獲取驗證碼")
+           toast.error("請填寫郵箱以獲取驗證碼")
             return;
         }
         sendEmail.mutate({ email: email.trim(), event: 'resetpwd' }, {
             onSuccess: () => {
-                alert("發送驗證碼成功，請到填寫的郵箱内查看驗證碼");
+                // alert("發送驗證碼成功，請到填寫的郵箱内查看驗證碼");
+                setTime(60);
+                setFlag(true);
             },
             onError: (res) => {
-                ////////console.log(res);
-                alert("發送驗證碼失敗");
+                //////////////console.log(res);
+                toast.error("發送驗證碼失敗");
             }
         })
-        setTime(60);
-        setFlag(true);
+
     }
 
     const reset = () => {
         resetPassword.mutate({ email: email.trim(), password: password.trim(), confirmPassword: repassword.trim() }, {
             onSuccess: async (res) => {
-                let isSuccess = await res.json()
-                if (isSuccess.code) {
-                    alert("重置成功")
+                // let res = await res.json()
+                if (res.code) {
                     props.toLogin();
                 } else {
-                    alert(isSuccess.msg);
+                    toast.error(res.msg);
                 }
             },
             onError: (res) => {
-                alert("重置失敗")
+                toast.error("重置失敗")
             }
         })
     }
@@ -63,15 +64,15 @@ export default function ForgetPassword(props) {
     const verfyCode = () => {
         verCode.mutate({ email: email.trim(), code: code.trim() }, {
             onSuccess: async (res) => {
-                let isSuccess = await res.json()
-                if (isSuccess.code) {
+                // let res = await res.json()
+                if (res.code) {
                     setType(1);
                 } else {
-                    alert(isSuccess.msg);
+                    toast.error(res.msg);
                 }
             },
             onError: (res) => {
-                alert("驗證失敗")
+                toast.error("驗證失敗")
             }
         })
     }

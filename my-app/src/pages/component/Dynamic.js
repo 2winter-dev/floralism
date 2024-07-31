@@ -5,13 +5,13 @@ import { useRouter } from 'next/router';
 const DynamicLazyComponent = dynamic(
     () => import('./Header'),
     { ssr: false }
-  )
+)
 export default function DynamicComponent(props) {
-    let router=useRouter();
+    let router = useRouter();
     return (<DynamicLazyComponent list={props.cateList} login={() => {
-        console.log("123");
+        //////console.log("123");
         if (Cookies.get('token')) {
-            alert("你先退出登陆吗")
+            // alert("你要退出嗎?")
         } else props.setLogin(true);
     }} />)
 }

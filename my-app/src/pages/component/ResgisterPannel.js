@@ -4,6 +4,7 @@ import { Modal } from "@nextui-org/react";
 import { useMutation } from '@tanstack/react-query';
 import Api from '../../m_api/index'
 import Cookies from 'js-cookie';
+import {ToastContainer, toast} from 'react-toastify'
 export default function RegisterPannerl(props) {
     const [isEmail, setIsEmail] = useState(props.type);
     const [email, setEmail] = useState("");
@@ -26,43 +27,45 @@ export default function RegisterPannerl(props) {
     })
     const getEmailCode = () => {
         if (!email.trim()) {
-            alert("請填寫郵箱以獲取驗證碼")
+            toast.error("請填寫郵箱以獲取驗證碼")
             return;
         }
         sendEmail.mutate({ email: email.trim(), type: 'register' }, {
             onSuccess: async (res) => {
-                let isSuccess = await res.json()
-                if (isSuccess.code) {
-                    alert("發送驗證碼成功，請到填寫的郵箱内查看驗證碼");
+                // let res = await res.json()
+                if (res.code) {
+                    toast("發送驗證碼成功，請到填寫的郵箱内查看驗證碼");
+                    setTime(60);
+                    setFlag(true);
                 } else {
-                    alert(isSuccess.msg);
+                    toast.error(res.msg);
                 }
             },
-            onError: () => alert("發送驗證碼失敗")
+            onError: () => toast.error("發送驗證碼失敗")
         })
-        setTime(60);
-        setFlag(true);
+      
+       
     }
 
     const _submit = () => {
         if (!username.trim()) {
-            alert("請填寫姓名");
+            toast.error("請填寫姓名");
             return;
         }
         if (!mobile.trim()) {
-            alert("請填寫手機號碼");
+            toast.error("請填寫手機號碼");
             return;
         }
         if (!password.trim()) {
-            alert("請填寫密碼");
+            toast.error("請填寫密碼");
             return;
         }
         if (password.trim() !== repassword.trim()) {
-            alert("兩次輸入的密碼不同，請保證一致");
+            toast.error("兩次輸入的密碼不同，請保證一致");
             return;
         }
         if (!code) {
-            alert("請填寫收到的驗證碼");
+            toast.error("請填寫收到的驗證碼");
             return;
         }
 
@@ -74,23 +77,23 @@ export default function RegisterPannerl(props) {
             username: username.trim(),
         }, {
             onSuccess: async (res) => {
-                let isSuccess = await res.json()
-                ////////console.log(res);
-                if (isSuccess.code === 1) {
+                // let res = await res.json()
+                //////////////console.log(res);
+                if (res.code === 1) {
                     props.close();
-                    Cookies.set('token', isSuccess.data.token, { expires: 1 });
-                    // Cookies.set('user', JSON.stringify(isSuccess.data.userinfo), { expires: 1 });
-                    alert("注冊成功");
+                    Cookies.set('token', res.data.token, { expires: 1 });
+                    // Cookies.set('user', JSON.stringify(res.data.userinfo), { expires: 1 });
+                    toast("注冊成功");
                     // props.hasLogin();
                     location.reload();
                     // localStorage.setItem("token",res.data.token);
                 } else {
-                    alert(isSuccess.msg);
+                    toast.error(res.msg);
                 }
             },
             onError: (res) => {
-                ////////console.log(res);
-                alert("注冊失敗")
+                //////////////console.log(res);
+                toast.error("注冊失敗")
             }
         })
     }
@@ -125,7 +128,7 @@ export default function RegisterPannerl(props) {
                         <div style={{ marginTop: '2.5%', width: '100%' }}>
                             <input type='text' placeholder='郵箱' className={style.account_input} value={email} onChange={(event) => {
                                 setEmail(event.target.value)
-                                ////////console.log(event)
+                                //////////////console.log(event)
                             }}></input>
                         </div>
                         <div style={{ marginTop: '2.5%' }}>
