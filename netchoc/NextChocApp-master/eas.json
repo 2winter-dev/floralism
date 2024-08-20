@@ -1,0 +1,75 @@
+{
+  "cli": {
+    "version": ">= 0.60.0",
+    "promptToConfigurePushNotifications": false
+  },
+  "build": {
+    "preview_apk_dev": {
+      "developmentClient": true,
+      "android": {
+        "buildType": "apk",
+        "distribution": "internal"
+      },
+      "env": {
+        "ANDROID_SDK_ROOT": "/Users/yfd/Library/Android/sdk",
+        "EX_UPDATES_ANDROID_DELAY_LOAD_APP": "false"
+      },
+      "channel": "preview_apk_dev"
+    },
+    "preview_ios_dev": {
+      "distribution": "internal",
+      "developmentClient": true,
+      "ios": {
+        "simulator": false,
+        "distribution": "internal",
+        "resourceClass": "m-medium"
+      },
+      "env": {
+        "APP_VARIANT": "development"
+      },
+      "channel": "preview_ios_dev"
+    },
+    "preview_ios_simulator": {
+      "developmentClient": true,
+      "ios": {
+        "simulator": true
+      },
+      "env": {
+        "APP_VARIANT": "development"
+      },
+      "channel": "preview_ios_simulator"
+    },
+    "preview_apk": {
+      "android": {
+        "buildType": "apk",
+        "distribution": "internal"
+      },
+      "env": {
+        "ANDROID_SDK_ROOT": "/Users/yfd/Library/Android/sdk"
+      },
+      "channel": "preview_apk"
+    },
+    "preview_aab": {
+      "env": {
+        "ANDROID_SDK_ROOT": "/Users/yfd/Library/Android/sdk",
+        "EX_UPDATES_ANDROID_DELAY_LOAD_APP": "false"
+      },
+      "channel": "preview_aab"
+    },
+    "production": {
+     
+      "env": {
+        "ANDROID_SDK_ROOT": "/Users/yfd/Library/Android/sdk",
+        "EAS_BUILD_DISABLE_NPM_CACHE": "1"
+      },
+      "ios": {
+        
+      },
+      "channel": "production"
+    }
+  },
+  "submit": {
+    "production": {},
+    "preview_ios_dev": {}
+  }
+}
