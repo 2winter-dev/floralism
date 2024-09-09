@@ -38,7 +38,7 @@ export default function AddressPosition() {
             </GoogleMapView>
             <View style={{ position: 'absolute', top: 40, display: 'flex', width: '100%', flexDirection: 'row', alignItems: 'center', marginTop: 12, justifyContent: 'space-between', paddingHorizontal: 16 }}>
                 {/* <Image source={require("../../assets/images/background_desc.jpg")} /> */}
-                <Pressable onPress={() => navigation.canGoBack && navigation.goBack()} style={{ width: 50, height: 50, borderRadius: 50, backgroundColor: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <Pressable onPress={() => navigation.canGoBack() && navigation.goBack()} style={{ width: 50, height: 50, borderRadius: 50, backgroundColor: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <Ionicons name="arrow-back" size={24} color="black" />
                 </Pressable>
             </View>

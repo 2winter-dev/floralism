@@ -40,6 +40,7 @@ export default function BussinessNavigation(Stack) {
         component={OrderFinish}
         options={{
           headerTitle: 'Order',
+          headerShown:false,
           headerTintColor: 'black'
 
         }}

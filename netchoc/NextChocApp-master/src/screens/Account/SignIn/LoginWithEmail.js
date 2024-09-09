@@ -149,7 +149,7 @@ export default function LoginWithEmail() {
             <LinearGradient colors={['rgb(242,248,231)', '#ffffff', '#ffffff', '#ffffff']} style={{ flex: 1 }}>
                 <ScrollView style={{ marginTop: Dimensions.get("screen").height * 0.06, paddingHorizontal: 18, display: 'flex' }} >
                     <View style={{ flex: 1, height: Dimensions.get("window").height * 1 }}>
-                        <Pressable onPress={() => navigation.canGoBack && navigation.goBack()}>
+                        <Pressable onPress={() => navigation.canGoBack() && navigation.goBack()}>
                             <Ionicons name="chevron-back" size={24} color="black" />
                         </Pressable>
                         {/* <Text style={{ fontSize: 32, display: 'flex', marginTop: 24 }}>JUST <Text style={{ color: config.primaryColor }}>Sign in,</Text></Text>

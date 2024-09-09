@@ -6,12 +6,13 @@ import { useToken } from "../common/store/user"
 import { useState, useRef, useEffect } from "react"
 import { FontAwesome, AntDesign, Ionicons } from "@expo/vector-icons"
 import * as ImagePicker from "expo-image-picker";
-
 import { nanoid } from "nanoid";
 import { EvilIcons, Entypo } from "@expo/vector-icons"
 import * as FileSystem from "expo-file-system";
 import { API_URL } from "../common/api/API_URL"
+import { useNavigation } from "@react-navigation/native"
 export default function OrderFinish({ route }) {
+    const navigation=useNavigation();
     const token = useToken();
     const [imgsStatus, setImgStatus] = useState(false);
     const [visible, setVisible] = useState(false);
@@ -23,6 +24,7 @@ export default function OrderFinish({ route }) {
     const [images, setImages] = useState("");
     const [imageList, setImageList] = useState([]);
     const [success, setSuccess] = useState(false);
+    const [points, setPoints] = useState(3);
     const mText = useRef();
     const orderStatus = useQuery({
         queryFn: () => OrderAPI.fetchOrderDetail({ order_id: route.params.id, token }),
@@ -137,171 +139,120 @@ export default function OrderFinish({ route }) {
 
     return (
         <>
-            {/* <KeyboardAvoidingView style={{}} keyboardVerticalOffset={20} enabled={true} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}> */}
-            <ScrollView style={{ paddingHorizontal: 16 }} contentContainerStyle={{ paddingBottom: height }} ref={scroll}>
-                {orderStatus.isFetching ? <ActivityIndicator style={{ margin: 20 }} size={'large'} color={config.primaryColor} /> : (orderStatus.isSuccess ? <View>
-                    <Text style={{ fontSize: 24, fontWeight: "500", marginTop: 24 }}>Thank you for your order</Text>
-                    <Text style={{ marginTop: 24 }}>Here is your order receipt for {orderStatus.data?.merchant.merchantname}.</Text>
-                    <View style={{ marginTop: 24, borderBottomColor: 'rgb(0,0,0)', borderBottomWidth: 1, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingBottom: 16 }}>
-                        <Text style={{ fontSize: 18, fontWeight: "500" }}>Total</Text>
-                        <Text style={{ fontSize: 18, fontWeight: "500" }}>{config.current}{orderStatus.data?.actual_payment_amount}</Text>
-                    </View>
-                    <View style={{ marginTop: 12, marginBottom: 12, }}>
-                        {orderStatus.data?.goods.map((item, index) => <View key={index} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-                            <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-                                <View style={{ marginRight: 12, width: 20, height: 20, borderWidth: 1, borderColor: 'rgba(0,0,0,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                    <Text>x{item.count}</Text>
+            <View style={{ minHeight: Dimensions.get("screen").height, display: 'flex' }}>
+                <View style={{ display: 'flex', flex: 1 }}>
+                    <ScrollView style={{ paddingHorizontal: 16, position: 'relative', backgroundColor: 'rgb(254,250,247)', minHeight: Dimensions.get("screen").height }} contentContainerStyle={{ paddingBottom: height }} ref={scroll}>
+                        <Image source={require('../assets/images/BackgroundImage.png')} style={{ width: '100%', height: '100%', position: 'absolute', left: 0, top: 0, right: 0, bottom: 0 }} />
+                        {orderStatus.isFetching ? <ActivityIndicator style={{ marginTop: Dimensions.get("screen").height * 0.04, }} size={'large'} color={config.primaryColor} /> : (
+                            <View style={{ marginTop: Dimensions.get("screen").height * 0.04, }}>
+                                <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginHorizontal: 32 }}>
+                                    <View style={{ width: 100 }}>
+                                        <Pressable onPress={() => navigation.canGoBack && navigation.goBack()} style={{ width: 50, height: 50, borderRadius: 50, backgroundColor: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                            <Ionicons name="arrow-back" size={24} color="black" />
+                                        </Pressable>
+                                    </View>
+                                    <Text style={{ fontSize: 20, fontWeight: '600' }}>Review</Text>
+                                    <View style={{ width: 100, display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+
+                                    </View>
                                 </View>
-                                <Text style={{}}>{item.goods_name}</Text>
-                            </View>
-                            <Text>
-                                {config.current}{item.price}
-                            </Text>
-                        </View>)}
-                        {/* <Text style={{ marginTop: 4 }}>Choice of Size {config.current}5</Text>
-                <Text style={{ marginTop: 4, fontSize: 13, color: 'rgba(0,0,0,0.3)' }}>Large {config.current}5</Text> */}
-                    </View>
-                    {/* <View style={{ height: 1, width: '100%', backgroundColor: 'rgba(0,0,0,0.2)', marginBottom: 12 }}></View> */}
-                    {/* <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-                        <Text style={{ fontSize: 15 }}>Subtotal</Text>
-                        <Text style={{ fontSize: 15, fontWeight: '500' }}>{config.current}{orderStatus.data.payment_amount}</Text>
-                    </View> */}
-                    <View style={{ marginTop: 4, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                            <Text style={{ fontSize: 15, color: 'rgba(0,0,0,0.8)' }}>Fees</Text>
-                            <Pressable onPress={() => setFees(true)}>
-                                <AntDesign name="questioncircleo" style={{ marginLeft: 4 }} size={12} color="black" />
-                            </Pressable>
-                        </View>
-                        <Text style={{ fontSize: 13, color: 'rgba(0,0,0,0.8)' }}>{config.current}{orderStatus.data.fees}</Text>
-                    </View>
-                    <View style={{ marginTop: 24, height: 1, width: '100%', backgroundColor: 'rgba(0,0,0,0.2)', marginBottom: 12 }}></View>
-                    <View style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexDirection: 'row' }}>
-                        <Text style={{ fontSize: 18, fontWeight: '500', }}>Total:</Text>
-                        <Text style={{ fontSize: 16, fontWeight: '500' }}>{config.current}{orderStatus.data.actual_payment_amount}</Text>
-                    </View>
-                    {/* <View style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'flex-end', marginTop: 24 }}>
-                        <Pressable onPress={() => setVisible(true)} style={{ backgroundColor: config.primaryColor, borderRadius: 24 }}>
-                            <Text style={{ paddingHorizontal: 36, paddingVertical: 8, fontSize: 16, color: 'white' }}>Evaluate</Text>
-                        </Pressable>
-                    </View> */}
-                    {!orderStatus?.data?.order_evaluate_info ? <View style={{ marginTop: 24 }}>
-                        {
-                            (<View style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'flex-start' }}>
-                                {
-                                    evaluate.isLoading ? <View style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%' }}><ActivityIndicator size={'large'} style={{}} color={config.primaryColor} /></View> : (
-                                        <View style={{ backgroundColor: 'white', borderRadius: 16, width: '100%' }}>
-                                            <View style={{}}>
+                                <View style={{ marginHorizontal: 32, marginTop: 56, backgroundColor: 'white', padding: 16 }}>
+                                    <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+                                        <Image source={require('../assets/images/vegetable.png')} style={{ width: 60, height: 60, borderRadius: 50, marginRight: 12 }} />
+                                        <Text style={{ fontSize: 18 }}>Classic Package  Magic Bag</Text>
+                                    </View>
+                                    <Image source={require('../assets/images/line2.png')} style={{ height: 2, width: '100%', marginVertical: 16 }} />
+                                    <Text style={{ fontWeight: '600', fontSize: 20, marginBottom: 16 }}>Are you satisfied with your recent purchase?</Text>
+                                    <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginTop: 8, justifyContent: 'space-between' }}>
 
-                                                <Text style={{ fontSize: 18, fontWeight: 500, marginBottom: 16 }}>Comments:</Text>
-                                                <Pressable onPress={() => {
-                                                    mText.current.focus();
-                                                }} style={{ height: 100, padding: 8, borderColor: 'black', borderWidth: 1, borderRadius: 12, marginBottom: 16 }}>
-                                                    <TextInput ref={mText} multiline={true} placeholder="Please give us your feedback" style={{ width: '100%' }} value={Input} onChangeText={(text) => {
-                                                        if (text.length > 500) {
-                                                            Toast.show("Maximum  500 words");
-                                                            return;
-                                                        }
-                                                        setInput(text);
-                                                    }} />
-                                                </Pressable>
-                                                <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-                                                    <Text>Rate:</Text>
-                                                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                                                        {
-                                                            [1, 1, 1, 1, 1].map((item, index) => {
-                                                                // if (item) return (<FontAwesome name="star-o" size={24} color="black" />)
-
-                                                                // else return <FontAwesome name="star" size={24} color="#FFC500" />
-                                                                if (score > index) return <Pressable key={index} onPress={() => setScore(index + 1)} style={{ marginRight: 8 }}><FontAwesome name="star" size={36} color={config.primaryColor} /></Pressable>
-                                                                else return <Pressable key={index} onPress={() => setScore(index + 1)} style={{ marginRight: 8 }}><FontAwesome name="star-o" size={36} color="black" /></Pressable>
-                                                            })
-                                                        }
+                                        <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
+                                            {
+                                                [0, 0, 0, 0, 0].map((item, index) => {
+                                                    ////console.log(orderStatus.data?.order_evaluate_info?.score)
+                                                    if (index < points) {
+                                                        return <Pressable onPress={() => setPoints(index + 1)}><Image source={require('../assets/images/points.png')} style={{ width: 30, height: 30, marginRight: 12 }} /></Pressable>
+                                                    } else return <Pressable onPress={() => setPoints(index + 1)}><Image source={require('../assets/images/unpoints.png')} style={{ width: 30, height: 30, marginRight: 12 }} /></Pressable>
+                                                })
+                                            }
+                                        </View>
+                                        <View>
+                                            <Text style={{ color: '#FCBF13', fontSize: 16 }}>Very good</Text>
+                                        </View>
+                                    </View>
+                                    <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap', marginTop: 16, overflow: 'hidden' }}>
+                                        <Pressable style={{ marginTop: 16, marginRight: 12 }}><Text style={{ color: '#838383', fontSize: 14, paddingHorizontal: 14, paddingVertical: 14, backgroundColor: '#F6F6F6' }}>Delicious food</Text></Pressable>
+                                        <Pressable style={{ marginTop: 16, marginRight: 12 }}><Text style={{ color: '#838383', fontSize: 14, paddingHorizontal: 14, paddingVertical: 14, backgroundColor: '#F6F6F6' }}>Friendly staff</Text></Pressable>
+                                        <Pressable style={{ marginTop: 16, marginRight: 12 }}><Text style={{ color: '#838383', fontSize: 14, paddingHorizontal: 14, paddingVertical: 14, backgroundColor: '#F6F6F6' }}>Great value</Text></Pressable>
+                                        <Pressable style={{ marginTop: 16, marginRight: 12 }}><Text style={{ color: '#838383', fontSize: 14, paddingHorizontal: 14, paddingVertical: 14, backgroundColor: '#F6F6F6' }}>Quick collection</Text></Pressable>
+                                    </View>
+                                    <View style={{ marginTop: 16, backgroundColor: 'white' }}>
+                                        <TextInput style={{ display: 'flex', flex: 1, padding: 4, fontSize: 20 }} placeholder="Please enter your comments"></TextInput>
+                                    </View>
+                                    {(
+                                        <ScrollView
+                                            style={{ marginTop: 16 }}
+                                            horizontal
+                                            showsHorizontalScrollIndicator={false}
+                                            contentContainerStyle={{ alignItems: 'center' }}
+                                        >
+                                            {!!imageList.length && imageList.map((im, index) => {
+                                                return (
+                                                    <View key={index} style={{ marginRight: 8 }}>
+                                                        <Image
+                                                            style={{
+                                                                width: 150,
+                                                                height: 150,
+                                                                borderRadius: 12,
+                                                            }}
+                                                            source={{ uri: im }}
+                                                        />
+                                                        {!orderStatus?.data?.order_evaluate_info && <Pressable
+                                                            style={{
+                                                                position: "absolute",
+                                                                left: "70%",
+                                                            }}
+                                                            onPress={() => onDel(index)}
+                                                        >
+                                                            <Entypo name="circle-with-cross" size={20} color="red" />
+                                                        </Pressable>}
                                                     </View>
-                                                </View>
+                                                );
+                                            })}
+                                            {imageList.length < 2 && !imgsStatus && !orderStatus?.data?.order_evaluate_info ? (
+                                                <Pressable onPress={pickImage}>
+                                                    <View
+                                                        style={{
+                                                            flexDirection: "column",
+                                                            alignItems: "center",
+                                                            width: 150,
+                                                            height: 150,
+                                                            backgroundColor: "#F6F6F6",
+                                                            borderRadius: 12,
 
-                                            </View>
-                                        </View>)
-                                }
-                            </View>)}
-                    </View>
-                        : <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-                            <Text style={{ fontSize: 18, fontWeight: 500, marginBottom: 16, marginTop: 24 }}>Rata us:</Text>
-                            <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
-                                {
-                                    [0, 0, 0, 0, 0].map((item, index) => {
-                                        ////console.log(orderStatus.data?.order_evaluate_info?.score)
-                                        if (index < orderStatus.data?.order_evaluate_info?.score) {
-                                            return <FontAwesome key={index} name="star" size={24} style={{ marginRight: 8 }} color={config.primaryColor} />
-                                        } else return <FontAwesome key={index} name="star-o" style={{ marginRight: 8 }} size={24} color="black" />
-                                    })
+                                                            justifyContent: 'center'
+                                                        }}
+                                                    >
+                                                        <Image source={require('../assets/images/xiangji-3.png')} style={{ width: 50, height: 50 }} />
+                                                        <Text style={{ color: '#25745B', marginTop: 8, fontSize: 14 }}>add</Text>
+                                                    </View>
+                                                </Pressable>)
+                                                : null}
 
-                                    // fetchOrderDetail.data?.order_evaluate_info?.status
-                                }
+                                        </ScrollView>
+
+
+                                    )}
+                                </View>
                             </View>
-                        </View>}
-                </View> : null)}
-
-                {(
-                    <ScrollView
-                        style={{ marginTop: 16 }}
-                        horizontal
-                        showsHorizontalScrollIndicator={false}
-                        contentContainerStyle={{ alignItems: 'center' }}
-                    >
-                        {!!imageList.length && imageList.map((im, index) => {
-                            return (
-                                <View key={index} style={{ marginRight: 8 }}>
-                                    <Image
-                                        style={{
-                                            width: 72,
-                                            height: 72,
-                                            borderRadius: 12,
-                                        }}
-                                        source={{ uri: im }}
-                                    />
-                                    {!orderStatus?.data?.order_evaluate_info && <Pressable
-                                        style={{
-                                            position: "absolute",
-                                            left: "70%",
-                                        }}
-                                        onPress={() => onDel(index)}
-                                    >
-                                        <Entypo name="circle-with-cross" size={20} color="red" />
-                                    </Pressable>}
-                                </View>
-                            );
-                        })}
-                        {imageList.length < 2 && !imgsStatus && !orderStatus?.data?.order_evaluate_info ? (
-                            <Pressable onPress={pickImage}>
-                                <View
-                                    style={{
-                                        flexDirection: "row",
-                                        alignItems: "center",
-                                        width: 72,
-                                        height: 72,
-                                        borderWidth: 1,
-                                        borderColor: 'black',
-                                        backgroundColor: "white",
-                                        borderRadius: 12,
-
-                                        justifyContent: 'center'
-                                    }}
-                                >
-                                    <EvilIcons name="plus" size={24} color="black" />
-                                </View>
-                            </Pressable>
-                        ) : null}
-
-                    </ScrollView>
+                            // : null
+                        )}
 
 
-                )}
-                {imgsStatus ? <Pressable style={{ justifyContent: "flex-start", flexDirection: 'row', marginTop: 8 }}>
-                    <ActivityIndicator size={'small'} />
-                    <Text style={{ color: 'gray', marginLeft: 8 }}>Uploading...</Text>
-                </Pressable> : null}
-                {!orderStatus?.data?.order_evaluate_info ? <View style={{ display: 'flex', alignItems: 'flex-end', marginTop: 16 }}>
+                        {imgsStatus ? <Pressable style={{ justifyContent: "flex-start", flexDirection: 'row', marginTop: 8 }}>
+                            <ActivityIndicator size={'small'} />
+                            <Text style={{ color: 'gray', marginLeft: 8 }}>Uploading...</Text>
+                        </Pressable> : null}
+                        {/* {!orderStatus?.data?.order_evaluate_info ? <View style={{ display: 'flex', alignItems: 'flex-end', marginTop: 16 }}>
                     <Pressable onPress={() => {
                         if (score === 0) {
                             return;
@@ -321,8 +272,13 @@ export default function OrderFinish({ route }) {
                     }} style={{ backgroundColor: config.primaryColor, borderRadius: 24 }}>
                         <Text style={{ paddingHorizontal: 36, paddingVertical: 8, fontSize: 16, color: 'white' }}>Rata us</Text>
                     </Pressable>
-                </View> : null}
-            </ScrollView>
+                </View> : null} */}
+                    </ScrollView>
+                </View>
+                <View style={{ marginBottom: 32, marginHorizontal: 32,paddingVertical:14,alignItems:'center',justifyContent:'center', display: 'flex', borderRadius: 30, backgroundColor: '#25745B' }}>
+                    <Text style={{ color: 'white', fontSize: 18,fontWeight:'500' }}>Review</Text>
+                </View>
+            </View>
             <Modal visible={fees} onRequestClose={() => setFees(false)} transparent={true}>
                 <View style={{ width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.5)', justifyContent: 'flex-end' }}>
                     <Pressable onPress={() => setFees(false)} style={{ flex: 1 }}>

@@ -28,6 +28,7 @@ export default function Search({ navigation }) {
   const [change, setChange] = useState(false);
   const [s_height, setSHeight] = useState(Dimensions.get('screen').height * 0.59);
   const [delta, setDelta] = useState({ latitudeDelta: 0.005 });
+  const [pvisible,setPVisible]=useState(false);
   const [shopList, setShopList] = useState([]);
   // const [pos, setPos] = useState({
   //   latitude:
@@ -486,9 +487,9 @@ export default function Search({ navigation }) {
           </View>
         </Animated.View>
       </View>
-      <View style={{ position: 'absolute', bottom: 10, width: '100%', paddingHorizontal: 8 }}>
+      {pvisible&&<View style={{ position: 'absolute', bottom: 10, width: '100%', paddingHorizontal: 8 }}>
         <ProductItem />
-      </View>
+      </View>}
     </View>
      <ShopModal visible={ModalVisible} onExit={() => setModalVisible(false)} mess={message} />
     {/*  */}

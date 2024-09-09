@@ -7,9 +7,11 @@ import { MaterialIcons, Ionicons } from '@expo/vector-icons';
 import { useState, useRef } from "react"
 import { View, Image, Dimensions, RefreshControl, Pressable, Text, Animated, ScrollView } from "react-native";
 
+
 export default function Orders({ navigation }) {
   const token = useToken();
   // ////////console.log(token)
+  
   const [status, setStatus] = useState(0)
   const [orderList, setOrderList] = useState({ pages: [], pageParams: [] });
   const scroll = useRef(new Animated.Value(0)).current;
@@ -94,6 +96,8 @@ export default function Orders({ navigation }) {
       </View>
 
     </View>
+    <Pressable onPress={()=>navigation.navigate("Bussiness.orderfinish", { id: 0 })} style={{}}><Text>前往评价</Text></Pressable>
+    <Pressable onPress={()=>navigation.navigate("InviteShop")} style={{}}><Text>InviteShop</Text></Pressable>
     <ScrollView style={{ paddingLeft: 16, marginRight: 16, flex: 1 }} showsVerticalScrollIndicator={false} refreshControl={<RefreshControl onRefresh={fetchOrderList.refetch} refreshing={fetchOrderList.isFetching || fetchOrderList.isLoading} />} onMomentumScrollEnd={_onMomentumScrollEnd}>
 
       <View style={{ marginTop: 18 }}></View>
@@ -116,6 +120,7 @@ export default function Orders({ navigation }) {
          is_allow_cancel:true
       }} token={token}></OrderItem> */}
 
+   
       {
         !!token && (fetchOrderList.isSuccess &&
           fetchOrderList.data.pages.map((item, index) => {

@@ -6,7 +6,7 @@ import { navigationRef } from "../common/utils";
 import SignUp from "../screens/Account/SignUp";
 import Intro from "../screens/Account/Intro";
 import Account_Telephone from "../screens/Account/SignUp/Account_Telephone";
-
+import CollectionWall from '../screens/Account/profile/CollectionWall'
 import ForgetNavigation from "./ForgetNavigation";
 import LoginWithPhone from "../screens/Account/SignIn/LoginWithPhone";
 import LoginMethod from "../screens/Account/SignIn/LoginMethod";
@@ -30,6 +30,12 @@ import NotificationsSetting from "../screens/BottomAccount/Notification";
 import ProfileSetting from "../screens/BottomAccount/ProfileSetting";
 import LoginSettting from "../screens/BottomAccount/LoginSetting";
 import UpdateCard from "../screens/UpdateCard";
+import Co2e from "../screens/Account/profile/Co2e";
+import Vouchers from "../screens/Account/Vouchers";
+import InviteFriend from "../screens/Account/InviteFriend";
+import InviteHistory from "../screens/Account/InviteHistory";
+import InviteShop from "../screens/bussiness/InviteShop";
+import QuestionDetail from "../screens/QuestionDetail";
 
 const Stack = createNativeStackNavigator();
 const prefix = Linking.createURL('/');
@@ -86,6 +92,34 @@ export default function Navigation() {
           }}
         />
         <Stack.Screen
+          name="Vouchers"
+          component={Vouchers}
+          options={{
+            headerShown:false
+          }}
+        />
+        <Stack.Screen
+           name="InviteFriend"
+           component={InviteFriend}
+           options={{
+            headerShown:false
+          }}
+        />
+        <Stack.Screen
+           name="InviteHistory"
+           component={InviteHistory}
+           options={{
+            headerShown:false
+          }}
+        />
+         <Stack.Screen
+           name="InviteShop"
+           component={InviteShop}
+           options={{
+            headerShown:false
+          }}
+        />
+        <Stack.Screen
           name="SignIn.LoginWithEmail"
           component={LoginWithEmail}
           options={{
@@ -102,6 +136,20 @@ export default function Navigation() {
         <Stack.Screen
           name="SignUp"
           component={SignUp}
+          options={{
+            headerShown: false
+          }}
+        />
+         <Stack.Screen
+          name="Co2e"
+          component={Co2e}
+          options={{
+            headerShown: false
+          }}
+        />
+         <Stack.Screen
+          name="CollectionWall"
+          component={CollectionWall}
           options={{
             headerShown: false
           }}
@@ -128,8 +176,14 @@ export default function Navigation() {
           name="Account.FAQ"
           component={FAQ}
           options={{
-            headerTitle: 'F&Q',
-            headerTintColor: 'black',
+            headerShown: false,
+          }}
+        />
+         <Stack.Screen
+          name="Account.QuestionDetail"
+          component={QuestionDetail}
+          options={{
+            headerShown: false,
           }}
         />
         <Stack.Screen

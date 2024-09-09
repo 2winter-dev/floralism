@@ -79,7 +79,7 @@ export default function ResetPassword({route}) {
     return (<View style={{position:'relative',display:'flex'}}>
         <LinearGradient colors={['rgb(242,248,231)', '#ffffff', '#ffffff', '#ffffff']} style={{ display:'flex',flex: 1,position:'absolute',width:'100%',height:'100%',top:0,left:0,right:0 }}></LinearGradient>
     <View style={{ marginTop: 60, paddingHorizontal: 12 }}>
-        <Pressable onPress={() => navigation.canGoBack && navigation.goBack()}>
+        <Pressable onPress={() => navigation.canGoBack() && navigation.goBack()}>
             <Ionicons name="arrow-back" style={{ width: 80 }} size={24} color="black" />
         </Pressable>
         <Text style={{ fontSize: 32, display: 'flex', marginTop: 36 }}>Reset password</Text>

@@ -27,7 +27,7 @@ export default function LoginMethod() {
     return (<LinearGradient colors={['rgb(242,248,231)', '#ffffff', '#ffffff', '#ffffff']} style={{ flex: 1, display: 'flex' }}>
         <View style={{ display: 'flex', marginTop: Dimensions.get("screen").height * 0.06, paddingHorizontal: 16 }}>
 
-            <Pressable onPress={() => navigation.canGoBack && navigation.goBack()} >
+            <Pressable onPress={() => navigation.canGoBack() && navigation.goBack()} >
                 <Ionicons name="arrow-back" style={{ width: 80 }} size={24} color="black" />
             </Pressable>
             

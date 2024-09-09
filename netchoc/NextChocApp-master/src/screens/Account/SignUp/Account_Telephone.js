@@ -27,7 +27,7 @@ export default function Account_Telephone({ route }) {
        navigation.popToTop();
     }
     return (<ScrollView style={{  marginTop: Dimensions.get("screen").height*0.06, paddingHorizontal: 18 }}>
-          <Pressable onPress={() => navigation.canGoBack && navigation.goBack()}>
+          <Pressable onPress={() => navigation.canGoBack() && navigation.goBack()}>
             <Ionicons name="arrow-back" style={{ width: 80 }} size={24} color="black" />
         </Pressable>
         <Text style={{ fontSize: 32, display: 'flex',marginTop:12 }}>Get started with</Text>

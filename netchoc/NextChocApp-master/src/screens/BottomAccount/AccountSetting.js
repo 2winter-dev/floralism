@@ -178,9 +178,9 @@ export default function AccountSetting() {
                             <View style={{ display: 'flex', width: '40%', margin: 32 }}>
                                 <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
                                     <Text style={{ fontSize: 28 }}>CO2e avoided</Text>
-                                    <View style={{ width: 24, height: 24, display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'row', borderWidth: 1, borderColor: 'black', borderRadius: 50, }}>
+                                    <Pressable onPress={()=>navigation.navigate("Co2e")} style={{ width: 24, height: 24, display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'row', borderWidth: 1, borderColor: 'black', borderRadius: 50, }}>
                                         <Text style={{ fontSize: 16 }}>?</Text>
-                                    </View>
+                                    </Pressable>
                                 </View>
                                 <View style={{ display: 'flex', marginTop: 12 }}>
                                     <Text style={{ fontSize: 28, fontWeight: 'bold' }}>{fetchBaseMess.data?.co2}kg</Text>
@@ -372,18 +372,7 @@ export default function AccountSetting() {
                                 </View>
 
                             </Pressable>
-                            <Pressable onPress={() =>token && navigation.navigate("Account.favorlist")} style={{ display: 'flex', paddingVertical: 12, borderBottomWidth: 0.5, borderBottomColor: 'rgba(0,0,0,0.2)', flexDirection: 'row', alignItems: 'center' }}>
-                                <View style={{ width: 36, display: 'flex', justifyContent: 'center', alignItems: 'center',marginHorizontal:16 }}>
-
-                                    <Image source={require('../../assets/images/favorite.png')} style={{width:'100%',height:26,objectFit:'contain'}} />
-                                </View>
-                                <View style={{ marginLeft: 12 }}>
-                                    <Text style={{ fontSize: 16, color: "rgba(0,0,0,0.7)" }}>Favourites</Text>
-
-                                </View>
-
-                            </Pressable>
-                            <Pressable onPress={() =>token && navigation.navigate("Account.favorlist")} style={{ display: 'flex', paddingVertical: 12, borderBottomWidth: 0.5, borderBottomColor: 'rgba(0,0,0,0.2)', flexDirection: 'row', alignItems: 'center' }}>
+                            <Pressable onPress={() =>token && navigation.navigate("Vouchers")} style={{ display: 'flex', paddingVertical: 12, borderBottomWidth: 0.5, borderBottomColor: 'rgba(0,0,0,0.2)', flexDirection: 'row', alignItems: 'center' }}>
                                 <View style={{ width: 36, display: 'flex', justifyContent: 'center', alignItems: 'center',marginHorizontal:16 }}>
 
                                     <Image source={require('../../assets/images/Vouchers.png')} style={{width:'100%',height:26,objectFit:'contain'}} />
@@ -394,7 +383,7 @@ export default function AccountSetting() {
                                 </View>
 
                             </Pressable>
-                            <Pressable onPress={() =>token && navigation.navigate("Account.favorlist")} style={{ display: 'flex', paddingVertical: 12, borderBottomWidth: 0.5, borderBottomColor: 'rgba(0,0,0,0.2)', flexDirection: 'row', alignItems: 'center' }}>
+                            <Pressable onPress={() =>token && navigation.navigate("Account.FAQ")} style={{ display: 'flex', paddingVertical: 12, borderBottomWidth: 0.5, borderBottomColor: 'rgba(0,0,0,0.2)', flexDirection: 'row', alignItems: 'center' }}>
                                 <View style={{ width: 36, display: 'flex', justifyContent: 'center', alignItems: 'center',marginHorizontal:16 }}>
 
                                     <Image source={require('../../assets/images/FAQ.png')} style={{width:'100%',height:26,objectFit:'contain'}} />

@@ -95,7 +95,7 @@ export default function Choose() {
 
 
     return (<View style={{ marginTop: Dimensions.get("screen").height * 0.06, paddingHorizontal: 16,flex:1 }}>
-        <Pressable onPress={() => navigation.canGoBack && navigation.goBack()}>
+        <Pressable onPress={() => navigation.canGoBack() && navigation.goBack()}>
             <Ionicons name="arrow-back" style={{ width: 80 }} size={24} color="black" />
 
         </Pressable>

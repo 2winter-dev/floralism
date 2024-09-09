@@ -57,7 +57,7 @@ export default function Home({ navigation }) {
 
    const [IsSearching, setIsSearching] = useState(false);
    const fetchHomepage = useQuery({
-      queryFn: () => HomeApi.fetchHomepage({ token }),
+      queryFn: () => HomeApi.fetchHomepagev2({ token }),
       queryKey: ['fetchHomepage', token],
       onSuccess: (res) => {
          console.log(res);
@@ -366,28 +366,7 @@ export default function Home({ navigation }) {
              */}
                         {fetchHomepage.isSuccess && <View>
                            {
-                              <CategoryComponent data={[{
-                                 title: "Baking",
-                                 src: "../../assets/images/Baking.png"
-                              }, {
-                                 title: "Meals",
-                                 src: "../../assets/images/Meals.png"
-                              }, {
-                                 title: "Drinks",
-                                 src: "../../assets/images/Drinks.png"
-                              }, {
-                                 title: "Groceries",
-                                 src: "../../assets/images/Groceries.png"
-                              }, {
-                                 title: "Pet food",
-                                 src: "../assets/images/petFood.png"
-                              }, {
-                                 title: "Baking",
-                                 src: "../../assets/images/Baking.png"
-                              }, {
-                                 title: "Baking",
-                                 src: "../../assets/images/Baking.png"
-                              }]} ></CategoryComponent>
+                              // <CategoryComponent data={fetchHomepage.data.category} ></CategoryComponent>
                            }
 
                            {

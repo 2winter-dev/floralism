@@ -52,7 +52,7 @@ export default function SignUp({ route }) {
             enabled={true}
             behavior={Platform.OS === "ios" ? "padding" : "height"}
         ><ScrollView style={{ marginTop: Dimensions.get("screen").height * 0.06, paddingHorizontal: 18 }}>
-                <Pressable onPress={() => navigation.canGoBack && navigation.goBack()}>
+                <Pressable onPress={() => navigation.canGoBack() && navigation.goBack()}>
                     <Ionicons name="arrow-back" style={{ width: 80 }} size={24} color="black" />
                 </Pressable>
                 <Text style={{ fontSize: 32, marginTop: 12, display: 'flex' }}>Let's <Text style={{ color: config.primaryColor }}>Sign you up,</Text></Text>

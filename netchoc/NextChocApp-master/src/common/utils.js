@@ -23,6 +23,11 @@ export async function ST_request({ method = 'GET', path = '', data = {} }) {
     if (method === 'PUT' || method === 'POST') {
         response = await fetch(`${API_URL}${path}`, { headers, method, body: JSON.stringify(data) })
     } else {
+        let _data=""
+         for(let i in data){
+              _data=_data+i+"="+data[i]+"&"
+         }
+         console.log(_data);
         response = await fetch(`${API_URL}${path}&lang=en`, { headers, method })
     }
 
@@ -34,7 +39,7 @@ export async function ST_request({ method = 'GET', path = '', data = {} }) {
     }
     // ////console.log(await response.text());
     if (response.status !== 200) {
-        // console.log(await response.text());
+        console.log(await response.text());
         throw new Error("Network response was not ok")
     }
     const _json = await response.json()

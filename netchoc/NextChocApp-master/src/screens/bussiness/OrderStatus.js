@@ -11,313 +11,162 @@ import Accordion from 'react-native-collapsible/Accordion';
 // import AnimatedAccordion from "@dev-event/react-native-accordion";
 import { useLocal, useToken } from "../../common/store/user";
 export default function OrderStatus({ route }) {
-    const loading = useState(false);
-    const [activeSections, setActiveSections] = useState([]);
-    const mRef = useRef()
-    const selectStatus = useState(false);
-    const [pos, setPos] = useState({
-        latitude: "-33.88788",
-        longitude: "151.18824",
-    });
-    const accordionRef = useRef();
-    const merchant = useState();
-    const token = useToken();
-    const [end, setEnd] = useState({
-        latitude: "-33.88798",
-        longitude: "151.18714",
-    })
-    const fetchOrderDetail = useQuery({
-        queryFn: () => OrderAPI.fetchOrderDetail({ order_id: route.params.id, token }),
-        queryKey: ['fetchOrderDetail', route.params.id],
-        onSuccess: (res) => {
-            console.log('商家：')
-            console.log(res);
-            setPos({
-                latitude: res.merchant.lat,
-                longitude: res.merchant.lng,
-            });
-            merchant[1](res.merchant)
-            setEnd({
-
-            })
-        }
-    })
-    const urlScheme = (mapName) => {
-        // const scheme = Platform.select({ ios: 'maps://0,0?q=', android: 'geo:0,0?q=' });
-
-        const scheme = mapName === 'ios' ? 'maps://0,0?q=' : 'geo:0,0?q=';
-        const latLng = `${pos.latitude},${pos.longitude}`;
-        const label = `${merchant[0]?.merchantname ?? 'Store Address'}`;
-        const url = mapName === 'ios' ? `${scheme}${label}@${latLng}` : `comgooglemaps://?center=${latLng}&zoom=14&views=traffic&q=${label}`;
-
-        Linking.openURL(url).catch((er) => {
-            ////console.log(er);
-            ////console.log(url)
-            Toast.show('Map Not Found!')
-        });
-        selectStatus[1](false)
-    }
-    useEffect(() => {
-        ////console.log("pos:");
-        ////console.log(pos.latitude, pos.longitude);
-        ////console.log(typeof pos.latitude, typeof pos.longitude)
-    }, [pos])
-    const SECTIONS = [
-        {
-            title: "What should I do if I fail to pick up on time?",
-            content: "After placing an order, the merchant will reserve the NextChoc surprise box for you. It cannot be purchased by others, but if you fail to pick it up on time, your order will become invalid. This is because not picking up the order within the specified time can result in food wastage, and unfortunately, no refunds can be issued in such cases.",
-        },
-        {
-            title: "If the store is closed or there are no NextChoc surprise boxes available when picking up, what should I do??",
-            content: "If you arrive at the store during the pickup time and the merchant is unable to provide the NextChoc surprise box, please go to 'My Account' and click on 'Chat with Us.' We will assist you in verifying and resolving the issue.",
-        },
-        {
-            title: "If I open the NextChoc surprise box and find something I don't like, what should I do?",
-            content: "Unfortunately, we can't process a refund in this case. To avoid wasting the food, you might consider sharing it with nearby friends instead.",
-        }
-    ]
-
-    const _renderHeader = (section, index) => {
-        ////console.log(section, index);
-        return (
-            <View key={index} style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', padding: 8, borderRadius: 12 }}>
-                <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', position: 'relative', width: '90%' }}>
-                    <View style={{ position: 'absolute', width: '20%', left: -5, height: 8, backgroundColor: config.primaryColor, opacity: 0.5, borderRadius: 24, bottom: -2 }}></View>
-                    <Text style={{}}>{section.title} </Text>
-                </View>
-
-                {
-                    activeSections[0] === index ? <AntDesign name='up' size={16} /> : <AntDesign name='down' size={16} />
-                }
-            </View>
-        );
-    }
-
-    const _renderContent = (section) => {
-        ////console.log(section)
-        return (
-            <View style={{ padding: 12, borderWidth: 1, borderColor: 'rgba(0,0,0,0.1)', borderRadius: 8 }}>
-                <Text>{section.content}</Text>
-            </View>
-        );
-    }
-
-    const _updateSections = (activeSections) => {
-        ////////////console.log(activeSections);
-        setActiveSections(activeSections);
-    }
-
-
     const navigation = useNavigation();
-    const handleContent = useCallback(() => {
-        return <Text style={styles.message}>Sample content</Text>
-    }, [])
-    const handleContentTouchable = useCallback(() => {
-        return <Text style={styles.title}>Sample header</Text>
-    }, [])
-    const handleOpenAccordion = useCallback(() => {
-        accordionRef.current?.openAccordion();
-    }, []);
-    const [show, setShow] = useState(false);
-    return (<View style={{ display: 'flex', flex: 1, position: 'relative' }}>
-        {fetchOrderDetail.isFetching ? <ActivityIndicator style={{ marginTop: 48 }} color={config.primaryColor} size={"large"} /> : fetchOrderDetail.isSuccess && <View style={{ display: 'flex', flex: 1, position: 'relative' }}>
-            <View style={{ position: 'relative', width: '100%', display: 'flex', flex: 1 }}>
-                <GoogleMapView
-                    loadingEnabled={loading[0]}
-                    initialCamera={{
-                        zoom: 16, center: {
-                            latitude: parseFloat(pos.latitude) - 0.004, longitude: parseFloat(pos.longitude)
-                        }, heading: 0, pitch: 0
-                    }}
-                    scrollEnabled={true}
-                    showsScale={true}
-                    ref={(r) => (mRef.current = r)}
-                    provider={PROVIDER_GOOGLE}
-                    showsCompass={true}
-                    zoomControlEnabled={true}
-                    zoomEnabled={true}
-                    mapType={"standard"}
-                    zoomTapEnabled={false}
-                    style={{ width: '100%', display: 'flex', flex: 1 }}
-                >
-                    {
-                        end && <Marker
-                            title={'nearby stores'}
-                            description={"nearby stores"}
-                            pinColor={'blue'}
-                            coordinate={{
-                                latitude: parseFloat(pos.latitude),
-                                longitude: parseFloat(pos.longitude),
-                            }}>
-                            <View style={{
-                                color: "#fff",
-                                width: 30,
-                                height: 30,
-                                lineHeight: 20,
-                                textAlign: "center",
-                                backgroundColor: config.primaryColor,
-                                alignItems: "center",
-                                borderRadius: 30,
-                                padding: 5,
-                            }}>
-                                <Entypo name="shop" size={15} color="#fff" />
-                            </View>
-                        </Marker>
-                    }
-                </GoogleMapView>
-                <View style={{ position: 'absolute', top: 40, zIndex: 100, display: 'flex', width: '100%', flexDirection: 'row', alignItems: 'center', marginTop: 12, justifyContent: 'space-between', paddingHorizontal: 16 }}>
-                    {/* <Image source={require("../../assets/images/background_desc.jpg")} /> */}
-                    <Pressable onPress={() => navigation.canGoBack && navigation.goBack()} style={{ width: 50, height: 50, borderRadius: 50, backgroundColor: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+    return (<ScrollView style={{ minHeight: Dimensions.get("screen").height, position: 'relative', backgroundColor: 'rgb(254,250,247)' }}>
+        <Image source={require('../../assets/images/BackgroundImage.png')} style={{ width: '100%', height: '100%', position: 'absolute', left: 0, top: 0, right: 0, bottom: 0 }} />
+        <View style={{ marginTop: Dimensions.get("screen").height * 0.04, position: 'relative' }}>
+
+            <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginHorizontal: 32 }}>
+                <View style={{ width: 100 }}>
+                    <Pressable onPress={() => navigation.canGoBack() && navigation.goBack()} style={{ width: 50, height: 50, borderRadius: 50, backgroundColor: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                         <Ionicons name="arrow-back" size={24} color="black" />
                     </Pressable>
                 </View>
-
-            </View>
-            <ScrollView refreshControl={<RefreshControl refreshing={fetchOrderDetail.isFetching} onRefresh={fetchOrderDetail.refetch} />} style={{ display: 'flex', marginBottom: 76, position: 'absolute', paddingHorizontal: 16, left: 0, right: 0, width: '100%', bottom: 0, height: Dimensions.get("window").height * 0.6, backgroundColor: 'white', flex: 1, borderTopLeftRadius: 12, borderTopRightRadius: 12 }} contentContainerStyle={{ alignItems: 'center', paddingTop: 24 }}>
-                {fetchOrderDetail?.data?.payment_status !== 2 ? <View style={{ borderColor: 'rgb(44,76,6)', borderWidth: 2, borderRadius: 8, display: 'flex', backgroundColor: 'rgb(180,223,122)' }}>
-                    <Text style={{ paddingHorizontal: 16, fontSize: 48, color: 'rgb(44,76,6)', paddingVertical: 12 }}>{fetchOrderDetail.data.check_code}</Text>
-                </View> : <View>
-                    {/* <Text style={{ fontSize: 24 }}>{fetchOrderDetail.data.payment_status_mean}</Text> */}
-                    <Text style={{ fontSize: 24 }}>{'Refund Complete'}</Text>
-                </View>}
-                {/* <Pressable style={{ display: 'flex',flex:1, flexDirection: 'row', marginTop: 24 }}>
-                    <AntDesign name="checkcircle" size={18} color={config.primaryColor} style={{ marginRight: 6 }} />
-                    <Text numberOfLines={2} style={{ fontWeight: 500, fontSize: 13 }}>Please use the code to collect your surprise box later</Text>
-                </Pressable> */}
-                <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-start', marginTop: 24 }}>
-                    <AntDesign name="checkcircle" size={18} color={config.primaryColor} style={{ marginRight: 6 }} />
-                    <Text numberOfLines={2} style={{ fontWeight: 500, fontSize: 13, width: '90%' }}>Please use the code to collect your surprise box later</Text>
-                </View>
-                <View style={{ marginTop: 24, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
-                    <View style={{ wdith: '24%', alignItems: 'center' }}>
-                        {
-                            fetchOrderDetail.data.status === -1 ? <Image source={require("../../assets/images/purchased.png")} style={{ height: 45, width: 60 }} resizeMode="contain" /> :
-                                <Image source={require("../../assets/images/m_purchase.png")} style={{ height: 45, width: 60 }} resizeMode="contain" />
-                        }
-                        <Text style={{ textAlign: 'center', marginTop: 8, fontSize: 13 }}>Purchased</Text>
-                    </View>
-                    <View style={{ wdith: '24%', alignItems: 'center' }}>
-                        {
-                            fetchOrderDetail.data.status === 1 ? <Image source={require("../../assets/images/making.png")} style={{ height: 45, width: 60 }} resizeMode="contain" />
-                                : <Image source={require("../../assets/images/m_shop.png")} style={{ height: 45, width: 60 }} resizeMode="contain" />
-
-                        }
-                        <Text style={{ textAlign: 'center', marginTop: 8, fontSize: 13 }}>Preparing</Text>
-                    </View>
-                    <View style={{ wdith: '24%', alignItems: 'center' }}>
-                        {
-                            fetchOrderDetail.data.status === 4 ? <Image source={require("../../assets/images/meal.png")} style={{ height: 45, width: 60 }} resizeMode="contain" />
-                                : <Image source={require("../../assets/images/m_meal.png")} style={{ height: 45, width: 60 }} resizeMode="contain" />
-                        }
-                        <Text style={{ textAlign: 'center', marginTop: 8, fontSize: 13 }}>Ready</Text>
-                    </View>
-                    <View style={{ wdith: '24%', display: 'flex', alignItems: 'center' }}>
-                        {
-                            fetchOrderDetail.data.status === 3 ? <Image source={require("../../assets/images/complete.png")} style={{ height: 45, width: 60 }} resizeMode="contain" />
-                                : <Image source={require("../../assets/images/m_complete.png")} style={{ height: 45, width: 60 }} resizeMode="contain" />
-                        }
-                        <Text style={{ textAlign: 'center', marginTop: 8, fontSize: 13 }}>Completed</Text>
-                    </View>
-                </View>
-
-                <View style={{ marginTop: 24, width: '100%' }}>
-                    <Pressable onPress={() => selectStatus[1](true)} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-                        <FontAwesome5 name="map-marker-alt" size={16} color={config.primaryColor} style={{ marginRight: 4 }} />
-                        <Text style={{ fontSize: 16, fontWeight: '500' }}>{fetchOrderDetail.data.merchant.merchantaddress}</Text>
-                    </Pressable>
-                    <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginTop: 12 }}>
-                        <FontAwesome5 name="clock" size={16} color={config.primaryColor} style={{ marginRight: 4 }} />
-                        <View style={{ flexDirection: !!fetchOrderDetail?.data?.businesshours2 ? 'column' : 'row', alignItems: 'center' }}>
-                            <View style={{ flexDirection: 'row' }}>
-                                <Text style={{ fontSize: 16, fontWeight: '500' }}>{fetchOrderDetail?.data?.businesshours ?? "9:00-18:00"}</Text>
-                                {!!fetchOrderDetail?.data?.businesshours2 && <Text style={{ fontSize: 16, fontWeight: '500' }}> & {fetchOrderDetail?.data?.businesshours2}</Text>}
-
-                            </View>
-                            <Text>(For same-day pickup only)</Text>
-                        </View>
-
-                    </View>
-
-
-                    <Pressable onPress={() => Linking.openURL(`tel:${fetchOrderDetail.data.merchant.mobile}`)} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginTop: 12 }}>
-                        <FontAwesome5 name="phone" size={16} color={config.primaryColor} style={{ marginRight: 4 }} />
-                        <Text style={{ fontSize: 16, fontWeight: '500' }}>{fetchOrderDetail.data.merchant.mobile}</Text>
-                    </Pressable>
-                </View>
-                <View style={{ marginTop: 24, width: '100%' }}>
-                    <Text style={{ fontSize: 18, fontWeight: 700, marginBottom: 18 }}>OrderDetail</Text>
-                    {
-                        fetchOrderDetail.data.goods.map((item, index) =>
-                            <View key={index} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginBottom: 12, justifyContent: 'space-between' }}>
-                                <Image source={{ uri: item.cover_image }} style={{ borderRadius: 12, width: 75, height: 75, marginRight: 12 }} resizeMode="cover" />
-                                <Text style={{ fontSize: 18, color: 'rgba(0,0,0,0.3)' }}>×{item.count}</Text>
-                                <Text style={{ fontSize: 18, color: 'rgba(0,0,0,0.3)' }}>{config.current}{item.price}</Text>
-                            </View>
-                        )
-                    }
-                    {
-                        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-                            <Text style={{ width: 75, textAlign: 'center', fontWeight: 'bold' }}>Service fee</Text>
-                            <Text>{config.current}{fetchOrderDetail.data.fees}</Text>
-                        </View>
-                    }
-
-                </View>
-                <View style={{ height: 2, width: '100%', backgroundColor: 'rgb(244,243,243)', marginVertical: 8 }}></View>
-                <Text style={{ textAlign: 'center', marginVertical: 8, fontSize: 16, fontWeight: 'bold', color: config.primaryColor }}>- Things you might want to know -</Text>
-                {/* <Text style={{ marginVertical: 8, fontSize: 16, fontWeight: '500', marginTop: 20 }}></Text> */}
-                <Accordion
-                    sections={SECTIONS}
-                    activeSections={activeSections}
-                    renderHeader={_renderHeader}
-                    renderContent={_renderContent}
-                    onChange={_updateSections}
-                    containerStyle={{ marginBottom: 24 }}
-                    sectionContainerStyle={{ marginBottom: 24 }}
-                    underlayColor={"transparent"}
-                />
-
-                <Text style={{ fontWeight: '600' }}>Thank you for partnering with NextChoc to fight food waste, reduce carbon emissions, and preserve the environment.</Text>
-            </ScrollView>
-            <View style={{ paddingHorizontal: 16, paddingTop: 15 }}>
-                {fetchOrderDetail?.data?.coupon_price !== "0.00" && <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-end', marginTop: 'auto', justifyContent: 'space-between' }}>
-                    <Text style={{ fontSize: 12 }}>coupon</Text>
-                    <Text style={{ fontSize: 16, fontWeight: '500' }}>-{config.current}{fetchOrderDetail.data.coupon_price}</Text>
-                </View>}
-                <View style={{ display: 'flex', marginBottom: fetchOrderDetail?.data?.coupon_price !== "0.00" ? 24 : 36, flexDirection: 'row', alignItems: 'flex-end', marginTop: 'auto', justifyContent: 'space-between' }}>
-                    <Text style={{ fontSize: 18 }}>Total</Text>
-                    <Text style={{ fontSize: 24, fontWeight: '500' }}>{config.current}{fetchOrderDetail.data.actual_payment_amount}</Text>
+                <Text style={{ fontSize: 20, fontWeight: '600' }}>Your Orders</Text>
+                <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+                    <Image source={require('../../assets/images/wenhao.png')} style={{ width: 25, height: 25, marginRight: 16 }} />
+                    <Image source={require('../../assets/images/reminder.png')} style={{ width: 40, height: 40 }} />
                 </View>
             </View>
-        </View>}
+            {<View style={{ marginTop: 24, position: 'relative', backgroundColor: 'white', display: 'flex', padding: 16, alignItems: 'center', justifyContent: 'center', marginHorizontal: 32, borderRadius: 24 }}>
+                <Text style={{ color: 'rgba(0,0,0,0.4)', fontSize: 16 }}>collect Code</Text>
+                <Text style={{ marginTop: 12, color: '#25745B', fontSize: 32, fontWeight: '500' }}>
+                    7A8712
+                </Text>
+                <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+                    <AntDesign name="questioncircleo" size={16} color="#969696" style={{ marginRight: 12 }} />
+                    <Text style={{ color: '#969696' }}>please use your pick-up number or QR code to collect your bag.</Text>
+                </View>
 
+                <View style={{ position: 'absolute', paddingHorizontal: 16, borderTopLeftRadius: 20, borderBottomRightRadius: 20, paddingVertical: 8, top: 0, right: 0, backgroundColor: '#25745B', display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+                    <Image source={require('../../assets/images/leftnum.png')} style={{ width: 20, height: 20, marginRight: 8 }} />
+                    <Text style={{ color: 'white', fontSize: 16, fontWeight: '500' }}>Ask a friend</Text>
+                </View>
+            </View>}
+            {<View style={{ marginTop: 24, position: 'relative', backgroundColor: 'white', display: 'flex', padding: 16, borderColor: '#FF0000', borderWidth: 3, alignItems: 'center', justifyContent: 'center', marginHorizontal: 32, borderRadius: 24 }}>
+                <Text style={{ fontSize: 28 }}>Cancellation status</Text>
+                <View style={{ marginTop: 16, display: 'flex', alignItem: 'center', justifyContent: 'space-between' }}>
+                    <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', paddingHorizontal: 8 }}>
+                        <Image resizeMode="contain" source={require('../../assets/images/cancel1.png')} style={{ width: 80, height: 80, marginRight: 12 }} />
+                        <View style={{ width: 90, height: 24, display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
+                            <View style={{ width: '100%', height: 3, backgroundColor: 'black' }}></View>
+                            <Image source={require('../../assets/images/finish1.png')} style={{ width: 24, height: 24, position: 'absolute', top: 0, bottom: 0 }} />
+                        </View>
+                        <Image resizeMode="contain" source={require('../../assets/images/recycle1.png')} style={{ width: 80, height: 80, marginHorizontal: 12 }} />
+                        <View style={{ width: 90, height: 24, display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
+                            <View style={{ width: '100%', height: 3, backgroundColor: 'black' }}></View>
+                            <Image source={require('../../assets/images/finish1.png')} style={{ width: 24, height: 24, position: 'absolute', top: 0, bottom: 0 }} />
+                        </View>
+                        <Image resizeMode="contain" source={require('../../assets/images/refund1.png')} style={{ width: 80, height: 80, marginLeft: 12 }} />
+                    </View>
+                    <View style={{ display: 'flex', flexDirection: 'row', marginTop: 12, alignItems: 'center', justifyContent: 'space-between' }}>
+                        <Text style={{ flex: 1, textAlign: 'left', fontSize: 24 }}>Received</Text>
+                        <Text style={{ flex: 1, textAlign: 'center', fontSize: 24 }}>Processed</Text>
+                        <Text style={{ flex: 1, textAlign: 'right', fontSize: 24 }}>Refunded</Text>
+                    </View>
+                </View>
+            </View>}
+            <View style={{ position: 'relative' }}>
+                <Image source={require('../../assets/images/Subtract1.png')} resizeMode="stretch" style={{ width: Dimensions.get("screen").width, height: (Dimensions.get("screen").width) / 1.3, }} />
+                <View style={{ position: 'absolute', display: 'flex', padding: '6%', alignItems: 'center', top: 0, left: 0, right: 0, bottom: 0, zIndex: 10, width: '100%', height: '100%' }}>
+                    <Text style={{ color: 'white', fontSize: 18 }}>Collect in 10:00 mins</Text>
+                    <Text style={{ marginTop: '5%', fontSize: 28 }}>Collect：Today 09:00-20:00</Text>
+                    <Image source={require('../../assets/images/code.png')} style={{ width: '45%', height: '45%', objectFit: 'contain', marginTop: '7%' }} />
+                    <Pressable style={{ paddingHorizontal: '10%', paddingVertical: 16, marginTop: '10%', borderRadius: 30, backgroundColor: '#819796' }}>
+                        <Text style={{ color: 'white', fontWeight: '600', fontSize: 18 }}>Cancel</Text>
+                    </Pressable>
+                </View>
+            </View>
 
-        {
+            <View style={{ marginTop: 16, marginHorizontal: 32, position: 'relative', backgroundColor: 'white', padding: 16, borderTopLeftRadius: 47, borderTopRightRadius: 47 }}>
+                <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+                    <View style={{ display: 'flex', flex: 1 }}>
+                        <Text numberOfLines={1} style={{ fontSize: 24 }}>McDonald’s</Text>
+                        <Text numberOfLines={1} style={{ fontSize: 16, color: '#969696' }}>112 Happiness Subdivision Street</Text>
+                    </View>
+                    <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+                        <Pressable style={{ width: 60, height: 60, display: 'flex', alignItems: 'center', justifyContent: 'center', marginRight: 16, borderRadius: 47, borderWidth: 1 }}>
+                            <Image source={require('../../assets/images/mobile.png')} style={{ width: 35, height: 35 }} />
+                        </Pressable>
+                        <Pressable style={{ width: 60, height: 60, display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: 47, borderWidth: 1 }}>
+                            <Image source={require('../../assets/images/goto.png')} style={{ width: 35, height: 35 }} />
+                        </Pressable>
+                    </View>
+                </View>
 
-            selectStatus[0] && <View style={{
-                position: 'absolute', bottom: 0, left: 0,
-                alignItems: 'center',
-                justifyContent: 'flex-end',
-                backgroundColor: 'rgba(0,0,0,0.5)', width: '100%', height: '100%',
+                <Image source={require('../../assets/images/line2.png')} style={{ height: 2, width: '100%', marginVertical: 32 }} />
+                <View style={{ width: 30, height: 30, backgroundColor: 'rgb(254,250,247)', borderRadius: 50, position: 'absolute', left: -15, top: 95, zIndex: 10 }}></View>
+                <View style={{ width: 30, height: 30, backgroundColor: 'rgb(254,250,247)', borderRadius: 50, position: 'absolute', right: -15, top: 95, zIndex: 10 }}></View>
 
+                <View>
+                    <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-start', width: '100%' }}>
+                        <View style={{ marginRight: 12 }}>
+                            <Image source={require('../../assets/images/vegetable.png')} style={{ width: 80, height: 80 }} />
+                        </View>
+                        <View style={{ display: 'flex', flex: 1 }}>
+                            <View style={{ display: 'flex', flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+                                <View style={{ display: 'flex', flex: 1, marginRight: 16 }}>
+                                    <Text numberOfLines={2} style={{ fontSize: 18, width: '100%' }}>Classic Package Magic Bag</Text>
+                                    <Text style={{ fontSize: 14, marginTop: 12 }}>x1</Text>
+                                </View>
+                                <View>
+                                    <Text style={{ fontSize: 14 }}>AU$ <Text style={{ fontSize: 18, fontWeight: '500' }}>5.99</Text></Text>
+                                </View>
+                            </View>
+                            <Image source={require('../../assets/images/line2.png')} style={{ height: 2, width: '100%', marginVertical: 12 }} />
+                            <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+
+                                <View style={{ display: 'flex', flex: 1, marginRight: 16 }}>
+                                    <Text numberOfLines={1} style={{ fontSize: 18, width: '100%', color: '#525252' }}>Service fee</Text>
+                                </View>
+                                <Text style={{ fontSize: 14 }}>AU$ <Text style={{ fontSize: 18, fontWeight: '500' }}>5.99</Text></Text>
+
+                            </View>
+                            <Image source={require('../../assets/images/line2.png')} style={{ height: 2, width: '100%', marginVertical: 12 }} />
+                            <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+
+                                <View style={{ display: 'flex', flex: 1, marginRight: 16 }}>
+                                    <Text numberOfLines={1} style={{ fontSize: 24, width: '100%' }}>Total:</Text>
+                                </View>
+                                <Text style={{ fontSize: 16 }}>AU$ <Text style={{ fontSize: 30, fontWeight: '500' }}>5.99</Text></Text>
+
+                            </View>
+
+                        </View>
+                    </View>
+                </View>
+            </View>
+            <View style={{ marginTop: 16, marginHorizontal: 32, height: (Dimensions.get("screen").width - 32) / 3.4, position: 'relative', backgroundColor: 'white', borderBottomLeftRadius: 47, borderBottomRightRadius: 47 }}>
+                <Image source={require('../../assets/images/Subtract3.png')} resizeMode="cover" style={{ position: 'absolute', width: '100%', height: '100%', bottom: 0, borderBottomLeftRadius: 47, borderBottomRightRadius: 47 }} />
+                <View style={{ padding: 16 }}>
+                    <Text style={{ marginTop: 16, color: '#969696', fontSize: 16 }}>Order time:01/02/2023 16:13</Text>
+                    <Text style={{ marginTop: 16, color: '#969696', fontSize: 16 }}>Order number: 2161485941513468416516516</Text>
+                    <Text style={{ marginTop: 16, color: '#969696', fontSize: 16 }}>Payment method: apple pay</Text>
+                </View>
+
+            </View>
+
+            <View style={{
+                marginTop: 16, shadowOffset: {
+                    width: 0,
+                    height: 2,
+                },
+                shadowOpacity: 0.23,
+                shadowRadius: 2.62,
+
+                elevation: 4, marginHorizontal: 32, marginBottom: 46, position: 'relative', backgroundColor: 'white', padding: 16, borderRadius: 47
             }}>
+                <Text style={{ fontSize: 28 }}>FAQs</Text>
 
-                <View style={{
-                    marginBottom: 10,
-                    backgroundColor: '#fff', padding: '5%', width: '90%', marginHorizontal: '5%', borderRadius: 10
-                }}>
-                    <Pressable onPress={() => urlScheme('ios')} style={{ padding: 10, paddingBottom: 20, borderRadius: 5, borderBottomColor: 'rgba(0,0,0,1)', borderBottomWidth: 0.3, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}><Text style={{ fontWeight: 'bold' }}>Open Apple Map</Text>
-                        <MaterialIcons name="navigate-next" size={24} color="black" />
-                    </Pressable>
-                    <Pressable onPress={() => urlScheme('google')} style={{ padding: 10, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}><Text style={{ fontWeight: 'bold' }}>Open Google Map</Text>
-                        <MaterialIcons name="navigate-next" size={24} color="black" /></Pressable>
+                <Text style={{ marginTop: 12, fontSize: 20 }}>Frequently asked questions？</Text>
+                <Text style={{ marginTop: 12, fontSize: 20 }}>Frequently asked questions？</Text>
+                <Text style={{ marginTop: 12, fontSize: 20 }}>Frequently asked questions？</Text>
+
+                {/* <Text style={{marginTop:12,fontSize:20}}>Frequently asked questions？</Text> */}
+                <View style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <Text style={{ marginTop: 24, fontSize: 16, color: '#25745B' }}>More</Text>
                 </View>
-
-
-                <Pressable onPress={() => selectStatus[1](false)} style={{ padding: 10, marginBottom: 50, backgroundColor: '#000', padding: '5%', width: '90%', marginHorizontal: '5%', borderRadius: 10 }}><Text style={{ fontWeight: 'bold', color: '#fff', textAlign: 'center' }}>Cancel</Text></Pressable>
             </View>
-
-        }
-
-    </View>)
+        </View>
+    </ScrollView>)
 }
